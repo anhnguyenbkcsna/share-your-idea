@@ -1,4 +1,7 @@
 # share-your-idea
+
+Install package
+- pip install -r requirements.txt
 Front-end
 - cd frontend
 - npm start

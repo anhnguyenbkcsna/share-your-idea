@@ -1,17 +1,20 @@
-# share-your-idea
-Before pulling the repo
-- Create a folder
-- Create virtual environment
-  + For mac/unix users: python3 -m venv env
-  + For windows users: py -m venv env
-Install package
-- pip install -r requirements.txt
-Front-end
-- cd frontend
-- npm start
+# Share Your Idea
 
-Back-end
-- python3 manage.py runserver || py manage.py runserver
+### Before pulling the repository
+Install needed packages
+```sh
+  pip install -r requirements.txt
+  cd frontend
+  yarn
+```
 
-MongoDB Atlas
-- Connection string: mongodb+srv://anhnguyenbkcsna:admin@cluster0.xketide.mongodb.net/?retryWrites=true&w=majority
+### How to run the server
+```sh
+  python3 manage.py runserver
+```
+  or
+```sh
+  py manage.py runserver
+```
+
+### MongoDB Atlas

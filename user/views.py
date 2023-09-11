@@ -26,34 +26,19 @@ class UserApiView(APIView):
 
     def post(self, request, id=None):
         if id:
-            user = self.collection.find_one_and_update(
+            self.collection.find_one_and_update(
                 {"_id": ObjectId(id)}, {"$set": request.data}
             )
-            return Response(
-                {"message": "User updated", "data": "Update successfully!"}
-            )
+            return Response({"message": "User updated"})
 
-        insert_obj = self.collection.insert_one(
-            {
-                "username": request.data["username"],
-                "password": request.data["password"],
-                "full_name": request.data["full_name"],
-                "age": request.data["age"],
-                "email": request.data["email"],
-                "number": request.data["number"],
-                "address": request.data["address"],
-            }
-        )
-        return Response({"message": "New user added", "data": parse_json(insert_obj)})
-
-        # mock object
-        {
-            "username": "dvz",
-            "password": "123",
-            "full_name": "Mannhh Nguyen",
-            "age": "12",
-            "email": "abc@gmail.com",
-            "number": "095678978",
-            "address": "HCM City"
-        }
-        {age: 20}
+        serializer = UserSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            self.collection.insert_one(serializer.data)
+            return Response({"message": "New user added", "data": parse_json(serializer.data)})
+    
+    def delete(self, request, id):
+        try:
+            self.collection.find_one_and_delete({"_id": ObjectId(id)})
+            return Response({"message": "User deleted"})
+        except:
+            return Response({"message": "User not found"})

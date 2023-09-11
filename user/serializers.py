@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 
-from ..core.models import User
+from .models import User
 
 # chua co gi dac biet lam
 class UserSerializer(ModelSerializer):

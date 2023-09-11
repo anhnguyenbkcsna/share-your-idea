@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from .serializers import UserSerializer
 from user.models import User
 from user.utils import parse_json, connect_db
 from bson.objectid import ObjectId
@@ -13,6 +14,7 @@ class UserApiView(APIView):
     # Provide the mongodb atlas url to connect python to mongodb using pymongo
     db = connect_db()
     collection = db.get_collection("user_user")
+    serializer_class = UserSerializer
 
     def get(self, request, id=None):
         if id:

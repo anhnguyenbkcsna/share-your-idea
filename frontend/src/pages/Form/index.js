@@ -1,14 +1,16 @@
 import React from "react";
-import { Input } from "antd";
+import Form from "../../components/Form";
+import { Space } from "antd";
 
-const Form = () => {
+const FormPage = () => {
     return (
-        <div>
+        <>
             <h1>pages/Form</h1>
-            <Input placeholder="Project name" />
-            
-        </div>
+            <Space direction="horizontal" style={{width: '100%', justifyContent: 'center'}}> 
+                <Form />
+            </Space>
+        </>
     )
 }
 
-export default Form;
+export default FormPage;

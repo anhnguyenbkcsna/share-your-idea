@@ -16,10 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include, re_path
-from user import views
+from user.views import UserApiView
+from idea.views import IdeaApiView
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('user/', views.UserApiView.as_view(), name='user'),
-    path('user/<str:id>/', views.UserApiView.as_view(), name='user'),
-]
+    path("admin/", admin.site.urls),
+    path("user/<str:id>/", UserApiView.as_view(), name="user"),
+    path("idea/<str:id>/", IdeaApiView.as_view(), name="idea"),
+    path("user/", UserApiView.as_view(), name="user"),
+    path("idea/", IdeaApiView.as_view(), name="idea"),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

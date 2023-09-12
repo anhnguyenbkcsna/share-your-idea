@@ -3,7 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import UserSerializer
 from user.models import User
-from user.utils import parse_json, connect_db
+from utils.utils import parse_json, connect_db
 from bson.objectid import ObjectId
 
 # Create your views here.

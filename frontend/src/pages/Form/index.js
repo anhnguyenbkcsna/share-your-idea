@@ -1,13 +1,14 @@
 import React from "react";
-import Form from "../../components/Form";
+import FormComponent from "../../components/FormComponent";
 import { Space } from "antd";
+import Navbar from "../../components/Navbar";
 
 const FormPage = () => {
     return (
         <>
-            <h1>pages/Form</h1>
+            <Navbar />
             <Space direction="horizontal" style={{width: '100%', justifyContent: 'center'}}> 
-                <Form />
+                <FormComponent />
             </Space>
         </>
     )

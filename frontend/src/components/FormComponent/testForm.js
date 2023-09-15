@@ -15,7 +15,7 @@ const normFile = (e) => {
 	return e?.fileList;
 };
 
-const FormComponent = () => {
+const TestForm = () => {
 return (
 	<Form
 		labelCol={{ span: 4 }}
@@ -23,8 +23,6 @@ return (
 		layout="horizontal"
 		style={{
 			minWidth: 600,
-			border: "1px solid #ccc",
-			borderRadius: "5%",
 			padding: "20px",
 		}}
 	>
@@ -60,14 +58,8 @@ return (
 				</div>
 			</Upload>
 		</Form.Item>
-
-		<Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-			<Button type="primary" htmlType="submit">
-				Submit
-			</Button>
-		</Form.Item>
 	</Form>
 	);
 };
 
-export default FormComponent;
+export default TestForm;

@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,15 +34,16 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    "idea",
-    "user",
-    "rest_framework",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "idea",
+    "user",
+    "rest_framework",
+    "storages",
 ]
 
 MIDDLEWARE = [
@@ -81,15 +85,18 @@ WSGI_APPLICATION = "Project.wsgi.application"
 #     #     'ENGINE': 'django.db.backends.sqlite3',
 #     #     'NAME': BASE_DIR / 'db.sqlite3',
 #     # }
-#     "default": {
-#         "ENGINE": "djongo",
-#         "NAME": "share-your-idea",
-#         "ENFORCE_SCHEMA": False,
-#         "CLIENT": {
-#             "host": "mongodb+srv://manhnguyenkimewaza:manh4949@cluster0.iwnzpbk.mongodb.net/?retryWrites=true&w=majority"
-#         },
-#     }
 # }
+
+# S3 BUCKETS CONFIG
+AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
+AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME")
+AWS_S3_REGION_NAME = os.getenv("AWS_S3_REGION_NAME")
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+AWS_S3_VERIFY = True
+DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+# AWS_S3_CUSTOM_DOMAIN = 'your-cloudfront-domain.com' # If you’re using S3 as a CDN like CloudFront
 
 
 # Password validation
@@ -135,14 +142,13 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-MEDIA_URL = '/uploads/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+MEDIA_URL = "/uploads/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
 
 
 REST_FRAMEWORK = {
-    'DEFAULT_PARSER_CLASSES': (
-        'rest_framework.parsers.JSONParser',
-        'rest_framework.parsers.MultiPartParser'
-        #...
+    "DEFAULT_PARSER_CLASSES": (
+        "rest_framework.parsers.JSONParser",
+        "rest_framework.parsers.MultiPartParser"
     )
 }

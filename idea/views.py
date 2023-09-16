@@ -32,19 +32,18 @@ class IdeaApiView(APIView):
             path = default_storage.save(request_file.name, ContentFile(request_file.read()))
             data =  request.data
             data['image'] = path
-            parse_data = parse_json(data)
             
             if id:
                 self.collection.find_one_and_update(
-					{"_id": ObjectId(id)}, {"$set": parse_data}
+					{"_id": ObjectId(id)}, {"$set": parse_json(data)}
 				)
-                return Response({"message": "Idea updated", "data": parse_data})
+                return Response({"message": "Idea updated", "data": parse_json(data)})
             
             
-            self.collection.insert_one(parse_data)
+            self.collection.insert_one(parse_json(data))
             
             return Response(
-                {"message": "New idea added", "data": parse_data}
+                {"message": "New idea added", "data": parse_json(data)}
             )
 
     def delete(self, request, id=None):

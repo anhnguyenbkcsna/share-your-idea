@@ -7,7 +7,7 @@ from .serializers import IdeaSerializer
 from utils.utils import parse_json, connect_db
 from bson.objectid import ObjectId
 from django.conf import settings
-from datetime import datetime
+import datetime
 
 
 class IdeaApiView(APIView):
@@ -28,10 +28,13 @@ class IdeaApiView(APIView):
         serializer = IdeaSerializer(data=request.data)
 
         if serializer.is_valid(raise_exception=True):
-            request_file = request.FILES["image"]
-            path = default_storage.save(request_file.name, ContentFile(request_file.read()))
-            data =  request.data
-            data['image'] = path
+            for request_file in request.FILES.getlist('files'):
+                path = default_storage.save(request_file.name, ContentFile(request_file.read()))
+                data = {
+                    "file": path,
+                    'created_at': datetime.datetime.utcnow(),
+                }
+                self.collection.insert_one(parse_json(data))
             
             if id:
                 self.collection.find_one_and_update(
@@ -40,10 +43,8 @@ class IdeaApiView(APIView):
                 return Response({"message": "Idea updated", "data": parse_json(data)})
             
             
-            self.collection.insert_one(parse_json(data))
-            
             return Response(
-                {"message": "New idea added", "data": parse_json(data)}
+                {"message": "New idea added"}
             )
 
     def delete(self, request, id=None):

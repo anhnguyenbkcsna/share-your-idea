@@ -1,0 +1,25 @@
+version: "3.9"
+   
+services:
+  backend:
+    build: 
+      context: ./backend
+    ports:
+      - "8085:8085"
+    restart: always
+    entrypoint: /entrypoint.sh
+    volumes:
+      - staticfiles:/backend/static
+  nginx:
+    build: 
+      context: .
+      dockerfile: ./nginx/Dockerfile
+    restart: always
+    volumes:
+      - staticfiles:/static
+    ports:
+      - "89:89"
+    depends_on:
+      - backend
+volumes:
+  staticfiles:

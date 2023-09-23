@@ -1,33 +1,7 @@
 import { PlusOutlined } from '@ant-design/icons'
 import React from 'react'
 import { Form, Button, Input, Slider, Upload, Select } from 'antd'
-
-const options = [
-  {
-    label: 'Science',
-    value: 'Science',
-  },
-  {
-    label: 'Healthcare',
-    value: 'Healthcare',
-  },
-  {
-    label: 'Beauty',
-    value: 'Beauty',
-  },
-  {
-    label: 'Business',
-    value: 'Business',
-  },
-  {
-    label: 'Marketing',
-    value: 'Marketing',
-  },
-  {
-    label: 'Eco-Bio',
-    value: 'Eco-Bio',
-  },
-]
+import { standoutReasons } from '../../../utils/constants'
 
 const normFile = (e) => {
   if (Array.isArray(e)) {
@@ -37,7 +11,7 @@ const normFile = (e) => {
   return e?.fileList
 }
 
-const TestForm = (props) => {
+const FormValuePropositions = (props) => {
   const { setFileList } = props
   const uploadFiles = async (upload) => {
     const { file, fileList } = upload
@@ -58,32 +32,26 @@ const TestForm = (props) => {
         padding: '20px',
       }}
     >
-      <Form.Item label="Project name">
+      <Form.Item
+        rules={[{ required: true, message: 'We need your specification!' }]}
+        label="Are there any applications direct the same issue?"
+      >
         <Input />
       </Form.Item>
 
-      <Form.Item label="Field (Domain)">
+      <Form.Item
+        rules={[{ required: true, message: 'We need your specification!' }]}
+        label="What makes your idea stand out?"
+      >
         <Select
           mode="multiple"
           placeholder="Please select"
           onChange={handleChange}
-          options={options}
+          options={standoutReasons}
         />
       </Form.Item>
-
-      <Form.Item label="Project slogan">
-        <Input />
-      </Form.Item>
-
-      <Form.Item label="Description">
-        <Input aria-rowcount={4} />
-      </Form.Item>
-
-      <Form.Item label="Age Range">
-        <Slider range step={1} defaultValue={[20, 50]} />
-      </Form.Item>
-
       <Form.Item
+        rules={[{ required: true, message: 'We need your specification!' }]}
         label="Upload"
         valuePropName="fileList"
         getValueFromEvent={normFile}
@@ -99,4 +67,4 @@ const TestForm = (props) => {
   )
 }
 
-export default TestForm
+export default FormValuePropositions

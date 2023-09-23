@@ -15,12 +15,12 @@ let mockItems = [
     icon: <UserOutlined />,
   },
   {
-    title: 'Verification',
+    title: 'Customer Segments',
     status: 'finish',
     icon: <SolutionOutlined />,
   },
   {
-    title: 'Pay',
+    title: 'Value Propositions',
     status: 'process',
     icon: <LoadingOutlined />,
   },

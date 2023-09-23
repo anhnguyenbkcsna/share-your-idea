@@ -10,7 +10,7 @@ import { Steps } from 'antd'
 
 let mockItems = [
   {
-    title: 'Login',
+    title: 'Idea Overview',
     status: 'finish',
     icon: <UserOutlined />,
   },

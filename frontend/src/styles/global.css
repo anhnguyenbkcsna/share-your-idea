@@ -2,3 +2,17 @@
   display: flex;
   flex-direction: column;
 }
+
+.header-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pr-20 {
+  padding-right: 20px;
+}
+
+.mr-24 {
+  margin-right: 24px;
+}

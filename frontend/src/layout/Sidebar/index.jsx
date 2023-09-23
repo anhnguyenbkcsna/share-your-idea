@@ -14,8 +14,13 @@ import logoAbbr from '../../assets/W.svg'
 const Sidebar = (props) => {
   const { collapsed } = props
   return (
-    <Sider trigger={null} collapsible collapsed={collapsed}>
-      <div className="demo-logo-vertical" />
+    <Sider
+      trigger={null}
+      collapsible
+      collapsed={collapsed}
+      style={{ height: '100vh' }}
+    >
+      <div />
       <img
         style={{ margin: '20px' }}
         src={collapsed ? logoAbbr : logo}

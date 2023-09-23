@@ -1,26 +1,29 @@
 import React, { useState } from 'react'
 import { Typography } from 'antd'
 import { Button, message, Steps } from 'antd'
-import TestForm from './testForm'
+import FormOverview from './Overview'
 import { Form, Input, Slider, Upload } from 'antd'
+import FormCustomerSegment from './CustomerSegment'
+import FormValuePropositions from './ValuePropositions'
+import FormSteps from '../FormSteps'
 
 const steps = [
   {
     title: 'First',
     content: 'Overview',
   },
-  // {
-  //     title: "Second",
-  //     content: "Customer Segments",
-  // },
-  // {
-  //     title: "Third",
-  //     content: "Value Position",
-  // },
-  // {
-  //     title: "Last",
-  //     content: "Furthur Information",
-  // },
+  {
+    title: 'Second',
+    content: 'Customer Segments',
+  },
+  {
+    title: 'Third',
+    content: 'Value Position',
+  },
+  //   {
+  //     title: 'Last',
+  //     content: 'Furthur Information',
+  //   },
 ]
 
 const FormComponent = () => {
@@ -68,15 +71,16 @@ const FormComponent = () => {
         layout="horizontal"
       >
         <Typography.Title level={3}></Typography.Title>
-        <Steps current={current} items={items} />
+        <FormSteps />
+        {/* <Steps current={current} items={items} /> */}
 
         <Typography.Title level={3}>{steps[current].content}</Typography.Title>
 
         {/* Content */}
-        {current === 0 && <TestForm setFileList={setFileList} />}
-        {current === 1 && <TestForm setFileList={setFileList} />}
-        {current === 2 && <TestForm setFileList={setFileList} />}
-        {current === 3 && <TestForm setFileList={setFileList} />}
+        {current === 0 && <FormOverview setFileList={setFileList} />}
+        {current === 1 && <FormCustomerSegment setFileList={setFileList} />}
+        {current === 2 && <FormValuePropositions setFileList={setFileList} />}
+        {/* {current === 3 && <FormOverview setFileList={setFileList} />} */}
 
         <div style={{ marginTop: 24 }}>
           {current > 0 && (

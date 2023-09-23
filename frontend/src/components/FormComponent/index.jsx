@@ -65,11 +65,7 @@ const FormComponent = () => {
 
   return (
     <div>
-      <Form
-        labelCol={{ span: 4 }}
-        wrapperCol={{ span: 14 }}
-        layout="horizontal"
-      >
+      <Form labelCol={{ span: 4 }} wrapperCol={{ span: 14 }} layout="vertical">
         <Typography.Title level={3}></Typography.Title>
         <FormSteps />
         {/* <Steps current={current} items={items} /> */}
@@ -84,7 +80,7 @@ const FormComponent = () => {
 
         <div style={{ marginTop: 24 }}>
           {current > 0 && (
-            <Button style={{ margin: '0 8px' }} onClick={() => prev()}>
+            <Button style={{ marginRight: '20px' }} onClick={() => prev()}>
               Previous
             </Button>
           )}

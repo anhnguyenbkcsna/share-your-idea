@@ -24,12 +24,9 @@ const FormCustomerSegment = (props) => {
   }
   return (
     <Form
-      labelCol={{ span: 4 }}
-      wrapperCol={{ span: 14 }}
-      layout="horizontal"
+      layout="vertical"
       style={{
         minWidth: 600,
-        padding: '20px',
       }}
     >
       <Form.Item

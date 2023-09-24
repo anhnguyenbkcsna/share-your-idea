@@ -40,10 +40,12 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     'corsheaders',
-    "idea",
-    "user",
+    'adrf',
     "rest_framework",
     "storages",
+    "user",
+    "poe_api",
+    "idea",
 ]
 
 CORS_ALLOWED_ORIGINS = ["http://localhost:3000"]

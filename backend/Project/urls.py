@@ -19,6 +19,7 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from user.views import UserApiView
 from idea.views import IdeaApiView
+from poe_api.views import PoeApiView
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -31,5 +32,6 @@ urlpatterns = [
     path("user/<str:id>/", UserApiView.as_view(), name="user"),
     path("idea/<str:id>/", IdeaApiView.as_view(), name="idea"),
     path("user/", UserApiView.as_view(), name="user"),
+    path("poe/", PoeApiView.as_view(), name="poe_api"),
     path("idea/", IdeaApiView.as_view(), name="idea"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

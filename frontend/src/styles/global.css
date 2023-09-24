@@ -16,3 +16,8 @@
 .mr-24 {
   margin-right: 24px;
 }
+
+h3 {
+  /* font-family: 'Dela Gothic One' !important; */
+  font-weight: 500;
+}

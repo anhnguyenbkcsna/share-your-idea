@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     "rest_framework",
     "storages",
     "user",
-    "poe_api",
     "idea",
 ]
 

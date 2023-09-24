@@ -32,6 +32,6 @@ urlpatterns = [
     path("user/<str:id>/", UserApiView.as_view(), name="user"),
     path("idea/<str:id>/", IdeaApiView.as_view(), name="idea"),
     path("user/", UserApiView.as_view(), name="user"),
-    path("poe/", PoeApiView.as_view(), name="poe_api"),
+    path("poe/", PoeApiView.as_view(), name="poe-api"),
     path("idea/", IdeaApiView.as_view(), name="idea"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

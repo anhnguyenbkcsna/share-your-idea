@@ -97,8 +97,32 @@ export const domains = [
   },
 ]
 
+export const userFormStepItem = [
+  {
+    title: 'Idea Overview',
+    // icon: <UserOutlined />,
+  },
+  {
+    title: 'Customer Segments',
+    // icon: <SolutionOutlined />,
+  },
+  {
+    title: 'Value Propositions',
+    // icon: <LoadingOutlined />,
+  },
+  {
+    title: 'Done',
+    // icon: <SmileOutlined />,
+  },
+]
+
+export const localStorageStepFormat = (stepCount) => {
+  return `step${stepCount}.data`
+}
+
 const professionalList = ['Children', 'Student', 'White-collar worker', 'Blue-collar worker', 'The elderly', 'The disabled', 'For everyone']
 const standoutReasonList = ['affordable', 'novel', 'eco-friendly', 'technology-based', 'productive', 'effective', 'fast', 'promising', 'problem-solving']
+
 export const professionals = labelValueGenerate(professionalList)
 export const standoutReasons = labelValueGenerate(standoutReasonList)
 

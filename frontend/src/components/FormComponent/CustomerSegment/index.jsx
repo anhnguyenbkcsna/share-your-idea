@@ -1,7 +1,12 @@
 import { PlusOutlined } from '@ant-design/icons'
 import React from 'react'
 import { Form, Button, Input, Slider, Upload, Select } from 'antd'
-import { gender, professionals, residential } from '../../../utils/constants'
+import {
+  gender,
+  localStorageStepFormat,
+  professionals,
+  residential,
+} from '../../../utils/constants'
 
 const normFile = (e) => {
   if (Array.isArray(e)) {
@@ -12,7 +17,8 @@ const normFile = (e) => {
 }
 
 const FormCustomerSegment = (props) => {
-  const { setFileList } = props
+  const { setFileList, form } = props
+
   const uploadFiles = async (upload) => {
     const { file, fileList } = upload
     setFileList(fileList)
@@ -24,12 +30,17 @@ const FormCustomerSegment = (props) => {
   }
   return (
     <Form
+      form={form}
       layout="vertical"
       style={{
         minWidth: 600,
       }}
+      initialValues={JSON.parse(
+        localStorage.getItem(localStorageStepFormat(1))
+      )}
     >
       <Form.Item
+        name="gender"
         label="Gender"
         rules={[{ required: true, message: 'We need your specification!' }]}
       >
@@ -41,38 +52,49 @@ const FormCustomerSegment = (props) => {
       </Form.Item>
 
       <Form.Item
+        name="ageRange"
         label="Age Range"
         rules={[{ required: true, message: 'We need your specification!' }]}
       >
         <Slider range step={1} defaultValue={[20, 50]} />
       </Form.Item>
 
-      <Form.Item label="Profession">
-        <Select
-          mode="multiple"
-          placeholder="Please select"
-          onChange={handleChange}
-          options={residential}
-        />
-      </Form.Item>
-
       <Form.Item
-        label="Geographical"
+        name="professional"
+        label="Professionals"
         rules={[{ required: true, message: 'We need your specification!' }]}
       >
         <Select
-          mode="multiple"
-          placeholder="Please select"
+          mode="tags"
+          placeholder="Please select or enter your answer"
           onChange={handleChange}
           options={professionals}
         />
       </Form.Item>
 
       <Form.Item
+        name="geographical"
+        label="Geographical"
+        rules={[{ required: true, message: 'We need your specification!' }]}
+      >
+        <Select
+          mode="tags"
+          placeholder="Please select or enter your answer"
+          onChange={handleChange}
+          options={residential}
+        />
+      </Form.Item>
+
+      <Form.Item
+        name="behavior"
         label="Why would this particular customer group would love your idea?"
         rules={[{ required: true, message: 'We need your specification!' }]}
       >
-        <Input aria-rowcount={4} />
+        <Input.TextArea
+          allowClear
+          placeholder="Describe Behavioral Specification of Your Audience"
+          autoSize={{ minRows: 2, maxRows: 10 }}
+        />
       </Form.Item>
     </Form>
   )

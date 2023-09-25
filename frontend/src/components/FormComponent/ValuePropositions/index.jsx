@@ -1,26 +1,14 @@
-import { PlusOutlined } from '@ant-design/icons'
 import React from 'react'
-import { Form, Button, Input, Slider, Upload, Select } from 'antd'
+import { Form, Input, Select } from 'antd'
 import {
   localStorageStepFormat,
   standoutReasons,
 } from '../../../utils/constants'
+const {TextArea} = Input;
 
-const normFile = (e) => {
-  if (Array.isArray(e)) {
-    console.log('>>>>>>  e?.fileList', e?.fileList)
-    return e
-  }
-  return e?.fileList
-}
 
 const FormValuePropositions = (props) => {
-  const { setFileList, form } = props
-  const uploadFiles = async (upload) => {
-    const { file, fileList } = upload
-    setFileList(fileList)
-    console.log('>>>>>> file', fileList)
-  }
+  const { form } = props
 
   const handleChange = (value) => {
     console.log(`Value Prop selected ${value}`)
@@ -41,7 +29,7 @@ const FormValuePropositions = (props) => {
         rules={[{ required: true, message: 'We need your specification!' }]}
         label="Are there any applications direct the same issue?"
       >
-        <Input />
+        <TextArea rows={3} />
       </Form.Item>
 
       <Form.Item
@@ -56,19 +44,23 @@ const FormValuePropositions = (props) => {
           options={standoutReasons}
         />
       </Form.Item>
+
       <Form.Item
-        name="fileUpload"
+        name="moneymaker"
+        placeholde="Your Marketing - Business Strategy"
+        label="How can you make money from your solution?"
         rules={[{ required: true, message: 'We need your specification!' }]}
-        label="Upload"
-        valuePropName="fileList"
-        getValueFromEvent={normFile}
       >
-        <Upload listType="picture-card" onChange={(e) => uploadFiles(e)}>
-          <div>
-            <PlusOutlined />
-            <div style={{ marginTop: 8 }}>Upload</div>
-          </div>
-        </Upload>
+        <TextArea rows={3} />
+      </Form.Item>
+
+      <Form.Item
+        name="commitment"
+        placeholde="4-6 months commitment"
+        label="Impress your sponsor with your commitment"
+        rules={[{ required: true, message: 'We need your specification!' }]}
+      >
+        <TextArea rows={3} />
       </Form.Item>
     </Form>
   )

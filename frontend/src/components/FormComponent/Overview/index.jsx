@@ -1,6 +1,6 @@
-import { PlusOutlined } from '@ant-design/icons'
+// import { PlusOutlined } from '@ant-design/icons'
 import React from 'react'
-import { Form, Button, Input, Slider, Upload, Select } from 'antd'
+import { Form, Input, Select } from 'antd'
 import { domains, localStorageStepFormat } from '../../../utils/constants'
 
 const textRules = {
@@ -18,21 +18,21 @@ const over30WordsValidator = ({ getFieldsValue }) => ({
   },
 })
 
-const normFile = (e) => {
-  if (Array.isArray(e)) {
-    console.log('>>>>>>  e?.fileList', e?.fileList)
-    return e
-  }
-  return e?.fileList
-}
+// const normFile = (e) => {
+//   if (Array.isArray(e)) {
+//     console.log('>>>>>>  e?.fileList', e?.fileList)
+//     return e
+//   }
+//   return e?.fileList
+// }
 
 const FormOverview = (props) => {
-  const { setFileList, form, name } = props
-  const uploadFiles = async (upload) => {
-    const { file, fileList } = upload
-    setFileList(fileList)
-    console.log('>>>>>> file', fileList)
-  }
+  const { form, name } = props
+  // const uploadFiles = async (upload) => {
+  //   const { file, fileList } = upload
+  //   setFileList(fileList)
+  //   console.log('>>>>>> file', fileList)
+  // }
 
   const handleChange = (value) => {
     console.log(`selected ${value}`)
@@ -90,7 +90,7 @@ const FormOverview = (props) => {
         />
       </Form.Item>
 
-      <Form.Item
+      {/* <Form.Item
         name="upload"
         rules={[{ required: true, message: 'We need your specification!' }]}
         label="Upload"
@@ -103,7 +103,7 @@ const FormOverview = (props) => {
             <div style={{ marginTop: 8 }}>Upload</div>
           </div>
         </Upload>
-      </Form.Item>
+      </Form.Item> */}
     </Form>
   )
 }

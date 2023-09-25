@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Steps } from 'antd'
 import { userFormStepItem } from '../../utils/constants'
 

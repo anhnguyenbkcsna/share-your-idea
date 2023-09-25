@@ -1,17 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   Typography,
-  Button,
-  message,
-  Steps,
   Form,
-  Input,
-  Slider,
-  Upload,
 } from 'antd'
 import FormSteps from '../../components/FormSteps'
 import FormCustomerSegment from '../../components/FormComponent/CustomerSegment'
 import FormValuePropositions from '../../components/FormComponent/ValuePropositions'
+import FormDone from '../../components/FormComponent/Done'
 import FormOverview from '../../components/FormComponent/Overview'
 import { localStorageStepFormat, userFormStepItem } from '../../utils/constants'
 import FormButtons from '../../components/FormButtons'
@@ -120,7 +115,7 @@ const FormPage = () => {
             setFileList={setFileList}
           />
         )}
-        {/* {current === 3 && <FormOverview setFileList={setFileList} />} */}
+        {currentStep === 3 && <FormDone setFileList={setFileList} />}
 
         <FormButtons
           prevHandler={prev}

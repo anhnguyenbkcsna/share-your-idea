@@ -1,6 +1,7 @@
 import { Button, Form } from 'antd'
 import React, { useState } from 'react'
-
+import axios from 'axios'
+import { localStorageStepFormat } from '../../utils/constants'
 const FormButtons = (props) => {
   const { form, currentStep, steps, prevHandler, nextHandler, finishForm } =
     props
@@ -21,6 +22,25 @@ const FormButtons = (props) => {
         setSubmittable(false)
       })
   }, [values])
+
+  const sendData = async () => {
+    let body = []
+    for (let i = 0; i < 3; i++) {
+      let jsonStr = localStorage.getItem(localStorageStepFormat(i))
+      const data = JSON.parse(jsonStr)
+      body.push(data)
+    }
+
+    await axios
+      .post('http://127.0.0.1:8000/idea/', body)
+      .then((res) => {
+        console.log('res.data', res.data)
+        return res.data
+      })
+      .catch((err) => {
+        console.log('axios err', err)
+      })
+  }
 
   return (
     <div style={{ marginTop: 24 }}>
@@ -46,7 +66,7 @@ const FormButtons = (props) => {
         <Button
           form={form}
           type="primary"
-          onClick={() => finishForm()}
+          onClick={() => sendData()}
           htmlType="submit"
           disabled={!submittable}
         >

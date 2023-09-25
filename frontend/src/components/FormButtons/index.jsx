@@ -1,9 +1,9 @@
 import { Button, Form } from 'antd'
 import React, { useState } from 'react'
 import axios from 'axios'
-// import { localStorageStepFormat } from '../../utils/constants'
+import { localStorageStepFormat } from '../../utils/constants'
 const FormButtons = (props) => {
-  const { form, currentStep, steps, prevHandler, nextHandler } =
+  const { form, currentStep, steps, prevHandler, nextHandler, finishForm } =
     props
 
   const [submittable, setSubmittable] = useState(false)
@@ -21,29 +21,19 @@ const FormButtons = (props) => {
         // console.log('** values', err)
         setSubmittable(false)
       })
-  }, [values, form])
+  }, [values])
 
   const sendData = async () => {
-    // let body = []
-    // for (let i = 0; i < 3; i++) {
-    //   let jsonStr = localStorage.getItem(localStorageStepFormat(i))
-    //   const jsondata = JSON.parse(jsonStr)
-    //   body = [...body, jsondata]
-    // }
-    // console.log('body', body)
-    
-    const data = {
-      username: "admin",  
-      password: "admin123",
-      full_name: "admin",
-      age: 12,
-      email: "admin@example.com",
-      number: "123123123",
-      address: "Location"
+    let data = new FormData()
+    let body = {}
+    for (let i = 0; i < 3; i++) {
+      let jsonStr = localStorage.getItem(localStorageStepFormat(i))
+      const data = JSON.parse(jsonStr)
+      body[localStorageStepFormat(i)] = data
     }
 
     await axios
-      .post('http://127.0.0.1:8000/user/', data)
+      .post('http://127.0.0.1:8000/idea/', body)
       .then((res) => {
         console.log('res.data', res.data)
         return res.data

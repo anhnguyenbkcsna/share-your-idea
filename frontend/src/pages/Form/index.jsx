@@ -46,24 +46,7 @@ const FormPage = () => {
     const data = new FormData()
     data.append('image', new Blob(fileList), 'file_list_name')
     console.log('------- data', fileList, eachStepData)
-    // const result = await fetch(
-    //   'http://127.0.0.1:8000/idea/65057546c5ba16ab88f1cecc/',
-    //   {
-    //     method: 'POST',
-    //     // headers: {
-    //     //     // "Content-Type": "application/json",
-    //     //     'Content-Type': 'multipart/form-data',
-    //     // },
-    //     body: data,
-    //   }
-    // ).then((res) => {
-    //   console.log('>>>>>>> response', res)
-    //   return res.data
-    // })
-
-    // const obj = result ? JSON.parse(result) : 'empty'
-    // console.log('>>>>> obj', obj)
-
+    
     for (let i = 0; i < userFormStepItem.length; i++) {
       localStorage.removeItem(localStorageStepFormat(i))
     }

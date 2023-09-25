@@ -23,6 +23,7 @@ const FormPage = () => {
   const [fileList, setFileList] = useState([])
   const next = (curData) => {
     localStorage.setItem('currentStep', currentStep + 1)
+    const dataKey = localStorageStepFormat(currentStep)
     handler(curData)
     setCurrentStep(currentStep + 1)
   }
@@ -37,7 +38,7 @@ const FormPage = () => {
     localStorage.setItem(dataKey, JSON.stringify(curData))
 
     let copyStepData = eachStepData
-    if (copyStepData.findIndex((item) => item === dataKey) === -1) {
+    if (copyStepData.findIndex(dataKey) === -1) {
       copyStepData.push({
         dataKey: curData,
       })

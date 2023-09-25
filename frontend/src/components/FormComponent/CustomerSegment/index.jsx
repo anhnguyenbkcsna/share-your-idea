@@ -1,6 +1,6 @@
-// import { PlusOutlined } from '@ant-design/icons'
+import { PlusOutlined } from '@ant-design/icons'
 import React from 'react'
-import { Form, Input, Slider, Select } from 'antd'
+import { Form, Button, Input, Slider, Upload, Select } from 'antd'
 import {
   gender,
   localStorageStepFormat,
@@ -8,22 +8,25 @@ import {
   residential,
 } from '../../../utils/constants'
 
-// const normFile = (e) => {
-//   if (Array.isArray(e)) {
-//     console.log('>>>>>>  e?.fileList', e?.fileList)
-//     return e
-//   }
-//   return e?.fileList
-// }
+const normFile = (fileList) => {
+  if (Array.isArray(fileList)) {
+    console.log(
+      '>>>>>>  e?.fileList',
+      fileList.map((file) => file.originFileObj)
+    )
+    return fileList.map((file) => file.originFileObj)
+  }
+  return fileList.map((file) => file.originFileObj)
+}
 
 const FormCustomerSegment = (props) => {
-  const { form } = props
+  const { setFileList, form } = props
 
-  // const uploadFiles = async (upload) => {
-  //   const { file, fileList } = upload
-  //   setFileList(fileList)
-  //   console.log('>>>>>> file', fileList)
-  // }
+  const uploadFiles = async (upload) => {
+    const { file, fileList } = upload
+    setFileList(fileList)
+    console.log('>>>>>> file', fileList)
+  }
 
   const handleChange = (value) => {
     console.log(`selected ${value}`)

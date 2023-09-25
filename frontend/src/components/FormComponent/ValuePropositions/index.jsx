@@ -6,20 +6,31 @@ import {
   standoutReasons,
 } from '../../../utils/constants'
 
-const normFile = (e) => {
-  if (Array.isArray(e)) {
-    console.log('>>>>>>  e?.fileList', e?.fileList)
-    return e
+const normFile = (fileList) => {
+  console.log('file', fileList)
+  if (Array.isArray(fileList)) {
+    console.log(
+      '>>>>>>  e?.fileList',
+      fileList.map((file) => file.originFileObj)
+    )
+    // return fileList.map((file) => file.originFileObj)
+    return new Blob(fileList.map((file) => file.originFileObj))
   }
-  return e?.fileList
+  // return fileList.map((file) => file.originFileObj)
+  return fileList ? fileList : []
 }
 
 const FormValuePropositions = (props) => {
   const { setFileList, form } = props
   const uploadFiles = async (upload) => {
     const { file, fileList } = upload
-    setFileList(fileList)
-    console.log('>>>>>> file', fileList)
+    if (fileList) {
+      setFileList(fileList.map((file) => file.originFileObj))
+      console.log(
+        '>>>>>> file',
+        fileList.map((file) => file.originFileObj)
+      )
+    }
   }
 
   const handleChange = (value) => {

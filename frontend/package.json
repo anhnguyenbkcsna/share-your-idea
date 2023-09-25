@@ -23,10 +23,7 @@
   },
   "_moduleAliases": {
     "components": "src/components",
-    "data": "src/data",
-    "hook": "src/hook",
     "pages": "src/pages",
-    "services": "src/services",
     "utils": "src/utils"
   },
   "eslintConfig": {
@@ -46,5 +43,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "homepage": ""
 }

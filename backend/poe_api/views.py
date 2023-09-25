@@ -22,4 +22,4 @@ class PoeApiView(APIView):
         message = ""
         async for msg in self.callPoe(question):
             message += msg
-        return HttpResponse({"message": message})
+        return HttpResponse(message)

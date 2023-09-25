@@ -9,29 +9,52 @@ const textRules = {
   max: 200,
 }
 
-const over30WordsValidator = ({ getFieldsValue }) => ({
-  validator(rules, value) {
-    if (!value || value.length >= 30) {
-      return Promise.resolve(textRules)
-    }
-    return Promise.reject(new Error(`Not enough details for ${rules.field}`))
-  },
-})
+const wordsValidator = (minWords) => {
+  return ({ getFieldsValue }) => ({
+    validator(rules, value) {
+      if (!value || value.length >= minWords) {
+        return Promise.resolve(textRules)
+      }
+      return Promise.reject(new Error(`Not enough details for ${rules.field}`))
+    },
+  })
+}
 
-const normFile = (e) => {
-  if (Array.isArray(e)) {
-    console.log('>>>>>>  e?.fileList', e?.fileList)
-    return e
-  }
-  return e?.fileList
+const normFile = (obj) => {
+  const files = obj.fileList.map((file) => {
+    return {
+      crossOrigin: file.crossOrigin && '',
+      name: file.name,
+      percent: file.percent,
+      status: file.status,
+      thumbUrl: file.thumbUrl,
+      uid: file.uid,
+      url: file.url,
+      originFileObj: file.originFileObj,
+    }
+  })
+
+  console.log('>>>>>>  obj', files, obj.fileList)
+  return files
 }
 
 const FormOverview = (props) => {
   const { setFileList, form, name } = props
   const uploadFiles = async (upload) => {
     const { file, fileList } = upload
-    setFileList(fileList)
-    console.log('>>>>>> file', fileList)
+    const files = fileList.map((file) => {
+      return {
+        crossOrigin: file.crossOrigin && '',
+        name: file.name,
+        percent: file.percent,
+        status: file.status,
+        thumbUrl: file.thumbUrl,
+        uid: file.uid,
+        url: file.url,
+        originFileObj: file.originFileObj,
+      }
+    })
+    setFileList(files)
   }
 
   const handleChange = (value) => {
@@ -73,7 +96,7 @@ const FormOverview = (props) => {
 
       <Form.Item
         name="slogan"
-        rules={[textRules, over30WordsValidator]}
+        rules={[textRules, wordsValidator(30)]}
         label="Project slogan"
       >
         <Input.TextArea
@@ -83,26 +106,16 @@ const FormOverview = (props) => {
         />
       </Form.Item>
 
-      <Form.Item name="description" rules={[textRules]} label="Description">
+      <Form.Item
+        name="description"
+        rules={[textRules, wordsValidator(60)]}
+        label="Description"
+      >
         <Input.TextArea
           placeholder="Overview about your target audience + objectives + your vision"
           autoSize={{ minRows: 2, maxRows: 10 }}
+          showCount
         />
-      </Form.Item>
-
-      <Form.Item
-        name="upload"
-        rules={[{ required: true, message: 'We need your specification!' }]}
-        label="Upload"
-        valuePropName="fileList"
-        getValueFromEvent={normFile}
-      >
-        <Upload listType="picture-card" onChange={(e) => uploadFiles(e)}>
-          <div>
-            <PlusOutlined />
-            <div style={{ marginTop: 8 }}>Upload</div>
-          </div>
-        </Upload>
       </Form.Item>
     </Form>
   )

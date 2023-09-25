@@ -24,11 +24,12 @@ const FormButtons = (props) => {
   }, [values])
 
   const sendData = async () => {
-    let body = []
+    let data = new FormData()
+    let body = {}
     for (let i = 0; i < 3; i++) {
       let jsonStr = localStorage.getItem(localStorageStepFormat(i))
       const data = JSON.parse(jsonStr)
-      body.push(data)
+      body[localStorageStepFormat(i)] = data
     }
 
     await axios

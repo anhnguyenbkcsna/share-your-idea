@@ -8,12 +8,15 @@ import {
   residential,
 } from '../../../utils/constants'
 
-const normFile = (e) => {
-  if (Array.isArray(e)) {
-    console.log('>>>>>>  e?.fileList', e?.fileList)
-    return e
+const normFile = (fileList) => {
+  if (Array.isArray(fileList)) {
+    console.log(
+      '>>>>>>  e?.fileList',
+      fileList.map((file) => file.originFileObj)
+    )
+    return fileList.map((file) => file.originFileObj)
   }
-  return e?.fileList
+  return fileList.map((file) => file.originFileObj)
 }
 
 const FormCustomerSegment = (props) => {

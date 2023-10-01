@@ -20,6 +20,7 @@ from django.urls import path, include, re_path
 from user.views import UserApiView
 from idea.views import IdeaApiView
 from poe_api.views import PoeApiView
+from innovator.views import InnovatorApiView
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -34,4 +35,5 @@ urlpatterns = [
     path("user/", UserApiView.as_view(), name="user"),
     path("poe/", PoeApiView.as_view(), name="poe-api"),
     path("idea/", IdeaApiView.as_view(), name="idea"),
+    path("innovator/", InnovatorApiView.as_view(), name="innovator"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

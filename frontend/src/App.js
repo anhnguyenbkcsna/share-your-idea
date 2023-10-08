@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 // Pages
 import Sponsor from "./pages/Sponsor/index";
 import FormPage from "./pages/Form/index";
+import IdeaPage from "./pages/Ideas";
 
 function App() {
 	return (
@@ -28,6 +29,7 @@ function App() {
 					<Routes>
 						<Route path="/userform" element={<FormPage />} />
 						<Route path="/sponsorform" element={<Sponsor />} />
+						<Route path="/idea" element={<IdeaPage />} />
 					</Routes>
 					{/* <FormPage /> */}
 				</CustomizedLayout>

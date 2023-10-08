@@ -4,12 +4,12 @@ import {
   Form,
 } from 'antd'
 import FormSteps from '../../components/FormSteps'
+import FormCustomerSegment from '../../components/FormComponent/CustomerSegment'
 import FormValuePropositions from '../../components/FormComponent/ValuePropositions'
 import FormDone from '../../components/FormComponent/Done'
 import FormOverview from '../../components/FormComponent/Overview'
-import { localStorageStepFormat, sponsorFormStepItem, userFormStepItem } from '../../utils/constants'
+import { localStorageStepFormat, userFormStepItem } from '../../utils/constants'
 import FormButtons from '../../components/FormButtons'
-import Problems from '../../components/FormComponent/Problems'
 
 const FormPage = () => {
   const [currentStep, setCurrentStep] = useState(0)
@@ -85,7 +85,7 @@ const FormPage = () => {
           />
         )}
         {currentStep === 1 && (
-          <Problems
+          <FormCustomerSegment
             form={form}
             name="validateOnly"
             setFileList={setFileList}
@@ -105,7 +105,7 @@ const FormPage = () => {
           nextHandler={next}
           finishForm={finishForm}
           form={form}
-          steps={sponsorFormStepItem.length}
+          steps={userFormStepItem.length}
           currentStep={currentStep}
         />
       </Form>

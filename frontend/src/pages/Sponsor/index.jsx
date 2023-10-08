@@ -4,14 +4,16 @@ import {
   Form,
 } from 'antd'
 import FormSteps from '../../components/FormSteps'
+import FormCustomerSegment from '../../components/FormComponent/CustomerSegment'
 import FormValuePropositions from '../../components/FormComponent/ValuePropositions'
 import FormDone from '../../components/FormComponent/Done'
-import FormOverview from '../../components/FormComponent/Overview'
 import { localStorageStepFormat, sponsorFormStepItem, userFormStepItem } from '../../utils/constants'
 import FormButtons from '../../components/FormButtons'
+import Specification from '../../components/FormComponent/Specification'
 import Problems from '../../components/FormComponent/Problems'
+import Competitors from '../../components/FormComponent/Competitors'
 
-const FormPage = () => {
+const SponsorFormPage = () => {
   const [currentStep, setCurrentStep] = useState(0)
   const [eachStepData, setEachStepData] = useState([])
   const [form] = Form.useForm()
@@ -42,7 +44,7 @@ const FormPage = () => {
     setEachStepData(copyStepData)
   }
 
-  const finishForm = async () => {
+  const sponsorForm = async () => {
     const data = new FormData()
     data.append('image', new Blob(fileList), 'file_list_name')
     console.log('------- data', fileList, eachStepData)
@@ -78,7 +80,7 @@ const FormPage = () => {
 
         {/* Content */}
         {currentStep === 0 && (
-          <FormOverview
+          <Specification
             form={form}
             name="validateOnly"
             setFileList={setFileList}
@@ -92,7 +94,7 @@ const FormPage = () => {
           />
         )}
         {currentStep === 2 && (
-          <FormValuePropositions
+          <Competitors
             form={form}
             name="validateOnly"
             setFileList={setFileList}
@@ -103,7 +105,7 @@ const FormPage = () => {
         <FormButtons
           prevHandler={prev}
           nextHandler={next}
-          finishForm={finishForm}
+          finishForm={sponsorForm}
           form={form}
           steps={sponsorFormStepItem.length}
           currentStep={currentStep}
@@ -113,4 +115,4 @@ const FormPage = () => {
   )
 }
 
-export default FormPage
+export default SponsorFormPage

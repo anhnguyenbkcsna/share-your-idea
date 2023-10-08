@@ -2,7 +2,10 @@ import { ConfigProvider } from "antd";
 import "./App.css";
 import CustomizedLayout from "./layout";
 
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 // Pages
+import Sponsor from "./pages/Sponsor/index";
 import FormPage from "./pages/Form/index";
 
 function App() {
@@ -20,9 +23,15 @@ function App() {
 				},
 			}}
 		>
-			<CustomizedLayout>
-				<FormPage />
-			</CustomizedLayout>
+			<BrowserRouter>
+				<CustomizedLayout>
+					<Routes>
+						<Route path="/userform" element={<FormPage />} />
+						<Route path="/sponsorform" element={<Sponsor />} />
+					</Routes>
+					{/* <FormPage /> */}
+				</CustomizedLayout>
+			</BrowserRouter>
 		</ConfigProvider>
 	);
 }

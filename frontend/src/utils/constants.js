@@ -97,6 +97,52 @@ export const domains = [
   },
 ]
 
+export const competitors = [
+  {
+    label: 'Facebook',
+    value: 'Facebook',
+  },
+  {
+    'label': 'Google',
+    'value': 'Google',
+  }
+]
+
+export const targets = [
+  {
+    label: 'Children',
+    value: 'Children',
+  },
+  {
+    label: 'Student',
+    value: 'Student',
+  },
+  {
+    label: 'Teenager',
+    value: 'Teenager',
+  },
+  {
+    label: 'White-collar worker',
+    value: 'White-collar worker',
+  },
+  {
+    label: 'Blue-collar worker',
+    value: 'Blue-collar worker',
+  },
+  {
+    label: 'The elderly',
+    value: 'The elderly',
+  },
+  {
+    label: 'The disabled',
+    value: 'The disabled',
+  },
+  {
+    label: 'For everyone',
+    value: 'For everyone',
+  },
+]
+
 export const userFormStepItem = [
   {
     title: 'Idea Overview',
@@ -108,6 +154,25 @@ export const userFormStepItem = [
   },
   {
     title: 'Value Propositions',
+    // icon: <LoadingOutlined />,
+  },
+  {
+    title: 'Done',
+    // icon: <SmileOutlined />,
+  },
+]
+
+export const sponsorFormStepItem = [
+  {
+    title: 'Business specification',
+    // icon: <UserOutlined />,
+  },
+  {
+    title: 'Problems',
+    // icon: <SolutionOutlined />,
+  },
+  {
+    title: 'Competitors',
     // icon: <LoadingOutlined />,
   },
   {

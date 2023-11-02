@@ -3,10 +3,10 @@ from rest_framework import serializers
 from .models import Innovator
 
 class InnovatorSerializer(ModelSerializer):
-    ideas = serializers.ListField(
+    idea_ids = serializers.ListField(
         child=serializers.CharField(), required=False
     )
     
     class Meta:
         model = Innovator
-        exclude = ['id', 'avatar']
+        exclude = ['avatar_url']

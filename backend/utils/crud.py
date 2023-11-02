@@ -76,6 +76,9 @@ class CrudHelper:
                 {"$set": serializer.validated_data},
                 return_document=ReturnDocument.AFTER,
             )
+            
+            if not document_after_updated:
+                return Response({"message": f"Cannot find {ent_type}"}, status=400)
 
             if document_after_updated:
                 return Response(
@@ -99,6 +102,9 @@ class CrudHelper:
                 {"$set": serializer.validated_data},
                 return_document=ReturnDocument.AFTER,
             )
+            
+            if not document_after_updated:
+                return Response({"message": f"Cannot find {ent_type}"}, status=400)
             
             file_paths = copy.copy(document_after_updated["files"])
             for request_file in file_list:
@@ -128,8 +134,9 @@ class CrudHelper:
 
     @staticmethod
     def delete(id, collection, ent_type=""):
-        try:
-            collection.find_one_and_delete({"_id": ObjectId(id)})
+        response = collection.find_one_and_delete({"_id": ObjectId(id)})
+        
+        if response:
             return Response(
                 {
                     "message": f"""Deleted {ent_type}""",
@@ -137,5 +144,5 @@ class CrudHelper:
                 },
                 status=200,
             )
-        except:
+        else:
             return Response({"message": f"""Cannot find {ent_type}"""}, status=400)

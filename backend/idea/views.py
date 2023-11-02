@@ -50,7 +50,7 @@ class IdeaApiView(APIView):
         id = request.query_params.get("id")
         file_list = request.FILES.getlist("files")
         
-        return CrudHelper.patch(id, self.collection, serializer, file_list, self.ENT_TYPE)
+        return CrudHelper.patch_with_file(id, self.collection, serializer, file_list, self.ENT_TYPE)
 
     def delete(self, request):
         id = request.query_params.get("id")

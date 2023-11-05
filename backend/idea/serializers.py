@@ -3,11 +3,7 @@ from rest_framework import serializers
 
 from .models import Idea
 
-class IdeaSerializer(ModelSerializer):
-    files = serializers.ListField(
-        child=serializers.FileField(), required=False
-    )
-    
+class IdeaSerializer(ModelSerializer):    
     class Meta:
         model = Idea
-        exclude = ['id']
+        exclude = ["like", "dislike"]

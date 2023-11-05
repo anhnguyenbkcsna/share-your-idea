@@ -43,8 +43,11 @@ INSTALLED_APPS = [
     'adrf',
     "rest_framework",
     "storages",
+    "file_upload",
     "user",
     "idea",
+    "innovator",
+    'company',
 ]
 
 CORS_ALLOWED_ORIGINS = ["http://localhost:3000"]

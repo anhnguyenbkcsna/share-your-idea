@@ -4,9 +4,9 @@ import { Form, Button, Input, Slider, Upload, Select } from 'antd'
 import {
   gender,
   localStorageStepFormat,
-  professionals,
+  customerJobs,
   residential,
-} from '../../../utils/constants'
+} from '../../../utils/form.constants'
 
 const normFile = (fileList) => {
   if (Array.isArray(fileList)) {
@@ -20,28 +20,13 @@ const normFile = (fileList) => {
 }
 
 const FormCustomerSegment = (props) => {
-  const { setFileList, form } = props
-
-  const uploadFiles = async (upload) => {
-    const { file, fileList } = upload
-    setFileList(fileList)
-    console.log('>>>>>> file', fileList)
-  }
+  // const { setFileList, form, name } = props
 
   const handleChange = (value) => {
     console.log(`selected ${value}`)
   }
   return (
-    <Form
-      form={form}
-      layout="vertical"
-      style={{
-        minWidth: 600,
-      }}
-      initialValues={JSON.parse(
-        localStorage.getItem(localStorageStepFormat(1))
-      )}
-    >
+    <div>
       <Form.Item
         name="gender"
         label="Gender"
@@ -59,7 +44,7 @@ const FormCustomerSegment = (props) => {
         label="Age Range"
         rules={[{ required: true, message: 'We need your specification!' }]}
       >
-        <Slider range step={1} defaultValue={[20, 50]} />
+        <Slider range step={1} initialValues={[20, 50]} />
       </Form.Item>
 
       <Form.Item
@@ -71,7 +56,7 @@ const FormCustomerSegment = (props) => {
           mode="tags"
           placeholder="Please select or enter your answer"
           onChange={handleChange}
-          options={professionals}
+          options={customerJobs}
         />
       </Form.Item>
 
@@ -99,7 +84,7 @@ const FormCustomerSegment = (props) => {
           autoSize={{ minRows: 2, maxRows: 10 }}
         />
       </Form.Item>
-    </Form>
+    </div>
   )
 }
 

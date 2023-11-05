@@ -1,7 +1,7 @@
 import { Button, Form } from 'antd'
 import React, { useState } from 'react'
 import axios from 'axios'
-import { localStorageStepFormat } from '../../utils/constants'
+import { localStorageStepFormat } from '../../utils/form.constants'
 const FormButtons = (props) => {
   const { form, currentStep, steps, prevHandler, nextHandler, finishForm } =
     props
@@ -14,7 +14,7 @@ const FormButtons = (props) => {
     form
       .validateFields()
       .then((val) => {
-        // console.log('(((( Vak', val)
+        console.log('Validates', val)
         setSubmittable(true)
       })
       .catch((err) => {

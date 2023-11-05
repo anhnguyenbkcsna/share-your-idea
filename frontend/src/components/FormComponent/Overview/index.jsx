@@ -1,19 +1,21 @@
 // import { PlusOutlined } from '@ant-design/icons'
 import React from 'react'
-import { Form, Input, Select } from 'antd'
-import { domains, localStorageStepFormat } from '../../../utils/constants'
+import { Button, Form, Input, Select } from 'antd'
+import { domains, localStorageStepFormat } from '../../../utils/form.constants'
+import { useEffect } from 'react'
+import SingleFormProgress from '../../FormProgress'
 
 const textRules = {
   required: true,
   type: 'string',
-  max: 200,
+  max: 20,
 }
 
 const wordsValidator = (minWords) => {
   return ({ getFieldsValue }) => ({
     validator(rules, value) {
-      if (!value || value.length >= minWords) {
-        return Promise.resolve(textRules)
+      if (value && value.length >= minWords) {
+        return Promise.resolve()
       }
       return Promise.reject(new Error(`Not enough details for ${rules.field}`))
     },
@@ -39,39 +41,31 @@ const normFile = (obj) => {
 }
 
 const FormOverview = (props) => {
-  const { setFileList, form, name } = props
-  const uploadFiles = async (upload) => {
-    const { file, fileList } = upload
-    const files = fileList.map((file) => {
-      return {
-        crossOrigin: file.crossOrigin && '',
-        name: file.name,
-        percent: file.percent,
-        status: file.status,
-        thumbUrl: file.thumbUrl,
-        uid: file.uid,
-        url: file.url,
-        originFileObj: file.originFileObj,
-      }
-    })
-    setFileList(files)
-  }
+  // const { setFileList, first, last, name ,nextHandler, prevHandler} = props
+
+  // const uploadFiles = async (upload) => {
+  //   const { file, fileList } = upload
+  //   const files = fileList.map((file) => {
+  //     return {
+  //       crossOrigin: file.crossOrigin && '',
+  //       name: file.name,
+  //       percent: file.percent,
+  //       status: file.status,
+  //       thumbUrl: file.thumbUrl,
+  //       uid: file.uid,
+  //       url: file.url,
+  //       originFileObj: file.originFileObj,
+  //     }
+  //   })
+  //   setFileList(files)
+  // }
 
   const handleChange = (value) => {
     console.log(`selected ${value}`)
   }
+
   return (
-    <Form
-      form={form}
-      name={name}
-      layout="vertical"
-      style={{
-        minWidth: 600,
-      }}
-      initialValues={JSON.parse(
-        localStorage.getItem(localStorageStepFormat(0))
-      )}
-    >
+    <div>
       <Form.Item
         name="name"
         rules={[{ required: true, message: 'We need your specification!' }]}
@@ -96,7 +90,7 @@ const FormOverview = (props) => {
 
       <Form.Item
         name="slogan"
-        rules={[textRules, wordsValidator(30)]}
+        rules={[wordsValidator(30)]}
         label="Project slogan"
       >
         <Input.TextArea
@@ -108,7 +102,7 @@ const FormOverview = (props) => {
 
       <Form.Item
         name="description"
-        rules={[textRules, wordsValidator(60)]}
+        rules={[wordsValidator(60)]}
         label="Description"
       >
         <Input.TextArea
@@ -117,7 +111,7 @@ const FormOverview = (props) => {
           showCount
         />
       </Form.Item>
-    </Form>
+    </div>
   )
 }
 

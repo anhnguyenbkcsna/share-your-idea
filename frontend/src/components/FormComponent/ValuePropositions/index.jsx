@@ -3,8 +3,9 @@ import { Form, Input, Select } from 'antd'
 import {
   localStorageStepFormat,
   standoutReasons,
-} from '../../../utils/constants'
-const {TextArea} = Input;
+} from '../../../utils/form.constants'
+import SingleFormProgress from '../../FormProgress'
+const {TextArea} = Input
 
 const normFile = (fileList) => {
   console.log('file', fileList)
@@ -21,32 +22,13 @@ const normFile = (fileList) => {
 }
 
 const FormValuePropositions = (props) => {
-  const { setFileList, form } = props
-  const uploadFiles = async (upload) => {
-    const { file, fileList } = upload
-    if (fileList) {
-      setFileList(fileList.map((file) => file.originFileObj))
-      console.log(
-        '>>>>>> file',
-        fileList.map((file) => file.originFileObj)
-      )
-    }
-  }
+  // const { setFileList, form, name } = props
 
   const handleChange = (value) => {
     console.log(`Value Prop selected ${value}`)
   }
   return (
-    <Form
-      form={form}
-      layout="vertical"
-      style={{
-        minWidth: 600,
-      }}
-      initialValues={JSON.parse(
-        localStorage.getItem(localStorageStepFormat(2))
-      )}
-    >
+    <>
       <Form.Item
         name="apps"
         rules={[{ required: true, message: 'We need your specification!' }]}
@@ -85,7 +67,7 @@ const FormValuePropositions = (props) => {
       >
         <TextArea rows={3} />
       </Form.Item>
-    </Form>
+    </>
   )
 }
 

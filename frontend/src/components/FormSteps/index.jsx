@@ -1,13 +1,13 @@
 import React from 'react'
 import { Steps } from 'antd'
-import { userFormStepItem } from '../../utils/constants'
 
 const FormSteps = (props) => {
+  const {dataSteps} = props
   return (
     <Steps
       direction="horizontal"
       current={props.current}
-      items={userFormStepItem}
+      items={dataSteps}
     />
   )
 }

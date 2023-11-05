@@ -8,11 +8,13 @@ import {
 } from '@ant-design/icons'
 import { Layout, Menu, Button, theme } from 'antd'
 import Sidebar from './Sidebar'
-import CusHeader from './Header'
+import CusHeader from './AccountHeader'
+import { AuthProvider, useAuth } from '../hooks/auth'
+import { Navigate, Outlet } from 'react-router-dom'
 
 const { Header, Sider, Content } = Layout
 
-const CustomizedLayout = (props) => {
+const PersonalLayout = (props) => {
   const [collapsed, setCollapsed] = useState(false)
   const {
     token: { colorBgContainer },
@@ -31,11 +33,13 @@ const CustomizedLayout = (props) => {
             background: colorBgContainer,
           }}
         >
-          {props.children}
+          {/* {props.children} */}
+          <Outlet />
         </Content>
       </Layout>
     </Layout>
   )
 }
 
-export default CustomizedLayout
+
+export default PersonalLayout

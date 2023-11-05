@@ -1,5 +1,5 @@
 import React from 'react'
-import { DatePicker, Typography } from 'antd';
+import { DatePicker, Typography } from 'antd'
 
 const UserForm = () => {
   return (

@@ -1,0 +1,13 @@
+@import '../../styles/variable.scss';
+
+.footer {
+  background-color: $primary-org;
+  color: #ffffff;
+
+  .inner {
+    width: 90%;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    margin: 50px auto;
+  }
+}

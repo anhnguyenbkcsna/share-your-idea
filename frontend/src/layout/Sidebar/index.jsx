@@ -8,8 +8,8 @@ import {
 } from '@ant-design/icons'
 import { Menu, theme } from 'antd'
 import Sider from 'antd/es/layout/Sider'
-import logo from '../../assets/Worldea.svg'
-import logoAbbr from '../../assets/W.svg'
+import logo from '../../assets/WorldeaOrg.svg'
+import logoAbbr from '../../assets/Worg.svg'
 
 const Sidebar = (props) => {
   const { collapsed } = props

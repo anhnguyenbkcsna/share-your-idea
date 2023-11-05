@@ -1,0 +1,32 @@
+@import '../../styles/variable.scss';
+.bg {
+  background-color: $primary-bg-color;
+  height: 100vh;
+}
+
+.container {
+  background-color: rgb(255, 255, 255);
+  width: 60%;
+  margin: auto;
+  height: fit-content;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 5px 10px 10px rgb(147, 144, 138);
+  top: 50%;
+  transform: translateY(-50%);
+  position: relative;
+
+  .col1 {
+    padding: 20px;
+  }
+
+  .col2 {
+    padding: 0;
+
+    > img {
+      display: block;
+    }
+  }
+}

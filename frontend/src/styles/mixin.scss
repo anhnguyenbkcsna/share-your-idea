@@ -1,0 +1,23 @@
+@import './variable.scss';
+
+@mixin large-slogan {
+  font-size: 40px;
+  font-weight: 700;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: $primary-bg-color;
+  margin: auto;
+}
+
+@mixin normal-slogan {
+  font-size: 20px;
+  font-weight: 500;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: $primary-color-darker;
+  margin: auto;
+}
+
+@mixin round-border {
+  box-sizing: border-box;
+  border-radius: 5px;
+  box-shadow: 5px 5px 10px rgb(177, 177, 177);
+}

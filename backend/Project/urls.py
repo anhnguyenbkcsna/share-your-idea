@@ -20,6 +20,9 @@ from django.urls import path, include, re_path
 from user.views import UserApiView
 from idea.views import IdeaApiView
 from poe_api.views import PoeApiView
+from innovator.views import InnovatorApiView
+from company.views import CompanyApiView
+from file_upload.views import FileUploadApiView
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -28,10 +31,11 @@ from django.conf.urls.static import static
 # router.register(r'accounts', AccountViewSet)
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("user/<str:id>/", UserApiView.as_view(), name="user"),
-    path("idea/<str:id>/", IdeaApiView.as_view(), name="idea"),
-    path("user/", UserApiView.as_view(), name="user"),
-    path("poe/", PoeApiView.as_view(), name="poe-api"),
-    path("idea/", IdeaApiView.as_view(), name="idea"),
+    path("admin", admin.site.urls),
+    path("user", UserApiView.as_view(), name="user"),
+    path("poe", PoeApiView.as_view(), name="poe-api"),
+    path("idea", IdeaApiView.as_view(), name="idea"),
+    path("file", FileUploadApiView.as_view(), name="file"),
+    path("company", CompanyApiView.as_view(), name="company"),
+    path("innovator", InnovatorApiView.as_view(), name="innovator"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

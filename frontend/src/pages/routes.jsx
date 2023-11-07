@@ -8,6 +8,7 @@ import CreateIdeaFormPage from './IdeaForm'
 import HomePage from './Home'
 import LoginPage from './Login'
 import CreateProfileForm from './Profile'
+import MatchIdea from './MatchIdea'
 import ErrorBoundary from './Error'
 
 export const getRouter = () => {
@@ -28,6 +29,10 @@ export const getRouter = () => {
         </Route>
         <Route path="company" Component={PrivateLayout}>
           <Route index Component={CreateIdeaFormPage} />
+          {/* <Route path='profile' Component={CreateProfileForm} /> */}
+        </Route>
+        <Route path="match-idea" Component={PrivateLayout}>
+          <Route index Component={MatchIdea} />
           {/* <Route path='profile' Component={CreateProfileForm} /> */}
         </Route>
       </Route>

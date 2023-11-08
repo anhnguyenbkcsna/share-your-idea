@@ -1,4 +1,5 @@
 import React from 'react'
+import { useLayoutEffect } from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { createContext, useContext, useMemo } from 'react'
@@ -7,14 +8,17 @@ import { isUserAuthorized } from '../api/google'
 import { localStorageConstant, userRoles } from '../utils/global.constants'
 import { userRole } from '../utils/profile.constants'
 import { validateGoogleResponse } from '../utils/validate'
+import { localStorageGetUser } from './localStorage'
 
 const AuthContext = createContext()
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState(null)
+  const [loading, setLoading] = useState(localStorage.getItem(localStorageConstant.API_TOKEN) === null)
   const navigate = useNavigate()
 
   useEffect(() => {
     const apiToken = localStorage.getItem(localStorageConstant.API_TOKEN)
+    console.log('Is loading...', loading)
     isUserAuthorized(apiToken).then((authorized) => {
       if (authorized === true) {
         setUser({
@@ -28,6 +32,7 @@ export const AuthProvider = ({ children }) => {
         setUser(null)
       }
     })
+    setLoading(false)
   }, [])
 
   // call this function when you want to authenticate the user
@@ -48,6 +53,7 @@ export const AuthProvider = ({ children }) => {
   const value = useMemo(
     () => ({
       user,
+      loading,
       login,
       logout
     }),

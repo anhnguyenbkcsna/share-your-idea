@@ -22,7 +22,6 @@ const HomePage = () => {
           </NavLink>
         </div>
         <div className={classNames(styles['bg-circle'])}/>
-
       </section>
       <div className={styles.container}>
         <section className={styles.section1}>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Steps } from 'antd'
 
-const FormSteps = (props) => {
+const ProgressBar = (props) => {
   const {dataSteps} = props
   return (
     <Steps
@@ -12,4 +12,4 @@ const FormSteps = (props) => {
   )
 }
 
-export default FormSteps
+export default ProgressBar

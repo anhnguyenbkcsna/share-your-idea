@@ -9,6 +9,7 @@ import HomePage from './Home'
 import LoginPage from './Login'
 import CreateProfileForm from './Profile'
 import ErrorBoundary from './Error'
+import IdeaMatchingPage from './Matching'
 
 export const getRouter = () => {
   const browserRouter = createBrowserRouter(
@@ -28,7 +29,7 @@ export const getRouter = () => {
         </Route>
         <Route path="company" Component={PrivateLayout}>
           <Route index Component={CreateIdeaFormPage} />
-          {/* <Route path='profile' Component={CreateProfileForm} /> */}
+          <Route path='matching' Component={IdeaMatchingPage} />
         </Route>
       </Route>
     ))

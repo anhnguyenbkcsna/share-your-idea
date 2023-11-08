@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import FormCustomerSegment from '../../components/FormComponent/CustomerSegment'
-import FormValuePropositions from '../../components/FormComponent/ValuePropositions'
-import FormDone from '../../components/FormComponent/Done'
-import FormOverview from '../../components/FormComponent/Overview'
+import FormCustomerSegment from '../../components/FormIdeaSteps/CustomerSegment'
+import FormValuePropositions from '../../components/FormIdeaSteps/ValuePropositions'
+import FormDone from '../../components/FormIdeaSteps/Done'
+import FormOverview from '../../components/FormIdeaSteps/Overview'
 import { localStorageStepFormat, userFormStepItem } from '../../utils/form.constants'
 import FormProgress from '../../components/FormProgress/progress'
 

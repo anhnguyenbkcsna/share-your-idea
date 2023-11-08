@@ -7,7 +7,7 @@ import {
   residential,
 } from '../../utils/form.constants'
 import { occupationGroups, userRole } from '../../utils/profile.constants'
-import FormSlogan from '../../components/FormComponent/Title'
+import FormSlogan from '../../components/FormIdeaSteps/Title'
 import { useState } from 'react'
 import Dragger from 'antd/es/upload/Dragger'
 import { createProfileApi } from '../../api/google'

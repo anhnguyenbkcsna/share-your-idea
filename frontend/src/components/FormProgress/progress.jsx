@@ -3,8 +3,8 @@ import React from 'react'
 import { useState } from 'react'
 import SingleFormProgress from '.'
 import { localStorageStepFormat } from '../../utils/form.constants'
-import FormSlogan from '../FormComponent/Title'
-import FormSteps from '../FormSteps'
+import FormSlogan from '../FormIdeaSteps/Title'
+import FormSteps from '../ProgressBar'
 
 // formSource should be () => React.JSX.Element with props.children passed
 

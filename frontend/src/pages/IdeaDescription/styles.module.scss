@@ -1,0 +1,72 @@
+@import '../../styles/variable.scss';
+@import '../../styles/mixin.scss';
+
+$bg-height: 300px;
+
+.bg-circle {
+  background: $primary-bg-color;
+  background-image: url(https://images.unsplash.com/photo-1699175481336-52d618f1f41d?q=80&w=2832&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+  background-position: bottom 10%;
+  background-size: contain;
+  height: $bg-height;
+  clip-path: circle(calc($bg-height/3) at 50% 50%);
+}
+
+.bg {
+  background: linear-gradient(0.4turn, $primary-color-light, $primary-org);
+  position: relative;
+  left: 0;
+  width: 100%;
+  height: $bg-height;
+  display: grid;
+  grid-template-columns: 1.9fr 1.3fr;
+  // clip-path: polygon(0 0, 100% 0, 100% 80%, 0 90%);
+}
+
+.description {
+  font-size: 40px;
+  font-weight: 700;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: $primary-bg-color;
+  margin: auto;
+}
+
+.emp {
+  font-weight: 700;
+  font-size: 60px;
+  color: #fff066;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  letter-spacing: 0.2rem;
+  margin: 10px 0;
+}
+
+.underline {
+  height: 10px;
+  background-color: #a8e6d8;
+}
+
+.btn {
+  margin-top: 3rem;
+  font-size: large;
+  color: $primary-color;
+  height: auto;
+  box-shadow: 5px 5px $primary-color-light;
+}
+
+.decor {
+  width: 80%;
+}
+
+.slogan {
+  @include semi-large-slogan;
+  color: $primary-org;
+}
+
+.title {
+  display: inline-block;
+  color: white;
+  margin: 10px 0;
+  @include round-border;
+  background-color: $primary-org;
+  padding: 0 5px;
+}

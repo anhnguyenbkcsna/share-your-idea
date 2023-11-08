@@ -4,7 +4,7 @@ import { useState } from 'react'
 import SingleFormProgress from '.'
 import { localStorageStepFormat } from '../../utils/form.constants'
 import FormSlogan from '../FormIdeaSteps/Title'
-import FormSteps from '../ProgressBar'
+import ProgressBar from '../ProgressBar'
 
 // formSource should be () => React.JSX.Element with props.children passed
 
@@ -12,19 +12,23 @@ const FormProgress = (props) => {
   const {onFormFinish, formSource, dataSteps, slogans} = props
   const [currentStep, setCurrentStep] = useState(0)
   const [eachStepData, setEachStepData] = useState([])
+  const [projectIdea, setProjectIdea] = useState({})
 
   const next = (curData) => {
     localStorage.setItem('currentStep', currentStep + 1)
     handler(curData)
     setCurrentStep(currentStep + 1)
+    setProjectIdea(curData)
   }
   const prev = (curData) => {
     localStorage.setItem('currentStep', currentStep - 1)
     handler(curData)
     setCurrentStep(currentStep - 1)
+    setProjectIdea(curData)
   }
 
-  const done = () => {
+  const done = (val) => {
+    setProjectIdea(val)
     console.log('** Progress done!')
     for (let stepCount = 0; stepCount < dataSteps.length; stepCount += 1) {
       localStorage.removeItem(localStorageStepFormat(stepCount))
@@ -48,25 +52,17 @@ const FormProgress = (props) => {
   }
 
   const eachFormSubmit = (name, formInfo) => {
-    formInfo.forms[name]
-      .validateFields()
-      .then((val) => {
-        console.log('Validates', val)
-        // projectIdea[name] = val
-        // setProjectIdea(projectIdea)
-      })
-      .catch((err) => {
-        console.log('** error after validate', err)
-      })
+    console.log('** formInfo', formInfo.forms, name)
+    // formInfo.forms
     if (lastStep) {
-      onFormFinish()
+      onFormFinish(name, formInfo)
     }
   }
 
   return (
     <Form.Provider onFormFinish={eachFormSubmit}>
       <FormSlogan sloganList={slogans} />
-      <FormSteps level={'hard'} current={currentStep} dataSteps={dataSteps}/>
+      <ProgressBar level={'hard'} current={currentStep} dataSteps={dataSteps}/>
       <Typography.Title level={3}>
         {dataSteps[currentStep].content}
       </Typography.Title>

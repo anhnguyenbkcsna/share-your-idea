@@ -3,9 +3,11 @@ import IdeaCard from '../../components/IdeaCard'
 import OwlCarousel from 'react-owl-carousel'
 import 'owl.carousel/dist/assets/owl.carousel.css'
 import 'owl.carousel/dist/assets/owl.theme.default.css'
+import CusCard from '../../components/CusCard'
 
 const ideas = [
   {
+    id: '1',
     title: 'Idea 1',
     percentage: 67,
     averageVote: 4.3,
@@ -15,6 +17,7 @@ const ideas = [
     tag: ['tag1', 'tag2', 'tag3'],
   },
   {
+    id: '2',
     title: 'Idea 2',
     percentage: 67,
     averageVote: 4.3,
@@ -24,6 +27,7 @@ const ideas = [
     tag: ['tag1', 'tag2', 'tag3'],
   },
   {
+    id: '3',
     title: 'Idea 3',
     percentage: 67,
     averageVote: 4.3,
@@ -33,6 +37,7 @@ const ideas = [
     tag: ['tag1', 'tag2', 'tag3'],
   },
   {
+    id: '4',
     title: 'Idea 4',
     percentage: 67,
     averageVote: 4.3,
@@ -42,6 +47,7 @@ const ideas = [
     tag: ['tag1', 'tag2', 'tag3'],
   },
   {
+    id: '5',
     title: 'Idea 5',
     percentage: 67,
     averageVote: 4.3,
@@ -60,14 +66,14 @@ const MatchIdea = () => {
   }
 
   return (
-    <>
+    <CusCard>
       <OwlCarousel
         className='owl-theme'
-        loop margin={50} center lazyLoad dots smartSpeed={450}
+        loop margin={50} center lazyLoad dots smartSpeed={450} style={{zIndex: 0}}
       >
         {ideas.map((idea, index) => (
-          <IdeaCard 
-            id={index} 
+          <IdeaCard
+            id={index}
             className='item'
             title={idea.title}
             percentage={idea.percentage}
@@ -79,7 +85,7 @@ const MatchIdea = () => {
           />
         ))}
       </OwlCarousel>
-    </>
+    </CusCard>
   )
 }
 export default MatchIdea

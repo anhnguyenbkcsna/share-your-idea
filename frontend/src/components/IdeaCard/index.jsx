@@ -1,25 +1,24 @@
 import React, { useState } from 'react'
-import { Card, Typography, Progress, Tooltip, Rate, Tag } from 'antd'
+import { Card, Typography, Progress, Tooltip, Rate, Tag, Anchor } from 'antd'
 import { EyeOutlined, StarOutlined, HeartOutlined, StarFilled, HeartFilled } from '@ant-design/icons'
+import styles from './styles.module.scss'
 
 const IdeaCard = (props) => {
-  const [voted, setVoted] = useState(0)
-  const [isFavourite, setIsFavourite] = useState(false)
+  const tags = ['red', 'green', 'blue', 'geekblue', 'purple']
+  const [voted, setVoted] = useState(0) // load from database
+  const [isFavourite, setIsFavourite] = useState(false) // load from database
   return (
-    <Card
-      style={{
-        width: 400,
-      }}
+    <Card className={styles.card}
       cover={
         <img
           alt='example'
-          src='https://bizflyportal.mediacdn.vn/thumb_wm/1000,100/bizflyportal/images/inn16276486529991.jpg'
+          src={props.src}
         />
       }
       actions={[
         <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
           <EyeOutlined style={{fontSize: '3em'}}/>
-          <p style={{margin: '0'}}>3.6k</p>
+          <p style={{margin: '0'}}>{props.views}</p>
         </div>,
 
         <Tooltip color='white' style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}
@@ -34,7 +33,7 @@ const IdeaCard = (props) => {
             </>
             : <>
               <StarOutlined style={{fontSize: '3em'}}/>
-              <p style={{margin: '0'}}>4.3</p>
+              <p style={{margin: '0'}}>{props.averageVote}</p>
             </>
           }
         </Tooltip>,
@@ -57,22 +56,23 @@ const IdeaCard = (props) => {
           justifyContent: 'space-between',
           alignItems: 'center'
         }}>
-          <Typography.Title level={2}>Idea Name</Typography.Title>
+          <a href='#' className={styles.link}>
+            <Typography.Title level={2}>
+              {props.title}
+            </Typography.Title>
+          </a>
           <Tooltip title='Complete percentage'>
-            <Progress type="circle" percent={75} size='small' />
+            <Progress type="circle" percent={props.percentage} size='small' />
           </Tooltip>
         </div>
-        <Typography.Paragraph style={{color: 'black'}}>
-          Lorem ipsum dolor sit amet consectetur adipisici
-          Lorem ipsum dolor sit amet consectetur adipisici
-          Lorem ipsum dolor sit amet consectetur adipisici
-          Lorem ipsum dolor sit amet consectetur adipisici
+        <Typography.Paragraph style={{color: 'black'}}>{props.description}
         </Typography.Paragraph>
         <div>
-          <Tag color="magenta">magenta</Tag>
+          {props.tag.map((tag, index) => (
+            <Tag color={tags[index]}>{tag}</Tag>
+          ))}
         </div>
       </div>
-
     </Card>
   )
 }

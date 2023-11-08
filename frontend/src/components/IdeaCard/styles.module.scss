@@ -1,0 +1,8 @@
+@import "../../styles/variable.scss";
+
+.link {
+  transition: all .2s ease-in-out;
+}
+.link :hover{
+  color: $primary-org;
+}

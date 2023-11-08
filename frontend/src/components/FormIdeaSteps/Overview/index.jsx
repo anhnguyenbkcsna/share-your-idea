@@ -1,9 +1,10 @@
 // import { PlusOutlined } from '@ant-design/icons'
 import React from 'react'
 import { Button, Form, Input, Select } from 'antd'
-import { domains, localStorageStepFormat } from '../../../utils/form.constants'
+import { companyIndustries, domains, localStorageStepFormat, teamDescription } from '../../../utils/form.constants'
 import { useEffect } from 'react'
 import SingleFormProgress from '../../FormProgress'
+import { labelValueGenerate } from '../../../utils/utils'
 
 const textRules = {
   required: true,
@@ -81,9 +82,10 @@ const FormOverview = (props) => {
       >
         <Select
           mode="tags"
+          maxLength={3}
           placeholder="Please select or enter your answer"
           onChange={handleChange}
-          options={domains}
+          options={labelValueGenerate(companyIndustries.sort())}
           allowClear
         />
       </Form.Item>
@@ -109,6 +111,32 @@ const FormOverview = (props) => {
           placeholder="Overview about your target audience + objectives + your vision"
           autoSize={{ minRows: 2, maxRows: 10 }}
           showCount
+        />
+      </Form.Item>
+
+      <Form.Item
+        name="teams"
+        rules={[wordsValidator(60)]}
+        label="Team Description"
+      >
+        <Input.TextArea
+          placeholder="Overview about your target audience + objectives + your vision"
+          autoSize={{ minRows: 2, maxRows: 10 }}
+          showCount
+        />
+      </Form.Item>
+
+      <Form.Item
+        name="teams"
+        rules={[wordsValidator(60)]}
+        label="Team Description"
+      >
+        <Select
+          mode="tags"
+          placeholder="Please select or enter your answer"
+          onChange={handleChange}
+          options={labelValueGenerate(teamDescription)}
+          allowClear
         />
       </Form.Item>
     </div>

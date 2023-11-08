@@ -32,4 +32,6 @@ const occupations = [
 
 export const occupationGroups = labelValueGenerate(occupations)
 
+export const organization = ['Self-employed or Freelance', 'Student']
+
 // export const

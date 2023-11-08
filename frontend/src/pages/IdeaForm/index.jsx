@@ -5,6 +5,7 @@ import FormDone from '../../components/FormIdeaSteps/Done'
 import FormOverview from '../../components/FormIdeaSteps/Overview'
 import { localStorageStepFormat, userFormStepItem } from '../../utils/form.constants'
 import FormProgress from '../../components/FormProgress/progress'
+import CusCard from '../../components/CusCard'
 
 const CreateIdeaFormPage = () => {
   const [currentStep, setCurrentStep] = useState(0)
@@ -67,13 +68,15 @@ const CreateIdeaFormPage = () => {
   }
 
   return (
-    <FormProgress
-      onFormFinish={onFormFinish}
-      slogans={['We are helping you', 'Your idea is awesome']}
-      formSource={[FormOverview, FormCustomerSegment, FormValuePropositions, doneElement
-      ]}
-      dataSteps={userFormStepItem}
-    />
+    <CusCard>
+      <FormProgress
+        onFormFinish={onFormFinish}
+        slogans={['We are helping you', 'Your idea is awesome']}
+        formSource={[FormOverview, FormCustomerSegment, FormValuePropositions, doneElement
+        ]}
+        dataSteps={userFormStepItem}
+      />
+    </CusCard>
   )
 }
 

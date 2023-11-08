@@ -171,19 +171,6 @@ const CreateProfileForm = (props) => {
           </Form.Item>
 
           <Form.Item
-            name="geographical"
-            label="Geographical"
-            rules={[{ required: true, message: 'We need your specification!' }]}
-          >
-            <Select
-              mode="tags"
-              placeholder="Please select or enter your answer"
-              // onChange={handleChange}
-              options={residential}
-            />
-          </Form.Item>
-
-          <Form.Item
             name="description"
             label="Special Description"
             rules={[{ required: true, message: 'We need your specification!' }]}

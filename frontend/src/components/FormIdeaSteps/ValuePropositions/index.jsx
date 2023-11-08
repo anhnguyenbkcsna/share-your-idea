@@ -1,10 +1,12 @@
 import React from 'react'
 import { Form, Input, Select } from 'antd'
 import {
+  currentDevStage,
   localStorageStepFormat,
   standoutReasons,
 } from '../../../utils/form.constants'
 import SingleFormProgress from '../../FormProgress'
+import { labelValueGenerate } from '../../../utils/utils'
 const {TextArea} = Input
 
 const normFile = (fileList) => {
@@ -32,7 +34,7 @@ const FormValuePropositions = (props) => {
       <Form.Item
         name="apps"
         rules={[{ required: true, message: 'We need your specification!' }]}
-        label="Are there any applications direct the same issue?"
+        label="Name at lease 2 applications which direct the same issue"
       >
         <TextArea rows={3} />
       </Form.Item>
@@ -44,29 +46,42 @@ const FormValuePropositions = (props) => {
       >
         <Select
           mode="tags"
-          placeholder="Please select or enter your answer"
+          placeholder="You could enter your own labels in short description"
           onChange={handleChange}
           options={standoutReasons}
         />
       </Form.Item>
 
       <Form.Item
+        name="currentDev"
+        rules={[{ required: true, message: 'Please select 1' }]}
+        label="Current Development Stage"
+      >
+        <Select
+          // mode="tags"
+          placeholder="Please select current development stage of your solution"
+          onChange={handleChange}
+          options={labelValueGenerate(currentDevStage)}
+        />
+      </Form.Item>
+
+      {/* <Form.Item
         name="moneymaker"
         placeholde="Your Marketing - Business Strategy"
         label="How can you make money from your solution?"
         rules={[{ required: true, message: 'We need your specification!' }]}
       >
         <TextArea rows={3} />
-      </Form.Item>
+      </Form.Item> */}
 
-      <Form.Item
+      {/* <Form.Item
         name="commitment"
         placeholde="4-6 months commitment"
         label="Impress your sponsor with your commitment"
         rules={[{ required: true, message: 'We need your specification!' }]}
       >
         <TextArea rows={3} />
-      </Form.Item>
+      </Form.Item> */}
     </>
   )
 }

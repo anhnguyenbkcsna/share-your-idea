@@ -18,19 +18,23 @@ const FormProgress = (props) => {
     localStorage.setItem('currentStep', currentStep + 1)
     handler(curData)
     setCurrentStep(currentStep + 1)
-    console.log('curData', curData)
-    setProjectIdea(curData)
+    console.log('curData when next', curData)
+    // setProjectIdea(curData)
   }
   const prev = (curData) => {
     localStorage.setItem('currentStep', currentStep - 1)
     handler(curData)
     setCurrentStep(currentStep - 1)
-    console.log('curData', curData)
-    setProjectIdea(curData)
+    console.log('curData when prev', curData)
+    // setProjectIdea(curData)
   }
 
   const done = (val) => {
-    setProjectIdea(val)
+    // setProjectIdea(val)
+    if (val.upload) {
+      let uploadFiles = val.upload.map(item => (item.originFileObj))
+      val.upload = uploadFiles
+    }
     handler(val)
     console.log('** Progress done!')
     for (let stepCount = 0; stepCount < dataSteps.length; stepCount += 1) {
@@ -44,26 +48,19 @@ const FormProgress = (props) => {
     localStorage.setItem(dataKey, JSON.stringify(curData))
 
     let copyStepData = eachStepData
-    if (copyStepData.findIndex((item) => item === dataKey) === -1) {
-      copyStepData.push({
-        dataKey: curData,
-      })
-    } else {
-      copyStepData[dataKey] = curData
-    }
+    copyStepData[dataKey] = curData
     setEachStepData(copyStepData)
+    console.log('>>> Step Data', copyStepData)
   }
 
-  const eachFormSubmit = (name, formInfo) => {
-    console.log('** formInfo', formInfo.forms, name)
-    // formInfo.forms
-    if (lastStep) {
-      onFormFinish(name, eachStepData)
-    }
+  const eachFormSubmit = () => {
+    let res = {}
+    console.log('Step!', Object.assign(res,...Object.values(eachStepData)))
+    onFormFinish(eachStepData)
   }
 
   return (
-    <Form.Provider onFormFinish={eachFormSubmit}>
+    <Form.Provider onFormFinish={() => eachFormSubmit()}>
       <FormSlogan sloganList={slogans} />
       <ProgressBar level={'hard'} current={currentStep} dataSteps={dataSteps}/>
       <Typography.Title level={3}>

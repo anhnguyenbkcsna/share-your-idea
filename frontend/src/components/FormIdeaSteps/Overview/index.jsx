@@ -102,9 +102,9 @@ const FormOverview = (props) => {
       </Form.Item>
 
       <Form.Item
-        name="description"
+        name="solution"
         rules={[wordsValidator(60)]}
-        label="Description"
+        label="Solution"
       >
         <Input.TextArea
           placeholder="The proposed technical solution is..."
@@ -114,7 +114,7 @@ const FormOverview = (props) => {
       </Form.Item>
 
       <Form.Item
-        name="teams"
+        name="teamDescription"
         label="Team Description"
       >
         <Select
@@ -125,7 +125,7 @@ const FormOverview = (props) => {
       </Form.Item>
 
       <Form.Item
-        name="experience"
+        name="teamExperience"
         rules={[wordsValidator(60)]}
         label="Team Experience"
       >

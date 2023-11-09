@@ -13,17 +13,10 @@ const normFile = (e) => {
 }
 
 const FormDone = (props) => {
-  // const { setFileList } = props
-  console.log('FormDone')
-
-  const uploadFiles = async (upload) => {
-    const { file, fileList } = upload
-    // setFileList(fileList)
-    console.log('>>>>>> file ', fileList)
-  }
-
-  const handleChange = (value) => {
-    console.log(`selected ${value}`)
+  const dummyRequest = ({ file, onSuccess }) => {
+    setTimeout(() => {
+      onSuccess('ok')
+    }, 0)
   }
 
   return (
@@ -31,21 +24,16 @@ const FormDone = (props) => {
       <Row>
         <Col span={12}>
           <Form.Item
-            name="upload"
+            name="files"
             rules={[{ required: true, message: 'We need your specification!' }]}
             label="Proof of work and other attachments"
             valuePropName="fileList"
             getValueFromEvent={normFile}
           >
-            {/* <Upload listType="picture-card" onChange={(e) => uploadFiles(e)}>
-          <div>
-            <PlusOutlined />
-            <div style={{ marginTop: 8 }}>Upload</div>
-          </div>
-        </Upload> */}
             <Dragger
               {...props}
-              onChange={(e) => uploadFiles(e)}
+              // onChange={(e) => uploadFiles(e)}
+              customRequest={dummyRequest}
               style={{ maxWidth: '70%' }}
             >
               <p className="ant-upload-drag-icon">

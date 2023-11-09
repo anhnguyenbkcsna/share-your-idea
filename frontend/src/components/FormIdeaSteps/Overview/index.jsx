@@ -47,16 +47,6 @@ const FormOverview = (props) => {
   const inputElement = useRef()
   const dispatch = useDispatch()
 
-  // Input fields state
-  const [name, setName] = useState(false)
-  const [tag, setTag] = useState(false)
-  const [slogan, setSlogan] = useState(false)
-  const [problem, setProblem] = useState(false)
-  const [description, setDescription] = useState(false)
-  const [select, setSelect] = useState(false)
-  const [experience, setExperience] = useState(false)
-  const [complete, setComplete] = useState(0)
-
   const handleChange = (value) => {
     console.log(`selected ${value}`)
   }
@@ -72,7 +62,7 @@ const FormOverview = (props) => {
         rules={[{ required: true, message: 'We need your specification!' }]}
         label="Project name"
       >
-        <Input allowClear onChange={(e) => setName(e.target.value !== '')}/>
+        <Input allowClear />
       </Form.Item>
 
       <Form.Item
@@ -86,7 +76,6 @@ const FormOverview = (props) => {
           placeholder="Please select or enter your answer"
           options={labelValueGenerate(companyIndustries.sort())}
           allowClear
-          onChange={(e) => setTag(e.target.value !== '')}
         />
       </Form.Item>
 
@@ -99,7 +88,6 @@ const FormOverview = (props) => {
           autoSize={{ minRows: 2, maxRows: 3 }}
           showCount
           allowClear
-          onChange={(e) => setSlogan(e.target.value !== '')}
         />
       </Form.Item>
 
@@ -112,7 +100,6 @@ const FormOverview = (props) => {
           placeholder="The problem your team want to solve"
           autoSize={{ minRows: 2, maxRows: 10 }}
           showCount
-          onChange={(e) => setProblem(e.target.value !== '')}
         />
       </Form.Item>
 
@@ -125,7 +112,6 @@ const FormOverview = (props) => {
           placeholder="The proposed technical solution is..."
           autoSize={{ minRows: 4, maxRows: 20 }}
           showCount
-          onChange={(e) => setDescription(e.target.value !== '')}
         />
       </Form.Item>
 
@@ -138,7 +124,6 @@ const FormOverview = (props) => {
           placeholder="Please select or enter your answer"
           options={labelValueGenerate(teamDescription)}
           allowClear
-          onChange={(e) => setSelect(e.target.value !== '')}
         />
       </Form.Item>
 
@@ -151,7 +136,6 @@ const FormOverview = (props) => {
           placeholder="Your team experience"
           autoSize={{ minRows: 2, maxRows: 10 }}
           showCount
-          onChange={(e) => setExperience(e.target.value !== '')}
         />
       </Form.Item>
     </div>

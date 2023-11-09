@@ -1,0 +1,12 @@
+@import '../../styles/variable.scss';
+
+.link {
+  transition: all 0.2s ease-in-out;
+}
+.link :hover {
+  color: $primary-org;
+}
+
+.card {
+  cursor: pointer;
+}

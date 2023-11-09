@@ -1,8 +1,8 @@
 export const labelValueGenerate = (strList) => {
-  return strList.map(item => {
+  return strList.map((item) => {
     return {
       label: item,
-      value: item
+      value: item,
     }
   })
 }
@@ -69,7 +69,6 @@ export const residential = [
   },
 ]
 
-
 export const domains = [
   {
     label: 'Science',
@@ -120,9 +119,26 @@ export const localStorageStepFormat = (stepCount) => {
   return `step${stepCount}.data`
 }
 
-const professionalList = ['Children', 'Student', 'White-collar worker', 'Blue-collar worker', 'The elderly', 'The disabled', 'For everyone']
-const standoutReasonList = ['affordable', 'novel', 'eco-friendly', 'technology-based', 'productive', 'effective', 'fast', 'promising', 'problem-solving']
+const professionalList = [
+  'Children',
+  'Student',
+  'White-collar worker',
+  'Blue-collar worker',
+  'The elderly',
+  'The disabled',
+  'For everyone',
+]
+const standoutReasonList = [
+  'affordable',
+  'novel',
+  'eco-friendly',
+  'technology-based',
+  'productive',
+  'effective',
+  'fast',
+  'promising',
+  'problem-solving',
+]
 
 export const professionals = labelValueGenerate(professionalList)
 export const standoutReasons = labelValueGenerate(standoutReasonList)
-

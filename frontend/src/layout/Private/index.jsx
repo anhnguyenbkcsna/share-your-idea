@@ -9,6 +9,7 @@ import NavHeader from '../NavHeader'
 import { userRoles } from '../../utils/global.constants'
 import UnauthorizedPage from '../../pages/Error/E403'
 import { useEffect } from 'react'
+import Footer from '../Footer'
 
 const PrivateLayout = (props) => {
   const {user} = useAuth()
@@ -34,19 +35,10 @@ const PrivateLayout = (props) => {
   return (
     <Layout style={{background: colorBgContainer}} >
       <NavHeader />
-      <Content
-        style={{
-          minHeight: '100vh',
-          margin: '50px auto',
-          padding: '50px',
-          width: '80%',
-          borderRadius: '10px',
-          overflow: 'hidden',
-          boxShadow: '2px 2px 10px gray',
-          background: 'white',
-        }}>
+      <Content>
         <Outlet />
       </Content>
+      <Footer />
     </Layout>
   )
 }

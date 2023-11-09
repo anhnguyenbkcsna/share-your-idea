@@ -1,8 +1,12 @@
-@import "../../styles/variable.scss";
+@import '../../styles/variable.scss';
 
 .link {
-  transition: all .2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
-.link :hover{
+.link :hover {
   color: $primary-org;
+}
+
+.card {
+  cursor: pointer;
 }

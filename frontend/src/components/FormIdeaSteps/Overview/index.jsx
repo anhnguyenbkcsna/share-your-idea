@@ -103,24 +103,24 @@ const FormOverview = (props) => {
       </Form.Item>
 
       <Form.Item
-        name="description"
+        name="problem"
         rules={[wordsValidator(60)]}
-        label="Description"
+        label="Problem"
       >
         <Input.TextArea
-          placeholder="Overview about your target audience + objectives + your vision"
+          placeholder="The problem your team want to solve"
           autoSize={{ minRows: 2, maxRows: 10 }}
           showCount
         />
       </Form.Item>
 
       <Form.Item
-        name="teams"
+        name="description"
         rules={[wordsValidator(60)]}
-        label="Team Description"
+        label="Description"
       >
         <Input.TextArea
-          placeholder="Overview about your target audience + objectives + your vision"
+          placeholder="The proposed technical solution is..."
           autoSize={{ minRows: 2, maxRows: 10 }}
           showCount
         />
@@ -137,6 +137,18 @@ const FormOverview = (props) => {
           onChange={handleChange}
           options={labelValueGenerate(teamDescription)}
           allowClear
+        />
+      </Form.Item>
+
+      <Form.Item
+        name="teams"
+        rules={[wordsValidator(60)]}
+        label="Team Experience"
+      >
+        <Input.TextArea
+          placeholder="Your team experience"
+          autoSize={{ minRows: 2, maxRows: 10 }}
+          showCount
         />
       </Form.Item>
     </div>

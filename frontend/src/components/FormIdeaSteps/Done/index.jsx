@@ -33,7 +33,7 @@ const FormDone = (props) => {
           <Form.Item
             name="upload"
             rules={[{ required: true, message: 'We need your specification!' }]}
-            label="Upload your project file"
+            label="Proof of work and other attachments"
             valuePropName="fileList"
             getValueFromEvent={normFile}
           >

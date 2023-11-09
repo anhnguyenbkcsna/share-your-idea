@@ -7,6 +7,7 @@ const CusCard = (props) => {
     margin: '50px auto',
     padding: '50px',
     width: '80%',
+    maxWidth: '1000px',
     borderRadius: '10px',
     overflow: 'hidden',
     boxShadow: '2px 2px 10px gray',

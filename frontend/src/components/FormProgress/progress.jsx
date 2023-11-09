@@ -18,17 +18,20 @@ const FormProgress = (props) => {
     localStorage.setItem('currentStep', currentStep + 1)
     handler(curData)
     setCurrentStep(currentStep + 1)
+    console.log('curData', curData)
     setProjectIdea(curData)
   }
   const prev = (curData) => {
     localStorage.setItem('currentStep', currentStep - 1)
     handler(curData)
     setCurrentStep(currentStep - 1)
+    console.log('curData', curData)
     setProjectIdea(curData)
   }
 
   const done = (val) => {
     setProjectIdea(val)
+    handler(val)
     console.log('** Progress done!')
     for (let stepCount = 0; stepCount < dataSteps.length; stepCount += 1) {
       localStorage.removeItem(localStorageStepFormat(stepCount))

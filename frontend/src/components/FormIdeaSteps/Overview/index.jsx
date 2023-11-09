@@ -1,10 +1,12 @@
-// import { PlusOutlined } from '@ant-design/icons'
-import React from 'react'
+import React, { useState } from 'react'
 import { Button, Form, Input, Select } from 'antd'
 import { companyIndustries, domains, localStorageStepFormat, teamDescription } from '../../../utils/form.constants'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import SingleFormProgress from '../../FormProgress'
 import { labelValueGenerate } from '../../../utils/utils'
+
+import { useDispatch } from 'react-redux'
+import { incrementByAmount, decrementByAmount } from '../../../redux/actions/createIdea'
 
 const textRules = {
   required: true,
@@ -42,27 +44,25 @@ const normFile = (obj) => {
 }
 
 const FormOverview = (props) => {
-  // const { setFileList, first, last, name ,nextHandler, prevHandler} = props
+  const inputElement = useRef()
+  const dispatch = useDispatch()
 
-  // const uploadFiles = async (upload) => {
-  //   const { file, fileList } = upload
-  //   const files = fileList.map((file) => {
-  //     return {
-  //       crossOrigin: file.crossOrigin && '',
-  //       name: file.name,
-  //       percent: file.percent,
-  //       status: file.status,
-  //       thumbUrl: file.thumbUrl,
-  //       uid: file.uid,
-  //       url: file.url,
-  //       originFileObj: file.originFileObj,
-  //     }
-  //   })
-  //   setFileList(files)
-  // }
+  // Input fields state
+  const [name, setName] = useState(false)
+  const [tag, setTag] = useState(false)
+  const [slogan, setSlogan] = useState(false)
+  const [problem, setProblem] = useState(false)
+  const [description, setDescription] = useState(false)
+  const [select, setSelect] = useState(false)
+  const [experience, setExperience] = useState(false)
+  const [complete, setComplete] = useState(0)
 
   const handleChange = (value) => {
     console.log(`selected ${value}`)
+  }
+
+  const focusInput = () => {
+    inputElement.current.focus()
   }
 
   return (
@@ -72,7 +72,7 @@ const FormOverview = (props) => {
         rules={[{ required: true, message: 'We need your specification!' }]}
         label="Project name"
       >
-        <Input allowClear />
+        <Input allowClear onChange={(e) => setName(e.target.value !== '')}/>
       </Form.Item>
 
       <Form.Item
@@ -82,73 +82,76 @@ const FormOverview = (props) => {
       >
         <Select
           mode="tags"
-          maxLength={3}
+          // maxLength={3}
           placeholder="Please select or enter your answer"
-          onChange={handleChange}
           options={labelValueGenerate(companyIndustries.sort())}
           allowClear
+          onChange={(e) => setTag(e.target.value !== '')}
         />
       </Form.Item>
 
       <Form.Item
         name="slogan"
-        rules={[wordsValidator(30)]}
+        // rules={[wordsValidator(30)]}
         label="Project slogan"
       >
         <Input.TextArea
           autoSize={{ minRows: 2, maxRows: 3 }}
           showCount
           allowClear
+          onChange={(e) => setSlogan(e.target.value !== '')}
         />
       </Form.Item>
 
       <Form.Item
         name="problem"
-        rules={[wordsValidator(60)]}
+        rules={[wordsValidator(20)]}
         label="Problem"
       >
         <Input.TextArea
           placeholder="The problem your team want to solve"
           autoSize={{ minRows: 2, maxRows: 10 }}
           showCount
+          onChange={(e) => setProblem(e.target.value !== '')}
         />
       </Form.Item>
 
       <Form.Item
         name="description"
-        rules={[wordsValidator(60)]}
+        rules={[wordsValidator(60)]}  
         label="Description"
       >
         <Input.TextArea
           placeholder="The proposed technical solution is..."
-          autoSize={{ minRows: 2, maxRows: 10 }}
+          autoSize={{ minRows: 4, maxRows: 20 }}
           showCount
+          onChange={(e) => setDescription(e.target.value !== '')}
         />
       </Form.Item>
 
       <Form.Item
         name="teams"
-        rules={[wordsValidator(60)]}
         label="Team Description"
       >
         <Select
-          mode="tags"
+          // mode="tags"
           placeholder="Please select or enter your answer"
-          onChange={handleChange}
           options={labelValueGenerate(teamDescription)}
           allowClear
+          onChange={(e) => setSelect(e.target.value !== '')}
         />
       </Form.Item>
 
       <Form.Item
-        name="teams"
-        rules={[wordsValidator(60)]}
+        name="experience"
+        // rules={[wordsValidator(60)]}
         label="Team Experience"
       >
         <Input.TextArea
           placeholder="Your team experience"
           autoSize={{ minRows: 2, maxRows: 10 }}
           showCount
+          onChange={(e) => setExperience(e.target.value !== '')}
         />
       </Form.Item>
     </div>

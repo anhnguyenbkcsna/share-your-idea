@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+from datetime import timedelta
 
 load_dotenv()
 
@@ -48,6 +49,7 @@ INSTALLED_APPS = [
     "idea",
     "innovator",
     'company',
+    'account'
 ]
 
 CORS_ALLOWED_ORIGINS = ["http://localhost:3000"]
@@ -89,10 +91,10 @@ WSGI_APPLICATION = "Project.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 # DATABASES = {
-#     # 'default': {
-#     #     'ENGINE': 'django.db.backends.sqlite3',
-#     #     'NAME': BASE_DIR / 'db.sqlite3',
-#     # }
+#     'default': {
+#         'ENGINE': 'djongo',
+#         "HOST": os.getenv("CONNECTION_STRING"),
+#     }
 # }
 
 # S3 BUCKETS CONFIG
@@ -104,7 +106,10 @@ AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
 AWS_S3_VERIFY = True
 DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
-# AWS_S3_CUSTOM_DOMAIN = 'your-cloudfront-domain.com' # If you’re using S3 as a CDN like CloudFront
+
+#OAUTH2 GOOGLE
+GOOGLE_OAUTH2_CLIENT_ID = os.getenv("GOOGLE_OAUTH2_CLIENT_ID")
+GOOGLE_OAUTH2_CLIENT_SECRET = os.getenv("GOOGLE_OAUTH2_CLIENT_SECRET")
 
 
 # Password validation
@@ -157,5 +162,20 @@ REST_FRAMEWORK = {
     "DEFAULT_PARSER_CLASSES": (
         "rest_framework.parsers.JSONParser",
         "rest_framework.parsers.MultiPartParser"
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
     )
 }
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ROTATE_REFRESH_TOKENS': False,
+    'BLACKLIST_AFTER_ROTATION': True,
+    'AUTH_HEADER_TYPES': ('Bearer',),
+    'USER_ID_FIELD': '_id',
+}
+
+AUTH_USER_MODEL = "account.Account"
+AUTH_PROFILE_MODULE = "account.Account"

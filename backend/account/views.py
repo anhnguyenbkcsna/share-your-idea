@@ -1,50 +1,38 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import serializers
-from utils.utils import parse_json, connect_db, validate_google_id_token
-from bson.objectid import ObjectId
-from django.conf import settings
-from utils.crud import CrudHelper
+from utils.utils import connect_db, validate_google_id_token
 from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework.permissions import IsAuthenticated
-from bson.objectid import ObjectId
+from rest_framework.permissions import AllowAny
+from .models import Account
 
 
-class User:
-    def __init__(self, id: str):
-        self._id = ObjectId(id)
-
-    pass
-
-
-class UserApiView(APIView):
+class AccountApiView(APIView):
     db = connect_db()
+    permission_classes = (AllowAny,)
+    ROLES = {"INNOVATOR": "innovator", "COMPANY": "company"}
 
-    # class UserSerializer(serializers.Serializer):
-    #     email = serializers.EmailField()
-    #     name = serializers.CharField(required=True)
-    #     role = serializers.CharField(required=True)
-    #     id_token = serializers.CharField(required=True)
-
-    def get(self, request):
+    def post(self, request):
         check, response = validate_google_id_token(request.data.get("id_token"))
-
         if not check:
             return Response({"message": response}, status=400)
 
-        if request.data.get("role") == "innovator":
+        if request.data.get("role") == self.ROLES.get("INNOVATOR"):
             collection = self.db.get_collection("innovator_profile")
-
             res = collection.find_one(
                 {"name": response["name"], "email": response["email"]}
             )
+
             if res:
-                token = RefreshToken.for_user(User(str(res["_id"])))
+                _id = str(res["_id"])
             else:
                 result = collection.insert_one(
                     {"name": response["name"], "email": response["email"]}
                 )
-                token = RefreshToken.for_user(User(result.inserted_id))
+                _id = result.inserted_id
+
+            token = RefreshToken.for_user(
+                Account(_id=_id, role=self.ROLES.get("INNOVATOR"))
+            )
             return Response(
                 {
                     "refresh": str(token),
@@ -61,4 +49,3 @@ class UserApiView(APIView):
         #     pass
         else:
             return Response({"message": "Invalid role"}, status=400)
-

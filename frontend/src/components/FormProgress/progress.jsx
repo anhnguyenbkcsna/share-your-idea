@@ -58,7 +58,7 @@ const FormProgress = (props) => {
     console.log('** formInfo', formInfo.forms, name)
     // formInfo.forms
     if (lastStep) {
-      onFormFinish(name, formInfo)
+      onFormFinish(name, eachStepData)
     }
   }
 

@@ -44,16 +44,15 @@ const normFile = (obj) => {
 }
 
 const FormOverview = (props) => {
-  const inputElement = useRef()
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
 
   const handleChange = (value) => {
     console.log(`selected ${value}`)
   }
 
-  const focusInput = () => {
-    inputElement.current.focus()
-  }
+  // const focusInput = () => {
+  //   inputElement.current.focus()
+  // }
 
   return (
     <div>
@@ -72,7 +71,6 @@ const FormOverview = (props) => {
       >
         <Select
           mode="tags"
-          // maxLength={3}
           placeholder="Please select or enter your answer"
           options={labelValueGenerate(companyIndustries.sort())}
           allowClear
@@ -81,7 +79,7 @@ const FormOverview = (props) => {
 
       <Form.Item
         name="slogan"
-        // rules={[wordsValidator(30)]}
+        rules={[wordsValidator(30)]}
         label="Project slogan"
       >
         <Input.TextArea
@@ -105,7 +103,7 @@ const FormOverview = (props) => {
 
       <Form.Item
         name="description"
-        rules={[wordsValidator(60)]}  
+        rules={[wordsValidator(60)]}
         label="Description"
       >
         <Input.TextArea
@@ -120,7 +118,6 @@ const FormOverview = (props) => {
         label="Team Description"
       >
         <Select
-          // mode="tags"
           placeholder="Please select or enter your answer"
           options={labelValueGenerate(teamDescription)}
           allowClear
@@ -129,7 +126,7 @@ const FormOverview = (props) => {
 
       <Form.Item
         name="experience"
-        // rules={[wordsValidator(60)]}
+        rules={[wordsValidator(60)]}
         label="Team Experience"
       >
         <Input.TextArea

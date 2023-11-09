@@ -12,6 +12,7 @@ import { useState } from 'react'
 import Dragger from 'antd/es/upload/Dragger'
 import { createProfileApi } from '../../api/google'
 import CusCard from '../../components/CusCard'
+import { userRoles } from '../../utils/global.constants'
 
 const dummyRequest = ({ file, onSuccess }) => {
   setTimeout(() => {
@@ -134,51 +135,73 @@ const CreateProfileForm = (props) => {
             >
               <Select
                 placeholder="Are you innovator or sponsor?"
-                onChange={(value) => {setProfileRole(value)}}
+                onChange={(value) => {
+                  console.log('value', value)
+                  setProfileRole(value.toLowerCase())
+                }}
                 options={userRole}
               />
             </Form.Item>
 
-            <Form.Item
-              name="major"
-              label="Current Major"
-              rules={[{ required: true, message: 'We need your specification!' }]}
-            >
-              <Select
-                mode="tags"
-                placeholder="Your major is related to..."
-                onChange={(value, opts) => {console.log('major value', value)}}
-                options={occupationGroups}
-              />
-            </Form.Item>
+            {profileRole === userRoles.INNOVATOR ?
+              (<>
+                <Form.Item
+                  name="major"
+                  label="Current Major"
+                  rules={[{ required: true, message: 'We need your specification!' }]}
+                >
+                  <Select
+                    mode="tags"
+                    placeholder="Your major is related to..."
+                    onChange={(value, opts) => {console.log('major value', value)}}
+                    options={occupationGroups}
+                  />
+                </Form.Item>
 
-            <Form.Item
-              name="phone"
-              label="Phone Number"
-              rules={[{ required: true, message: 'We need your specification!' }]}
-            >
-              <Input.TextArea rows={1} allowClear maxLength={15}/>
-            </Form.Item>
+                <Form.Item
+                  name="phone"
+                  label="Phone Number"
+                  rules={[{ required: true, message: 'We need your specification!' }]}
+                >
+                  <Input.TextArea rows={1} allowClear maxLength={15}/>
+                </Form.Item>
 
-            <Form.Item
-              name="gender"
-              label="Gender"
-              rules={[{ required: true, message: 'We need your specification!' }]}
-            >
-              <Select
-                placeholder="Please select"
-                // onChange={handleChange}
-                options={gender}
-              />
-            </Form.Item>
+                <Form.Item
+                  name="gender"
+                  label="Gender"
+                  rules={[{ required: true, message: 'We need your specification!' }]}
+                >
+                  <Select
+                    placeholder="Please select"
+                    // onChange={handleChange}
+                    options={gender}
+                  />
+                </Form.Item>
 
-            <Form.Item
-              name="description"
-              label="Special Description"
-              rules={[{ required: true, message: 'We need your specification!' }]}
-            >
-              <Input.TextArea allowClear />
-            </Form.Item>
+                <Form.Item
+                  name="description"
+                  label="Special Description"
+                  rules={[{ required: true, message: 'We need your specification!' }]}
+                >
+                  <Input.TextArea allowClear />
+                </Form.Item>
+              </>) :
+              <div >
+                <Form.Item
+                  name="email"
+                  label="Contact Email"
+                  rules={[{ required: true, message: 'We need your specification!' }]}
+                >
+                  <Input.TextArea allowClear />
+                </Form.Item>
+                <Form.Item
+                  name="website"
+                  label="Company Website"
+                  rules={[{ required: true, message: 'We need your specification!' }]}
+                >
+                  <Input.TextArea allowClear />
+                </Form.Item>
+              </div>}
           </Col>
           <Col span={12} />
         </Row>

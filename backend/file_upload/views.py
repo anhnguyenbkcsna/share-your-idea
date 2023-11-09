@@ -7,12 +7,16 @@ from bson.objectid import ObjectId
 from django.conf import settings
 import json
 import boto3
+from rest_framework.permissions import IsAuthenticated, AllowAny
+from auth.authentication import CustomAuthentication
 
 
 class FileUploadApiView(APIView):
     db = connect_db()
     collection = db.get_collection("idea_detail")
     EXPIRATION = 3600
+    permission_classes = (AllowAny,)
+    authentication_classes = [CustomAuthentication]
 
     def get(self, request):
         s3_client = boto3.client("s3")

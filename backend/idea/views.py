@@ -10,7 +10,7 @@ from django.conf import settings
 from pymongo.collection import ReturnDocument
 import datetime
 import boto3
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from auth.authentication import CustomAuthentication
 
 
@@ -19,7 +19,7 @@ class IdeaApiView(APIView):
     collection = db.get_collection("idea_detail")
     serializer_class = IdeaSerializer
     ENT_TYPE = "idea"
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (AllowAny,)
     authentication_classes = [CustomAuthentication]
 
     def get(self, request):

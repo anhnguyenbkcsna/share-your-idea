@@ -16,26 +16,28 @@ Including another URLconf
 """
 from django.contrib import admin
 # from rest_framework import routers
-from django.urls import path, include, re_path
+from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 from user.views import UserApiView
 from idea.views import IdeaApiView
 from poe_api.views import PoeApiView
 from innovator.views import InnovatorApiView
 from company.views import CompanyApiView
 from file_upload.views import FileUploadApiView
-from django.conf import settings
-from django.conf.urls.static import static
-
-# router = routers.SimpleRouter()
-# router.register(r'users', UserViewSet)
-# router.register(r'accounts', AccountViewSet)
+from account.views import AccountApiView
+from rest_framework_simplejwt.views import (
+    TokenRefreshView,
+)
 
 urlpatterns = [
-    path("admin", admin.site.urls),
-    path("user", UserApiView.as_view(), name="user"),
-    path("poe", PoeApiView.as_view(), name="poe-api"),
+    # path("poe", PoeApiView.as_view(), name="poe-api")
+    # path("admin", admin.site.urls),
+    # path("user", UserApiView.as_view(), name="user"),
     path("idea", IdeaApiView.as_view(), name="idea"),
     path("file", FileUploadApiView.as_view(), name="file"),
     path("company", CompanyApiView.as_view(), name="company"),
     path("innovator", InnovatorApiView.as_view(), name="innovator"),
+    path("account", AccountApiView.as_view(), name='account'),
+    path("account/refresh", TokenRefreshView.as_view(), name='token_refresh'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

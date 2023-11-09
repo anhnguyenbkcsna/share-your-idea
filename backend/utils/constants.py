@@ -1,0 +1,4 @@
+ROLES = [
+	'innovator',
+	'company'
+]

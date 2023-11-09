@@ -6,6 +6,17 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: $primary-bg-color;
   margin: auto;
+  margin-bottom: 30px;
+}
+
+@mixin semi-large-slogan {
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1.7;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: $primary-bg-color;
+  margin: auto;
+  margin-bottom: 30px;
 }
 
 @mixin normal-slogan {

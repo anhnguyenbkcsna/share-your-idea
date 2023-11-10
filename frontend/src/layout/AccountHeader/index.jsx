@@ -38,7 +38,7 @@ const CusHeader = (props) => {
           className="mr-24"
           src="https://xsgames.co/randomusers/avatar.php?g=pixel&key=1"
         />
-        <span className="mr-24">My Account</span>
+        <span className="mr-24">Tài khoản</span>
       </Popover>
     </Header>
   )

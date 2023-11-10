@@ -25,7 +25,7 @@ const FormDone = (props) => {
         <Col span={12}>
           <Form.Item
             name="files"
-            rules={[{ required: true, message: 'We need your specification!' }]}
+            // rules={[{ required: true, message: 'We need your specification!' }]}
             label="Proof of work and other attachments"
             valuePropName="fileList"
             getValueFromEvent={normFile}

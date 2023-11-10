@@ -1,6 +1,6 @@
 import { labelValueGenerate } from './utils'
 
-export const deployedAPI = 'http://127.0.0.1:8000/'
+export const deployedAPI = 'https://share-your-idea.onrender.com'
 
 export const gender = [
   {

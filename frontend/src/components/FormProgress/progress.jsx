@@ -54,9 +54,10 @@ const FormProgress = (props) => {
   }
 
   const eachFormSubmit = () => {
-    let res = {}
-    console.log('Step!', Object.assign(res,...Object.values(eachStepData)))
-    onFormFinish(eachStepData)
+    let mergeData = {}
+    mergeData = Object.assign(mergeData, ...Object.values(eachStepData))
+    console.log('>>> mergeData', mergeData)
+    onFormFinish(mergeData)
   }
 
   return (

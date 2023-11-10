@@ -42,11 +42,11 @@ const normFile = (fileInfo) => {
 const beforeUpload = (file) => {
   const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png'
   if (!isJpgOrPng) {
-    message.error('You can only upload JPG/PNG file!')
+    message.error('Chỉ tải được định dạng JPG/PNG!')
   }
   const isLt2M = file.size / 1024 / 1024 < 2
   if (!isLt2M) {
-    message.error('Image must smaller than 2MB!')
+    message.error('Dung lượng không được quá 2MB!')
   }
   return isJpgOrPng && isLt2M
 }
@@ -86,8 +86,8 @@ const CreateProfileForm = (props) => {
       data: values,
       files: fileList
     },
-    () => message.success('Submit Successfuly'),
-    () => message.error('Submit Failed'))
+    () => message.success('Chỉnh sửa thành công'),
+    () => message.error('Lỗi'))
   }
 
   // If possible, upload Avatar Photo
@@ -104,13 +104,13 @@ const CreateProfileForm = (props) => {
         )}
         onFinish={onSubmitHandler}
       >
-        <FormSlogan sloganList={['Your first time logged in?', 'Create Your Account!']} />
+        <FormSlogan sloganList={['Đăng nhập lần đầu?', 'Tạo tài khoản!']} />
         <Row gutter={16}>
           <Col span={12}>
             <Form.Item
               name="avatar"
-              rules={[{ required: true, message: 'We need your specification!' }]}
-              label="Upload your avatar"
+              rules={[{ required: true, message: 'Đây là trường bắt buộc!' }]}
+              label="Tải hình đại diện"
               fileList={fileList}
               // valuePropName="fileList"
               getValueFromEvent={normFile}
@@ -131,10 +131,10 @@ const CreateProfileForm = (props) => {
             <Form.Item
               name="userRole"
               label="Role"
-              rules={[{ required: true, message: 'We need your specification!' }]}
+              rules={[{ required: true, message: 'Đây là trường bắt buộc!' }]}
             >
               <Select
-                placeholder="Are you innovator or sponsor?"
+                placeholder="Bạn là nhà sáng tạo hay nhà tài trợ?"
                 onChange={(value) => {
                   console.log('value', value)
                   setProfileRole(value.toLowerCase())
@@ -147,12 +147,12 @@ const CreateProfileForm = (props) => {
               (<>
                 <Form.Item
                   name="major"
-                  label="Current Major"
-                  rules={[{ required: true, message: 'We need your specification!' }]}
+                  label="Chuyên môn hiện tại"
+                  rules={[{ required: true, message: 'Đây là trường bắt buộc!' }]}
                 >
                   <Select
                     mode="tags"
-                    placeholder="Your major is related to..."
+                    placeholder= "Lĩnh vực liên quan"
                     onChange={(value, opts) => {console.log('major value', value)}}
                     options={occupationGroups}
                   />
@@ -160,16 +160,16 @@ const CreateProfileForm = (props) => {
 
                 <Form.Item
                   name="phone"
-                  label="Phone Number"
-                  rules={[{ required: true, message: 'We need your specification!' }]}
+                  label="Số điện thoại"
+                  rules={[{ required: true, message: 'Đây là trường bắt buộc!' }]}
                 >
                   <Input.TextArea rows={1} allowClear maxLength={15}/>
                 </Form.Item>
 
                 <Form.Item
                   name="gender"
-                  label="Gender"
-                  rules={[{ required: true, message: 'We need your specification!' }]}
+                  label="Giới tính"
+                  rules={[{ required: true, message: 'Đây là trường bắt buộc!' }]}
                 >
                   <Select
                     placeholder="Please select"
@@ -180,8 +180,8 @@ const CreateProfileForm = (props) => {
 
                 <Form.Item
                   name="description"
-                  label="Special Description"
-                  rules={[{ required: true, message: 'We need your specification!' }]}
+                  label="Mô tả ngắn"
+                  rules={[{ required: true, message: 'Đây là trường bắt buộc!' }]}
                 >
                   <Input.TextArea allowClear />
                 </Form.Item>
@@ -189,15 +189,15 @@ const CreateProfileForm = (props) => {
               <div >
                 <Form.Item
                   name="email"
-                  label="Contact Email"
-                  rules={[{ required: true, message: 'We need your specification!' }]}
+                  label="Email"
+                  rules={[{ required: true, message: 'Đây là trường bắt buộc!' }]}
                 >
                   <Input.TextArea allowClear />
                 </Form.Item>
                 <Form.Item
                   name="website"
                   label="Company Website"
-                  rules={[{ required: true, message: 'We need your specification!' }]}
+                  rules={[{ required: true, message: 'Đây là trường bắt buộc!' }]}
                 >
                   <Input.TextArea allowClear />
                 </Form.Item>
@@ -205,7 +205,7 @@ const CreateProfileForm = (props) => {
           </Col>
           <Col span={12} />
         </Row>
-        <Button htmlType='submit'>Submit</Button>
+        <Button htmlType='submit'>Gửi</Button>
       </Form>
     </CusCard>
   )

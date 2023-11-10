@@ -9,8 +9,8 @@ export default function InternalServerErrorPage() {
     <Result
       status="500"
       title="500"
-      subTitle="Sorry, something went wrong."
-      extra={<Button type="primary" onClick={() => navigate('/')} >Back Home</Button>}
+      subTitle="Rất tiếc, đã có lỗi xảy ra."
+      extra={<Button type="primary" onClick={() => navigate('/')} >Trở về trang chủ</Button>}
     />
   )
 }

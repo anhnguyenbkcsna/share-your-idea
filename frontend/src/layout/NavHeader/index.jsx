@@ -43,15 +43,15 @@ const NavHeader = (props) => {
         items={[
           {
             key: '1',
-            label: 'About Us',
+            label: 'Về chúng tôi',
           },
           {
             key: '2',
-            label: 'Innovator',
+            label: 'Nhà sáng tạo',
           },
           {
             key: '3',
-            label: 'FAQ',
+            label: 'Câu hỏi thường gặp',
           },
         ]}
         className={'w-90'}
@@ -59,13 +59,13 @@ const NavHeader = (props) => {
       {!user ?
         <div>
           <NavLink to={'login'}>
-            <Button type='text'>Login</Button>
+            <Button type='text'>Đăng nhập</Button>
           </NavLink>
-          <Button type='primary'>Sign up</Button>
+          <Button type='primary'>Đăng ký</Button>
         </div> :
         <div>
-          <span>{`Hello ${user.name} `}</span>
-          <Button onClick={() => logout()} type='primary'>Logout</Button>
+          <span>{`Xin chào ${user.name}!`}</span>
+          <Button onClick={() => logout()} type='primary'>Thoát</Button>
         </div>}
     </Header>
   )

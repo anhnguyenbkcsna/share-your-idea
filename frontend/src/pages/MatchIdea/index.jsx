@@ -66,7 +66,7 @@ const MatchIdea = () => {
 
   useEffect(() => {
     const fetchIdea = async () => {
-      let response = await axios.get(`${deployedAPI}/idea`).then(res => res.data)
+      let response = await axios.get('https://share-your-idea.onrender.com/idea').then(res => res.data)
       console.log(response.data)
       setFetchIdeas(response.data)
       // console.log(response.data[0]._id.$oid)

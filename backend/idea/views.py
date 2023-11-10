@@ -31,6 +31,8 @@ class IdeaApiView(APIView):
 
     def post(self, request):
         serializer = IdeaSerializer(data=request.data)
+        print(serializer.is_valid())
+        print(serializer.errors)
         file_list = request.FILES.getlist("files")
         return CrudHelper.post_with_file(
             self.collection, serializer, file_list, self.ENT_TYPE

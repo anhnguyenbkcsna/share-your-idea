@@ -3,7 +3,7 @@ from django.db import models
 class Idea(models.Model):
     # Idea Overview
     name = models.TextField()
-    domain = models.JSONField()
+    # domain = models.JSONField(default=None)
     slogan = models.TextField(default="")
     problem = models.TextField(default="")
     solution = models.TextField(default="")
@@ -12,21 +12,20 @@ class Idea(models.Model):
     
     # Customer segments
     gender = models.TextField(default="")
-    ageRange = models.TextField(default="")
-    professional = models.JSONField(default=None)
-    geographical = models.JSONField(default=None)
+    # ageRange = models.JSONField(default=None)
+    # professional = models.JSONField(default=None)
+    # geographical = models.JSONField(default=None)
     behavior = models.TextField(default="")
     
     # Value propositions
     apps = models.TextField(default="")
-    outstand = models.TextField(default="")
+    # outstand = models.JSONField(default=None)
     currentDev = models.TextField(default="")
     
     # Done
     # upload
     support = models.TextField(default="")
     
-    # Other
     innovator_id = models.CharField(max_length=255, default=None)
     upvote = models.IntegerField(default=0)
     downvote = models.IntegerField(default=0)

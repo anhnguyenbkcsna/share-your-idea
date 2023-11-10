@@ -1,10 +1,9 @@
 import axios from 'axios'
-
-const backend = '172.16.16.57:8000'
+import { deployedAPI } from '../utils/form.constants'
 
 export const createNewIdea = async (ideaObj) => {
   return await axios
-    .post(`${backend}/idea`, ideaObj)
+    .post(`${deployedAPI}/idea`, JSON.stringify(ideaObj))
     .then((res) => {
       console.log('res', res)
       return res

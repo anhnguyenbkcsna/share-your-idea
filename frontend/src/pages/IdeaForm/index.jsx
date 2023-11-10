@@ -6,6 +6,8 @@ import FormOverview from '../../components/FormIdeaSteps/Overview'
 import { localStorageStepFormat, userFormStepItem } from '../../utils/form.constants'
 import FormProgress from '../../components/FormProgress/progress'
 import CusCard from '../../components/CusCard'
+import { createNewIdea } from '../../api/idea'
+import { Navigate } from 'react-router-dom'
 
 const CreateIdeaFormPage = () => {
   const [currentStep, setCurrentStep] = useState(0)
@@ -57,22 +59,24 @@ const CreateIdeaFormPage = () => {
     setCurrentStep(parseInt(curStep))
   }, [])
 
-  const onFormFinish = (name, val) => {
-    projectIdea[name] = val
-    setProjectIdea(projectIdea)
+  const onFormFinish = (formObj) => {
+    // setProjectIdea(formObj)
+    createNewIdea(formObj).then(res => {
+      <Navigate to='/' />
+    })
   }
 
-  const doneElement = () => {
-    return FormDone({setFileList: setFileList}) //  component is using the props.children pattern explicitly
-    // return <FormDone setFileList={setFileList} /> //will not work, because we not passing children
-  }
+  // const doneElement = () => {
+  //   return FormDone({setFileList: setFileList}) //  component is using the props.children pattern explicitly
+  //   // return <FormDone setFileList={setFileList} /> //will not work, because we not passing children
+  // }
 
   return (
     <CusCard>
       <FormProgress
         onFormFinish={onFormFinish}
         slogans={['We are helping you', 'Your idea is awesome']}
-        formSource={[FormOverview, FormCustomerSegment, FormValuePropositions, doneElement]}
+        formSource={[FormOverview, FormCustomerSegment, FormValuePropositions, FormDone]}
         dataSteps={userFormStepItem}
       />
     </CusCard>

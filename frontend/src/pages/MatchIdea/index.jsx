@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import IdeaCard from '../../components/IdeaCard'
 import OwlCarousel from 'react-owl-carousel'
 import 'owl.carousel/dist/assets/owl.carousel.css'
 import 'owl.carousel/dist/assets/owl.theme.default.css'
 import CusCard from '../../components/CusCard'
+import axios from 'axios'
+
+import { deployedAPI } from '../../utils/form.constants'
 
 const ideas = [
   {
@@ -58,12 +61,19 @@ const ideas = [
   },
 ]
 
-
 const MatchIdea = () => {
-  const [active, setActive] = useState(3)
-  const onChange = (currentSlide) => {
-    console.log(currentSlide)
-  }
+  const [fetchIdea, setFetchIdeas] = useState([])
+
+  useEffect(() => {
+    const fetchIdea = async () => {
+      let response = await axios.get(`${deployedAPI}/idea`).then(res => res.data)
+      console.log(response.data)
+      setFetchIdeas(response.data)
+      // console.log(response.data[0]._id.$oid)
+    }
+    fetchIdea()
+  }, [])
+  console.log('>>>> fetchIdea', fetchIdea)
 
   return (
     <CusCard>
@@ -71,17 +81,11 @@ const MatchIdea = () => {
         className='owl-theme'
         loop margin={50} center lazyLoad dots smartSpeed={450} style={{zIndex: 0}}
       >
-        {ideas.map((idea, index) => (
+        {fetchIdea?.map((idea, index) => (
           <IdeaCard
-            id={index}
+            key={index}
             className='item'
-            title={idea.title}
-            percentage={idea.percentage}
-            averageVote={idea.averageVote}
-            views={idea.views}
-            src={idea.src}
-            description={idea.description}
-            tag={idea.tag}
+            idea={idea}
           />
         ))}
       </OwlCarousel>

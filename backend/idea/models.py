@@ -11,22 +11,23 @@ class Idea(models.Model):
     teamExperience = models.TextField(default="")
     
     # Customer segments
-    gender = models.TextField()
-    ageRange = models.TextField()
-    professional = models.JSONField()
-    geographical = models.JSONField()
-    behavior = models.TextField()
+    gender = models.TextField(default="")
+    ageRange = models.TextField(default="")
+    professional = models.JSONField(default=None)
+    geographical = models.JSONField(default=None)
+    behavior = models.TextField(default="")
     
     # Value propositions
-    apps = models.TextField()
-    outstand = models.TextField()
-    currentDev = models.TextField()
+    apps = models.TextField(default="")
+    outstand = models.TextField(default="")
+    currentDev = models.TextField(default="")
     
     # Done
     # upload
-    support = models.TextField()
+    support = models.TextField(default="")
     
-    innovator_id = models.CharField(max_length=255, default="")
+    # Other
+    innovator_id = models.CharField(max_length=255, default=None)
     upvote = models.IntegerField(default=0)
     downvote = models.IntegerField(default=0)
     

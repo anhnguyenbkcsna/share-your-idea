@@ -19,7 +19,7 @@ class AccountApiView(APIView):
         if request.data.get("role") == self.ROLES.get("INNOVATOR"):
             collection = self.db.get_collection("innovator_profile")
             res = collection.find_one(
-                {"name": response["name"], "email": response["email"]}
+                {"email": response["email"]}
             )
 
             if res:

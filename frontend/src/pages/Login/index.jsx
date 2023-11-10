@@ -35,8 +35,8 @@ const LoginPage = () => {
     <div className={styles.bg}>
       <div className={styles.container}>
         <div className={styles.col1}>
-          <h1>Login</h1>
-          <p>Description Login</p>
+          <h1>Đăng nhập</h1>
+          <p>Thông tin đăng nhập</p>
           <GoogleLogin
             onSuccess={credentialResponse => {
               console.log(credentialResponse)

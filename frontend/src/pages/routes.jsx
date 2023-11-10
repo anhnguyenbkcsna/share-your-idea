@@ -39,8 +39,10 @@ export const getRouter = () => {
       </Route>
     ))
 
-  // console.log('browserRouter', browserRouter.routes)
-
   return browserRouter
 }
 
+// export const routerMatching = {
+//   'innovator/idea/create': CreateIdeaFormPage,
+//   'innovator/idea'
+// }

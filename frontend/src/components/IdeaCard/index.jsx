@@ -10,7 +10,7 @@ const IdeaCard = (props) => {
   const [voted, setVoted] = useState(0) // load from database
   const [isFavourite, setIsFavourite] = useState(false) // load from database
   return (
-    <NavLink to = {`${idea._id}`} >
+    <NavLink to = {`${idea._id.$oid}`} >
       <Card className={styles.card}
         cover={
           <img
@@ -61,14 +61,14 @@ const IdeaCard = (props) => {
           }}>
             <a href='#' className={styles.link}>
               <Typography.Title level={2}>
-                {idea.title}
+                {idea.name}
               </Typography.Title>
             </a>
             <Tooltip title='Complete percentage'>
-              <Progress type="circle" percent={idea.percentage} size='small' />
+              <Progress type="circle" percent={idea.ageRange[1]} size='small' />
             </Tooltip>
           </div>
-          <Typography.Paragraph style={{color: 'black'}}>{idea.description}
+          <Typography.Paragraph style={{color: 'black'}}>{idea.solution}
           </Typography.Paragraph>
           <div className={styles.tags}>
             <Tag color={tags[0]}>TAG</Tag>

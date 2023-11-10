@@ -8,38 +8,8 @@ import { Button, Col, Grid, List, Row, Space, Tag } from 'antd'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { companyIndustries, currentDevStage, teamDescription } from '../../utils/form.constants'
-
-const desc = {
-  id: '5',
-  name: 'OrganicScan Activating-Multimedia Filtering-based',
-  slogan: 'A rapid device for detecting chemicals in our food',
-  percentage: 67,
-  averageVote: 4.3,
-  // views: '3.6k',
-  src: 'https://bizflyportal.mediacdn.vn/thumb_wm/1000,100/bizflyportal/images/inn16276486529991.jpg',
-  description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. 1',
-  domain: [companyIndustries[2], companyIndustries[10], companyIndustries[0]],
-  tag: ['affordable', 'unique', 'attainable'],
-  currentDev: currentDevStage[2],
-  summary: 'Since 2020, the organic food market has bloomed, driven by a surge in demand for \
-  sustainable products and consumer consciousness about what they eat. \
-  However, a hurdle remains: the lack of a rapid and reliable technology to aid stakeholders \
-  across the agricultural value chain in quickly verifying the authenticity \
-  of organic produce or conducting pesticide residue tests simply because the existing solutions \
-  are time-consuming, costly, and not reliable.\
-  This challenge exposes consumers to potential chemical consumption, adulteration, distrust, and \
-  opacity in the organic food market while also bearing \
-  adverse environmental implications. \
-  OrganicScan provides rapid results in a handheld device that \
-  can be used by farmers in the field to retailers also integrated with a mobile App \
-  to allow users to store their data and serves as a hub for organic certification \
-  bodies, retailers, and consumers to verify the authenticity of organic product and promote sustainable agriculture.',
-  author: {
-    name: 'Nguyen Doan Phuong Nghi',
-    email: 'nghi.nguyen@gmail.com',
-    team: teamDescription[2]
-  },
-}
+import axios from 'axios'
+import { deployedAPI } from '../../utils/form.constants'
 
 const iconKey = {
   name: <UserOutlined />,
@@ -54,11 +24,27 @@ const iconGenerated = () => {
 
 const IdeaDescriptionPage = () => {
   let params = useParams()
-  const [idea, setIdea] = useState(desc)
+  const {ideaId} = params
+
+  const [fetchIdeas, setFetchIdeas] = useState([])
+  const [idea, setIdea] = useState({})
 
   useEffect(() => {
-    //loadIdea
-  },[])
+    const fetchIdea = async () => {
+      let response = await axios.get('https://share-your-idea.onrender.com/idea').then(res => res.data)
+      setFetchIdeas(response.data)
+      // console.log(response.data[0]._id.$oid)
+    }
+    fetchIdea()
+  }, [])
+
+  useEffect(() => {
+    if (fetchIdeas.length > 0) {
+      let idea = fetchIdeas.find(item => item._id.$oid === ideaId)
+      setIdea(idea)
+    }
+  }, [fetchIdeas])
+
 
   const dataSourceGenerate = (ideaObj) => {
     let {author} = ideaObj
@@ -74,13 +60,12 @@ const IdeaDescriptionPage = () => {
     return res
   }
 
-  const {ideaId} = params
   return (
     <div>
       <section className={classNames(styles.bg)}>
         <div className={classNames('w-90', styles.description)}>
           {idea.name} - {idea.slogan} <br />
-          {idea.domain.map((item, idx) => (<Tag key={idx} color={'cyan'}>{item}</Tag>))}
+          {/* {idea.domain.map((item, idx) => (<Tag key={idx} color={'cyan'}>{item}</Tag>))} */}
         </div>
         <div className={classNames(styles['bg-circle'])}/>
       </section>
@@ -88,9 +73,9 @@ const IdeaDescriptionPage = () => {
       <CusCard>
         <Row gutter={[8,8]}>
           <Col span={8}>
-            <h1 className={styles.slogan}>{idea.name}</h1>
-            {idea.tag.map((item, idx) => (<Tag key={idx} color={'orange'}>{item}</Tag>))}
-            <List
+            <h1 className={styles.slogan}>{idea.slogan}</h1>
+            {/* {idea.tag.map((item, idx) => (<Tag key={idx} color={'orange'}>{item}</Tag>))} */}
+            {/* <List
               style={{marginTop: '50px'}}
               itemLayout="vertical"
               size="large"
@@ -102,7 +87,7 @@ const IdeaDescriptionPage = () => {
                 >
                   <List.Item.Meta avatar={iconKey[item.title]} title={item.title} description={item.content} />
                 </List.Item>)}
-            />
+            /> */}
             <Button type='primary'>Contact</Button>
           </Col>
           <Col span={16} className={styles.decor}>

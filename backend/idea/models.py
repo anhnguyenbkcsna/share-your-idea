@@ -26,6 +26,13 @@ class Idea(models.Model):
     # upload
     support = models.TextField(default="")
     
+    # Other
+#     summary
+# + isSpam: (Enum? True - False - Warning) -> warning
+
+# + voting (optional)
+# + view (optional)
+    
     innovator_id = models.CharField(max_length=255, default=None)
     upvote = models.IntegerField(default=0)
     downvote = models.IntegerField(default=0)

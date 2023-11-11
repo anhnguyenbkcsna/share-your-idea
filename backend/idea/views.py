@@ -12,6 +12,7 @@ import datetime
 import boto3
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from auth.authentication import CustomAuthentication
+from django.core.files.uploadedfile import InMemoryUploadedFile
 
 
 class IdeaApiView(APIView):
@@ -31,9 +32,9 @@ class IdeaApiView(APIView):
 
     def post(self, request):
         serializer = IdeaSerializer(data=request.data)
-        print(serializer.is_valid())
-        print(serializer.errors)
         file_list = request.FILES.getlist("files")
+        print('Nums of Files is uploading: ', len(file_list))
+        
         return CrudHelper.post_with_file(
             self.collection, serializer, file_list, self.ENT_TYPE
         )

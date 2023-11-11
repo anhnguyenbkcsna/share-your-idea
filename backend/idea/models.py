@@ -1,6 +1,12 @@
 from django.db import models
 
 class Idea(models.Model):
+    class IsSpamEnum(models.TextChoices):
+        TRUE = 'True'
+        FALSE = 'False'
+        WARNING = 'Warning'
+        
+    
     # Idea Overview
     name = models.TextField()
     # domain = models.JSONField(default=None)
@@ -27,12 +33,16 @@ class Idea(models.Model):
     support = models.TextField(default="")
     
     # Other
-#     summary
-# + isSpam: (Enum? True - False - Warning) -> warning
-
-# + voting (optional)
-# + view (optional)
+    summary = models.TextField(default="")
+    isSpam = models.CharField(
+        max_length=10,
+        choices=IsSpamEnum.choices,
+        default=IsSpamEnum.FALSE,
+    )
+    voting = models.IntegerField(default=0)
+    views = models.IntegerField(default=0)
     
+    # Other
     innovator_id = models.CharField(max_length=255, default=None)
     upvote = models.IntegerField(default=0)
     downvote = models.IntegerField(default=0)

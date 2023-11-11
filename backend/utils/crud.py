@@ -51,6 +51,7 @@ class CrudHelper:
                 f"{new_idea_id}/{request_file.name}", ContentFile(request_file.read())
             )
             file_paths.append(path)
+        print(file_paths)
 
         collection.find_one_and_update(
             {"_id": ObjectId(new_idea_id)},

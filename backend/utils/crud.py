@@ -4,20 +4,28 @@ from .utils import parse_json
 from pymongo.collection import ReturnDocument
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
-import datetime
 import copy
 
 
 class CrudHelper:
+    def mapIdField(idea):
+        id = idea["_id"].get('$oid')
+        idea.pop("_id")
+        idea["id"] = id
+        return idea
+    
     @staticmethod
     def get_all(collection, ent_type=""):
         ideas = parse_json(collection.find({}))
+        ideas = list(map(CrudHelper.mapIdField, ideas))
         return Response({"message": f"Got all {ent_type}", "data": ideas}, status=200)
 
     @staticmethod
     def get_by_id(id, collection, ent_type=""):
         idea = parse_json(collection.find_one({"_id": ObjectId(id)}))
+        
         if idea:
+            idea = CrudHelper.mapIdField(idea)
             return Response({"message": f"Got an {ent_type}", "data": idea}, status=200)
         else:
             return Response({"message": f"Cannot find {ent_type}"}, status=400)

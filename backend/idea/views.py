@@ -1,15 +1,7 @@
 from rest_framework.views import APIView
-from rest_framework.response import Response
-from django.core.files.storage import default_storage
-from django.core.files.base import ContentFile
 from .serializers import IdeaSerializer
 from utils.utils import parse_json, connect_db
 from utils.crud import CrudHelper
-from bson.objectid import ObjectId
-from django.conf import settings
-from pymongo.collection import ReturnDocument
-import datetime
-import boto3
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from auth.authentication import CustomAuthentication
 from django.core.files.uploadedfile import InMemoryUploadedFile
@@ -17,7 +9,7 @@ from django.core.files.uploadedfile import InMemoryUploadedFile
 
 class IdeaApiView(APIView):
     db = connect_db()
-    collection = db.get_collection("idea_detail")
+    collection = db.get_collection("idea")
     serializer_class = IdeaSerializer
     ENT_TYPE = "idea"
     permission_classes = (AllowAny,)

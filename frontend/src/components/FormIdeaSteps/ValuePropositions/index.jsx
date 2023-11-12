@@ -33,16 +33,16 @@ const FormValuePropositions = (props) => {
     <>
       <Form.Item
         name="apps"
-        rules={[{ required: true, message: 'We need your specification!' }]}
-        label="Name at lease 2 applications which direct the same issue"
+        rules={[{ required: true, message: 'Hãy nhập mô tả còn thiếu' }]}
+        label="Những ứng dụng tương tự và các vấn đề mà chúng gặp phải"
       >
         <TextArea rows={3} />
       </Form.Item>
 
       <Form.Item
         name="outstand"
-        rules={[{ required: true, message: 'We need your specification!' }]}
-        label="What makes your idea stand out?"
+        rules={[{ required: true, message: 'Hãy nhập mô tả còn thiếu' }]}
+        label="Điểm nổi bật của ý tưởng?"
       >
         <Select
           mode="tags"
@@ -54,12 +54,12 @@ const FormValuePropositions = (props) => {
 
       <Form.Item
         name="currentDev"
-        rules={[{ required: true, message: 'Please select 1' }]}
-        label="Current Development Stage"
+        rules={[{ required: true, message: 'Vui lòng chọn một' }]}
+        label="Quá trình phát triển"
       >
         <Select
           // mode="tags"
-          placeholder="Please select current development stage of your solution"
+          placeholder="Vui lòng chọn quá trình phát triển của ý tưởng"
           onChange={handleChange}
           options={labelValueGenerate(currentDevStage)}
         />
@@ -69,7 +69,7 @@ const FormValuePropositions = (props) => {
         name="moneymaker"
         placeholde="Your Marketing - Business Strategy"
         label="How can you make money from your solution?"
-        rules={[{ required: true, message: 'We need your specification!' }]}
+        rules={[{ required: true, message: 'Hãy nhập mô tả còn thiếu' }]}
       >
         <TextArea rows={3} />
       </Form.Item> */}
@@ -78,7 +78,7 @@ const FormValuePropositions = (props) => {
         name="commitment"
         placeholde="4-6 months commitment"
         label="Impress your sponsor with your commitment"
-        rules={[{ required: true, message: 'We need your specification!' }]}
+        rules={[{ required: true, message: 'Hãy nhập mô tả còn thiếu' }]}
       >
         <TextArea rows={3} />
       </Form.Item> */}

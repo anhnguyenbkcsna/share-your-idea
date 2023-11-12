@@ -30,7 +30,7 @@ const IdeaCard = (props) => {
   }, [])
 
   return (
-    <NavLink to = {`${idea._id.$oid}`} >
+    <NavLink to = {`${idea.id}`} >
       <Card className={styles.card}
         cover={
           <img
@@ -85,7 +85,7 @@ const IdeaCard = (props) => {
               </Typography.Title>
             </a>
             <Tooltip title='Complete percentage'>
-              <Progress type="circle" percent={idea.ageRange[1]} size='small' />
+              <Progress type="circle" percent={69} size='small' />
             </Tooltip>
           </div>
           <Typography.Paragraph className={styles.description}>{idea.solution}

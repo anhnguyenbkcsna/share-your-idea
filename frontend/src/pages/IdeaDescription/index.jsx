@@ -34,14 +34,13 @@ const IdeaDescriptionPage = () => {
     const fetchIdea = async () => {
       let response = await axios.get('https://share-your-idea.onrender.com/idea').then(res => res.data)
       setFetchIdeas(response.data)
-      // console.log(response.data[0]._id.$oid)
     }
     fetchIdea()
   }, [])
 
   useEffect(() => {
     if (fetchIdeas.length > 0) {
-      let idea = fetchIdeas.find(item => item._id.$oid === ideaId)
+      let idea = fetchIdeas.find(item => item.id === ideaId)
       setIdea(idea)
     }
   }, [fetchIdeas])

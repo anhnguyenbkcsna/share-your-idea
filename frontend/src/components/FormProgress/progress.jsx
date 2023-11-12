@@ -12,31 +12,24 @@ const FormProgress = (props) => {
   const {onFormFinish, formSource, dataSteps, slogans} = props
   const [currentStep, setCurrentStep] = useState(0)
   const [eachStepData, setEachStepData] = useState([])
-  const [projectIdea, setProjectIdea] = useState({})
 
   const next = (curData) => {
     localStorage.setItem('currentStep', currentStep + 1)
     handler(curData)
     setCurrentStep(currentStep + 1)
-    console.log('curData when next', curData)
-    // setProjectIdea(curData)
   }
   const prev = (curData) => {
     localStorage.setItem('currentStep', currentStep - 1)
     handler(curData)
     setCurrentStep(currentStep - 1)
-    console.log('curData when prev', curData)
-    // setProjectIdea(curData)
   }
 
   const done = (val) => {
-    // setProjectIdea(val)
     if (val.upload) {
       let uploadFiles = val.upload.map(item => (item.originFileObj))
       val.upload = uploadFiles
     }
     handler(val)
-    console.log('** Progress done!')
     for (let stepCount = 0; stepCount < dataSteps.length; stepCount += 1) {
       localStorage.removeItem(localStorageStepFormat(stepCount))
     }
@@ -49,14 +42,12 @@ const FormProgress = (props) => {
 
     let copyStepData = eachStepData
     copyStepData[dataKey] = curData
-    setEachStepData(copyStepData)
-    console.log('>>> Step Data', copyStepData)
+    // console.log('>>> Step Data', copyStepData)
   }
 
   const eachFormSubmit = () => {
     let mergeData = {}
     mergeData = Object.assign(mergeData, ...Object.values(eachStepData))
-    console.log('>>> mergeData', mergeData)
     onFormFinish(mergeData)
   }
 

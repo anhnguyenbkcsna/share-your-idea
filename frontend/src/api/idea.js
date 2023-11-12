@@ -4,12 +4,11 @@ import { deployedAPI } from '../utils/form.constants'
 const backend = 'http://127.0.0.1:8000'
 
 export const createNewIdea = async (ideaObj) => {
-  const flattenIdeaObj = {}
-  Object.assign(flattenIdeaObj, ...Object.values(ideaObj))
+  const flattenIdeaObj = ideaObj
+  console.log('ideaObj', ideaObj)
 
   const formData = new FormData()
 
-  // stringify all fields except files
   for (let key in flattenIdeaObj)
   {
     if (key === 'files') continue

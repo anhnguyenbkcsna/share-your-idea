@@ -62,7 +62,7 @@ const ideas = [
 ]
 
 const MatchIdea = () => {
-  const [fetchIdea, setFetchIdeas] = useState([])
+  const [fetchIdeas, setFetchIdeas] = useState([])
 
   useEffect(() => {
     const fetchIdea = async () => {
@@ -73,15 +73,15 @@ const MatchIdea = () => {
     }
     fetchIdea()
   }, [])
-  console.log('>>>> fetchIdea', fetchIdea)
+  console.log('>>>> fetchIdea', fetchIdeas)
 
   return (
     <CusCard>
       <OwlCarousel
         className='owl-theme'
-        loop margin={15} center lazyLoad dots smartSpeed={450} style={{zIndex: 0}}
+        loop margin={15} lazyLoad dots smartSpeed={450} style={{zIndex: 0}}
       >
-        {fetchIdea?.map((idea, index) => (
+        {fetchIdeas?.map((idea, index) => (
           <IdeaCard
             key={index}
             className='item'

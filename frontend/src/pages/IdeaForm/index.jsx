@@ -60,16 +60,10 @@ const CreateIdeaFormPage = () => {
   }, [])
 
   const onFormFinish = (formObj) => {
-    // setProjectIdea(formObj)
     createNewIdea(formObj).then(res => {
       <Navigate to='/' />
     })
   }
-
-  // const doneElement = () => {
-  //   return FormDone({setFileList: setFileList}) //  component is using the props.children pattern explicitly
-  //   // return <FormDone setFileList={setFileList} /> //will not work, because we not passing children
-  // }
 
   return (
     <CusCard>

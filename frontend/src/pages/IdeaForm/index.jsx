@@ -61,7 +61,7 @@ const CreateIdeaFormPage = () => {
 
   const onFormFinish = (formObj) => {
     createNewIdea(formObj).then(res => {
-      <Navigate to='/' />
+      <Navigate to='/home' />
     })
   }
 

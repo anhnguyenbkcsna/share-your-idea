@@ -28,7 +28,7 @@ const minWordsValidator = (minWords) => {
 const maxWordsValidator = (maxWords) => {
   return ({ getFieldsValue }) => ({
     validator(rules, value) {
-      if (value && value.length <= maxWords) {
+      if (value.length <= maxWords) {
         return Promise.resolve()
       }
       return Promise.reject(new Error(`Too much characters for ${rules.field} field`))
@@ -86,7 +86,7 @@ const FormOverview = (props) => {
         <Select
           mode="tags"
           placeholder="Hãy chọn lĩnh vực của ý tưởng"
-          options={labelValueGenerate(companyIndustries.sort())}
+          options={labelValueGenerate(companyIndustries)}
           allowClear
         />
       </Form.Item>

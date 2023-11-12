@@ -10,6 +10,7 @@ import LoginPage from './Login'
 import CreateProfileForm from './Profile'
 import MatchIdea from './MatchIdea'
 import ErrorBoundary from './Error'
+import InnovatorIdea from './IdeaList'
 import IdeaDescriptionPage from './IdeaDescription'
 
 export const getRouter = () => {
@@ -24,7 +25,7 @@ export const getRouter = () => {
           <Route index Component={CreateProfileForm} />
         </Route>
         <Route path="innovator" Component={PrivateLayout}>
-          <Route index Component={CreateIdeaFormPage} />
+          <Route index Component={InnovatorIdea} />
           <Route path='idea' Component={CreateIdeaFormPage} />
           {/* <Route path='profile' Component={CreateProfileForm} /> */}
         </Route>

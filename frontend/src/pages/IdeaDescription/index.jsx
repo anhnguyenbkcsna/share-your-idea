@@ -9,6 +9,7 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import { companyIndustries, currentDevStage, teamDescription } from '../../utils/form.constants'
 import axios from 'axios'
+import NotFoundPage from '../Error/E404'
 import { deployedAPI } from '../../utils/form.constants'
 
 const iconKey = {
@@ -61,47 +62,49 @@ const IdeaDescriptionPage = () => {
   }
 
   return (
-    <div>
-      <section className={classNames(styles.bg)}>
-        <div className={classNames('w-90', styles.description)}>
-          {idea.name} - {idea.slogan} <br />
-          {/* {idea.domain.map((item, idx) => (<Tag key={idx} color={'cyan'}>{item}</Tag>))} */}
-        </div>
-        <div className={classNames(styles['bg-circle'])}/>
-      </section>
+    <>
+      {idea != null ? <div>
+        <section className={classNames(styles.bg)}>
+          <div className={classNames('w-90', styles.description)}>
+            {idea.name} - {idea.slogan} <br />
+            {/* {idea.domain.map((item, idx) => (<Tag key={idx} color={'cyan'}>{item}</Tag>))} */}
+          </div>
+          <div className={classNames(styles['bg-circle'])}/>
+        </section>
 
-      <CusCard>
-        <Row gutter={[8,8]}>
-          <Col span={8}>
-            <h1 className={styles.slogan}>{idea.slogan}</h1>
-            {/* {idea.tag.map((item, idx) => (<Tag key={idx} color={'orange'}>{item}</Tag>))} */}
-            {/* <List
-              style={{marginTop: '50px'}}
-              itemLayout="vertical"
-              size="large"
-              dataSource={dataSourceGenerate(idea)}
-              renderItem={(item) => (
-                <List.Item
-                  key={item.title}
-                  style={{marginBottom: '5px'}}
-                >
-                  <List.Item.Meta avatar={iconKey[item.title]} title={item.title} description={item.content} />
-                </List.Item>)}
-            /> */}
-            <Button type='primary'>Contact</Button>
-          </Col>
-          <Col span={16} className={styles.decor}>
-            <h1>{idea.slogan}</h1>
-            <h1 className={styles.title}>Idea Pitch</h1>
-            <h3 style={{lineHeight: 2}}>{idea.summary}</h3>
-            <Row gutter={[8,8]}>
-              <Col span={12}><h2 className={styles.title}>Customer Segment</h2></Col>
-              <Col span={12}><h2 className={styles.title}>Value Propositions</h2></Col>
-            </Row>
-          </Col>
-        </Row>
-      </CusCard>
-    </div>
+        <CusCard>
+          <Row gutter={[8,8]}>
+            <Col span={8}>
+              <h1 className={styles.slogan}>{idea.slogan}</h1>
+              {/* {idea.tag.map((item, idx) => (<Tag key={idx} color={'orange'}>{item}</Tag>))} */}
+              {/* <List
+                style={{marginTop: '50px'}}
+                itemLayout="vertical"
+                size="large"
+                dataSource={dataSourceGenerate(idea)}
+                renderItem={(item) => (
+                  <List.Item
+                    key={item.title}
+                    style={{marginBottom: '5px'}}
+                  >
+                    <List.Item.Meta avatar={iconKey[item.title]} title={item.title} description={item.content} />
+                  </List.Item>)}
+              /> */}
+              <Button type='primary'>Contact</Button>
+            </Col>
+            <Col span={16} className={styles.decor}>
+              <h1>{idea.slogan}</h1>
+              <h1 className={styles.title}>Idea Pitch</h1>
+              <h3 style={{lineHeight: 2}}>{idea.summary}</h3>
+              <Row gutter={[8,8]}>
+                <Col span={12}><h2 className={styles.title}>Customer Segment</h2></Col>
+                <Col span={12}><h2 className={styles.title}>Value Propositions</h2></Col>
+              </Row>
+            </Col>
+          </Row>
+        </CusCard>
+      </div> : <NotFoundPage />}
+    </>
   )
 }
 

@@ -1,21 +1,41 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Card, Typography, Progress, Tooltip, Rate, Tag, Anchor, Button } from 'antd'
 import { EyeOutlined, StarOutlined, HeartOutlined, StarFilled, HeartFilled } from '@ant-design/icons'
 import styles from './styles.module.scss'
 import { NavLink } from 'react-router-dom'
+import classNames from 'classnames'
+
+const defaultImage = 'https://bizflyportal.mediacdn.vn/thumb_wm/1000,100/bizflyportal/images/inn16276486529991.jpg'
 
 const IdeaCard = (props) => {
   const { idea } = props
   const tags = ['red', 'green', 'blue', 'geekblue', 'purple']
+  const [imageSrc, setImageSrc] = useState(defaultImage)
   const [voted, setVoted] = useState(0) // load from database
   const [isFavourite, setIsFavourite] = useState(false) // load from database
+
+  useEffect(() => {
+    // const fetchImage = async () => {
+    //   let response = await fetch(idea.src)
+    //   let data = await response.blob()
+    //   let metadata = {
+    //     type: 'image/jpeg'
+    //   }
+    //   let file = new File([data], 'image.jpg', metadata)
+    //   let url = URL.createObjectURL(file)
+    //   setImageSrc(url)
+    // }
+    // fetchImage()
+    idea.src ? setImageSrc(idea.src) : null
+  }, [])
+
   return (
     <NavLink to = {`${idea._id.$oid}`} >
       <Card className={styles.card}
         cover={
           <img
             alt='example'
-            src={idea.src}
+            src={imageSrc}
           />
         }
         actions={[
@@ -60,7 +80,7 @@ const IdeaCard = (props) => {
             alignItems: 'center'
           }}>
             <a href='#' className={styles.link}>
-              <Typography.Title level={2}>
+              <Typography.Title level={4} className={styles.title}>
                 {idea.name}
               </Typography.Title>
             </a>
@@ -68,7 +88,7 @@ const IdeaCard = (props) => {
               <Progress type="circle" percent={idea.ageRange[1]} size='small' />
             </Tooltip>
           </div>
-          <Typography.Paragraph style={{color: 'black'}}>{idea.solution}
+          <Typography.Paragraph className={styles.description}>{idea.solution}
           </Typography.Paragraph>
           <div className={styles.tags}>
             <Tag color={tags[0]}>TAG</Tag>

@@ -1,6 +1,8 @@
 import axios from 'axios'
 import { deployedAPI } from '../utils/form.constants'
 
+const backend = 'http://127.0.0.1:8000'
+
 export const createNewIdea = async (ideaObj) => {
   const flattenIdeaObj = {}
   Object.assign(flattenIdeaObj, ...Object.values(ideaObj))
@@ -21,7 +23,7 @@ export const createNewIdea = async (ideaObj) => {
   }
 
   return await axios
-    .post(`${deployedAPI}/idea`, formData, {
+    .post(`${backend}/idea`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       }

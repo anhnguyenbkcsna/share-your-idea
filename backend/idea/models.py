@@ -6,7 +6,6 @@ class Idea(models.Model):
         FALSE = 'False'
         WARNING = 'Warning'
         
-    
     # Idea Overview
     name = models.TextField()
     # domain = models.JSONField(default=None)

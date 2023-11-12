@@ -14,13 +14,24 @@ const textRules = {
   max: 20,
 }
 
-const wordsValidator = (minWords) => {
+const minWordsValidator = (minWords) => {
   return ({ getFieldsValue }) => ({
     validator(rules, value) {
       if (value && value.length >= minWords) {
         return Promise.resolve()
       }
       return Promise.reject(new Error(`Not enough details for ${rules.field}`))
+    },
+  })
+}
+
+const maxWordsValidator = (maxWords) => {
+  return ({ getFieldsValue }) => ({
+    validator(rules, value) {
+      if (value && value.length <= maxWords) {
+        return Promise.resolve()
+      }
+      return Promise.reject(new Error(`Too much characters for ${rules.field} field`))
     },
   })
 }
@@ -58,15 +69,18 @@ const FormOverview = (props) => {
     <div>
       <Form.Item
         name="name"
-        rules={[{ required: true, message: 'We need your specification!' }]}
+        required
+        rules={[maxWordsValidator(200)]}
         label="Project name"
+
       >
         <Input allowClear />
       </Form.Item>
 
       <Form.Item
         name="domain"
-        rules={[{ required: true, message: 'We need your specification!' }]}
+        required
+        rules={[maxWordsValidator(100)]}
         label="Field (Domain)"
       >
         <Select
@@ -79,7 +93,7 @@ const FormOverview = (props) => {
 
       <Form.Item
         name="slogan"
-        rules={[wordsValidator(30)]}
+        rules={[maxWordsValidator(150)]}
         label="Project slogan"
       >
         <Input.TextArea
@@ -91,7 +105,8 @@ const FormOverview = (props) => {
 
       <Form.Item
         name="problem"
-        rules={[wordsValidator(20)]}
+        required
+        rules={[minWordsValidator(10)]}
         label="Problem"
       >
         <Input.TextArea
@@ -103,7 +118,8 @@ const FormOverview = (props) => {
 
       <Form.Item
         name="solution"
-        rules={[wordsValidator(60)]}
+        required
+        rules={[minWordsValidator(60)]}
         label="Solution"
       >
         <Input.TextArea
@@ -116,6 +132,7 @@ const FormOverview = (props) => {
       <Form.Item
         name="teamDescription"
         label="Team Description"
+        required
       >
         <Select
           placeholder="Please select or enter your answer"
@@ -126,7 +143,6 @@ const FormOverview = (props) => {
 
       <Form.Item
         name="teamExperience"
-        rules={[wordsValidator(60)]}
         label="Team Experience"
       >
         <Input.TextArea

@@ -9,81 +9,81 @@ export const labelValueGenerate = (strList) => {
 
 export const gender = [
   {
-    label: 'Male',
+    label: 'Nam',
     value: 'Male',
   },
   {
-    label: 'Female',
+    label: 'Nữ',
     value: 'Female',
   },
   {
-    label: 'Others',
+    label: 'Khác',
     value: 'Others',
   },
   {
-    label: 'Global',
+    label: 'Tất cả',
     value: 'Global',
   },
 ]
 
 export const residential = [
   {
-    label: 'Vietnam',
+    label: 'Việt Nam',
     value: 'Vietnam',
   },
   {
-    label: 'Asia',
+    label: 'Châu Á',
     value: 'Asia',
   },
   {
-    label: 'Europe',
+    label: 'Châu Âu',
     value: 'Europe',
   },
   {
-    label: 'Africa',
+    label: 'Châu Phi',
     value: 'Africa',
   },
   {
-    label: 'Australia',
+    label: 'Châu Úc',
     value: 'Australia',
   },
   {
-    label: 'Americas',
+    label: 'Châu Mỹ',
     value: 'Americas',
   },
   {
-    label: 'Metropolis', //big city
+    label: 'Thành phố lớn', //big city
     value: 'Metropolis',
   },
   {
-    label: 'Downtown',
+    label: 'Trung tâm thành phố',
     value: 'Downtown',
   },
   {
-    label: 'Countryside',
+    label: 'Nông thôn',
     value: 'Countryside',
   },
   {
-    label: 'Minority Area',
+    label: 'Vùng dân tộc thiểu số',
     value: 'Minority Area',
   },
 ]
 
 export const domains = [
   {
-    label: 'Science',
+    label: 'Khoa học',
     value: 'Science',
   },
   {
-    label: 'Healthcare',
+    label: 'Sức khoẻ',
     value: 'Healthcare',
   },
   {
-    label: 'Beauty',
+    label: 'Làm đẹp',
     value: 'Beauty',
   },
   {
-    label: 'Business',
+    label: 'Doanh nghiệp',
     value: 'Business',
   },
   {
@@ -98,19 +98,19 @@ export const domains = [
 
 export const userFormStepItem = [
   {
-    title: 'Idea Overview',
+    title: 'Tổng quan ý tưởng',
     // icon: <UserOutlined />,
   },
   {
-    title: 'Customer Segments',
+    title: 'Đối tượng khách hàng',
     // icon: <SolutionOutlined />,
   },
   {
-    title: 'Value Propositions',
+    title: 'Đề xuất giá trị ',
     // icon: <LoadingOutlined />,
   },
   {
-    title: 'Done',
+    title: 'Hoàn tất',
     // icon: <SmileOutlined />,
   },
 ]
@@ -120,24 +120,26 @@ export const localStorageStepFormat = (stepCount) => {
 }
 
 const professionalList = [
-  'Children',
-  'Student',
-  'White-collar worker',
-  'Blue-collar worker',
-  'The elderly',
-  'The disabled',
-  'For everyone',
+  'Trẻ em',
+  'Học sinh, sinh viên',
+  'Doanh nghiệp',
+  'Người tiêu dùng',
+  'Người khuyết tật',
+  'Người già',
+  'Mọi người'
 ]
 const standoutReasonList = [
-  'affordable',
-  'novel',
-  'eco-friendly',
-  'technology-based',
-  'productive',
-  'effective',
-  'fast',
-  'promising',
-  'problem-solving',
+  'Nhanh',
+  'Hiệu quả',
+  'Mới lạ',
+  'Hữu ích',
+  'Tiết kiệm',
+  'Dễ dàng',
+  'An toàn',
+  'Khả thi',
+  'Bền vững',
+  'Tối ưu tốt',
+  'Ứng dụng cao'
 ]
 
 export const professionals = labelValueGenerate(professionalList)

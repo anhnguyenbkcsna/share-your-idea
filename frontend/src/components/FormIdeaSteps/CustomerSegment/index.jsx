@@ -29,11 +29,11 @@ const FormCustomerSegment = (props) => {
     <div>
       <Form.Item
         name="gender"
-        label="Gender"
-        rules={[{ required: true, message: 'We need your specification!' }]}
+        label="Giới tính"
+        rules={[{ required: true, message: 'Hãy nhập mô tả còn thiếu' }]}
       >
         <Select
-          placeholder="Please select"
+          placeholder="Vui lòng chọn giới tính"
           onChange={handleChange}
           options={gender}
         />
@@ -41,20 +41,20 @@ const FormCustomerSegment = (props) => {
 
       <Form.Item
         name="ageRange"
-        label="Age Range"
-        rules={[{ required: true, message: 'We need your specification!' }]}
+        label="Giới hạn độ tuổi"
+        rules={[{ required: true, message: 'Hãy nhập mô tả còn thiếu' }]}
       >
         <Slider range step={1} initialValues={[20, 50]} />
       </Form.Item>
 
       <Form.Item
         name="professional"
-        label="Professionals"
-        rules={[{ required: true, message: 'We need your specification!' }]}
+        label="Đối tượng khách hàng"
+        rules={[{ required: true, message: 'Hãy nhập mô tả còn thiếu' }]}
       >
         <Select
           mode="tags"
-          placeholder="Please select or enter your answer"
+          placeholder="Vui lòng chọn đối tượng khách hàng"
           onChange={handleChange}
           options={customerJobs}
         />
@@ -62,12 +62,12 @@ const FormCustomerSegment = (props) => {
 
       <Form.Item
         name="geographical"
-        label="Geographical"
-        rules={[{ required: true, message: 'We need your specification!' }]}
+        label="Vị trí địa lý"
+        rules={[{ required: true, message: 'Hãy nhập mô tả còn thiếu' }]}
       >
         <Select
           mode="tags"
-          placeholder="Please select or enter your answer"
+          placeholder="Vui lòng chọn đối tượng khách hàng"
           onChange={handleChange}
           options={residential}
         />
@@ -75,12 +75,12 @@ const FormCustomerSegment = (props) => {
 
       <Form.Item
         name="behavior"
-        label="Why would this particular customer group would love your idea?"
-        rules={[{ required: true, message: 'We need your specification!' }]}
+        label="Tại sao bạn nghĩ khách hàng sẽ ưu tiên sử dụng ý tưởng của bạn?"
+        rules={[{ required: true, message: 'Hãy nhập mô tả còn thiếu' }]}
       >
         <Input.TextArea
           allowClear
-          placeholder="Describe Behavioral Specification of Your Audience"
+          placeholder="Hãy mô tả những điểm nổi bật của ý tưởng khiến khách hàng bị thu hút"
           autoSize={{ minRows: 2, maxRows: 10 }}
         />
       </Form.Item>

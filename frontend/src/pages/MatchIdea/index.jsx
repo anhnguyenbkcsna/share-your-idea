@@ -79,7 +79,7 @@ const MatchIdea = () => {
     <CusCard>
       <OwlCarousel
         className='owl-theme'
-        loop margin={50} center lazyLoad dots smartSpeed={450} style={{zIndex: 0}}
+        loop margin={15} center lazyLoad dots smartSpeed={450} style={{zIndex: 0}}
       >
         {fetchIdea?.map((idea, index) => (
           <IdeaCard

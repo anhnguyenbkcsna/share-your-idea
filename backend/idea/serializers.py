@@ -10,7 +10,6 @@ class IdeaSerializer(ModelSerializer):
     ageRange = serializers.JSONField(required=False)
     outstand = serializers.JSONField(required=False)
     # files = serializers.ListField(child=serializers.FileField(), required=False)
-    tmp = serializers.FileField(required=False)
     
     class Meta:
         model = Idea

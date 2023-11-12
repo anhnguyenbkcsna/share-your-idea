@@ -40,10 +40,10 @@ const FormDone = (props) => {
                 <InboxOutlined />
               </p>
               <p className="ant-upload-text">
-                Click or drag file to this area to upload
+                Nhấp chọn hoặc kéo thả tệp vào đây
               </p>
               <p className="ant-upload-hint">
-                Support for pdf, ppt, jpg, png, etc.
+                Hỗ trợ định dạng pdf, ppt, jpg, png, etc.
               </p>
             </Dragger>
           </Form.Item>
@@ -51,12 +51,13 @@ const FormDone = (props) => {
         <Col span={12}>
           <Form.Item
             name="support"
-            label="What support do you need from enterprise?"
+            label="Bạn cần sự hỗ trợ gì từ doanh nghiệp?"
           >
             <TextArea
               rows={3}
               showCount maxLength={100}
               allowClear
+              label="Về tài chính, kỹ thuật, marketing, etc."
             />
           </Form.Item>
         </Col>

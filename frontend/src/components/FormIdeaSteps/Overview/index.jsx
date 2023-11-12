@@ -71,7 +71,7 @@ const FormOverview = (props) => {
         name="name"
         required
         rules={[maxWordsValidator(200)]}
-        label="Project name"
+        label="Tên ý tưởng"
 
       >
         <Input allowClear />
@@ -81,11 +81,11 @@ const FormOverview = (props) => {
         name="domain"
         required
         rules={[maxWordsValidator(100)]}
-        label="Field (Domain)"
+        label="Lĩnh vực"
       >
         <Select
           mode="tags"
-          placeholder="Please select or enter your answer"
+          placeholder="Hãy chọn lĩnh vực của ý tưởng"
           options={labelValueGenerate(companyIndustries.sort())}
           allowClear
         />
@@ -94,7 +94,7 @@ const FormOverview = (props) => {
       <Form.Item
         name="slogan"
         rules={[maxWordsValidator(150)]}
-        label="Project slogan"
+        label="Slogan"
       >
         <Input.TextArea
           autoSize={{ minRows: 2, maxRows: 3 }}
@@ -107,10 +107,10 @@ const FormOverview = (props) => {
         name="problem"
         required
         rules={[minWordsValidator(10)]}
-        label="Problem"
+        label="Vấn đề"
       >
         <Input.TextArea
-          placeholder="The problem your team want to solve"
+          placeholder="Vấn đề bạn muốn giải quyết là gì?"
           autoSize={{ minRows: 2, maxRows: 10 }}
           showCount
         />
@@ -120,10 +120,10 @@ const FormOverview = (props) => {
         name="solution"
         required
         rules={[minWordsValidator(60)]}
-        label="Solution"
+        label="Giải pháp"
       >
         <Input.TextArea
-          placeholder="The proposed technical solution is..."
+          placeholder="Hướng giải quyết mà bạn muốn đề xuất là gì?"
           autoSize={{ minRows: 4, maxRows: 20 }}
           showCount
         />
@@ -131,11 +131,11 @@ const FormOverview = (props) => {
 
       <Form.Item
         name="teamDescription"
-        label="Team Description"
+        label="Nhóm thực hiện"
         required
       >
         <Select
-          placeholder="Please select or enter your answer"
+          placeholder="Hãy nhập thông tin về nhóm"
           options={labelValueGenerate(teamDescription)}
           allowClear
         />
@@ -143,10 +143,9 @@ const FormOverview = (props) => {
 
       <Form.Item
         name="teamExperience"
-        label="Team Experience"
+        label="Kinh nghiệm làm việc của nhóm"
       >
         <Input.TextArea
-          placeholder="Your team experience"
           autoSize={{ minRows: 2, maxRows: 10 }}
           showCount
         />

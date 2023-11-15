@@ -24,8 +24,6 @@ $bg-height: 300px;
 }
 
 .description {
-  font-size: 40px;
-  font-weight: 700;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: $primary-bg-color;
   margin: auto;
@@ -46,11 +44,12 @@ $bg-height: 300px;
 }
 
 .btn {
-  margin-top: 3rem;
+  margin-top: 2rem;
   font-size: large;
-  color: $primary-color;
+  color: white;
   height: auto;
-  box-shadow: 5px 5px $primary-color-light;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
 }
 
 .decor {
@@ -59,7 +58,9 @@ $bg-height: 300px;
 
 .slogan {
   @include semi-large-slogan;
-  color: $primary-org;
+  text-align: right;
+  font-weight: 700;
+  color: $primary-color-light;
 }
 
 .title {
@@ -69,4 +70,20 @@ $bg-height: 300px;
   @include round-border;
   background-color: $primary-org;
   padding: 0 5px;
+}
+.subtitle{
+  color: $primary-color-light;
+}
+.content {
+  line-height: 1.5;
+}
+.fileList {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.file {
+  margin: 0 10px;
 }

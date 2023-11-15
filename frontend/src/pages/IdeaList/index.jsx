@@ -1,99 +1,86 @@
-import React, { useState, useEffect } from "react"
-import axios from "axios"
-import { deployedAPI } from "../../utils/form.constants"
-import { LikeOutlined, MessageOutlined, StarOutlined } from "@ant-design/icons"
-import { Avatar, List, Space } from "antd"
-import styles from "./styles.module.scss"
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import { Button, Space, Dropdown, Typography, Input } from 'antd'
+import styles from './styles.module.scss'
+import { deployedAPI } from '../../utils/form.constants'
+import IdeaListComponent from '../../components/IdeaListComponent'
+import { DownOutlined } from '@ant-design/icons'
 
-const data = Array.from({
-  length: 23,
-}).map((_, i) => ({
-  href: "https://ant.design",
-  title: `ant design part ${i}`,
-  avatar: `https://xsgames.co/randomusers/avatar.php?g=pixel&key=${i}`,
-  description:
-    "Ant Design, a design language for background applications, is refined by Ant UED Team.",
-  content:
-    "We supply a series of design principles, practical patterns and high quality",
-}))
-const IconText = ({ icon, text }) => (
-  <Space>
-    {React.createElement(icon)}
-    {text}
-  </Space>
-)
+const sortTypes = [
+  {
+    name: 'Sort',
+    value: 'none',
+  },
+  {
+    name: 'Most viewed',
+    value: 'views',
+  },
+  {
+    name: 'Most voted',
+    value: 'averageVote',
+  }
+]
 
 const InnovatorIdea = () => {
   const [fetchIdeas, setFetchIdeas] = useState([])
+  const [sortIndex, setSortIndex] = useState(0)
+
+  const handleSearch = (value) => {
+    let res = []
+    res = fetchIdeas.forEach((item) => {
+      item.name.toLowerCase().indexOf(value.toLowerCase()) != -1 ? res.push(item) : null
+    })
+    console.log(res)
+    setFetchIdeas(res)
+  }
+
+  const handleSort = () => {
+    setSortIndex(sortIndex + 1)
+    if (sortIndex === sortTypes.length - 1) {
+      setSortIndex(0)
+    }
+  }
 
   useEffect(() => {
     const fetchIdea = async () => {
       let response = await axios
         .get(`${deployedAPI}/idea`)
         .then((res) => res.data)
-      console.log(response.data)
       setFetchIdeas(response.data)
     }
     fetchIdea()
   }, [])
-  console.log(">>>> fetchIdea", fetchIdeas)	
-  
+
+  useEffect(() => {
+    if (sortTypes[sortIndex].value === 'views') {
+      let sorted = fetchIdeas.sort((a, b) => {
+        return b.views - a.views
+      })
+      setFetchIdeas(sorted)
+    }
+    else if (sortTypes[sortIndex].value === 'averageVote') {
+      let sorted = fetchIdeas.sort((a, b) => {
+        return b.averageVote - a.averageVote
+      })
+      setFetchIdeas(sorted)
+    }
+  }, [sortIndex])
+
   return (
     <div className={styles.container}>
-      <List
-        itemLayout="vertical"
-        size="large"
-        pagination={{
-          onChange: (page) => {
-            console.log(page)
-          },
-          pageSize: 3,
-        }}
-        dataSource={fetchIdeas}
-        footer={
-          <div>
-            <b>ant design</b> footer part
-          </div>
-        }
-        renderItem={(item) => (
-          <List.Item
-            key={item.title}
-            actions={[
-              <IconText
-                icon={StarOutlined}
-                text="156"
-                key="list-vertical-star-o"
-              />,
-              <IconText
-                icon={LikeOutlined}
-                text="156"
-                key="list-vertical-like-o"
-              />,
-              <IconText
-                icon={MessageOutlined}
-                text="2"
-                key="list-vertical-message"
-              />,
-            ]}
-            extra={
-              <img
-                width={272}
-                alt="logo"
-                src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
-              />
-            }
-          >
-            <List.Item.Meta
-              avatar={<Avatar src={item.avatar} />}
-              title={<a href={item.href}>{item.name}</a>}
-              description={item.slogan}
-            />
-            <div className={styles.description}>
-              {item.problem}
-            </div>
-          </List.Item>
-        )}
-      />
+      <div style={{display: 'flex', justifyContent: 'space-between'}}>
+        <Input.Search
+          placeholder="Find your idea"
+          onChange={handleSearch}
+          style={{
+            width: 200,
+          }}
+        />
+        <Button onClick={handleSort}>
+          {sortTypes[sortIndex].name}
+        </Button>
+      </div>
+      <IdeaListComponent fetchIdeas={fetchIdeas} />
     </div>
   )
 }

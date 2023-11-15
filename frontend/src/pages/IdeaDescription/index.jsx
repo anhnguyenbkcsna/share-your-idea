@@ -1,16 +1,13 @@
-import { UserOutlined , TeamOutlined, LineChartOutlined, MailOutlined, ApartmentOutlined } from '@ant-design/icons'
-import classNames from 'classnames'
-import React from 'react'
-import { NavLink, useParams } from 'react-router-dom'
-import styles from './styles.module.scss'
-import CusCard from '../../components/CusCard'
-import { Button, Col, Grid, List, Row, Space, Tag } from 'antd'
-import { useEffect } from 'react'
-import { useState } from 'react'
-import { companyIndustries, currentDevStage, teamDescription } from '../../utils/form.constants'
+import React, { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+import { Button, Col, Divider, Row, Tag } from 'antd'
 import axios from 'axios'
+import classNames from 'classnames'
+import styles from './styles.module.scss'
 import NotFoundPage from '../Error/E404'
+import CusCard from '../../components/CusCard'
 import { deployedAPI } from '../../utils/form.constants'
+import { UserOutlined , TeamOutlined, LineChartOutlined, MailOutlined, BulbOutlined } from '@ant-design/icons'
 
 const iconKey = {
   name: <UserOutlined />,
@@ -19,8 +16,8 @@ const iconKey = {
   team: <TeamOutlined/>
 }
 
-const iconGenerated = () => {
-
+const rmvQuote = (str) => {
+  return str && str.split('\"').join('')
 }
 
 const IdeaDescriptionPage = () => {
@@ -32,7 +29,7 @@ const IdeaDescriptionPage = () => {
 
   useEffect(() => {
     const fetchIdea = async () => {
-      let response = await axios.get('https://share-your-idea.onrender.com/idea').then(res => res.data)
+      let response = await axios.get(`${deployedAPI}/idea`).then(res => res.data)
       setFetchIdeas(response.data)
     }
     fetchIdea()
@@ -60,22 +57,45 @@ const IdeaDescriptionPage = () => {
     return res
   }
 
+  const getUserFromLocal = () => {
+
+  }
+
   return (
     <>
       {idea != null ? <div>
         <section className={classNames(styles.bg)}>
           <div className={classNames('w-90', styles.description)}>
-            {idea.name} - {idea.slogan} <br />
-            {/* {idea.domain.map((item, idx) => (<Tag key={idx} color={'cyan'}>{item}</Tag>))} */}
+            <h2 style={{
+              fontSize: '50px',
+              fontWeight: 'bold'
+            }}>
+              {rmvQuote(idea.name)}
+            </h2>
+            
+            <br />
+            {idea.domain && idea.domain.map((item, idx) => (
+              <Tag key={idx} color='blue'>{item}</Tag>
+            ))}
           </div>
           <div className={classNames(styles['bg-circle'])}/>
         </section>
 
         <CusCard>
+          <h3 className={styles.slogan}>
+            {rmvQuote(idea.slogan)} x<BulbOutlined />
+          </h3>
           <Row gutter={[8,8]}>
             <Col span={8}>
-              <h1 className={styles.slogan}>{idea.slogan}</h1>
-              {/* {idea.tag.map((item, idx) => (<Tag key={idx} color={'orange'}>{item}</Tag>))} */}
+              <h2 className={styles.title}>Thông tin nhóm</h2>
+              <h3 className={styles.content}>
+                <span className={styles.subtitle}>Số lượng thành viên: </span>
+                {rmvQuote(idea.teamDescription)}
+              </h3>
+              <h3 className={styles.content}>
+                <span className={styles.subtitle}>Kinh nghiệm: </span>
+                {rmvQuote(idea.teamExperience)}
+              </h3>
               {/* <List
                 style={{marginTop: '50px'}}
                 itemLayout="vertical"
@@ -89,17 +109,93 @@ const IdeaDescriptionPage = () => {
                     <List.Item.Meta avatar={iconKey[item.title]} title={item.title} description={item.content} />
                   </List.Item>)}
               /> */}
-              <Button type='primary'>Contact</Button>
+
+              <Button type='primary' className={styles.btn}>
+                <MailOutlined />
+                Liên hệ
+              </Button>
             </Col>
             <Col span={16} className={styles.decor}>
-              <h1>{idea.slogan}</h1>
-              <h1 className={styles.title}>Idea Pitch</h1>
-              <h3 style={{lineHeight: 2}}>{idea.summary}</h3>
-              <Row gutter={[8,8]}>
-                <Col span={12}><h2 className={styles.title}>Customer Segment</h2></Col>
-                <Col span={12}><h2 className={styles.title}>Value Propositions</h2></Col>
-              </Row>
+              <h2 className={styles.title}>
+                Vấn đề gặp phải
+              </h2>
+              <h3 className={styles.content}>
+                {rmvQuote(idea.problem)}
+              </h3>
+              <Divider />
+              
+              <h2 className={styles.title}>Hướng giải quyết</h2>
+              <h3 className={styles.content}>
+                {rmvQuote(idea.solution)}
+              </h3>
             </Col>
+            <Divider />
+            <Col span={12}>
+              <h2 className={styles.title}>Đối tượng khách hàng</h2>
+              <br />
+              
+              {idea.gender && <h3 className={styles.content}>
+                <span className={styles.subtitle}>Giới tính: </span>
+                {rmvQuote(idea.gender)}
+              </h3>}
+              
+              {idea.ageRange && <h3 className={styles.content}>
+                <span className={styles.subtitle}>Độ tuổi: </span>
+                {idea.ageRange[0]} - {idea.ageRange[1]} tuổi
+              </h3>}
+
+              {idea.professional && <h3 className={styles.content}>
+                <span className={styles.subtitle}>Nghề nghiệp: </span>
+                {idea.professional.map((item, idx) => rmvQuote(item)).join(', ')}
+              </h3>}  
+
+              {idea.geographical && <h3 className={styles.content}>
+                <span className={styles.subtitle}>Khu vực: </span>
+                {idea.geographical.map((item, idx) => rmvQuote(item)).join(', ')}
+              </h3>}
+
+              {idea.behavior && <h3 className={styles.content}>
+                <span className={styles.subtitle}>Thói quen: </span>
+                {rmvQuote(idea.behavior)}
+              </h3>}
+            </Col>
+
+            <Col span={12}><h2 className={styles.title}>Đề xuất giá trị</h2>
+              {idea.apps && <h3 className={styles.content}>
+                <span className={styles.subtitle}>Các ứng dụng liên quan: </span>
+                {rmvQuote(idea.apps)}
+              </h3>}
+
+              {idea.outstand && <h3 className={styles.content}>
+                <span className={styles.subtitle}>Ưu điểm: </span>
+                {idea.outstand.map((item, idx) => rmvQuote(item)).join(', ')}
+              </h3>}
+              
+              <h3 className={styles.content}>
+                {rmvQuote(idea.currentDev)}
+              </h3>
+
+            </Col>
+            <Divider />
+            
+            {idea.files && <div className={styles.fileList}>
+              {idea.files.map((item, idx) => {
+                return (
+                  <div className={styles.file} key={idx}>
+                    <Button type='primary' href={item.link}>Download</Button>
+                  </div>
+                )
+              })}
+            </div>}
+            <Divider />
+            <div className={styles.support}>              
+              {idea.support != 'undefined' && <div className={styles.content}>
+                <h3 className={styles.content}>
+                  <span className={styles.subtitle}>Hỗ trợ nhóm phát triển dự án: </span>
+                  {rmvQuote(idea.support)}
+                </h3>
+              </div>}  
+            </div>
           </Row>
         </CusCard>
       </div> : <NotFoundPage />}

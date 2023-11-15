@@ -30,6 +30,4 @@ yarn-error.log*
 .vscode/
 
 # venv
-venv/
-
-# Pipfile
+*venv

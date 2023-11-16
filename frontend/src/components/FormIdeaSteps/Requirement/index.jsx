@@ -21,6 +21,8 @@ const RequirementForm = (props) => {
         rules={[{
           type: 'array',
           max: 3,
+          min: 1,
+          required: true,
           message: 'Tối đa 3 lĩnh vực'
         }]}
         label="Lĩnh vực"

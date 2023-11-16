@@ -80,7 +80,13 @@ const FormOverview = (props) => {
       <Form.Item
         name="domain"
         required
-        rules={[maxWordsValidator(100)]}
+        rules={[{
+          type: 'array',
+          max: 3,
+          min: 1,
+          required: true,
+          message: 'Tối đa 3 lĩnh vực'
+        }]}
         label="Lĩnh vực"
       >
         <Select
@@ -100,6 +106,7 @@ const FormOverview = (props) => {
           autoSize={{ minRows: 2, maxRows: 3 }}
           showCount
           allowClear
+          placeholder='Hệ thống/Nền tảng/... dành cho... giái quyết vấn đề... bằng cách...'
         />
       </Form.Item>
 

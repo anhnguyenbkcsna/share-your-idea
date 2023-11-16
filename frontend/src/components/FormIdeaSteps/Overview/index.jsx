@@ -84,7 +84,7 @@ const FormOverview = (props) => {
         label="Lĩnh vực"
       >
         <Select
-          mode="tags"
+          mode="multiple"
           placeholder="Hãy chọn lĩnh vực của ý tưởng"
           options={labelValueGenerate(companyIndustries)}
           allowClear

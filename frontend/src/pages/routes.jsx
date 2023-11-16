@@ -12,6 +12,7 @@ import MatchIdea from './MatchIdea'
 import ErrorBoundary from './Error'
 import InnovatorIdea from './IdeaList'
 import IdeaDescriptionPage from './IdeaDescription'
+import CompanyRequirementFormPage from './CompanyRequirement'
 
 export const getRouter = () => {
   const browserRouter = createBrowserRouter(
@@ -30,7 +31,7 @@ export const getRouter = () => {
           {/* <Route path='profile' Component={CreateProfileForm} /> */}
         </Route>
         <Route path="company" Component={PrivateLayout}>
-          <Route index Component={CreateIdeaFormPage} />
+          <Route index Component={CompanyRequirementFormPage} />
           {/* <Route path='profile' Component={CreateProfileForm} /> */}
         </Route>
         <Route path="match-idea" Component={PrivateLayout}>

@@ -3,24 +3,19 @@ from rest_framework.serializers import ModelSerializer
 from rest_framework import serializers
 
 
-class Company(models.Model):
-    name = models.TextField()
-    logo_url = models.TextField()
-    slogan = models.TextField()
-    description = models.TextField()
-    website = models.TextField()
-    email = models.TextField()
-    number = models.TextField()
-    address = models.TextField()
+class Requirement(models.Model):
+    domains = models.JSONField(default=[])
+    problem = models.TextField(default="")
+    acceptance_criterias = models.TextField(default="")
+    constraints = models.TextField(default="")
 
     def __str__(self):
-        return """Company: {self.name}"""
+        return """Requirement: {self.name}"""
 
 
-class CompanySerializer(ModelSerializer):
-    specialties = serializers.ListField(child=serializers.CharField(), required=False)
-    idea_ids = serializers.ListField(child=serializers.CharField(), required=False)
+class RequirementSerializer(ModelSerializer):
+    domains = serializers.ListField(child=serializers.CharField(), required=False)
 
     class Meta:
-        model = Company
+        model = Requirement
         fields = "__all__"

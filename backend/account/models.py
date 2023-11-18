@@ -50,6 +50,7 @@ class Company(Account):
     website = models.TextField(default=None)
     number = models.TextField(default=None)
     address = models.TextField(default=None)
+    requirement = models.JSONField(default=dict)
     specialties = models.JSONField(default=list)
     idea_ids = models.JSONField(default=list)
 

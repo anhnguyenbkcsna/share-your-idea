@@ -42,8 +42,8 @@ urlpatterns = [
     # path("user", UserApiView.as_view(), name="user"),
     path("idea", IdeaApiView.as_view(), name="idea"),
     path("file", FileUploadApiView.as_view(), name="file"),
-    path("company", CompanyApiView.as_view(), name="company"),
-    path("innovator", InnovatorApiView.as_view(), name="innovator"),
+    path("requirement", CompanyApiView.as_view(), name="requirement"),
+    # path("innovator", InnovatorApiView.as_view(), name="innovator"),
     path("account/refresh", TokenRefreshView.as_view(), name='token_refresh'),
     path('', include(router.urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

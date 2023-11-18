@@ -25,10 +25,16 @@ from poe_api.views import PoeApiView
 from innovator.views import InnovatorApiView
 from company.views import CompanyApiView
 from file_upload.views import FileUploadApiView
-from account.views import AccountApiView
+from account.views import AccountViewSet
 from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
+from django.urls import path, include
+from rest_framework import routers
+
+
+router = routers.DefaultRouter()
+router.register(r'account', AccountViewSet)
 
 urlpatterns = [
     # path("poe", PoeApiView.as_view(), name="poe-api")
@@ -38,6 +44,6 @@ urlpatterns = [
     path("file", FileUploadApiView.as_view(), name="file"),
     path("company", CompanyApiView.as_view(), name="company"),
     path("innovator", InnovatorApiView.as_view(), name="innovator"),
-    path("account", AccountApiView.as_view(), name='account'),
     path("account/refresh", TokenRefreshView.as_view(), name='token_refresh'),
+    path('', include(router.urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

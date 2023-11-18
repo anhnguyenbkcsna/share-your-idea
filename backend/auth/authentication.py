@@ -25,5 +25,5 @@ class CustomAuthentication(authentication.BaseAuthentication):
 
     def get_user(self, validated_token):
         res = self.collection.find_one({"_id": ObjectId(validated_token["user_id"])})
-        user = Account(res["_id"], res["name"], res["email"])
+        user = Account(res["_id"], res["name"], res["email"], res["role"])
         return user

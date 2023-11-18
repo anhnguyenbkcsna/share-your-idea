@@ -5,6 +5,8 @@ from utils.crud import CrudHelper
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from auth.authentication import CustomAuthentication
 from django.core.files.uploadedfile import InMemoryUploadedFile
+import requests
+import json
 
 
 class IdeaApiView(APIView):
@@ -16,6 +18,12 @@ class IdeaApiView(APIView):
     authentication_classes = [CustomAuthentication]
 
     def get(self, request):
+        # payload = {
+        #     'domain': json.dumps(['test']), 
+        #     'professional': 'test'
+        # }
+        # requests.post('http://localhost:8080', data=payload)
+        
         id = request.query_params.get("id")
         if not id:
             return CrudHelper.get_all(self.collection, self.ENT_TYPE)

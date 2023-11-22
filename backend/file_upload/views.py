@@ -12,8 +12,6 @@ from auth.authentication import CustomAuthentication
 
 
 class FileUploadApiView(APIView):
-    db = connect_db()
-    collection = db.get_collection("idea_detail")
     EXPIRATION = 3600
     permission_classes = (AllowAny,)
     authentication_classes = [CustomAuthentication]

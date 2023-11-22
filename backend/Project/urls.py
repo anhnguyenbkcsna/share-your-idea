@@ -19,13 +19,10 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from user.views import UserApiView
-from idea.views import IdeaApiView
-from poe_api.views import PoeApiView
-from innovator.views import InnovatorApiView
 from company.views import CompanyApiView
 from file_upload.views import FileUploadApiView
 from account.views import AccountViewSet
+from idea.views import IdeaViewSet
 from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
@@ -34,16 +31,16 @@ from rest_framework import routers
 
 
 router = routers.DefaultRouter()
-router.register(r'account', AccountViewSet)
+router.register(r'', AccountViewSet, basename='accounts')
+router.register(r'', IdeaViewSet, basename='ideas')
 
 urlpatterns = [
     # path("poe", PoeApiView.as_view(), name="poe-api")
     # path("admin", admin.site.urls),
     # path("user", UserApiView.as_view(), name="user"),
-    path("idea", IdeaApiView.as_view(), name="idea"),
-    path("file", FileUploadApiView.as_view(), name="file"),
-    path("requirement", CompanyApiView.as_view(), name="requirement"),
+    path(r"files/", FileUploadApiView.as_view(), name="file"),
+    path(r"requirements/", CompanyApiView.as_view(), name="requirement"),
     # path("innovator", InnovatorApiView.as_view(), name="innovator"),
-    path("account/refresh", TokenRefreshView.as_view(), name='token_refresh'),
+    path(r"accounts/refresh/", TokenRefreshView.as_view(), name='token-refresh'),
     path('', include(router.urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

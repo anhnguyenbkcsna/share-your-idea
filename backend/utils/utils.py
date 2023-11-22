@@ -32,3 +32,9 @@ def validate_google_id_token(id_token):
         return False, "Invalid audience"
 
     return True, response.json()
+
+def get_id_from_request(request):
+    try:
+        return request._auth["user_id"]
+    except:
+        return None 

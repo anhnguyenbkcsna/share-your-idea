@@ -44,10 +44,10 @@ INSTALLED_APPS = [
     'adrf',
     "rest_framework",
     "storages",
+    # custom apps
     "file_upload",
-    "user",
     "idea",
-    "innovator",
+    # "innovator",
     'company',
     'account'
 ]
@@ -164,7 +164,7 @@ REST_FRAMEWORK = {
         "rest_framework.parsers.MultiPartParser"
     ),
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.AllowAny',
     )
 }
 
@@ -179,3 +179,4 @@ SIMPLE_JWT = {
 
 AUTH_USER_MODEL = "account.Account"
 AUTH_PROFILE_MODULE = "account.Account"
+CORS_ALLOW_ALL_ORIGINS=True

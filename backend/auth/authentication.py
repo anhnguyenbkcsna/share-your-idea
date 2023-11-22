@@ -3,11 +3,11 @@ from bson.objectid import ObjectId
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework import authentication
 from account.models import Account
+from db.connection import db_connection
 
 
 class CustomAuthentication(authentication.BaseAuthentication):
-    db = connect_db()
-    collection = db.get_collection("innovator_profile")
+    collection = db_connection.get_collection("profile")
 
     def authenticate(self, request, username=None, password=None):
         jwt_authenticator = JWTAuthentication()
@@ -24,6 +24,7 @@ class CustomAuthentication(authentication.BaseAuthentication):
         return self.get_user(validated_token), validated_token
 
     def get_user(self, validated_token):
-        res = self.collection.find_one({"_id": ObjectId(validated_token["user_id"])})
+        user_id = validated_token["user_id"]
+        res = self.collection.find_one({"_id": ObjectId(user_id)})
         user = Account(res["_id"], res["name"], res["email"], res["role"])
         return user

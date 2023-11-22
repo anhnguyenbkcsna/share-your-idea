@@ -8,7 +8,7 @@ class Idea(models.Model):
         
     # Idea Overview
     name = models.TextField()
-    # domain = models.JSONField(default=None)
+    domain = models.JSONField(default=list)
     slogan = models.TextField(default="")
     problem = models.TextField(default="")
     solution = models.TextField(default="")
@@ -17,14 +17,14 @@ class Idea(models.Model):
     
     # Customer segments
     gender = models.TextField(default="")
-    # ageRange = models.JSONField(default=None)
-    # professional = models.JSONField(default=None)
-    # geographical = models.JSONField(default=None)
+    ageRange = models.JSONField(default=list)
+    professional = models.JSONField(default=list)
+    geographical = models.JSONField(default=list)
     behavior = models.TextField(default="")
     
     # Value propositions
     apps = models.TextField(default="")
-    # outstand = models.JSONField(default=None)
+    outstand = models.JSONField(default=list)
     currentDev = models.TextField(default="")
     
     # Done

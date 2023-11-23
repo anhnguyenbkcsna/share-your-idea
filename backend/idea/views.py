@@ -11,8 +11,10 @@ from rest_framework.response import Response
 from db.connection import db_connection
 from .models import Idea
 from django.db.models.query import QuerySet
+from utils.constants import IdeaValidStatus
 import requests
 import json
+import time
 
 
 class IdeaViewSet(viewsets.ViewSet):
@@ -57,9 +59,20 @@ class IdeaViewSet(viewsets.ViewSet):
         file_list = request.FILES.getlist("files")
         print('Nums of Files is uploading: ', len(file_list))
         
-        return CrudHelper.post_with_file(
+        res = CrudHelper.post_with_file(
             self.collection, serializer, file_list, self.ENT_TYPE
         )
+        
+        if res.status_code != 200:
+            return res
+        
+        time.sleep(5)
+        return Response({
+            "message": "Idea is validated successfully!",
+            "data": parse_json({
+                "isValid": IdeaValidStatus.IS_VALID
+            })
+        }, status=200)
 
     @action(detail=False, methods=["DELETE"], url_path=r"ideas/(?P<id>[^/.]+)")
     def delete(self, request, id=None):

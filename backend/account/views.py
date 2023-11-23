@@ -74,6 +74,7 @@ class AccountViewSet(viewsets.ViewSet):
             {
                 "refresh": str(token),
                 "access": str(token.access_token),
+                "data": res
             },
             status=200,
         )
@@ -116,6 +117,7 @@ class AccountViewSet(viewsets.ViewSet):
             {
                 "refresh": str(token),
                 "access": str(token.access_token),
+                "data": inserted_data
             },
             status=200,
         )

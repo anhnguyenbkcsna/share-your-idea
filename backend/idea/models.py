@@ -1,10 +1,11 @@
 from django.db import models
+from utils.constants import IdeaValidStatus
 
 class Idea(models.Model):
     class IsSpamEnum(models.TextChoices):
-        IS_VALID = 'isValid'
-        IS_SPAM = 'isSpam'
-        WARNING = 'warning'
+        IS_VALID = IdeaValidStatus.IS_VALID
+        IS_SPAM = IdeaValidStatus.IS_SPAM
+        WARNING = IdeaValidStatus.WARNING
         
     # Idea Overview
     name = models.TextField()

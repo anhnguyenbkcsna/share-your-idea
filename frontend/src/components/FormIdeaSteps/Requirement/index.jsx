@@ -43,7 +43,7 @@ const RequirementForm = (props) => {
           rows={3}
           showCount maxLength={100}
           allowClear
-          label="Những tiêu chí đánh giá một đề tài là thành công..."
+          placeholder="Những tiêu chí đánh giá một đề tài là thành công..."
           onChange={(e) => {setProblem(e.target.value)}}
         />
       </Form.Item>
@@ -58,7 +58,7 @@ const RequirementForm = (props) => {
           rows={3}
           showCount maxLength={100}
           allowClear
-          label="Giải pháp dựa trên AI, hệ thống Web/App,..."
+          placeholder="Giải pháp dựa trên AI, hệ thống Web/App,..."
           // onChange={()}
         />
       </Form.Item>
@@ -74,7 +74,7 @@ const RequirementForm = (props) => {
           rows={3}
           showCount maxLength={100}
           allowClear
-          label="Giải pháp không sử dụng cho ngôn ngữ Tiếng Anh..."
+          placeholder="Giải pháp không sử dụng cho ngôn ngữ Tiếng Anh..."
           // onChange={()}
         />
       </Form.Item>

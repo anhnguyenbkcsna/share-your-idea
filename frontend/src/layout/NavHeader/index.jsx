@@ -8,8 +8,79 @@ import { NavLink, Outlet } from 'react-router-dom'
 import { useAuth } from '../../hooks/auth'
 import { useState } from 'react'
 
+const guestMenu = [
+  {
+    key: '1',
+    label: (
+      <NavLink to={'/'}>
+        Về chúng tôi
+      </NavLink>
+    )
+  },
+  {
+    key: '2',
+    label: (
+      <NavLink to={'/faq'}>
+        Câu hỏi thường gặp
+      </NavLink>
+    )
+  }
+]
+const innovatorMenu = [
+  {
+    key: '1',
+    label: (
+      <NavLink to={'/'}>
+        Về chúng tôi
+      </NavLink>
+    ),
+  },
+  {
+    key: '2',
+    label: (
+      <NavLink to={'/innovator'}>
+        Danh sách ý tưởng
+      </NavLink>
+    )
+  },
+  {
+    key: '3',
+    label: (
+      <NavLink to={'/faq'}>
+        Câu hỏi thường gặp
+      </NavLink>
+    )
+  }
+]
+const companyMenu = [
+  {
+    key: '1',
+    label: (
+      <NavLink to={'/'}>
+        Về chúng tôi
+      </NavLink>
+    ),
+  },
+  {
+    key: '2',
+    label: (
+      <NavLink to={'/match-idea'}>
+        Ý tưởng đề xuất
+      </NavLink>
+    )
+  },
+  {
+    key: '3',
+    label: (
+      <NavLink to={'/faq'}>
+        Câu hỏi thường gặp
+      </NavLink>
+    )
+  }
+]
 
 const NavHeader = (props) => {
+  const { role } = props
   const {user, logout} = useAuth()
   const {
     token: { colorBgContainer },
@@ -40,20 +111,7 @@ const NavHeader = (props) => {
         mode="horizontal"
         disabledOverflow={true}
         defaultSelectedKeys={['2']}
-        items={[
-          {
-            key: '1',
-            label: 'Về chúng tôi',
-          },
-          {
-            key: '2',
-            label: 'Nhà sáng tạo',
-          },
-          {
-            key: '3',
-            label: 'Câu hỏi thường gặp',
-          },
-        ]}
+        items={role === 'innovator' ? innovatorMenu : role === 'company' ? companyMenu : guestMenu}
         className={'w-90'}
       />
       {!user ?

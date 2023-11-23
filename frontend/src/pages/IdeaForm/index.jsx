@@ -7,9 +7,14 @@ import { localStorageStepFormat, userFormStepItem } from '../../utils/form.const
 import FormProgress from '../../components/FormProgress/progress'
 import CusCard from '../../components/CusCard'
 import { createNewIdea } from '../../api/idea'
-import { Navigate } from 'react-router-dom'
+import { useNavigate, Navigate } from 'react-router-dom'
+import { Alert } from 'antd'
 
 const CreateIdeaFormPage = () => {
+  const [alert, setAlert] = useState(false)
+  const navigate = useNavigate()
+  const delay = ms => new Promise(res => setTimeout(res, ms))
+
   const [currentStep, setCurrentStep] = useState(0)
   const [eachStepData, setEachStepData] = useState([])
   const [fileList, setFileList] = useState([])
@@ -61,12 +66,24 @@ const CreateIdeaFormPage = () => {
 
   const onFormFinish = (formObj) => {
     createNewIdea(formObj).then(res => {
-      <Navigate to='/home' />
+      setAlert(true)
+      waitSecond()
     })
+  }
+  const waitSecond = async () => {
+    await delay(5000)
+    console.log("Waited 5s")
+  
+    await delay(5000)
+    navigate("/innovator")
   }
 
   return (
     <CusCard>
+      {alert ? <Alert
+        message="Warning Text"
+        type="warning"
+      /> : null}
       <FormProgress
         onFormFinish={onFormFinish}
         slogans={['We are helping you', 'Your idea is awesome']}

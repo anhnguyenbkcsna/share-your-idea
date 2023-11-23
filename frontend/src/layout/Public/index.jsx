@@ -14,7 +14,7 @@ const PublicLayout = (props) => {
 
   return (
     <Layout>
-      <NavHeader />
+      <NavHeader role='innovator'/>
       <Content
         style={{
           minHeight: '100vh',

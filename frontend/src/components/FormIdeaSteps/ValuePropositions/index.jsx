@@ -44,12 +44,7 @@ const FormValuePropositions = (props) => {
         rules={[{ required: true, message: 'Hãy nhập mô tả còn thiếu' }]}
         label="Điểm nổi bật của ý tưởng?"
       >
-        <Select
-          mode="tags"
-          placeholder="You could enter your own labels in short description"
-          onChange={handleChange}
-          options={standoutReasons}
-        />
+        <TextArea rows={3} />
       </Form.Item>
 
       <Form.Item

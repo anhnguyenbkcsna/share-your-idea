@@ -44,7 +44,7 @@ const InnovatorIdea = () => {
   useEffect(() => {
     const fetchIdea = async () => {
       let response = await axios
-        .get(`${deployedAPI}/idea`)
+        .get(`${deployedAPI}/ideas/`)
         .then((res) => res.data)
       setFetchIdeas(response.data)
     }

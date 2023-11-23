@@ -63,7 +63,7 @@ class AccountViewSet(viewsets.ViewSet):
             _id = str(res["_id"])
         else:
             # Insert if not found
-            return Response({"message": "User not found"}, status=404)
+            return Response({"message": "User not found"}, status=400)
             # result = self.collection.insert_one(
             #     {"name": response["name"], "email": response["email"], "role": role}
             # )
@@ -103,9 +103,11 @@ class AccountViewSet(viewsets.ViewSet):
         elif role == Role.COMPANY:
             serializer = CompanySerializer(data=request.data)
         
+        inserted_data = serializer.validated_data
+        inserted_data["email"] = response["email"]
+        
         result = self.collection.insert_one(
-            serializer.validated_data
-            # {"name": response["name"], "email": response["email"], "role": role}
+            inserted_data
         )
         _id = result.inserted_id
 

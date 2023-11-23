@@ -21,9 +21,11 @@ class AccountManager(models.Manager):
 
 class Account(AbstractUser):
     _id = models.CharField(max_length=255, primary_key=True)
-    name = models.CharField(max_length=255)
+    name = models.TextField(default=None)
     email = models.CharField(max_length=255)
     role = models.CharField(max_length=255)
+    avatar_url = models.TextField(default=None)
+    
     is_authenticated = models.BooleanField(default=True)
     objects = AccountManager()
 
@@ -34,23 +36,22 @@ class Account(AbstractUser):
 
 
 class Innovator(Account):
+    fields = models.JSONField(default=list)
     number = models.CharField(max_length=255, default=None)
-    address = models.CharField(max_length=255, default=None)
-    avatar_url = models.TextField(default=None)
+    description = models.TextField(default=None)
+    address = models.TextField(default=None)
 
     def __str__(self):
         return """Innovator: {self.username}"""
 
 
 class Company(Account):
-    logo_url = models.TextField(default=None)
-    slogan = models.TextField(default=None)
-    description = models.TextField(default=None)
     website = models.TextField(default=None)
-    number = models.TextField(default=None)
     address = models.TextField(default=None)
+    description = models.TextField(default=None)
+    
+    
     requirement = models.JSONField(default=dict)
-    specialties = models.JSONField(default=list)
     idea_ids = models.JSONField(default=list)
 
     def __str__(self):

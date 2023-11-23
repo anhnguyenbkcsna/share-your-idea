@@ -109,11 +109,7 @@ export const userFormStepItem = [
     // icon: <SmileOutlined />,
   },
 ]
-export const companyRequirementStep = [
-  {
-    title: 'Yêu cầu từ doanh nghiệp',
-  }
-]
+
 export const localStorageStepFormat = (stepCount) => {
   return `step${stepCount}.data`
 }
@@ -125,7 +121,7 @@ const professionalList = [
   'Người tiêu dùng',
   'Người khuyết tật',
   'Người già',
-  'Mọi người'
+  'Mọi người',
 ]
 const standoutReasonList = [
   'Nhanh',
@@ -138,7 +134,7 @@ const standoutReasonList = [
   'Khả thi',
   'Bền vững',
   'Tối ưu tốt',
-  'Ứng dụng cao'
+  'Ứng dụng cao',
 ]
 
 export const customerJobs = labelValueGenerate(professionalList)
@@ -149,9 +145,9 @@ export const gooleTokenInfo =
 
 export const industries = {
   'Nông nghiệp và Thực phẩm': [
-    'Khoa học Nông nghiệp', 
+    'Khoa học Nông nghiệp',
     'Kinh doanh Nông nghiệp',
-    'Khoa học Thực phẩm', 
+    'Khoa học Thực phẩm',
     'Khoa học Chăn nuôi',
   ],
   'Công nghệ và Công nghiệp': [
@@ -208,18 +204,14 @@ export const industries = {
     'Quản lý khách sạn',
     'Du lịch và Dịch vụ du lịch',
     'Nghệ thuật ẩm thực',
-    'Tổ chức sự kiện'
+    'Tổ chức sự kiện',
   ],
-  'Sản xuất': [
-    'Sản xuất',
-    'Quản lý sản xuất',
-    'Quản lý chất thải',
-  ],
+  'Sản xuất': ['Sản xuất', 'Quản lý sản xuất', 'Quản lý chất thải'],
   'Tâm lý': [
     'Tâm lý học',
     'Tâm lý học trực tuyến',
     'Tâm lý học và Tâm lý học học đường',
-  ]
+  ],
 }
 export const companyIndustries = [
   'Phần mềm (Software)',
@@ -308,4 +300,10 @@ export const currentDevStage = [
   '[Alpha] Ý tưởng đang được thử nghiệm trong môi trường thực tế nhưng chưa hoàn thiện',
   '[Beta] Ý tưởng đã hoàn thiện và cần một số chỉnh sửa nhỏ',
   '[Hoàn thiện] Ý tưởng đã có thể đưa ra thị trường và hoạt động tốt',
+]
+
+export const companyRequirementStep = [
+  {
+    title: 'Yêu cầu ý tưởng',
+  },
 ]

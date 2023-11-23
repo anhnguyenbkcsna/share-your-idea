@@ -31,3 +31,6 @@ yarn-error.log*
 
 # venv
 *venv
+
+# word2vec - 720MB
+*word2vec

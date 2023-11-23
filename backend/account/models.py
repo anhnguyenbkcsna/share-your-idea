@@ -37,7 +37,6 @@ class Innovator(Account):
     number = models.CharField(max_length=255, default=None)
     address = models.CharField(max_length=255, default=None)
     avatar_url = models.TextField(default=None)
-    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return """Innovator: {self.username}"""

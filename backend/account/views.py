@@ -46,6 +46,42 @@ class AccountViewSet(viewsets.ViewSet):
     @action(detail=False, methods=["POST"], permission_classes=[AllowAny], url_path=r"accounts/auth")
     def auth(self, request):
         check, response = validate_google_id_token(request.data.get("id_token"))
+        # role = request.data.get("role")
+
+        # Validate google ID token
+        if not check:
+            return Response({"message": response}, status=400)
+
+        # Validate role
+        # if not (role in Role.values()):
+        #     return Response({"message": "Invalid role"}, status=400)
+
+        # Find in database
+        res = self.collection.find_one({"email": response["email"]})
+
+        if res:
+            _id = str(res["_id"])
+        else:
+            # Insert if not found
+            return Response({"message": "User not found"}, status=404)
+            # result = self.collection.insert_one(
+            #     {"name": response["name"], "email": response["email"], "role": role}
+            # )
+            # _id = result.inserted_id
+
+        token = RefreshToken.for_user(Account(_id=_id))
+        return Response(
+            {
+                "refresh": str(token),
+                "access": str(token.access_token),
+            },
+            status=200,
+        )
+
+
+    @action(detail=False, methods=["POST"], permission_classes=[AllowAny], url_path=r"accounts/signup")
+    def sign_up(self, request):
+        check, response = validate_google_id_token(request.data.get("id_token"))
         role = request.data.get("role")
 
         # Validate google ID token
@@ -56,17 +92,22 @@ class AccountViewSet(viewsets.ViewSet):
         if not (role in Role.values()):
             return Response({"message": "Invalid role"}, status=400)
 
-        # Find in database
-        res = self.collection.find_one({"email": response["email"], "role": role})
 
-        if res:
-            _id = str(res["_id"])
-        else:
-            # Insert if not found
-            result = self.collection.insert_one(
-                {"name": response["name"], "email": response["email"], "role": role}
-            )
-            _id = result.inserted_id
+        # Find in database
+        if self.collection.find_one({"email": response["email"]}):
+            return Response({"message": "User already exists"}, status=400)
+        
+        # Insert new user
+        if role == Role.INNOVATOR:
+            serializer = InnovatorSerializer(data=request.data)
+        elif role == Role.COMPANY:
+            serializer = CompanySerializer(data=request.data)
+        
+        result = self.collection.insert_one(
+            serializer.validated_data
+            # {"name": response["name"], "email": response["email"], "role": role}
+        )
+        _id = result.inserted_id
 
         token = RefreshToken.for_user(Account(_id=_id))
         return Response(

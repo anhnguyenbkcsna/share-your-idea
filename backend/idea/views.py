@@ -61,7 +61,6 @@ class IdeaViewSet(viewsets.ViewSet):
             self.collection, serializer, file_list, self.ENT_TYPE
         )
 
-
-    # def delete(self, request):
-    #     id = request.query_params.get("id")
-    #     return CrudHelper.delete(id, self.collection, self.ENT_TYPE)
+    @action(detail=False, methods=["DELETE"], url_path=r"ideas/(?P<id>[^/.]+)")
+    def delete(self, request, id=None):
+        return CrudHelper.delete(id, self.collection, self.ENT_TYPE)

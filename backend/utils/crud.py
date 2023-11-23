@@ -28,7 +28,7 @@ class CrudHelper:
             idea = CrudHelper.mapIdField(idea)
             return Response({"message": f"Got an {ent_type}", "data": idea}, status=200)
         else:
-            return Response({"message": f"Cannot find {ent_type}"}, status=400)
+            return Response({"message": f"Cannot find {ent_type}"}, status=404)
 
 
     @staticmethod
@@ -87,7 +87,7 @@ class CrudHelper:
             )
             
             if not document_after_updated:
-                return Response({"message": f"Cannot find {ent_type}"}, status=400)
+                return Response({"message": f"Cannot find {ent_type}"}, status=404)
 
             if document_after_updated:
                 return Response(
@@ -154,4 +154,4 @@ class CrudHelper:
                 status=200,
             )
         else:
-            return Response({"message": f"""Cannot find {ent_type}"""}, status=400)
+            return Response({"message": f"""Cannot find {ent_type}"""}, status=404)

@@ -109,7 +109,11 @@ export const userFormStepItem = [
     // icon: <SmileOutlined />,
   },
 ]
-
+export const companyRequirementStep = [
+  {
+    title: 'Yêu cầu từ doanh nghiệp',
+  }
+]
 export const localStorageStepFormat = (stepCount) => {
   return `step${stepCount}.data`
 }

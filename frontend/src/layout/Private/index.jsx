@@ -34,7 +34,7 @@ const PrivateLayout = (props) => {
 
   return (
     <Layout style={{background: colorBgContainer}} >
-      <NavHeader />
+      <NavHeader role='innovator' />
       <Content>
         <Outlet />
       </Content>

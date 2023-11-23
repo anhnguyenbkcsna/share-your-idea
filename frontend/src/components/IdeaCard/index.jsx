@@ -30,7 +30,7 @@ const IdeaCard = (props) => {
   }, [])
 
   return (
-    <NavLink to = {`${idea.id}`} >
+    <NavLink to = {`/idea/${idea.id}`} >
       <Card className={styles.card}
         cover={
           <img

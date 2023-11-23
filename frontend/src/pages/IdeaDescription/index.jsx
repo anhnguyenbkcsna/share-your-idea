@@ -29,7 +29,7 @@ const IdeaDescriptionPage = () => {
 
   useEffect(() => {
     const fetchIdea = async () => {
-      let response = await axios.get(`${deployedAPI}/idea`).then(res => res.data)
+      let response = await axios.get(`${deployedAPI}/ideas/`).then(res => res.data)
       setFetchIdeas(response.data)
     }
     fetchIdea()
@@ -83,7 +83,7 @@ const IdeaDescriptionPage = () => {
 
         <CusCard>
           <h3 className={styles.slogan}>
-            {rmvQuote(idea.slogan)} x<BulbOutlined />
+            {rmvQuote(idea.slogan)} <BulbOutlined />
           </h3>
           <Row gutter={[8,8]}>
             <Col span={8}>

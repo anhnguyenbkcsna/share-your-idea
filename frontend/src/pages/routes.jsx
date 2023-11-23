@@ -36,6 +36,8 @@ export const getRouter = () => {
         </Route>
         <Route path="match-idea" Component={PrivateLayout}>
           <Route index Component={MatchIdea} />
+        </Route>
+        <Route path="idea" Component={PrivateLayout}>
           <Route path=':ideaId' Component={IdeaDescriptionPage} />
         </Route>
       </Route>

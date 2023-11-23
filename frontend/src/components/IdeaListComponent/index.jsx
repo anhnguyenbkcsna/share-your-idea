@@ -1,6 +1,7 @@
 import React from 'react'
 import { LikeOutlined, MessageOutlined, StarOutlined } from '@ant-design/icons'
 import { Avatar, List, Space } from 'antd'
+import { NavLink } from 'react-router-dom'
 import styles from './styles.module.scss'
 
 const IconText = ({ icon, text }) => (
@@ -61,7 +62,11 @@ const IdeaListComponent = (props) => {
         >
           <List.Item.Meta
             avatar={<Avatar src={item.avatar} />}
-            title={<a href={item.href}>{item.name}</a>}
+            title={
+              <NavLink to = {`/idea/${item.id}`} >
+                {item.name}
+              </NavLink>
+            }
             description={item.slogan}
           />
           <div className={styles.description}>

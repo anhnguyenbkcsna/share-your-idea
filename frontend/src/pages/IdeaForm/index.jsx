@@ -171,7 +171,7 @@ const CreateIdeaFormPage = () => {
       <FormProgress
         onFormFinish={onFormFinish}
         slogans={['We are helping you', 'Your idea is awesome']}
-        formSource={[FormDone]}
+        formSource={[FormOverview, FormCustomerSegment, FormValuePropositions, FormDone]}
         dataSteps={userFormStepItem}
       />
     </CusCard>

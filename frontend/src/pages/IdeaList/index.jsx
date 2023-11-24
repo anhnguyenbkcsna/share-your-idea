@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { Button, Space, Dropdown, Typography, Input } from 'antd'
+import { Button, Space, Dropdown, Typography, Input, FloatButton } from 'antd'
 import styles from './styles.module.scss'
 import { deployedAPI } from '../../utils/form.constants'
 import IdeaListComponent from '../../components/IdeaListComponent'
-import { DownOutlined } from '@ant-design/icons'
+import { useNavigate } from 'react-router-dom'
 
 const sortTypes = [
   {
@@ -22,6 +22,7 @@ const sortTypes = [
 ]
 
 const InnovatorIdea = () => {
+  const navigate = useNavigate()
   const [fetchIdeas, setFetchIdeas] = useState([])
   const [sortIndex, setSortIndex] = useState(0)
 
@@ -78,6 +79,9 @@ const InnovatorIdea = () => {
         />
         <Button onClick={handleSort}>
           {sortTypes[sortIndex].name}
+        </Button>
+        <Button type='primary' onClick={() => navigate('/innovator/idea')}>
+          Tạo ý tưởng
         </Button>
       </div>
       <IdeaListComponent fetchIdeas={fetchIdeas} />

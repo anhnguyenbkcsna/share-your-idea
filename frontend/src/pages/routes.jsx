@@ -13,6 +13,7 @@ import ErrorBoundary from './Error'
 import InnovatorIdea from './IdeaList'
 import IdeaDescriptionPage from './IdeaDescription'
 import CompanyRequirementFormPage from './CompanyRequirement'
+import Faq from './FAQ'
 
 export const getRouter = () => {
   const browserRouter = createBrowserRouter(
@@ -39,6 +40,9 @@ export const getRouter = () => {
         </Route>
         <Route path="idea" Component={PrivateLayout}>
           <Route path=':ideaId' Component={IdeaDescriptionPage} />
+        </Route>
+        <Route path="faq" Component={PrivateLayout} >
+          <Route index Component={Faq} />
         </Route>
       </Route>
     ))

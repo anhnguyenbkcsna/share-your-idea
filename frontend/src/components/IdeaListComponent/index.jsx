@@ -11,6 +11,10 @@ const IconText = ({ icon, text }) => (
   </Space>
 )
 
+const rmvQuote = (str) => {
+  return str && str.split('\"').join('')
+}
+
 const IdeaListComponent = (props) => {
   const { fetchIdeas } = props
 
@@ -26,11 +30,7 @@ const IdeaListComponent = (props) => {
         pageSize: 3,
       }}
       dataSource={fetchIdeas}
-      // footer={
-      //   <div>
-      //     <b>ant design</b> footer part
-      //   </div>
-      // }
+      
       renderItem={(item) => (
         <List.Item
           className={styles.item}
@@ -64,13 +64,13 @@ const IdeaListComponent = (props) => {
             avatar={<Avatar src={item.avatar} />}
             title={
               <NavLink to = {`/idea/${item.id}`} >
-                {item.name}
+                {rmvQuote(item.name)}
               </NavLink>
             }
-            description={item.slogan}
+            description={rmvQuote(item.slogan)}
           />
           <div className={styles.description}>
-            {item.problem}
+            {rmvQuote(item.problem)}
           </div>
         </List.Item>
       )}

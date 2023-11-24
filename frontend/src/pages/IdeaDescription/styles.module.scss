@@ -14,19 +14,37 @@ $bg-height: 300px;
 
 .bg {
   background: linear-gradient(0.4turn, $primary-color-light, $primary-org);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // position: relative;
+  // left: 0;
+  // width: 100%;
+  // height: $bg-height;
+  // display: grid;
+  // grid-template-columns: 1.9fr 1.3fr;
+  // clip-path: polygon(0 0, 100% 0, 100% 80%, 0 90%);
+}
+.ideaname {
+  width: 80%;
+  max-width: 1000px;
   position: relative;
   left: 0;
-  width: 100%;
   height: $bg-height;
   display: grid;
-  grid-template-columns: 1.9fr 1.3fr;
-  // clip-path: polygon(0 0, 100% 0, 100% 80%, 0 90%);
+  grid-template-columns: 2fr 1fr;  
 }
 
 .description {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: $primary-bg-color;
   margin: auto;
+}
+
+.tags {
+  border-radius: 10px;
+  font-size: 15px;
+  padding: 5px 10px;
 }
 
 .emp {
@@ -40,6 +58,10 @@ $bg-height: 300px;
 
 .underline {
   height: 10px;
+  background-color: #a8e6d8;
+}
+
+.descriptionItem {
   background-color: #a8e6d8;
 }
 
@@ -60,19 +82,17 @@ $bg-height: 300px;
   @include semi-large-slogan;
   text-align: right;
   font-weight: 700;
-  color: $primary-color-light;
+  color: $primary-org;
 }
 
 .title {
   display: inline-block;
-  color: white;
+  color: $primary-org;
   margin: 10px 0;
-  @include round-border;
-  background-color: $primary-org;
-  padding: 0 5px;
 }
 .subtitle{
-  color: $primary-color-light;
+  // color: $primary-color-light;
+  font-weight: bold;
 }
 .content {
   line-height: 1.5;

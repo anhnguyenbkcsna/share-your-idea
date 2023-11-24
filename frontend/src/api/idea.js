@@ -15,24 +15,26 @@ export const createNewIdea = async (ideaObj) => {
     formData.append(key, JSON.stringify(flattenIdeaObj[key]))
   }
 
-  // append files
-  for (let file of flattenIdeaObj.files)
-  {
-    formData.append('files', file.originFileObj, file.name)
+  if (flattenIdeaObj.files) {
+    // append files
+    for (let file of flattenIdeaObj.files)
+    {
+      formData.append('files', file.originFileObj, file.name)
+    }
   }
 
-  return await axios
-    .post(`${deployedAPI}/ideas`, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      }
-    })
-    .then((res) => {
-      console.log('res', res)
-      return res
-    })
-    .catch((err) => {
-      console.log('err', err)
-      return err
-    })
+  // return await axios
+  //   .post(`${deployedAPI}/ideas`, formData, {
+  //     headers: {
+  //       'Content-Type': 'multipart/form-data',
+  //     }
+  //   })
+  //   .then((res) => {
+  //     console.log('res', res)
+  //     return res
+  //   })
+  //   .catch((err) => {
+  //     console.log('err', err)
+  //     return err
+  //   })
 }

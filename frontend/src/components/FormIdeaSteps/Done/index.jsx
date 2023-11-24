@@ -34,7 +34,7 @@ const FormDone = (props) => {
               {...props}
               // onChange={(e) => uploadFiles(e)}
               customRequest={dummyRequest}
-              style={{ maxWidth: '70%' }}
+              style={{ maxWidth: '90%' }}
             >
               <p className="ant-upload-drag-icon">
                 <InboxOutlined />
@@ -57,7 +57,7 @@ const FormDone = (props) => {
               rows={3}
               showCount maxLength={100}
               allowClear
-              label="Về tài chính, kỹ thuật, marketing, etc."
+              placeholder="Về tài chính, kỹ thuật, marketing, etc."
             />
           </Form.Item>
         </Col>

@@ -1,6 +1,6 @@
 class Role(object):
 	INNOVATOR = "innovator"
-	COMPANY = "company"
+	COMPANY = 'company'
 	ADMIN = "admin"
 
 	@staticmethod

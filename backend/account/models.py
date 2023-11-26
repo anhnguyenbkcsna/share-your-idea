@@ -35,9 +35,14 @@ class Account(AbstractUser):
         super().__init__(*args, **kwargs)
 
 
-class Innovator(Account):
+class Innovator(models.Model):
+    name = models.TextField(default=None)
+    email = models.CharField(max_length=255)
+    role = models.CharField(max_length=255)
+    avatar_url = models.TextField(default=None)
+    
     fields = models.JSONField(default=list)
-    number = models.CharField(max_length=255, default=None)
+    phone = models.CharField(max_length=255, default=None)
     description = models.TextField(default=None)
     address = models.TextField(default=None)
 
@@ -45,7 +50,12 @@ class Innovator(Account):
         return """Innovator: {self.username}"""
 
 
-class Company(Account):
+class Company(models.Model):
+    name = models.TextField(default=None)
+    email = models.CharField(max_length=255)
+    role = models.CharField(max_length=255)
+    avatar_url = models.TextField(default=None)
+    
     website = models.TextField(default=None)
     address = models.TextField(default=None)
     description = models.TextField(default=None)

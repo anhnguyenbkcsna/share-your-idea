@@ -25,7 +25,7 @@ class Idea(models.Model):
     
     # Value propositions
     apps = models.TextField(default="")
-    outstand = models.JSONField(default=list)
+    outstand = models.TextField(default="")
     currentDev = models.TextField(default="")
     
     # Done
@@ -43,6 +43,7 @@ class Idea(models.Model):
     views = models.IntegerField(default=0)
     
     # Other
+    date = models.DateTimeField(auto_now_add=True)
     innovator_id = models.CharField(max_length=255, default=None)
     upvote = models.IntegerField(default=0)
     downvote = models.IntegerField(default=0)

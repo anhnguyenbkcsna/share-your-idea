@@ -16,7 +16,7 @@ from auth.authentication import CustomAuthentication
 
 class AccountViewSet(viewsets.ViewSet):
     collection = db_connection.get_collection("profile")
-    permission_classes = (IsAdminUser,)
+    permission_classes = (AllowAny,)
     authentication_classes = [CustomAuthentication]
     queryset = Account.objects.all()
     ENT_TYPE = "account"
@@ -25,7 +25,7 @@ class AccountViewSet(viewsets.ViewSet):
     def users(self, request):
         return CrudHelper.get_all(self.collection, self.ENT_TYPE)
 
-    @action(detail=False, methods=["GET", "PATCH"], url_path=r"accounts/(?P<id>[^/.]+)")
+    @action(detail=False, methods=["GET", "PATCH"], url_path=r"accounts/profile/(?P<id>[^/.]+)")
     def user(self, request, id=None):
         if not id:
             return Response({"message": f"Cannot find {self.ENT_TYPE}"}, status=400)
@@ -38,13 +38,23 @@ class AccountViewSet(viewsets.ViewSet):
             if role == Role.COMPANY:
                 serializer = CompanySerializer(data=request.data, partial=True)
             return CrudHelper.patch(id, self.collection, serializer, self.ENT_TYPE)
-    
-    @action(detail=False, methods=["GET"], permission_classes=[IsAuthenticated], url_path=r"accounts/profile")
+
+    @action(
+        detail=False,
+        methods=["GET"],
+        permission_classes=[IsAuthenticated],
+        url_path=r"accounts/profile",
+    )
     def profile(self, request):
         id = request._auth["user_id"]
         return CrudHelper.get_by_id(id, self.collection, self.ENT_TYPE)
 
-    @action(detail=False, methods=["POST"], permission_classes=[AllowAny], url_path=r"accounts/auth")
+    @action(
+        detail=False,
+        methods=["POST"],
+        permission_classes=[AllowAny],
+        url_path=r"accounts/auth",
+    )
     def auth(self, request):
         check, response = validate_google_id_token(request.data.get("id_token"))
         # role = request.data.get("role")
@@ -59,11 +69,10 @@ class AccountViewSet(viewsets.ViewSet):
 
         # Find in database
         res = self.collection.find_one({"email": response["email"]})
-        id = str(res["_id"])
-        res.pop("_id")
-        res["id"] = id
-
         if res:
+            id = str(res["_id"])
+            res.pop("_id")
+            res["id"] = id
             _id = str(res["id"])
         else:
             # Insert if not found
@@ -78,44 +87,49 @@ class AccountViewSet(viewsets.ViewSet):
             {
                 "refresh": str(token),
                 "access": str(token.access_token),
-                "data": parse_json(res)
+                "data": parse_json(res),
             },
             status=200,
         )
 
-
-    @action(detail=False, methods=["POST"], permission_classes=[AllowAny], url_path=r"accounts/signup")
+    @action(
+        detail=False,
+        methods=["POST"],
+        permission_classes=[AllowAny],
+        url_path=r"accounts/signup",
+    )
     def sign_up(self, request):
-        check, response = validate_google_id_token(request.data.get("id_token"))
+        # check, response = validate_google_id_token(request.data.get("id_token"))
         role = request.data.get("role")
+        email = request.data.get("email")
 
         # Validate google ID token
-        if not check:
-            return Response({"message": response}, status=400)
+        # if not check:
+        #     return Response({"message": response}, status=400)
 
         # Validate role
-        if not (role in Role.values()):
+        if role not in (Role.values()):
             return Response({"message": "Invalid role"}, status=400)
 
-
         # Find in database
-        if self.collection.find_one({"email": response["email"]}):
+        if self.collection.find_one({"email": email}):
             return Response({"message": "User already exists"}, status=400)
-        
+
         # Insert new user
         if role == Role.INNOVATOR:
             serializer = InnovatorSerializer(data=request.data)
         elif role == Role.COMPANY:
             serializer = CompanySerializer(data=request.data)
-        
+
+        if not serializer.is_valid(raise_exception=True):
+            return Response({"message": "Invalid data"}, status=400)
+            
         inserted_data = serializer.validated_data
-        inserted_data["email"] = response["email"]
-        
-        result = self.collection.insert_one(
-            inserted_data
-        )
+        inserted_data["email"] = email
+
+        result = self.collection.insert_one(inserted_data)
         _id = result.inserted_id
-        
+
         id = str(inserted_data["_id"])
         inserted_data.pop("_id")
         inserted_data["id"] = id
@@ -125,7 +139,7 @@ class AccountViewSet(viewsets.ViewSet):
             {
                 "refresh": str(token),
                 "access": str(token.access_token),
-                "data": parse_json(inserted_data)
+                "data": parse_json(inserted_data),
             },
             status=200,
         )

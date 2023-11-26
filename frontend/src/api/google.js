@@ -1,6 +1,8 @@
 import axios from 'axios'
+import { createFormData } from '../utils/utils'
 import { gooleTokenInfo } from '../utils/form.constants'
 import { validateGoogleResponse } from '../utils/validate'
+import { signupEndpoint } from '../utils/api.constants'
 
 export const isUserAuthorized = async (token) => {
   if (!token) {
@@ -21,11 +23,14 @@ export const isUserAuthorized = async (token) => {
 
 export const createProfileApi = (body, successCallback, failCallback) => {
   const { data, files } = body
+  // let newFormData = new FormData()
+  // for (let key in data) {
+  //   newFormData.append(key, JSON.stringify(data[key]))
+  // }
+  let newFormData = createFormData(data)
+  console.log(newFormData)
   axios
-    .post('/user', {
-      data,
-      files,
-    })
+    .post(signupEndpoint, newFormData)
     .then((res) => {
       console.log('??? res', res)
       successCallback()

@@ -1,17 +1,16 @@
 import React from 'react'
 import { InboxOutlined } from '@ant-design/icons'
-import { Form, Button, Input, Slider, Upload, Select, Col, Row, message } from 'antd'
+import { Form, Button, Input, Upload, Select, Col, Row, message } from 'antd'
 import {
   gender,
   localStorageStepFormat,
-  residential,
 } from '../../utils/form.constants'
 import { occupationGroups, userRole } from '../../utils/profile.constants'
 import FormSlogan from '../../components/FormIdeaSteps/Title'
 import { useState } from 'react'
-import Dragger from 'antd/es/upload/Dragger'
 import { createProfileApi } from '../../api/google'
 import CusCard from '../../components/CusCard'
+import { useNavigate } from 'react-router-dom'
 import { userRoles } from '../../utils/global.constants'
 
 const dummyRequest = ({ file, onSuccess }) => {
@@ -53,6 +52,7 @@ const beforeUpload = (file) => {
 
 const CreateProfileForm = (props) => {
   const { form } = props
+  const navigate = useNavigate()
   const [profileRole, setProfileRole] = useState('')
   const [loading, setLoading] = useState(false)
   const [fileList ,setFileList] = useState([])
@@ -86,8 +86,8 @@ const CreateProfileForm = (props) => {
       data: values,
       files: fileList
     },
-    () => message.success('Chỉnh sửa thành công'),
-    () => message.error('Lỗi'))
+    () => navigate('/'),
+    () => console.log('Cant submit profile form'))
   }
 
   // If possible, upload Avatar Photo
@@ -129,7 +129,21 @@ const CreateProfileForm = (props) => {
               </Upload>
             </Form.Item>
             <Form.Item
-              name="userRole"
+              name='name'
+              label='Tên'
+              rules={[{ required: true, message: 'Đây là trường bắt buộc!' }]}
+            >
+              <Input.TextArea rows={1} allowClear maxLength={30}/>
+            </Form.Item>
+            <Form.Item
+              name="email"
+              label="Email"
+              rules={[{ required: true, message: 'Đây là trường bắt buộc!' }]}
+            >
+              <Input.TextArea allowClear />
+            </Form.Item>
+            <Form.Item
+              name="role"
               label="Role"
               rules={[{ required: true, message: 'Đây là trường bắt buộc!' }]}
             >
@@ -137,7 +151,7 @@ const CreateProfileForm = (props) => {
                 placeholder="Bạn là nhà sáng tạo hay nhà tài trợ?"
                 onChange={(value) => {
                   console.log('value', value)
-                  setProfileRole(value.toLowerCase())
+                  setProfileRole(value)
                 }}
                 options={userRole}
               />
@@ -146,7 +160,7 @@ const CreateProfileForm = (props) => {
             {profileRole === userRoles.INNOVATOR ?
               (<>
                 <Form.Item
-                  name="major"
+                  name="fields"
                   label="Chuyên môn hiện tại"
                   rules={[{ required: true, message: 'Đây là trường bắt buộc!' }]}
                 >
@@ -188,20 +202,22 @@ const CreateProfileForm = (props) => {
               </>) :
               <div >
                 <Form.Item
-                  name="email"
-                  label="Email"
-                  rules={[{ required: true, message: 'Đây là trường bắt buộc!' }]}
-                >
-                  <Input.TextArea allowClear />
-                </Form.Item>
-                <Form.Item
                   name="website"
                   label="Company Website"
                   rules={[{ required: true, message: 'Đây là trường bắt buộc!' }]}
                 >
                   <Input.TextArea allowClear />
                 </Form.Item>
-              </div>}
+                <Form.Item
+                  name="address"
+                  label="Địa chỉ công ty"
+                  rules={[{ required: true, message: 'Đây là trường bắt buộc!' }]}
+                >
+                  <Input.TextArea allowClear />
+                </Form.Item>
+              </div>
+            }
+
           </Col>
           <Col span={12} />
         </Row>

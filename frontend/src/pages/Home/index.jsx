@@ -17,7 +17,7 @@ const HomePage = () => {
           <p className={styles.emp}>Entrepreneurs & Investors</p>
           <p style={{fontSize: '17px', fontWeight: '300', fontStyle: 'italic'}}>Our Mission is to make your
             idea come true with the help of our trustworthy partners! </p>
-          <NavLink to={'/innovator'}>
+          <NavLink to={'/innovator/idea'}>
             <Button shape="round" className={styles.btn}>Create Your Idea</Button>
           </NavLink>
         </div>

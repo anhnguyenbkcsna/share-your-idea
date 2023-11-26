@@ -3,11 +3,11 @@ import { labelValueGenerate } from './utils'
 export const userRole = [
   {
     label: 'Innovator',
-    value: 'Innovator',
+    value: 'innovator',
   },
   {
     label: 'Company/Sponsor',
-    value: 'Company',
+    value: 'company',
   },
 ]
 

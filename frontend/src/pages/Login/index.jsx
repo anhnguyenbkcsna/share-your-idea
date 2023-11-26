@@ -1,34 +1,45 @@
-import React from 'react'
-import styles from './styles.module.scss'
-import { GoogleLogin} from '@react-oauth/google'
-import axios from 'axios'
-import loginImg from '../../assets/login.png'
-import { validateGoogleResponse } from '../../utils/validate'
-import { gooleTokenInfo } from '../../utils/form.constants'
-import { Navigate, useNavigate } from 'react-router-dom'
-import { useAuth } from '../../hooks/auth'
-import { localStorageConstant, userRoles } from '../../utils/global.constants'
+import React from "react"
+import styles from "./styles.module.scss"
+import { GoogleLogin } from "@react-oauth/google"
+import axios from "axios"
+import loginImg from "../../assets/login.png"
+import { useNavigate } from "react-router-dom"
+import { useAuth } from "../../hooks/auth"
+import { authEndpoint } from "../../utils/api.constants.js"
+import { localStorageConstant } from "../../utils/global.constants"
 
 const LoginPage = () => {
   const navigate = useNavigate()
-  const {login} = useAuth()
+  const { login } = useAuth()
 
   const validateUserToken = (token) => {
-    axios.get(`${gooleTokenInfo}${token}`
-    ).then((res) => {
-      const validate = validateGoogleResponse(res, token)
-      if (validate === true) {
+    let newFormdata = new FormData()
+
+    newFormdata.append('id_token', token)
+    axios
+      .post(authEndpoint, newFormdata, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => {
+        let data = res.data.data
+        localStorage.setItem(localStorageConstant.ACCESS_TOKEN, res.access)
+        localStorage.setItem(localStorageConstant.NAME, data.name)
+        localStorage.setItem(localStorageConstant.EMAIL, data.email)
+        localStorage.setItem(localStorageConstant.ROLE, data.role)
+        localStorage.setItem(localStorageConstant.ID, data.id)
         login({
-          name: localStorage.getItem(localStorageConstant.NAME),
-          email: localStorage.getItem(localStorageConstant.EMAIL),
-          role: userRoles.INNOVATOR
+          name: data.name,
+          email: data.email,
+          role: data.role,  
         })
-      }
-      navigate(-1, {replace: true})
-      return validate
-    }).catch(err => {
-      return err
-    })
+        navigate('/')
+      })
+      .catch((err) => {
+        console.log(err.message)
+        navigate('/profile')
+      })
   }
 
   return (
@@ -38,12 +49,12 @@ const LoginPage = () => {
           <h1>Đăng nhập</h1>
           <p>Thông tin đăng nhập</p>
           <GoogleLogin
-            onSuccess={credentialResponse => {
+            onSuccess={(credentialResponse) => {
               console.log(credentialResponse)
               validateUserToken(credentialResponse.credential)
             }}
             onError={() => {
-              // console.log('Login Failed')
+              console.log('Login Failed')
               // raise alert
             }}
           />

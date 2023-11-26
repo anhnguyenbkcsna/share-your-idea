@@ -24,7 +24,7 @@ export const createNewIdea = async (ideaObj) => {
   }
 
   return await axios
-    .post(`${deployedAPI}/ideas`, formData, {
+    .post(`${deployedAPI}/ideas/`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       }

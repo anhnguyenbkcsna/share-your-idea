@@ -23,7 +23,7 @@ export const getRouter = () => {
           <Route index Component={HomePage} />
         </Route>
         <Route path="login" Component={LoginPage} />
-        <Route path='profile' Component={PrivateLayout} >
+        <Route path='profile' Component={PublicLayout} >
           <Route index Component={CreateProfileForm} />
         </Route>
         <Route path="innovator" Component={PrivateLayout}>

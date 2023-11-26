@@ -186,9 +186,7 @@ const IdeaDescriptionPage = () => {
                 {idea.outstand && (
                   <h3 className={styles.content}>
                     <span className={styles.subtitle}>Ưu điểm: </span>
-                    {idea.outstand
-                      .map((item, idx) => rmvQuote(item))
-                      .join(", ")}
+                    {rmvQuote(idea.outstand)}
                   </h3>
                 )}
 

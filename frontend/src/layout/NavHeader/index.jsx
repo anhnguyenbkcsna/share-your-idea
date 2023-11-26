@@ -4,7 +4,7 @@ import styles from './styles.module.scss'
 import React from 'react'
 import logosvg from '../../assets/Worldea.svg'
 import Footer from '../Footer'
-import { NavLink, Outlet } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/auth'
 import { useState } from 'react'
 
@@ -80,6 +80,7 @@ const companyMenu = [
 ]
 
 const NavHeader = (props) => {
+  const navigate = useNavigate()
   const { role } = props
   const {user, logout} = useAuth()
   const {
@@ -119,7 +120,9 @@ const NavHeader = (props) => {
           <NavLink to={'login'}>
             <Button type='text'>Đăng nhập</Button>
           </NavLink>
-          <Button type='primary'>Đăng ký</Button>
+          <NavLink to={'profile'}>
+            <Button type='primary'>Đăng ký</Button>
+          </NavLink>
         </div> :
         <div>
           <span>{`Xin chào ${user.name}!`}</span>

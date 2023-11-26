@@ -23,7 +23,7 @@ const CompanyRequirementFormPage = () => {
 
   const onFormFinish = (formObj) => {
     createRequirement(formObj).then(res => {
-      <Navigate to='/home' />
+      <Navigate to='/' />
     })
   }
 

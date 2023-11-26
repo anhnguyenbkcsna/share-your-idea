@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
         setUser({
           name: localStorage.getItem(localStorageConstant.NAME),
           email: localStorage.getItem(localStorageConstant.EMAIL),
-          role: userRoles.INNOVATOR
+          role: localStorage.getItem(localStorageConstant.ROLE)
         })
         console.log('AuthProvider', authorized)
       } else {

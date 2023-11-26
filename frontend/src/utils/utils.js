@@ -6,3 +6,15 @@ export const labelValueGenerate = (strList) => {
     }
   })
 }
+
+export const createFormData = (data) => {
+  let dataForm = new FormData()
+  for (let key in data) {
+    if(typeof data[key] === 'object' && data[key] !== 'null') {
+      dataForm.append(key, JSON.stringify(data[key]))
+    }
+    else
+      dataForm.append(key, data[key])
+  }
+  return dataForm
+}

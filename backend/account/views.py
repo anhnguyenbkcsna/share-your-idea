@@ -6,6 +6,7 @@ from .models import Account
 from utils.constants import Role
 from rest_framework import viewsets
 from bson.objectid import ObjectId
+from utils.utils import parse_json
 from rest_framework.decorators import action
 from utils.crud import CrudHelper
 from db.connection import db_connection
@@ -58,9 +59,12 @@ class AccountViewSet(viewsets.ViewSet):
 
         # Find in database
         res = self.collection.find_one({"email": response["email"]})
+        id = str(res["_id"])
+        res.pop("_id")
+        res["id"] = id
 
         if res:
-            _id = str(res["_id"])
+            _id = str(res["id"])
         else:
             # Insert if not found
             return Response({"message": "User not found"}, status=400)
@@ -74,7 +78,7 @@ class AccountViewSet(viewsets.ViewSet):
             {
                 "refresh": str(token),
                 "access": str(token.access_token),
-                "data": res
+                "data": parse_json(res)
             },
             status=200,
         )
@@ -111,13 +115,17 @@ class AccountViewSet(viewsets.ViewSet):
             inserted_data
         )
         _id = result.inserted_id
+        
+        id = str(inserted_data["_id"])
+        inserted_data.pop("_id")
+        inserted_data["id"] = id
 
         token = RefreshToken.for_user(Account(_id=_id))
         return Response(
             {
                 "refresh": str(token),
                 "access": str(token.access_token),
-                "data": inserted_data
+                "data": parse_json(inserted_data)
             },
             status=200,
         )

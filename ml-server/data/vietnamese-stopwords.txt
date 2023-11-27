@@ -313,7 +313,6 @@ cuộc
 càng
 càng càng
 càng hay
-cá nhân
 các
 các cậu
 cách
@@ -358,7 +357,6 @@ có vẻ
 có ý
 có ăn
 có điều
-có điều kiện
 có đáng
 có đâu
 có được
@@ -490,10 +488,9 @@ dễ đâu
 dở chừng
 dữ
 dữ cách
+dựa
 em
 em em
-giá trị
-giá trị thực tế
 giảm
 giảm chính
 giảm thấp
@@ -1940,3 +1937,9 @@ yêu cầu
 ừ ào
 ừ ừ
 ử
+công
+bạn
+tôi
+giúp
+đi
+đứng

@@ -1,12 +1,11 @@
-export const deployedAPI = 'http://172.16.16.223:8000'
+export const deployedAPI = 'https://share-your-idea.onrender.com'
 
-export const ideaEndpoint = 'http://172.16.16.223:8000/ideas/'
+export const ideaEndpoint = deployedAPI + '/ideas/'
 
-export const accountEndpoint = 'http://172.16.16.223:8000/accounts/'
+export const accountEndpoint = deployedAPI + '/accounts/'
 
-export const authEndpoint =
-  'http://172.16.16.223:8000/accounts/auth/'
+export const authEndpoint = deployedAPI + '/accounts/auth/'
 
-export const filesEndpoint = 'http://172.16.16.223:8000/files/'
+export const filesEndpoint = deployedAPI + '/files/'
 
 export const signupEndpoint = deployedAPI + '/accounts/signup/'

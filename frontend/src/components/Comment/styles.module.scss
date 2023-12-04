@@ -1,0 +1,56 @@
+@import '../../styles/variable.scss';
+@import '../../styles/mixin.scss';
+
+// Comment
+.comment {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #eee;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.commentContent {
+  margin: 10px; 
+  padding: 0 10px;
+}
+.commentHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.commentAuthor {
+  font-weight: bold;
+  margin-right: 1rem;
+}
+
+.commentDate {
+  color: #666;
+  font-style: italic;
+}
+
+.commentFooter {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start ;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.commentInput {
+  display: flex;
+  flex-direction: row;
+}
+.inputContent {
+  width: 100%;
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.inputContent button {
+  margin-top: 10px;
+  max-width: 100px;
+}

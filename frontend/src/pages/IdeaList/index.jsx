@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { Button, Space, Dropdown, Typography, Input, FloatButton } from 'antd'
+import { Button, Input } from 'antd'
 import styles from './styles.module.scss'
 import { deployedAPI } from '../../utils/form.constants'
 import IdeaListComponent from '../../components/IdeaListComponent'
@@ -29,7 +29,7 @@ const InnovatorIdea = () => {
   const handleSearch = (value) => {
     let res = []
     res = fetchIdeas.forEach((item) => {
-      item.name.toLowerCase().indexOf(value.toLowerCase()) != -1 ? res.push(item) : null
+      item.name.toLowerCase().indexOf(value.toLowerCase()) !== -1 ? res.push(item) : null
     })
     console.log(res)
     setFetchIdeas(res)

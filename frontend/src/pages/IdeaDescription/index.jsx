@@ -1,30 +1,49 @@
-import React, { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
-import { Button, Col, Divider, Row, Tag, Descriptions } from "antd"
-import axios from "axios"
-import classNames from "classnames"
-import styles from "./styles.module.scss"
-import NotFoundPage from "../Error/E404"
-import CusCard from "../../components/CusCard"
-import { deployedAPI } from "../../utils/form.constants"
+import React, { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+import { Button, Col, Divider, Row, Tag, Descriptions } from 'antd'
+import axios from 'axios'
+import classNames from 'classnames'
+import styles from './styles.module.scss'
+import CusCard from '../../components/CusCard'
+import { deployedAPI } from '../../utils/form.constants'
 import {
   UserOutlined,
   TeamOutlined,
   LineChartOutlined,
   MailOutlined,
   BulbOutlined,
-} from "@ant-design/icons"
+} from '@ant-design/icons'
 
-const iconKey = {
-  name: <UserOutlined />,
-  email: <MailOutlined />,
-  "current development stage": <LineChartOutlined />,
-  team: <TeamOutlined />,
-}
+import NotFoundPage from '../Error/E404'
+import CommentList from '../../components/Comment/commentList'
+
+// const iconKey = {
+//   name: <UserOutlined />,
+//   email: <MailOutlined />,
+//   'current development stage': <LineChartOutlined />,
+//   team: <TeamOutlined />,
+// }
 
 const rmvQuote = (str) => {
-  return str && str.split('"').join("")
+  return str && str.split('"').join('')
 }
+
+const comments = [
+  {
+    'id': '655e012d9bce09ceaefabb64',
+    'date': '26-10-2023',
+    'content': 'This is a comment!',
+    'like': 3156,
+    'dislike': 76,
+  },
+  {
+    'id': '65635cc73ec6e1780b1df38b',
+    'date': '26-10-2023',
+    'content': 'This is another comment!',
+    'like': 3156,
+    'dislike': 76,
+  }
+]
 
 const IdeaDescriptionPage = () => {
   let params = useParams()
@@ -54,7 +73,7 @@ const IdeaDescriptionPage = () => {
         children: localStorage.getItem('email')
       }
     )
-    console.log("author", author)
+    console.log('author', author)
   }, [])
 
   useEffect(() => {
@@ -76,7 +95,7 @@ const IdeaDescriptionPage = () => {
 
   const dataSourceGenerate = (ideaObj) => {
     let { author } = ideaObj
-    author["current development stage"] = ideaObj.currentDev
+    author['current development stage'] = ideaObj.currentDev
     let res = []
     for (const [key, value] of Object.entries(author)) {
       res.push({
@@ -84,7 +103,7 @@ const IdeaDescriptionPage = () => {
         content: value,
       })
     }
-    console.log("res", res)
+    console.log('res', res)
     return res
   }
 
@@ -96,11 +115,11 @@ const IdeaDescriptionPage = () => {
         <div>
           <section className={classNames(styles.bg)}>
             <div className={styles.ideaname}>
-              <div className={classNames("w-90", styles.description)}>
+              <div className={classNames('w-90', styles.description)}>
                 <h2
                   style={{
-                    fontSize: "48px",
-                    fontWeight: "bold",
+                    fontSize: '48px',
+                    fontWeight: 'bold',
                   }}
                 >
                   {rmvQuote(idea.name)}
@@ -109,35 +128,35 @@ const IdeaDescriptionPage = () => {
                 <br />
                 {idea.domain &&
                   idea.domain.map((item, idx) => (
-                    <Tag className={styles.tags} key={idx} color="#427DDB">
+                    <Tag className={styles.tags} key={idx} color='#427DDB'>
                       {item}
                     </Tag>
                   ))}
               </div>
-              <div className={classNames(styles["bg-circle"])} />
+              <div className={classNames(styles['bg-circle'])} />
             </div>
           </section>
 
           <CusCard>
             <Descriptions bordered>
               <Descriptions.Item 
-                labelStyle={{backgroundColor: "#ddd"}}
+                labelStyle={{backgroundColor: '#ddd'}}
                 contentStyle={{backgroundColor: '#eee'}}
-                label="Họ và tên"
+                label='Họ và tên'
               >
                 {localStorage.getItem('name')}
               </Descriptions.Item>
               <Descriptions.Item 
-                labelStyle={{backgroundColor: "#ddd"}}
+                labelStyle={{backgroundColor: '#ddd'}}
                 contentStyle={{backgroundColor: '#eee'}}
-                label="Email"
+                label='Email'
               >
                 {localStorage.getItem('email')}
               </Descriptions.Item>
               <Descriptions.Item 
-                labelStyle={{backgroundColor: "#ddd"}}
+                labelStyle={{backgroundColor: '#ddd'}}
                 contentStyle={{backgroundColor: '#eee'}}
-                label="Ngày đăng"
+                label='Ngày đăng'
               >
                 {new Date().toJSON().slice(0,10)}
               </Descriptions.Item>
@@ -158,7 +177,7 @@ const IdeaDescriptionPage = () => {
                   {rmvQuote(idea.teamExperience)}
                 </h3>
 
-                <Button type="primary" className={styles.btn}>
+                <Button type='primary' className={styles.btn}>
                   <MailOutlined />
                   Liên hệ
                 </Button>
@@ -177,7 +196,7 @@ const IdeaDescriptionPage = () => {
                 {idea.apps && (
                   <h3 className={styles.content}>
                     <span className={styles.subtitle}>
-                      Các ứng dụng liên quan:{" "}
+                      Các ứng dụng liên quan:{' '}
                     </span>
                     {rmvQuote(idea.apps)}
                   </h3>
@@ -213,7 +232,7 @@ const IdeaDescriptionPage = () => {
                     <span className={styles.subtitle}>Nghề nghiệp: </span>
                     {idea.professional
                       .map((item, idx) => rmvQuote(item))
-                      .join(", ")}
+                      .join(', ')}
                   </h3>
                 )}
 
@@ -222,7 +241,7 @@ const IdeaDescriptionPage = () => {
                     <span className={styles.subtitle}>Khu vực: </span>
                     {idea.geographical
                       .map((item, idx) => rmvQuote(item))
-                      .join(", ")}
+                      .join(', ')}
                   </h3>
                 )}
 
@@ -241,7 +260,7 @@ const IdeaDescriptionPage = () => {
                   {idea.files.map((item, idx) => {
                     return (
                       <div className={styles.file} key={idx}>
-                        <Button type="primary" href={item.link}>
+                        <Button type='primary' href={item.link}>
                           Download
                         </Button>
                       </div>
@@ -251,11 +270,11 @@ const IdeaDescriptionPage = () => {
               )}
               <Divider />
               <div className={styles.support}>
-                {idea.support != "undefined" && (
+                {idea.support !== 'undefined' && (
                   <div className={styles.content}>
                     <h3 className={styles.content}>
                       <span className={styles.subtitle}>
-                        Hỗ trợ nhóm phát triển dự án:{" "}
+                        Hỗ trợ nhóm phát triển dự án:{' '}
                       </span>
                       {rmvQuote(idea.support)}
                     </h3>
@@ -263,6 +282,7 @@ const IdeaDescriptionPage = () => {
                 )}
               </div>
             </Row>
+            <CommentList comments={comments}/>
           </CusCard>
         </div>
       ) : (

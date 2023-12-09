@@ -1,4 +1,4 @@
-FROM python:3.9
+FROM python:3.10
 
 ENV DockerHOME=/home/code/share-your-idea  
 
@@ -10,8 +10,12 @@ WORKDIR $DockerHOME
 COPY . $DockerHOME 
 RUN pip install -r ./requirements.txt
 
-# Installing dependencies
+# Install gunicorn
 RUN pip install gunicorn
+
+# collect static files
+RUN python manage.py collectstatic
+
 
 # Expose the port that the Django app will run on
 EXPOSE 8000

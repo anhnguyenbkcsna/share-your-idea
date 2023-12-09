@@ -33,3 +33,4 @@ yarn-error.log*
 venv/
 
 # Pipfile
+Project/static

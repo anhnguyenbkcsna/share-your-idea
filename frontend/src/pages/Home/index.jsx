@@ -4,6 +4,7 @@ import classNames from 'classnames'
 import { Button } from 'antd'
 import planImg from '../../assets/plan.png'
 import { NavLink } from 'react-router-dom'
+import { sendEmail } from '../../api/email'
 
 const HomePage = () => {
   return (
@@ -59,6 +60,7 @@ const HomePage = () => {
           </div>
         </section>
       </div>
+      <Button onClick={() => sendEmail() } >Send Email</Button>
     </>
   )
 }

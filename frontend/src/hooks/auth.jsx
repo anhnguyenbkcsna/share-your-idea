@@ -15,6 +15,7 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const apiToken = localStorage.getItem(localStorageConstant.API_TOKEN)
+    console.log('apiToken', apiToken)
     isUserAuthorized(apiToken).then((authorized) => {
       if (authorized === true) {
         setUser({
@@ -35,6 +36,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (data) => {
     setUser(data)
     console.log('>> Login', data)
+    // localStorage.setItem('user', data.clientId)
     navigate(-1) // back
   }
 

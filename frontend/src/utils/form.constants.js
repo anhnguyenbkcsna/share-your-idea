@@ -1,6 +1,8 @@
 import { labelValueGenerate } from './utils'
+import { deployedAPI } from './api.constants'
 
-export const deployedAPI = 'https://share-your-idea.onrender.com'
+export { deployedAPI }
+// export const deployedAPI = 'https://share-your-idea.onrender.com'
 
 export const gender = [
   {
@@ -149,9 +151,9 @@ export const gooleTokenInfo =
 
 export const industries = {
   'Nông nghiệp và Thực phẩm': [
-    'Khoa học Nông nghiệp', 
+    'Khoa học Nông nghiệp',
     'Kinh doanh Nông nghiệp',
-    'Khoa học Thực phẩm', 
+    'Khoa học Thực phẩm',
     'Khoa học Chăn nuôi',
   ],
   'Công nghệ và Công nghiệp': [

@@ -14,7 +14,7 @@ RUN pip install -r ./requirements.txt
 RUN pip install gunicorn
 
 # collect static files
-RUN python manage.py collectstatic
+RUN python manage.py collectstatic --no-input
 
 
 # Expose the port that the Django app will run on

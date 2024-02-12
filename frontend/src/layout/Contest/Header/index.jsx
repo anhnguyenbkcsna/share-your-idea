@@ -9,7 +9,7 @@ export default function ContestHeader() {
         alignItems: 'center',
         // background: 'rgba(0, 0, 0, 0.86)',
         background: '#000',
-        fontSize: '1.5em',
+        fontSize: '2rem',
         padding: '0 78px',
         color: '#fff',
         height: 94,

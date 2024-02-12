@@ -16,6 +16,9 @@ const PublicLayout = (props) => {
         style={{
           minHeight: '100vh',
           background: '#000',
+          height: '100%',
+          color: '#fff',
+          fontFamily: 'Play, sans-serif'
         }}>
         <Outlet />
       </Content>

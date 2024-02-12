@@ -8,7 +8,7 @@ export default function ContestFooter() {
         justifyContent: 'space-between',
         alignItems: 'center',
         background: '#9a9a9a',
-        fontSize: '2.5em',
+        fontSize: '3rem',
         padding: '0 78px',
         color: '#fff',
         height: 214,
@@ -20,7 +20,7 @@ export default function ContestFooter() {
       </div>
       <div
         style={{
-          fontSize: '1.5rem',
+          fontSize: '2rem',
           textDecoration: 'underline',
         }}
       >

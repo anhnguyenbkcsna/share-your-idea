@@ -3,7 +3,7 @@ import { createBrowserRouter, createRoutesFromElements, Route } from 'react-rout
 import { AuthProvider} from '../hooks/auth'
 import PrivateLayout from '../layout/Private'
 import PublicLayout from '../layout/Public'
-import UnauthorizedPage from './Error/E403'
+// import UnauthorizedPage from './Error/E403'
 import CreateIdeaFormPage from './IdeaForm'
 import HomePage from './Home'
 import LoginPage from './Login'
@@ -14,13 +14,21 @@ import InnovatorIdea from './IdeaList'
 import IdeaDescriptionPage from './IdeaDescription'
 import CompanyRequirementFormPage from './CompanyRequirement'
 import { default as ContestHomePage } from './Contest/Home'
-import {default as ContestPublicLayout} from '../layout/Contest/Public'
+import { default as CreateContestPage } from './Contest/CreateContest'
+import { default as ContestPublicLayout } from '../layout/Contest/Public'
 import Faq from './FAQ'
 
 export const getRouter = () => {
   const browserRouter = createBrowserRouter(
     createRoutesFromElements(
       <Route element={<AuthProvider />} errorElement={<ErrorBoundary />}>
+        {/* Contest subdomain */}
+        <Route path="/" criteria={{ host: 'contest' }} Component={ContestPublicLayout}>
+          <Route index Component={ContestHomePage} />
+          <Route path='create' Component={CreateContestPage} />
+        </Route>
+
+        {/* Default */}
         <Route path="/" Component={PublicLayout}>
           <Route index Component={HomePage} />
         </Route>
@@ -45,9 +53,6 @@ export const getRouter = () => {
         </Route>
         <Route path="faq" Component={PrivateLayout} >
           <Route index Component={Faq} />
-        </Route>
-        <Route path="contest" Component={ContestPublicLayout}>
-          <Route index Component={ContestHomePage} />
         </Route>
       </Route>
     ))

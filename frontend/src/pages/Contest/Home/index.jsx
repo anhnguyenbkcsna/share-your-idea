@@ -1,20 +1,27 @@
 import React from 'react'
 import styles from './styles.module.scss'
+import { useNavigate } from 'react-router-dom'
+import genericStyles from '../index.module.scss'
 // import contestBackground from '../../../assets/contest-bg.jpg'
 
 export default function HomePage() {
+  const navigate = useNavigate()
+
+  const handleCreateEventClick = () => {
+    navigate('/create')
+  }
+
   return (
     <div
       className={styles.contestHomeContainer}
     >
       <div className={styles.contestHomeBg} />
       <h1
+        className={genericStyles.contestHeader}
         style={{
-          color: '#FF7510',
           fontSize: '6rem',
           height: 160,
-          lineHeight: '160px',
-          fontFamily: 'Michroma, sans-serif',
+          lineHeight: '160px'
           // boxShadow: '0 0 10px 0 #FF7510',
           // filter: "blur(1px)",
           // background: 'rgba(255, 255, 255, 0.5)',
@@ -39,6 +46,7 @@ export default function HomePage() {
       </div>
       <button
         className={styles.createEventButton}
+        onClick={handleCreateEventClick}
       >
         CREATE NEW EVENT
       </button>

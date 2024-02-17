@@ -13,8 +13,10 @@ import ErrorBoundary from './Error'
 import InnovatorIdea from './IdeaList'
 import IdeaDescriptionPage from './IdeaDescription'
 import CompanyRequirementFormPage from './CompanyRequirement'
+
 import { default as ContestHomePage } from './Contest/Home'
 import {default as ContestPublicLayout} from '../layout/Contest/Public'
+import ContestInfo from './Contest/Info'
 import Faq from './FAQ'
 
 export const getRouter = () => {
@@ -48,6 +50,9 @@ export const getRouter = () => {
         </Route>
         <Route path="contest" Component={ContestPublicLayout}>
           <Route index Component={ContestHomePage} />
+        </Route>
+        <Route path="contest" Component={ContestPublicLayout}>
+          <Route path=":contestId" Component={ContestInfo} />
         </Route>
       </Route>
     ))

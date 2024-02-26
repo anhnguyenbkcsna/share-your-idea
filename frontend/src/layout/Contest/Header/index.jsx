@@ -1,22 +1,25 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import styles from './styles.module.scss'
 
 export default function ContestHeader() {
+  const navigate = useNavigate()
+
+  const handleLogoClick = () => {
+    navigate('/')
+  }
+
   return (
     <div
+      className={styles.container}
       style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        // background: 'rgba(0, 0, 0, 0.86)',
-        background: '#000',
-        fontSize: '2rem',
-        padding: '0 78px',
-        color: '#fff',
-        height: 94,
         fontFamily: 'Michroma, sans-serif'
       }}
     >
-      <div>
+      <div
+        onClick={handleLogoClick}
+        className={styles.contestLogo}
+      >
         WorIdea
       </div>
       <div
@@ -27,8 +30,8 @@ export default function ContestHeader() {
           textDecoration: 'underline',
         }}
       >
-        <div style={{marginRight: 56}}>Contact</div>
-        <div style={{marginRight: 56}}>Events</div>
+        <div style={{ marginRight: 56 }}>Contact</div>
+        <div style={{ marginRight: 56 }}>Events</div>
         <div>About us</div>
       </div>
       <div>

@@ -42,3 +42,10 @@
 	opacity: 0.8;
 	cursor: pointer;
 }
+.contestEventCardList{
+	max-width: 1600px;
+	margin: 100px auto;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+	grid-gap: 30px;
+}

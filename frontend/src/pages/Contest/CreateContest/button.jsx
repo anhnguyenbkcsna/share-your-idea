@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './styles.module.scss'
 
-export function OrangeBasicButton({onClick = ()=>{}, style = {}}) {
+export function OrangeBasicButton({onClick = ()=>{}, style = {}, text = ''}) {
   return (
     <div
       className={styles.orangeBasicButton}
@@ -10,7 +10,7 @@ export function OrangeBasicButton({onClick = ()=>{}, style = {}}) {
       }}
       onClick={onClick}
     >
-      Create
+      {text}
     </div>
   )
 }

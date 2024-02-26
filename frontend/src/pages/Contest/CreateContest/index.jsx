@@ -38,7 +38,7 @@ export default function CreateContestPage() {
           <ContestInput label={'Mô tả cụ thể'} setFunc={setData} fieldName={'description'} />
           <ContestInput label={'Thông tin thêm'} setFunc={setData} fieldName={'moreInfo'} />
 
-          <OrangeBasicButton style={{ marginBottom: 90 }}/>
+          <OrangeBasicButton style={{ marginBottom: 90 }} text='Create'/>
         </div>
         <div className={styles.right}>
           <div

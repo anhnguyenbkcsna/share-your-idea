@@ -13,9 +13,11 @@ import ErrorBoundary from './Error'
 import InnovatorIdea from './IdeaList'
 import IdeaDescriptionPage from './IdeaDescription'
 import CompanyRequirementFormPage from './CompanyRequirement'
+
 import { default as ContestHomePage } from './Contest/Home'
 import { default as CreateContestPage } from './Contest/CreateContest'
 import { default as ContestPublicLayout } from '../layout/Contest/Public'
+import ContestInfo from './Contest/Info'
 import Faq from './FAQ'
 
 export const getRouter = () => {
@@ -25,7 +27,8 @@ export const getRouter = () => {
         {/* Contest subdomain */}
         <Route path="/" criteria={{ host: 'contest' }} Component={ContestPublicLayout}>
           <Route index Component={ContestHomePage} />
-          <Route path='create' Component={CreateContestPage} />
+          <Route path='new' Component={CreateContestPage} />
+          <Route path=":contestId" Component={ContestInfo} />
         </Route>
 
         {/* Default */}
@@ -54,6 +57,12 @@ export const getRouter = () => {
         <Route path="faq" Component={PrivateLayout} >
           <Route index Component={Faq} />
         </Route>
+        {/* <Route path="contest" Component={ContestPublicLayout}>
+          <Route index Component={ContestHomePage} />
+        </Route> */}
+        {/* <Route path="contest" Component={ContestPublicLayout}>
+          <Route path=":contestId" Component={ContestInfo} />
+        </Route> */}
       </Route>
     ))
 

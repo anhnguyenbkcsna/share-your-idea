@@ -2,7 +2,6 @@ import React from 'react'
 import styles from './styles.module.scss'
 import ContestEventCard from '../../../components/Contest/EventCard'
 import { useNavigate } from 'react-router-dom'
-import genericStyles from '../index.module.scss'
 // import contestBackground from '../../../assets/contest-bg.jpg'
 
 export default function HomePage() {
@@ -24,10 +23,7 @@ export default function HomePage() {
             fontSize: '6rem',
             height: 160,
             lineHeight: '160px',
-            fontFamily: 'Michroma, sans-serif',
-            // boxShadow: '0 0 10px 0 #FF7510',
-            // filter: "blur(1px)",
-            // background: 'rgba(255, 255, 255, 0.5)',
+            fontFamily: 'Michroma, sans-serif'
           }}
         >
           INNOVATION COMPETITION

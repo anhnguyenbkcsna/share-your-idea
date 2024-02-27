@@ -1,0 +1,35 @@
+@import '../../styles/variable.scss';
+
+.contestHeading {
+	color: $contest-primary-color;
+	font-family: $contest-heading-font-family
+}
+
+
+.orangeBasicButton {
+	background: #ff8c00;
+	color: #fff;
+	font-size: 2rem;
+	cursor: pointer;
+	width: 200px;
+	height: 60px;
+	line-height: 60px;
+	text-align: center;
+	font-weight: bold;
+	border-radius: 10px;
+}
+
+.orangeBasicButton:hover {
+	background: $contest-primary-color;
+}
+
+.contestStatusLabel {
+	display: inline-block;
+	text-transform: uppercase;
+	background: #686868;
+	color: #fbfbfb;
+	width: fit-content;
+	padding: 4px 14px;
+	border-radius: 20px;
+	font-size: 2rem;
+}

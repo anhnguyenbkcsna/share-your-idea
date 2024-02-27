@@ -1,8 +1,11 @@
+
+@import '../../../styles/variable.scss';
+
 .container {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	// background: 'rgba(0; 0; 0; 0.86)';
+	font-family: $contest-heading-font-family;
 	background: #000;
 	font-size: 2rem;
 	padding: 0 78px;

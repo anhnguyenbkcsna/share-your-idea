@@ -1,6 +1,6 @@
 import React from 'react'
 import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom'
-import { AuthProvider} from '../hooks/auth'
+import { AuthProvider } from '../hooks/auth'
 import PrivateLayout from '../layout/Private'
 import PublicLayout from '../layout/Public'
 // import UnauthorizedPage from './Error/E403'
@@ -19,50 +19,54 @@ import { default as CreateContestPage } from './Contest/CreateContest'
 import { default as ContestPublicLayout } from '../layout/Contest/Public'
 import ContestInfo from './Contest/Info'
 import Faq from './FAQ'
+import SubmittedIdeasPage from './Contest/SubmittedIdeas'
 
 export const getRouter = () => {
   const browserRouter = createBrowserRouter(
     createRoutesFromElements(
       <Route element={<AuthProvider />} errorElement={<ErrorBoundary />}>
+        {/* Default */}
+        <Route path="/" criteria={{ host: '' }}>
+          <Route path="/" Component={PublicLayout}>
+            <Route index Component={HomePage} />
+          </Route>
+          <Route path="login" Component={LoginPage} />
+          <Route path='profile' Component={PublicLayout} >
+            <Route index Component={CreateProfileForm} />
+          </Route>
+          <Route path="innovator" Component={PrivateLayout}>
+            <Route index Component={InnovatorIdea} />
+            <Route path='idea' Component={CreateIdeaFormPage} />
+            {/* <Route path='profile' Component={CreateProfileForm} /> */}
+          </Route>
+          <Route path="company" Component={PrivateLayout}>
+            <Route index Component={CompanyRequirementFormPage} />
+            {/* <Route path='profile' Component={CreateProfileForm} /> */}
+          </Route>
+          <Route path="match-idea" Component={PrivateLayout}>
+            <Route index Component={MatchIdea} />
+          </Route>
+          <Route path="idea" Component={PrivateLayout}>
+            <Route path=':ideaId' Component={IdeaDescriptionPage} />
+          </Route>
+          <Route path="faq" Component={PrivateLayout} >
+            <Route index Component={Faq} />
+          </Route>
+        </Route>
+        {/* <Route path="contest" Component={ContestPublicLayout}>
+          <Route index Component={ContestHomePage} />
+        </Route> */}
+        {/* <Route path="contest" Component={ContestPublicLayout}>
+          <Route path=":contestId" Component={ContestInfo} />
+        </Route> */}
         {/* Contest subdomain */}
         <Route path="/" criteria={{ host: 'contest' }} Component={ContestPublicLayout}>
           <Route index Component={ContestHomePage} />
           <Route path='new' Component={CreateContestPage} />
           <Route path=":contestId" Component={ContestInfo} />
+          <Route path="submitted-ideas" Component={SubmittedIdeasPage} />
         </Route>
 
-        {/* Default */}
-        <Route path="/" Component={PublicLayout}>
-          <Route index Component={HomePage} />
-        </Route>
-        <Route path="login" Component={LoginPage} />
-        <Route path='profile' Component={PublicLayout} >
-          <Route index Component={CreateProfileForm} />
-        </Route>
-        <Route path="innovator" Component={PrivateLayout}>
-          <Route index Component={InnovatorIdea} />
-          <Route path='idea' Component={CreateIdeaFormPage} />
-          {/* <Route path='profile' Component={CreateProfileForm} /> */}
-        </Route>
-        <Route path="company" Component={PrivateLayout}>
-          <Route index Component={CompanyRequirementFormPage} />
-          {/* <Route path='profile' Component={CreateProfileForm} /> */}
-        </Route>
-        <Route path="match-idea" Component={PrivateLayout}>
-          <Route index Component={MatchIdea} />
-        </Route>
-        <Route path="idea" Component={PrivateLayout}>
-          <Route path=':ideaId' Component={IdeaDescriptionPage} />
-        </Route>
-        <Route path="faq" Component={PrivateLayout} >
-          <Route index Component={Faq} />
-        </Route>
-        {/* <Route path="contest" Component={ContestPublicLayout}>
-          <Route index Component={ContestHomePage} />
-        </Route> */}
-        {/* <Route path="contest" Component={ContestPublicLayout}>
-          <Route path=":contestId" Component={ContestInfo} />
-        </Route> */}
       </Route>
     ))
 

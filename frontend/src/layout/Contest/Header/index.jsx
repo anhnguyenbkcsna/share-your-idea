@@ -12,9 +12,6 @@ export default function ContestHeader() {
   return (
     <div
       className={styles.container}
-      style={{
-        fontFamily: 'Michroma, sans-serif'
-      }}
     >
       <div
         onClick={handleLogoClick}

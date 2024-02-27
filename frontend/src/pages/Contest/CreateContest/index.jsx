@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import styles from './styles.module.scss'
 import { useNavigate } from 'react-router-dom'
-import genericStyles from '../index.module.scss'
-import { ContestInput } from './input'
-import { OrangeBasicButton } from './button'
+import genericStyles from '../styles.module.scss'
+import { ContestInput } from '../Components/input'
+import { OrangeBasicButton } from '../Components/button'
 // import contestBackground from '../../../assets/contest-bg.jpg'
 
 export default function CreateContestPage() {
@@ -21,7 +21,7 @@ export default function CreateContestPage() {
       }}
     >
       <h1
-        className={genericStyles.contestHeader}
+        className={genericStyles.contestHeading}
         style={{
           marginTop: 60,
           fontSize: '5rem',

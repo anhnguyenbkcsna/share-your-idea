@@ -1,0 +1,19 @@
+
+@import '../../../styles/variable.scss';
+
+.container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-family: $contest-heading-font-family;
+	background: #000;
+	font-size: 2rem;
+	padding: 0 78px;
+	color: #fff;
+	height: 94px;
+}
+
+.contestLogo:hover {
+	opacity: 0.7;
+	cursor: pointer;
+}

@@ -1,4 +1,5 @@
 @import "../../../styles/variable.scss";
+@import "../styles.module.scss";
 
 .container {
 	padding: 0 78px;
@@ -14,9 +15,9 @@
 	text-align: right;
 }
 
-.contestName {
-	font-size: 7rem;
-	color: $contest-primary-color;
+.organizer {
+	@extend .contestHeading;
+	font-size: 5rem;
 }
 
 .carouselItemContainIdeasWrapper {
@@ -83,32 +84,6 @@
 	line-clamp: 1;
 	-webkit-box-orient: vertical;
 	overflow: hidden;
-}
-
-.authorLine {
-	display: flex;
-	justify-content: flex-start;
-	flex-direction: row;
-	align-items: center;
-	justify-self: flex-end;
-}
-
-.authorAvtWrapper {
-	border-radius: 50%;
-	overflow: hidden;
-	width: 50px;
-	aspect-ratio: 1/1;
-}
-
-.authorAvtWrapper img {
-	object-fit: cover;
-	height: 100%;
-	width: 100%;
-}
-
-.authorName {
-	font-weight: bold;
-	margin-left: 12px;
 }
 
 // arrow

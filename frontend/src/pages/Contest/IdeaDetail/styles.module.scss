@@ -1,0 +1,61 @@
+@import "../../../styles/variable.scss";
+@import "../styles.module.scss";
+
+.container {
+	padding: 0 78px;
+	font-size: 2rem;
+	line-height: 1.2;
+}
+
+.contestHeading {
+	@extend .contestHeading;
+	font-size: 5rem;
+	margin-top: 20px;
+}
+
+.mediaBox {
+	margin: 40px auto;
+	height: 600px;
+	aspect-ratio: 16/9;
+	line-height: 600px;
+	text-align: center;
+	background-color: #D9D9D9;
+	color: #000;
+	font-size: 6rem;
+	vertical-align: middle;
+}
+
+.ideaHeading {
+	font-size: 4.6rem;
+	margin-bottom: 40px;
+}
+
+.mainContent {
+	display: flex;
+}
+
+.information {
+	flex: 1;
+}
+
+.information .line {
+	padding-bottom: 24px;
+}
+
+.ideaStatus {
+	color: $contest-primary-color;
+	margin-bottom: 6px;
+}
+
+.detail {
+	flex: 3;
+	margin-left: 10%;
+}
+
+.para {
+	text-align: justify;
+}
+
+.evaluation {
+
+}

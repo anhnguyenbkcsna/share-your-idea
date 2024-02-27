@@ -1,8 +1,12 @@
 import styles from './styles.module.scss'
+import genericStyles from '../styles.module.scss'
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export default function ContestIdeaCard({ idea }) {
   // when idea is null, return a dummy card to fill the space
+  const navigate = useNavigate()
+
   const WIDTH_OF_CARD = 280
   if (!idea)
   {
@@ -14,9 +18,18 @@ export default function ContestIdeaCard({ idea }) {
     )
   }
 
+  const handleOnClick = () => {
+    idea.id = 1
+    navigate(`/submitted-ideas/${idea.id}`)
+  }
+
   const { ideaImgUrl, title, field, innovatorAvtUrl, innovatorName } = idea
   return (
-    <div style={{ width: WIDTH_OF_CARD }} className={styles.contestIdeaCard}>
+    <div
+      style={{ width: WIDTH_OF_CARD }}
+      className={styles.contestIdeaCard}
+      onClick={handleOnClick}
+    >
       <img
         alt='contest'
         src={ideaImgUrl}
@@ -29,14 +42,14 @@ export default function ContestIdeaCard({ idea }) {
           {field}
         </div>
         <div style={{ flex: 1 }} />
-        <div className={styles.authorLine}>
-          <div className={styles.authorAvtWrapper}>
+        <div className={genericStyles.authorLine}>
+          <div className={genericStyles.authorAvtWrapper}>
             <img
               alt='contest'
               src={innovatorAvtUrl}
             />
           </div>
-          <div className={styles.authorName}>
+          <div className={genericStyles.authorName}>
             {innovatorName}
           </div>
         </div>

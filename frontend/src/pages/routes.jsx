@@ -20,11 +20,25 @@ import { default as ContestPublicLayout } from '../layout/Contest/Public'
 import ContestInfo from './Contest/Info'
 import Faq from './FAQ'
 import SubmittedIdeasPage from './Contest/SubmittedIdeas'
+import { isSubdomainExist } from '../utils/utils'
+
 
 export const getRouter = () => {
   const browserRouter = createBrowserRouter(
     createRoutesFromElements(
       <Route element={<AuthProvider />} errorElement={<ErrorBoundary />}>
+        {/* Contest subdomain */}
+        {
+          isSubdomainExist('contest') && (
+            <Route path="/" Component={ContestPublicLayout}>
+              <Route index Component={ContestHomePage} />
+              <Route path='new' Component={CreateContestPage} />
+              <Route path=":contestId" Component={ContestInfo} />
+              <Route path="submitted-ideas" Component={SubmittedIdeasPage} />
+            </Route>
+          )
+        }
+
         {/* Default */}
         <Route path="/" criteria={{ host: '' }}>
           <Route path="/" Component={PublicLayout}>
@@ -59,14 +73,6 @@ export const getRouter = () => {
         {/* <Route path="contest" Component={ContestPublicLayout}>
           <Route path=":contestId" Component={ContestInfo} />
         </Route> */}
-        {/* Contest subdomain */}
-        <Route path="/" criteria={{ host: 'contest' }} Component={ContestPublicLayout}>
-          <Route index Component={ContestHomePage} />
-          <Route path='new' Component={CreateContestPage} />
-          <Route path=":contestId" Component={ContestInfo} />
-          <Route path="submitted-ideas" Component={SubmittedIdeasPage} />
-        </Route>
-
       </Route>
     ))
 

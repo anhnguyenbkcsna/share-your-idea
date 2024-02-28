@@ -3,7 +3,7 @@
 
 .container {
 	padding: 0 78px;
-	font-size: 2rem;
+	font-size: 1.6rem;
 	line-height: 1.2;
 }
 
@@ -19,7 +19,7 @@
 	aspect-ratio: 16/9;
 	line-height: 600px;
 	text-align: center;
-	background-color: #D9D9D9;
+	background-color: #d9d9d9;
 	color: #000;
 	font-size: 6rem;
 	vertical-align: middle;
@@ -32,19 +32,18 @@
 
 .mainContent {
 	display: flex;
+	margin-bottom: 80px;
 }
 
 .information {
 	flex: 1;
-}
-
-.information .line {
-	padding-bottom: 24px;
-}
-
-.ideaStatus {
-	color: $contest-primary-color;
-	margin-bottom: 6px;
+	.line {
+		padding-bottom: 24px;
+	}
+	.ideaStatus {
+		color: $contest-primary-color;
+		margin-bottom: 6px;
+	}
 }
 
 .detail {
@@ -56,6 +55,140 @@
 	text-align: justify;
 }
 
-.evaluation {
+// bottom
+.bottom {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	margin-bottom: 40px;
+}
 
+// evaluation
+.evaluationWrapper {
+	margin-bottom: 60px;
+	.evaluationTable {
+		flex: 3;
+		display: grid;
+		gap: 20px;
+		grid-template-columns: 22% 8% 70%;
+	}
+
+	.evaluation {
+		display: flex;
+		align-items: center;
+	}
+
+	.tblItem {
+	}
+
+	.point {
+		font-size: 6rem;
+		color: #000;
+		background-color: #d9d9d9;
+		aspect-ratio: 1 / 1;
+		padding: 60px;
+		text-align: center;
+		border-radius: 50%;
+		margin-left: 60px;
+	}
+}
+
+.h2 {
+	font-weight: bold;
+	color: $contest-primary-color;
+	font-size: 3.6rem;
+	margin-bottom: 20px;
+}
+
+// comment
+.commentWrapper {
+	flex: 6;
+}
+
+.commentInputWrapper {
+	display: flex;
+	width: 80%;
+	margin: 30px 0 20px 0;
+}
+.commentAvtWrapper {
+	@extend .authorAvtWrapper;
+	aspect-ratio: 1/1;
+	width: 60px;
+	img {
+		@extend .avt;
+	}
+}
+
+.commentInput {
+	font-family: $contest-font-family;
+	flex: 1;
+	margin-left: 20px;
+	padding: 10px 20px;
+	border-radius: 10px;
+	outline: none;
+	font-size: 1.4rem;
+	border: none;
+	resize: none;
+}
+
+.comments {
+	.comment {
+		display: flex;
+		flex-wrap: nowrap;
+		@extend .commentInput;
+		background-color: #f2f2f2;
+		margin-left: 0;
+		padding: 10px 16px;
+		width: 80%;
+		color: #000;
+		img {
+			@extend .avt;
+		}
+		.right {
+			margin-left: 16px;
+		}
+		.name {
+			font-weight: bold;
+			margin-bottom: 4px;
+		}
+		.content {
+			text-align: left;
+		}
+	}
+}
+
+// ranking
+.rankingWrapper {
+	flex: 5;
+}
+
+.rankingBox {
+	background-color: $contest-primary-color;
+	border-radius: 10px;
+	width: 100%;
+	padding: 24px;
+
+	.title {
+		font-size: 3.6rem;
+		color: #000;
+		margin-bottom: 20px;
+		font-weight: bold;
+	}
+
+	.other {
+		display: grid;
+		grid-template-columns: auto auto;
+	}
+
+	.other span {
+		font-size: 2.8rem;
+		color: #fff;
+		text-decoration: underline;
+		padding-bottom: 14px;
+		opacity: 0.8;
+	}
+	.other span:hover {
+		cursor: pointer;
+		opacity: 1;
+	}
 }

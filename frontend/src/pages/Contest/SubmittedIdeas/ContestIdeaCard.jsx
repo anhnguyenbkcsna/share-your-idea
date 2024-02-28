@@ -45,6 +45,7 @@ export default function ContestIdeaCard({ idea }) {
         <div className={genericStyles.authorLine}>
           <div className={genericStyles.authorAvtWrapper}>
             <img
+              className={styles.avt}
               alt='contest'
               src={innovatorAvtUrl}
             />

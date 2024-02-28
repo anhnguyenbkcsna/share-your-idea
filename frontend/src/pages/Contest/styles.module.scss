@@ -7,7 +7,7 @@
 
 
 .orangeBasicButton {
-	background: #ff8c00;
+	background: $contest-primary-color;
 	color: #fff;
 	font-size: 2rem;
 	cursor: pointer;
@@ -20,7 +20,7 @@
 }
 
 .orangeBasicButton:hover {
-	background: $contest-primary-color;
+	background: #ff8c00;
 }
 
 .contestStatusLabel {
@@ -32,4 +32,31 @@
 	padding: 4px 14px;
 	border-radius: 20px;
 	font-size: 2rem;
+}
+
+// Innovator account
+.authorLine {
+	display: flex;
+	justify-content: flex-start;
+	flex-direction: row;
+	align-items: center;
+	justify-self: flex-end;
+}
+
+.authorAvtWrapper {
+	border-radius: 50%;
+	overflow: hidden;
+	width: 50px;
+	aspect-ratio: 1/1;
+}
+
+.authorAvtWrapper .avt {
+	object-fit: cover;
+	height: 100%;
+	width: 100%;
+}
+
+.authorName {
+	font-weight: bold;
+	margin-left: 12px;
 }

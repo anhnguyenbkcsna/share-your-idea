@@ -21,6 +21,7 @@ import ContestInfo from './Contest/Info'
 import Faq from './FAQ'
 import SubmittedIdeasPage from './Contest/SubmittedIdeas'
 import { isSubdomainExist } from '../utils/utils'
+import ContestIdeaDetailPage from './Contest/IdeaDetail'
 
 
 export const getRouter = () => {
@@ -35,6 +36,7 @@ export const getRouter = () => {
               <Route path='new' Component={CreateContestPage} />
               <Route path=":contestId" Component={ContestInfo} />
               <Route path="submitted-ideas" Component={SubmittedIdeasPage} />
+              <Route path="submitted-ideas/:id" Component={ContestIdeaDetailPage} />
             </Route>
           )
         }

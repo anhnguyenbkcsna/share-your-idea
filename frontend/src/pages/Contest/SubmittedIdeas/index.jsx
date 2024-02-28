@@ -324,7 +324,7 @@ export default function SubmittedIdeasPage() {
         </div>
         <div className={styles.rightWrapper}>
           <ContestStatusLabel title={status} />
-          <div className={styles.contestName}>
+          <div className={styles.organizer}>
             {organizer}
           </div>
         </div>

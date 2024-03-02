@@ -1,6 +1,6 @@
-import React, { useState } from "react"
+import React, { useState } from 'react'
 import styles from './styles.module.scss'
-import { Button, Divider, Card } from 'antd'
+import { Button, Divider, Card, ConfigProvider } from 'antd'
 
 const ContestInfo = () => {
   const [firstPrizeValue, setFirstPrizeValue] = useState(2500)
@@ -10,11 +10,17 @@ const ContestInfo = () => {
   const [vote, setVote] = useState(23142)
 
   return (
-    <div>
-      <img 
-        className={styles.banner} 
-        src="https://www.pvoil.com.vn/Data/Sites/1/media/tinpvoil/2021/20210924-p1.jpg" 
-        alt="Banner" 
+    <ConfigProvider
+      theme={{
+        token: {
+          fontFamily: 'Play',
+        },
+      }}
+    >
+      <img
+        className={styles.banner}
+        src="https://www.pvoil.com.vn/Data/Sites/1/media/tinpvoil/2021/20210924-p1.jpg"
+        alt="Banner"
       />
       <div className={styles.container}>
         <h1 className={styles.contestName}>Contest Info</h1>
@@ -28,7 +34,7 @@ const ContestInfo = () => {
             </div>
           </div>
           {/* First prize box */}
-          <div className={styles.prizeBox}>
+          <div className={styles.prizeBox} style={{ margin: '0 40px'}}>
             <h3 className={styles.prizeValue}>${firstPrizeValue}</h3>
             <div className={styles.firstPrizeBox}>
               <div className={styles.prizeBoxTitle}>1st Prize</div>
@@ -49,7 +55,7 @@ const ContestInfo = () => {
         }}>
           <Button type="primary" className={styles.submitButton}>
             Nộp ý tưởng
-          </Button> 
+          </Button>
         </div>
         <Divider />
         <div className={styles.contestDescription}>
@@ -86,13 +92,13 @@ const ContestInfo = () => {
             <h3>Danh sách vòng thi</h3>
             <div className={styles.roundCard}>
               <a className={styles.roundTitle}><p>
-                Vòng 1: Vòng loại  
+                Vòng 1: Vòng loại
               </p></a>
               <span className={styles.roundDescription}>13/04/2023 08:00 - 01/08/2023 12:00</span>
             </div>
             <div className={styles.roundCard}>
               <a className={styles.roundTitle}><p>
-                Vòng 2: Vòng thi bán kết  
+                Vòng 2: Vòng thi bán kết
               </p></a>
               <span className={styles.roundDescription}>13/04/2023 08:00 - 01/08/2023 12:00</span>
             </div>
@@ -105,7 +111,7 @@ const ContestInfo = () => {
           </div>
         </div>
       </div>
-    </div>
+    </ConfigProvider>
   )
 }
 

@@ -1,117 +1,102 @@
-.banner{
+@import "../../../styles/variable.scss";
+
+.banner {
 	width: 100%;
 	background-color: #1e1e1e;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-
 }
-.container{
+.container {
 	padding: 20px;
 }
-.contestName{
+.contestName {
 	font-size: 5rem;
-	color: #FF7510;
+	color: #ff7510;
 }
-.contestPrize{
-	margin: 0 auto;
-	width: 40vw;
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	align-items: end;
+.contestPrize {
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
 	text-align: center;
 }
-.prizeValue{
-	font-size: 5rem;
-	color: #FF7510;
+.prizeValue {
+	font-size: 6rem;
+	color: #ff7510;
 	margin-bottom: 20px;
 	font-weight: bold;
 }
-.submitButton{
+.submitButton {
 	width: 450px;
 	height: 100px;
 	text-transform: uppercase;
 	font-size: 4rem;
 	font-weight: bold;
 	border-radius: 25px;
-	background-color: #FF7510;
-	box-shadow: 4px 4px 10px 0 rgba($color: #fff, $alpha: 0.70);
+	background-color: #ff7510;
+	box-shadow: 4px 4px 10px 0 rgba($color: #fff, $alpha: 0.7);
 }
-.firstPrizeBox{
-	margin: 0 auto;
+
+.prizeBoxParent {
+	margin: 0;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: center;
 	padding: 20px;
+	background-color: #1e1e1e;
+	border-radius: 10px;
+	width: 200px;
+	box-shadow: 4px 4px 10px #444;
+}
+
+.firstPrizeBox {
+	@extend .prizeBoxParent;
 	height: 250px;
-	background-color: #1e1e1e;
-	border-radius: 10px;
-	width: 200px;
-	box-shadow: 4px 4px 10px #444;
-
 }
-.secondPrizeBox{
-	margin: 0 auto;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	padding: 20px;
+.secondPrizeBox {
+	@extend .prizeBoxParent;
 	height: 200px;
-	background-color: #1e1e1e;
-	border-radius: 10px;
-	width: 200px;
-	box-shadow: 4px 4px 10px #444;
-
 }
-.thirdPrizeBox{
-	margin: 0 auto;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	padding: 20px;
+.thirdPrizeBox {
+	@extend .prizeBoxParent;
 	height: 150px;
-	background-color: #1e1e1e;
-	border-radius: 10px;
-	width: 200px;
-	box-shadow: 4px 4px 10px #444;
-
 }
-.prizeBoxTitle{
-	font-size: 5rem;
+
+.prizeBoxTitle {
+	font-family: $contest-heading-font-family;
+	font-size: 3.4rem;
 	color: white;
 }
-.contestDescription{
+.contestDescription {
 	display: grid;
 	grid-template-columns: 4fr 3fr 3fr;
 	gap: 10px;
 }
 
-.timeline{
+.timeline {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	gap: 10px;
 }
-.time{
+.time {
 	font-size: 2rem;
-	color: #FF7510;
+	color: #ff7510;
 }
-.roundCard{
+.roundCard {
 	width: 80%;
 	background-color: #1e1e1e;
 	padding: 10px;
 	margin: 10px 0 0 10px;
 	border-radius: 10px;
 }
-.roundTitle{
+.roundTitle {
 	font-size: 2rem;
 	color: #ffffff;
-	:hover{
-		color: #FF7510;
+	:hover {
+		color: #ff7510;
 	}
 }
-.roundDescription{
+.roundDescription {
 	color: #888;
 }

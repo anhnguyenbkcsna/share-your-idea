@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 
 export default function HomePage() {
   const navigate = useNavigate()
+  const [contests, setContests] = React.useState([])
 
   const handleCreateEventClick = () => {
     navigate('/new')
@@ -52,10 +53,22 @@ export default function HomePage() {
 
         {/* List event card */}
       </div>
-      <div className={styles.contestEventCardList}>
-        <ContestEventCard />
-        <ContestEventCard />
-        <ContestEventCard />
+
+      <div className={styles.contestEventContainer}>
+        <h1
+          style={{
+            color: '#FF7510',
+            fontSize: '5rem',
+            fontFamily: 'Michroma, sans-serif'
+          }}
+        >
+          Highlight
+        </h1>
+        <div className={styles.contestEventCardList}>
+          <ContestEventCard />
+          <ContestEventCard />
+          <ContestEventCard />
+        </div>
       </div>
     </>
   )

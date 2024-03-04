@@ -22,12 +22,13 @@ class ContestViewSet(viewsets.ViewSet):
     serializer_class = ContestSerializer
     ENT_TYPE = "contest"
     
-    @action(detail=False, methods=["GET"], url_path=r"list")
-    def get_contests(self):
+    @action(detail=False, methods=["GET"], url_path=r"contests")
+    def get_contests(self, request):
       return CrudHelper.get_all(self.collection, self.ENT_TYPE)
     
-    @action(detail=False, methods=["GET", "POST"], url_path=r"(?P<id>[^/.]+)")
-    def crud_contest(self, request, id):
+    # (?P<id>[^/.]+)
+    @action(detail=False, methods=["GET", "POST"], url_path=r"contests/(?P<id>[a-z0-9]{24})")
+    def crud_contest(self, request, id=None):
       if request.method == "GET":
         return CrudHelper.get_by_id(id, self.collection, self.ENT_TYPE)
       elif request.method == "POST":

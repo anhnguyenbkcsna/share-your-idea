@@ -33,7 +33,7 @@ from rest_framework import routers
 router = routers.DefaultRouter()
 router.register(r'', AccountViewSet, basename='account')
 router.register(r'', IdeaViewSet, basename='idea')
-router.register(r'contests', ContestViewSet, basename='contest')
+router.register(r'', ContestViewSet, basename='contest')
 
 urlpatterns = [
     path(r"files/", FileUploadApiView.as_view(), name="file"),

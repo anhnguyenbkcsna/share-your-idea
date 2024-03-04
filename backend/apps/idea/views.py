@@ -3,12 +3,12 @@ from .serializers import IdeaSerializer
 from utils.utils import parse_json, connect_db
 from utils.crud import CrudHelper
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from auth.authentication import CustomAuthentication
 from rest_framework import viewsets
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from db.connection import db_connection
+from customs.db_connection import db_connection
+from customs.authentication import CustomAuthentication
 from .models import Idea
 from django.db.models.query import QuerySet
 import requests
@@ -24,7 +24,7 @@ class IdeaViewSet(viewsets.ViewSet):
     authentication_classes = [CustomAuthentication]
 
     @action(detail=False, methods=["GET"], url_path=r"ideas")
-    def get_all_ideas(self, request):
+    def get_ideas(self, request):
         return CrudHelper.get_all(self.collection, self.ENT_TYPE)
 
     @action(detail=False, methods=["GET"], url_path=r"ideas/innovator/(?P<id>[^/.]+)")

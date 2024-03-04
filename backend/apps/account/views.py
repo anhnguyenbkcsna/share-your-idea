@@ -8,9 +8,9 @@ from rest_framework import viewsets
 from bson.objectid import ObjectId
 from rest_framework.decorators import action
 from utils.crud import CrudHelper
-from db.connection import db_connection
+from customs.authentication import CustomAuthentication
+from customs.db_connection import db_connection
 from .serializers import InnovatorSerializer, CompanySerializer
-from auth.authentication import CustomAuthentication
 
 
 class AccountViewSet(viewsets.ViewSet):

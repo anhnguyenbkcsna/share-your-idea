@@ -14,3 +14,17 @@ export function OrangeBasicButton({onClick = ()=>{}, style = {}, text = '', chil
     </div>
   )
 }
+
+export function OrangeWhiteShadowButton({onClick = ()=>{}, style = {}, text = '', children}) {
+  return (
+    <div
+      style={{
+        ...style
+      }}
+      className={styles.orangeWhiteShadowButton}
+      onClick={onClick}
+    >
+      {text || children}
+    </div>
+  )
+}

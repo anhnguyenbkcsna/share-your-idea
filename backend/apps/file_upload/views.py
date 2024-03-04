@@ -8,7 +8,7 @@ from django.conf import settings
 import json
 import boto3
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from auth.authentication import CustomAuthentication
+from customs.authentication import CustomAuthentication
 
 
 class FileUploadApiView(APIView):

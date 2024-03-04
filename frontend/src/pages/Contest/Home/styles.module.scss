@@ -42,10 +42,15 @@
 	opacity: 0.8;
 	cursor: pointer;
 }
+
+.contestEventContainer {
+	padding: 70px 78px;
+	font-weight: normal;
+}
+
 .contestEventCardList{
-	max-width: 1600px;
-	margin: 100px auto;
+	// max-width: 1600px;
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
-	grid-gap: 30px;
+	grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+	grid-gap: 80px;
 }

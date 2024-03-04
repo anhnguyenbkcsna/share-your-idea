@@ -3,16 +3,25 @@ import styles from './styles.module.scss'
 import { Button } from 'antd'
 import { formatDate } from '../../../utils/utils'
 import { OrangeWhiteShadowButton } from '../../../pages/Contest/Components/button'
+import { useNavigate } from 'react-router-dom'
 
 const ContestEventCard = ({ contest }) => {
+  const navigate = useNavigate()
+
   const {
+    id,
     status,
     deadline,
-    location,
+    topic,
+    location = 'Chưa cập nhật',
     organizer,
-    note
+    otherInfo = 'Chưa cập nhật'
   } = contest
   const dateInStr = formatDate(deadline)
+
+  const handleViewClick = () => {
+    navigate(`/${id}`)
+  }
 
   return (
     <div className={styles.cardContainer}>
@@ -28,10 +37,10 @@ const ContestEventCard = ({ contest }) => {
         {`Địa điểm tổ chức: ${location}`}
       </div>
       <div className={styles.line}>
-        {`Chủ đề: ${location}`}
+        {`Chủ đề: ${topic}`}
       </div>
       <div className={styles.line}>
-        {`Yêu cầu: ${note}`}
+        {`Yêu cầu: ${otherInfo}`}
       </div>
       <div className={styles.footerContainer}>
         <OrangeWhiteShadowButton
@@ -39,6 +48,7 @@ const ContestEventCard = ({ contest }) => {
           style={{
             margin: '0 auto'
           }}
+          onClick={handleViewClick}
           text='Xem' />
       </div>
     </div>

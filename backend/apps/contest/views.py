@@ -22,16 +22,17 @@ class ContestViewSet(viewsets.ViewSet):
     serializer_class = ContestSerializer
     ENT_TYPE = "contest"
     
-    @action(detail=False, methods=["GET"], url_path=r"contests")
+    @action(detail=False, methods=["GET", "POST"], url_path=r"contests")
     def get_contests(self, request):
+      if request.method == "POST":
+        serializer = ContestSerializer(data=request.data)
+        return CrudHelper.post(self.collection, serializer, self.ENT_TYPE)
+      
       return CrudHelper.get_all(self.collection, self.ENT_TYPE)
     
+    
     # (?P<id>[^/.]+)
-    @action(detail=False, methods=["GET", "POST"], url_path=r"contests/(?P<id>[a-z0-9]{24})")
+    @action(detail=False, methods=["GET"], url_path=r"contests/(?P<id>[a-z0-9]{24})")
     def crud_contest(self, request, id=None):
       if request.method == "GET":
         return CrudHelper.get_by_id(id, self.collection, self.ENT_TYPE)
-      elif request.method == "POST":
-        serializer = ContestSerializer(data=request.data)
-        return CrudHelper.post(self.collection, serializer, self.ENT_TYPE)
-      return Exception("Method not allowed")

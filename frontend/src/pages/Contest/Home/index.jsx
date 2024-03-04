@@ -1,16 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles from './styles.module.scss'
 import ContestEventCard from '../../../components/Contest/EventCard'
 import { useNavigate } from 'react-router-dom'
+import { getContestList } from '../../../api/contest'
 // import contestBackground from '../../../assets/contest-bg.jpg'
 
 export default function HomePage() {
   const navigate = useNavigate()
-  const [contests, setContests] = React.useState([])
+  const [contest, setContest] = React.useState([])
+  const [contestList, setContestList] = React.useState([])
 
   const handleCreateEventClick = () => {
     navigate('/new')
   }
+
+  useEffect(() => {
+    getContestList().then(res => setContestList(res))
+  }, [])
 
   return (
     <>
@@ -65,9 +71,12 @@ export default function HomePage() {
           Highlight
         </h1>
         <div className={styles.contestEventCardList}>
-          <ContestEventCard />
-          <ContestEventCard />
-          <ContestEventCard />
+          {contestList?.map((contestItem, index) => (
+            <ContestEventCard
+              key={index}
+              contest={contestItem}
+            />
+          ))}
         </div>
       </div>
     </>

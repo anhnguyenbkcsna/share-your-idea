@@ -1,8 +1,8 @@
-import React from "react"
-import styles from "./styles.module.scss"
-import { Button } from "antd"
+import React from 'react'
+import styles from './styles.module.scss'
+import { Button } from 'antd'
 
-const ContestEventCard = () => {
+const ContestEventCard = ({ contest }) => {
   return (
     <div className={styles.cardContainer}>
       <div className={styles.headerContainer}>

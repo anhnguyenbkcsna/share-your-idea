@@ -16,6 +16,7 @@ class Contest(models.Model):
     round3Time = models.DateTimeField()
     location = models.TextField()
     
+    organizer = models.TextField()
     contestant = models.TextField()
     teamFormat = models.TextField()
     note = models.TextField()

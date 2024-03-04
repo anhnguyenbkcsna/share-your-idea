@@ -2,8 +2,8 @@ from utils.utils import connect_db
 from bson.objectid import ObjectId
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework import authentication
-from account.models import Account
-from db.connection import db_connection
+from apps.account.models import Account
+from .db_connection import db_connection
 
 
 class CustomAuthentication(authentication.BaseAuthentication):

@@ -15,7 +15,7 @@ class DBConnection(object):
     def connect_db(self) -> MongoClient:
         load_dotenv()
         CONNECTION_STRING = os.getenv("CONNECTION_STRING")
-        client = MongoClient(CONNECTION_STRING + "=true")
+        client = MongoClient(CONNECTION_STRING)
         return client.get_database("share-your-idea")
     
     def get_collection(self, collection_name) -> collection.Collection:

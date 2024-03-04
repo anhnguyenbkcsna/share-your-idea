@@ -4,6 +4,7 @@ from .utils import parse_json
 from pymongo.collection import ReturnDocument
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
+from customs.response import CustomResponse
 import copy
 
 
@@ -18,7 +19,7 @@ class CrudHelper:
     def get_all(collection, ent_type=""):
         ideas = parse_json(collection.find({}))
         ideas = list(map(CrudHelper.mapIdField, ideas))
-        return Response({"message": f"Got all {ent_type}", "data": ideas}, status=200)
+        return Response({"message": f"Get all {ent_type}s successfully", "data": ideas}, status=200)
 
     @staticmethod
     def get_by_id(id, collection, ent_type=""):
@@ -26,9 +27,9 @@ class CrudHelper:
         
         if idea:
             idea = CrudHelper.mapIdField(idea)
-            return Response({"message": f"Got an {ent_type}", "data": idea}, status=200)
+            return Response({"message": f"Get {ent_type} successfully", "data": idea}, status=200)
         else:
-            return Response({"message": f"Cannot find {ent_type}"}, status=400)
+            return Response({"message": f"Can't find {ent_type}"}, status=400)
 
 
     @staticmethod
@@ -37,19 +38,16 @@ class CrudHelper:
             inserted_document_id = collection.insert_one(
                 serializer.validated_data
             ).inserted_id
-            return Response(
-                {
-                    "message": f"Created new {ent_type}",
-                    "data": parse_json(inserted_document_id),
-                },
-                status=200,
+            return CustomResponse(
+                message=f"Created {ent_type} successfully",
+                data=parse_json(inserted_document_id)
             )
-        return Response({"message": f"Cannot create {ent_type}"}, status=400)
+        return CustomResponse(message=f"Error when creating {ent_type}", status=400)
 
     @staticmethod
     def post_with_file(collection, serializer, file_list, ent_type=""):
         if not serializer.is_valid(raise_exception=True):
-            return Response({"message": f"Cannot create {ent_type}"}, status=400)
+            return Response({"message": f"Error when creating {ent_type}"}, status=400)
 
         new_idea_id = collection.insert_one(serializer.validated_data).inserted_id
 
@@ -69,7 +67,7 @@ class CrudHelper:
 
         return Response(
             {
-                "message": f"Created new {ent_type}",
+                "message": f"Created {ent_type} successfully",
                 "data": parse_json(new_idea_id),
             },
             status=200,
@@ -87,18 +85,18 @@ class CrudHelper:
             )
             
             if not document_after_updated:
-                return Response({"message": f"Cannot find {ent_type}"}, status=400)
+                return Response({"message": f"Can't find {ent_type}"}, status=400)
 
             if document_after_updated:
                 return Response(
                     {
-                        "message": f"Updated {ent_type}",
+                        "message": f"Updated {ent_type} successfully",
                         "data": parse_json(document_after_updated),
                     },
                     status=200,
                 )
 
-        return Response({"message": f"Cannot update {ent_type}"}, status=400)
+        return Response({"message": f"Can't update {ent_type}"}, status=400)
     
     @staticmethod
     def patch_with_file(id, collection, serializer, file_list, ent_type=""):
@@ -113,7 +111,7 @@ class CrudHelper:
             )
             
             if not document_after_updated:
-                return Response({"message": f"Cannot find {ent_type}"}, status=400)
+                return Response({"message": f"Can't find {ent_type}"}, status=400)
             
             file_paths = copy.copy(document_after_updated["files"])
             for request_file in file_list:
@@ -132,13 +130,13 @@ class CrudHelper:
             if document_after_updated:
                 return Response(
                     {
-                        "message": f"Updated {ent_type}",
+                        "message": f"Updated {ent_type} successfully",
                         "data": parse_json(document_after_updated),
                     },
                     status=200,
                 )
 
-        return Response({"message": f"Cannot update {ent_type}"}, status=400)
+        return Response({"message": f"Can't update {ent_type}"}, status=400)
 
 
     @staticmethod
@@ -148,10 +146,10 @@ class CrudHelper:
         if response:
             return Response(
                 {
-                    "message": f"""Deleted {ent_type}""",
+                    "message": f"""Delete {ent_type} successfully""",
                     "data": parse_json({"_id": ObjectId(id)}),
                 },
                 status=200,
             )
         else:
-            return Response({"message": f"""Cannot find {ent_type}"""}, status=400)
+            return Response({"message": f"""Can't find {ent_type}"""}, status=400)

@@ -24,7 +24,7 @@ class IdeaViewSet(viewsets.ViewSet):
     authentication_classes = [CustomAuthentication]
 
     @action(detail=False, methods=["GET"], url_path=r"ideas")
-    def get_all_ideas(self, request):
+    def get_ideas(self, request):
         return CrudHelper.get_all(self.collection, self.ENT_TYPE)
 
     @action(detail=False, methods=["GET"], url_path=r"ideas/innovator/(?P<id>[^/.]+)")

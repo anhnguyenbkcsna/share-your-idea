@@ -11,6 +11,7 @@ from customs.db_connection import db_connection
 from customs.authentication import CustomAuthentication
 from customs.response import CustomResponse
 from .serializers import ContestSerializer
+from utils.crud import CrudHelper
 
 
 class ContestViewSet(viewsets.ViewSet):
@@ -19,33 +20,17 @@ class ContestViewSet(viewsets.ViewSet):
     # authentication_classes = [CustomAuthentication]
     # queryset = Account.objects.all()
     serializer_class = ContestSerializer
+    ENT_TYPE = "contest"
     
-    @action(detail=False, methods=["GET"], url_path=r"contests")
-    def get_all_contests(self, request):
-      return Response({"message": "Welcome to contest"})
+    @action(detail=False, methods=["GET"], url_path=r"list")
+    def get_contests(self):
+      return CrudHelper.get_all(self.collection, self.ENT_TYPE)
     
-    @action(detail=False, methods=["POST"], url_path=r"contests")
-    def create_contest(self, request):
-      serializer = ContestSerializer(data=request.data)
-      if serializer.is_valid(raise_exception=True):
-        serializer.save()
-        return CustomResponse(data=serializer.data)
-      return Response({"message": "Welcome to contest"})
-
-    # @action(detail=False, methods=["GET"], url_path=r"accounts")
-    # def users(self, request):
-    #     return CrudHelper.get_all(self.collection, self.ENT_TYPE)
-
-    # @action(detail=False, methods=["GET", "PATCH"], url_path=r"accounts/(?P<id>[^/.]+)")
-    # def user(self, request, id=None):
-    #     if not id:
-    #         return Response({"message": f"Cannot find {self.ENT_TYPE}"}, status=400)
-    #     if request.method == "GET":
-    #         return CrudHelper.get_by_id(id, self.collection, self.ENT_TYPE)
-    #     elif request.method == "PATCH":
-    #         role = self.collection.find_one({"_id": ObjectId(id)})["role"]
-    #         if role == Role.INNOVATOR:
-    #             serializer = InnovatorSerializer(data=request.data, partial=True)
-    #         if role == Role.COMPANY:
-    #             serializer = CompanySerializer(data=request.data, partial=True)
-    #         return CrudHelper.patch(id, self.collection, serializer, self.ENT_TYPE)
+    @action(detail=False, methods=["GET", "POST"], url_path=r"(?P<id>[^/.]+)")
+    def crud_contest(self, request, id):
+      if request.method == "GET":
+        return CrudHelper.get_by_id(id, self.collection, self.ENT_TYPE)
+      elif request.method == "POST":
+        serializer = ContestSerializer(data=request.data)
+        return CrudHelper.post(self.collection, serializer, self.ENT_TYPE)
+      return Exception("Method not allowed")

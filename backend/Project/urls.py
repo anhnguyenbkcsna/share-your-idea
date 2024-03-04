@@ -15,14 +15,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-# from rest_framework import routers
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from company.views import CompanyApiView
-from file_upload.views import FileUploadApiView
-from account.views import AccountViewSet
-from idea.views import IdeaViewSet
+from apps.company.views import CompanyApiView
+from apps.file_upload.views import FileUploadApiView
+from apps.account.views import AccountViewSet
+from apps.contest.views import ContestViewSet
+from apps.idea.views import IdeaViewSet
 from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
@@ -31,15 +31,14 @@ from rest_framework import routers
 
 
 router = routers.DefaultRouter()
-router.register(r'', AccountViewSet, basename='accounts')
-router.register(r'', IdeaViewSet, basename='ideas')
+router.register(r'', AccountViewSet, basename='account')
+router.register(r'', IdeaViewSet, basename='idea')
+router.register(r'contests', ContestViewSet, basename='contest')
 
 urlpatterns = [
-    # path("poe", PoeApiView.as_view(), name="poe-api")
-    # path("admin", admin.site.urls),
-    # path("user", UserApiView.as_view(), name="user"),
     path(r"files/", FileUploadApiView.as_view(), name="file"),
     path(r"requirements/", CompanyApiView.as_view(), name="requirement"),
+    # path("user", UserApiView.as_view(), name="user"),
     # path("innovator", InnovatorApiView.as_view(), name="innovator"),
     path(r"accounts/refresh/", TokenRefreshView.as_view(), name='token-refresh'),
     path('', include(router.urls)),

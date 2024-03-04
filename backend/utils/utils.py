@@ -33,8 +33,9 @@ def validate_google_id_token(id_token):
 
     return True, response.json()
 
+
 def get_id_from_request(request):
     try:
         return request._auth["user_id"]
     except:
-        return None 
+        return None

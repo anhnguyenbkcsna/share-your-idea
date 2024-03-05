@@ -84,3 +84,9 @@ ul {
 ul > li {
   padding-top: 5px;
 }
+
+/* Custom React Quill */
+.ql-editor {
+  font-family: 'Play', sans-serif;
+  font-size: 1.7rem;
+}

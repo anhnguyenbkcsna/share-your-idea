@@ -1,16 +1,22 @@
 
 
 .inputContainer {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	height: 100%;
+	column-gap: 10%;
 	width: 100%;
 }
 
-.left {
-	flex: 1;
-}
+// .left {
+// 	flex: 1;
+// }
 
-.right {
-	flex: 1;
+// .right {
+// 	flex: 1;
+// }
+
+.bottom {
+	grid-column-start: 1;
+  grid-column-end: 3;
 }

@@ -37,7 +37,9 @@ const LoginPage = () => {
           email: data.email,
           role: data.role,
         })
-        navigate('/')
+        // navigate('/')
+        let subdomain = searchParams.get('subdomain') !== null ? `${searchParams.get('subdomain')}.` : ''
+        window.location.href = `${window.location.protocol}//${subdomain}${window.location.host}/`
       })
       .catch((err) => {
         console.log(err.message)

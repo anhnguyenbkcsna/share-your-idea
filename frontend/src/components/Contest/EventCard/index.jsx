@@ -1,6 +1,5 @@
 import React from 'react'
 import styles from './styles.module.scss'
-import { Button } from 'antd'
 import { formatDate } from '../../../utils/utils'
 import { OrangeWhiteShadowButton } from '../../../pages/Contest/Components/button'
 import { useNavigate } from 'react-router-dom'

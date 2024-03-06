@@ -1,16 +1,19 @@
-import React from "react"
-import styles from "./styles.module.scss"
-import { GoogleLogin } from "@react-oauth/google"
-import axios from "axios"
-import loginImg from "../../assets/login.png"
-import { useNavigate } from "react-router-dom"
-import { useAuth } from "../../hooks/auth"
-import { authEndpoint } from "../../utils/api.constants.js"
-import { localStorageConstant } from "../../utils/global.constants"
+import React from 'react'
+import styles from './styles.module.scss'
+import { GoogleLogin } from '@react-oauth/google'
+import axios from 'axios'
+import loginImg from '../../assets/login.png'
+import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../../hooks/auth'
+import { authEndpoint } from '../../utils/api.constants.js'
+import { localStorageConstant } from '../../utils/global.constants'
+import { useSearchParams } from 'react-router-dom'
+
 
 const LoginPage = () => {
   const navigate = useNavigate()
   const { login } = useAuth()
+  const [searchParams] = useSearchParams()
 
   const validateUserToken = (token) => {
     let newFormdata = new FormData()
@@ -19,7 +22,7 @@ const LoginPage = () => {
     axios
       .post(authEndpoint, newFormdata, {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       })
       .then((res) => {
@@ -32,13 +35,16 @@ const LoginPage = () => {
         login({
           name: data.name,
           email: data.email,
-          role: data.role,  
+          role: data.role,
         })
         navigate('/')
       })
       .catch((err) => {
         console.log(err.message)
-        navigate('/profile')
+
+        const subDomainQueryParam = searchParams.get('subdomain') !== null ?
+          `?subdomain=${searchParams.get('subdomain')}` : ''
+        navigate('/profile' + subDomainQueryParam)
       })
   }
 

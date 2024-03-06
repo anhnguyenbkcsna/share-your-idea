@@ -89,7 +89,7 @@ export default function CreateContestPage() {
         <OrangeBasicButton
           style={{ marginBottom: 90 }}
           onClick={handleSubmitClick}
-          text='Create'
+          text='Tạo cuộc thi'
         />
       </div>
     </div>

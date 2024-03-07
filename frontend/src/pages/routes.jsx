@@ -20,7 +20,6 @@ import { default as ContestPublicLayout } from '../layout/Contest/Public'
 import ContestInfo from './Contest/Info'
 import Faq from './FAQ'
 import SubmittedIdeasPage from './Contest/SubmittedIdeas'
-import { isSubdomainExist } from '../utils/utils'
 import ContestIdeaDetailPage from './Contest/IdeaDetail'
 import { useDomain } from '../hooks/domain'
 

@@ -34,7 +34,7 @@ export function ContestInput({
           padding: '10px 12px',
           color: '#fff',
           fontFamily: 'inherit',
-          width: '100%',
+          width: '100%'
         }}
       />
     </div>

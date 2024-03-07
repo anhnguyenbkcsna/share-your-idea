@@ -77,3 +77,15 @@
 	height: 300px;
 	resize: none;
 }
+
+.notFoundElementContainer {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	text-transform: uppercase;
+	color: #fff;
+	font-size: 5rem;
+	text-align: center;
+	margin-top: 18rem;
+}

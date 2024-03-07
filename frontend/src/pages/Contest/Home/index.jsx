@@ -7,7 +7,6 @@ import { getContestList } from '../../../api/contest'
 
 export default function HomePage() {
   const navigate = useNavigate()
-  const [contest, setContest] = React.useState([])
   const [contestList, setContestList] = React.useState([])
 
   const handleCreateEventClick = () => {

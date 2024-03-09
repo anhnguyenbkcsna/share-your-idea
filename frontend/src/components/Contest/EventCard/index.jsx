@@ -9,7 +9,6 @@ const ContestEventCard = ({ contest }) => {
 
   const {
     id,
-    status,
     deadline,
     topic,
     location = 'Chưa cập nhật',
@@ -25,7 +24,7 @@ const ContestEventCard = ({ contest }) => {
   return (
     <div className={styles.cardContainer}>
       <div className={styles.headerContainer}>
-        <div className={styles.headerTitle}>{status ? 'opening' : 'closed'}</div>
+        <div className={styles.headerTitle}>{contest?.status ? 'opening' : 'closed'}</div>
         <div className={styles.headerDate}>{dateInStr}</div>
       </div>
       <h3 className={styles.title}>{organizer}</h3>

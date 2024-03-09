@@ -115,9 +115,20 @@
 
 .contestDetail {
 	grid-column-start: 1;
-  grid-column-end: 3;
+	grid-column-end: 3;
 
 	ol {
 		padding: 0;
+	}
+	p {
+		font-size: 2.2rem;
+		margin: 0 0 4px 0;
+	}
+	ul {
+		margin: 10px 0;
+		list-style: circle;
+	}
+	ul li {
+		margin-left: 2rem;
 	}
 }

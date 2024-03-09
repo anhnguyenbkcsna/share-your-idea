@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styles from './styles.module.scss'
 import { useNavigate } from 'react-router-dom'
 import genericStyles from '../styles.module.scss'
-import { ContestInput, ContestTextarea } from '../Components/input'
+import { ContestStartAndEndDateInput, ContestInput, ContestTextarea } from '../Components/input'
 import { OrangeBasicButton } from '../Components/button'
 import { createContest } from '../../../api/contest'
 // import contestBackground from '../../../assets/contest-bg.jpg'
@@ -14,11 +14,12 @@ export default function CreateContestPage() {
   const handleSubmitClick = () => {
     createContest(data)
       .then(res => {
-        if (res.status === 200)
+        if (res?.status === 200)
         {
           navigate('/')
         }
       })
+      .catch()
   }
 
   return (
@@ -40,7 +41,7 @@ export default function CreateContestPage() {
       <div className={styles.inputContainer}>
         <div className={styles.left}>
           <ContestInput label={'Tên cuộc thi'} setFunc={setData} fieldName={'name'} />
-          <ContestInput label={'Hạn chót nộp đề tài'} setFunc={setData} fieldName={'deadline'} type={'date'} />
+          <ContestInput label={'Hạn chót nộp đề tài'} setFunc={setData} fieldName={'deadline'} type={'datetime-local'} />
           <ContestInput label={'Chủ đề'} setFunc={setData} fieldName={'topic'} />
           <ContestInput label={'Địa điểm tổ chức'} setFunc={setData} fieldName={'location'} />
           <ContestInput label={'Thông tin thêm'} setFunc={setData} fieldName={'otherInfo'} />
@@ -71,17 +72,14 @@ export default function CreateContestPage() {
           <ContestInput label={'Email liên hệ'} setFunc={setData} type='email' fieldName={'email'} />
           {/* <ContestInput label={'Đối tượng tham gia'} setFunc={setData} fieldName={'contestant'} />
           <ContestInput label={'Hình thức dự thi'} setFunc={setData} fieldName={'teamFormat'} /> */}
-          <ContestInput
+          <ContestStartAndEndDateInput
             label={'Thời gian dự kiến diễn ra vòng 2'}
             setFunc={setData}
-            type='date'
             fieldName={'round2Time'} />
-          <ContestInput
+          <ContestStartAndEndDateInput
             label={'Thời gian dự kiến diễn ra vòng chung kết'}
             setFunc={setData}
-            type='date'
-            fieldName={'round3Time'}
-          />
+            fieldName={'round3Time'} />
         </div>
         <div className={styles.bottom}>
           <ContestTextarea label={'Mô tả cụ thể'} setFunc={setData} fieldName={'description'} />

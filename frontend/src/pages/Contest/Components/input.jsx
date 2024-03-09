@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import 'quill/dist/quill.snow.css'
 import ReactQuill from 'react-quill'
 import styles from '../styles.module.scss'
@@ -37,6 +37,81 @@ export function ContestInput({
           width: '100%'
         }}
       />
+    </div>
+  )
+}
+
+export function ContestStartAndEndDateInput({
+  label,
+  setFunc = () => { },
+  style = {},
+  fieldName
+}) {
+  const handleOnChangeStart = (e) => {
+    setFunc((prev) => ({
+      ...prev, [fieldName]: {
+        start: e.target.value,
+        end: prev[fieldName]?.end
+      }
+    }))
+  }
+
+  const handleOnChangeEnd = (e) => {
+    setFunc((prev) => ({
+      ...prev, [fieldName]: {
+        start: prev[fieldName]?.start,
+        end: e.target.value
+      } }))
+  }
+
+  // useEffect(() => {
+  //   console.log(setFunc(prev => {
+  //     console.log(prev)
+  //     return prev
+  //   }))
+  // })
+
+  return (
+    <div style={{ ...style, }}>
+      <label style={{ fontSize: '1.7rem', }}>
+        {label}
+      </label>
+      <br />
+      <div>
+        <input
+          type={'datetime-local'}
+          onChange={handleOnChangeStart}
+          style={{
+            outline: 'none',
+            background: 'transparent',
+            border: '1px solid #fff',
+            fontSize: '1.7rem',
+            marginTop: 10,
+            marginBottom: 40,
+            padding: '10px 12px',
+            color: '#fff',
+            fontFamily: 'inherit',
+            width: '48%',
+            marginRight: '4%'
+          }}
+        />
+        <input
+          type={'datetime-local'}
+          onChange={handleOnChangeEnd}
+          style={{
+            outline: 'none',
+            background: 'transparent',
+            border: '1px solid #fff',
+            fontSize: '1.7rem',
+            marginTop: 10,
+            marginBottom: 40,
+            padding: '10px 12px',
+            color: '#fff',
+            fontFamily: 'inherit',
+            width: '48%'
+          }}
+        />
+      </div>
     </div>
   )
 }

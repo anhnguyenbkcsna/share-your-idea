@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom'
 import { getContestById } from '../../../api/contest'
 import { ContestNotFoundElement } from '../Components/error'
 import { GlowingBall } from '../Components/glowingBall'
-
+import Parser from 'html-react-parser'
 
 const ContestInfo = () => {
   const [firstPrizeValue, setFirstPrizeValue] = useState(2500)
@@ -27,6 +27,19 @@ const ContestInfo = () => {
         console.log(err)
       })
   }, [])
+
+  const convertToHtml = () => {
+    let res = ''
+    try
+    {
+      res = Parser(idea?.description)
+    }
+    catch (e)
+    {
+      res = idea?.description
+    }
+    return res
+  }
 
   return idea ? (
     <ConfigProvider
@@ -108,7 +121,7 @@ const ContestInfo = () => {
             </div>
 
             <div className={styles.contestDetail}>
-              {idea?.description}
+              {convertToHtml()}
             </div>
           </div>
 

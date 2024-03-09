@@ -19,9 +19,7 @@ export default function HomePage() {
 
   return (
     <>
-      <div
-        className={styles.contestHomeContainer}
-      >
+      <div className={styles.contestHomeContainer}>
         <div className={styles.contestHomeBg} />
         <h1
           style={{
@@ -61,6 +59,7 @@ export default function HomePage() {
 
       <div className={styles.contestEventContainer}>
         <h1
+          id='contest-heading'
           style={{
             color: '#FF7510',
             fontSize: '5rem',

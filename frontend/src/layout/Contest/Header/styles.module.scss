@@ -1,7 +1,10 @@
 
 @import '../../../styles/variable.scss';
 
+$header-height: 94px;
+
 .container {
+	position: relative;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -10,7 +13,12 @@
 	font-size: 2rem;
 	padding: 0 78px;
 	color: #fff;
-	height: 94px;
+	height: $header-height;
+}
+
+.contestLogo {
+	height: 100%;
+	line-height: $header-height;
 }
 
 .contestLogo:hover {
@@ -20,4 +28,13 @@
 
 .signIn {
 	@extend .contestLogo;
+}
+
+.navItem {
+	@extend .signIn;
+	text-decoration: underline;
+}
+
+.navItem:not(:last-child) {
+	margin-right: 56px;
 }

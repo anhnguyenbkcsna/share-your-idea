@@ -89,3 +89,15 @@
 	text-align: center;
 	margin-top: 18rem;
 }
+
+.glowingBall {
+	position: absolute;
+	width: 150px;
+	height: 150px;
+	animation: phase 6s infinite;
+	border-radius: 50%;
+	aspect-ratio: 1/1;
+	background-color: white;
+	filter: blur(3vmax);
+	z-index: 9999;
+}

@@ -5,9 +5,7 @@ import datetime
 
 
 class DateRangeField(models.JSONField):
-    def __init__(self, start=datetime.datetime.now(), end=datetime.datetime.now(), *args, **kwargs):
-        kwargs["start"] = start
-        kwargs["end"] = end
+    def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
     
     def from_db_value(self, value, expression, connection):

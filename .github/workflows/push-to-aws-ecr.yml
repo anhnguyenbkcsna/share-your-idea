@@ -41,7 +41,7 @@ jobs:
           REPOSITORY: woridea
           IMAGE_TAG: latest
         run: |
-          echo ${{ GITHUB_WORKSPACE }}
+          echo ${{ github.workspace }}
           docker build -t $REPOSITORY .
           docker tag $REPOSITORY:$IMAGE_TAG $REGISTRY/$REPOSITORY:$IMAGE_TAG
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG

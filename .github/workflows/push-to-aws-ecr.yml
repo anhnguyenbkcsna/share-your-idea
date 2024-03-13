@@ -40,7 +40,7 @@ jobs:
         name: Build
         uses: docker/build-push-action@v5
         with:
-          context: /backend
+          context: "{{defaultContext}}:backend"
           push: false
       -  
         name: Tag and push docker image to Amazon ECR

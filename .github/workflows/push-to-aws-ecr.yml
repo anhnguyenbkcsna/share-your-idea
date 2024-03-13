@@ -40,6 +40,7 @@ jobs:
           REGISTRY: ${{ needs.login-to-ecr.outputs.registry }}
           REPOSITORY: woridea
           IMAGE_TAG: latest
+        working-directory: backend/
         run: |
           docker build -f ./backend/Dockerfile -t $REPOSITORY .
           docker tag $REPOSITORY:$IMAGE_TAG $REGISTRY/$REPOSITORY:$IMAGE_TAG

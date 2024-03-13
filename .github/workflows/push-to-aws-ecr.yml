@@ -4,10 +4,7 @@ on:
     branches: [main]
 
 env:
-  AWS_REGION: ${{ vars.AWS_REGION }}
-  AWS_ECR_URI: ${{ vars.AWS_ECR_URI }}
-  AWS_ECR_USERNAME: ${{ secrets.AWS_ECR_USERNAME }}
-  AWS_ECR_PASSWORD: ${{ secrets.AWS_ECR_PASSWORD }}
+  AWS_REGION: ${{ env.AWS_REGION }}
 
 jobs:
   build:

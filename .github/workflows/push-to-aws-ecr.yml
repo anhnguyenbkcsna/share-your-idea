@@ -13,6 +13,9 @@ jobs:
       - 
         name: Checkout
         uses: actions/checkout@v4
+      -
+        name: Change current directory
+        run: cd ./backend
   login-to-ecr:
     runs-on: ubuntu-latest
     needs: check-out
@@ -35,11 +38,10 @@ jobs:
       -  
         name: Build, tag, and push docker image to Amazon ECR
         env:
-          REGISTRY: ${{ job.login-to-ecr.steps.login-ecr.outputs.registry }}
+          REGISTRY: ${{ jobs.login-to-ecr.steps.login-ecr.outputs.registry }}
           REPOSITORY: woridea
           IMAGE_TAG: latest
         run: |
-          cd ./backend
           docker build -t $REPOSITORY .
           docker tag $REPOSITORY:$IMAGE_TAG $REGISTRY/$REPOSITORY:$IMAGE_TAG
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG

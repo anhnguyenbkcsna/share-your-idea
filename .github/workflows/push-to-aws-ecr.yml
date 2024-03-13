@@ -32,9 +32,6 @@ jobs:
     needs: login-to-ecr
     runs-on: ubuntu-latest
     steps:
-      - 
-        name: Change current directory
-        run: cd ./backend
       -  
         name: Build, tag, and push docker image to Amazon ECR
         env:
@@ -42,6 +39,8 @@ jobs:
           REPOSITORY: woridea
           IMAGE_TAG: latest
         run: |
+          ls
+          cd ./backend
           docker build -t $REPOSITORY .
           docker tag $REPOSITORY:$IMAGE_TAG $REGISTRY/$REPOSITORY:$IMAGE_TAG
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG

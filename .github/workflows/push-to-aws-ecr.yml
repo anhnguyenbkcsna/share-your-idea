@@ -7,12 +7,18 @@ env:
   AWS_REGION: ${{ vars.AWS_REGION }}
 
 jobs:
-  build:
+  check-out: 
     runs-on: ubuntu-latest
     steps:
       - 
         name: Checkout
         uses: actions/checkout@v4
+      - 
+        name: Change current directory
+        run: cd ./backend
+  login-to-ecr:
+    runs-on: ubuntu-latest
+    steps:
       - 
         name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -24,6 +30,10 @@ jobs:
         name: Login to AWS ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
+  build-n-push:
+    needs: login-to-ecr
+    runs-on: ubuntu-latest
+    steps:
       -  
         name: Build, tag, and push docker image to Amazon ECR
         env:
@@ -33,15 +43,3 @@ jobs:
         run: |
           docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
-
-          
-      
-      # - 
-      #   name: Build the Image
-      #   run: docker build -t woridea .
-      # - 
-      #   name: Tag the Image
-      #   run: docker tag woridea:latest $AWS_ECR_URI/woridea:latest
-      # - 
-      #   name: Push to AWS ECR
-      #   run: docker push $AWS_ECR_URI/woridea:latest

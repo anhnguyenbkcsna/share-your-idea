@@ -13,9 +13,6 @@ jobs:
       - 
         name: Checkout
         uses: actions/checkout@v4
-      -
-        name: Change current directory
-        run: cd ./backend
   login-to-ecr:
     runs-on: ubuntu-latest
     needs: check-out
@@ -42,6 +39,6 @@ jobs:
           REPOSITORY: woridea
           IMAGE_TAG: latest
         run: |
-          docker build -t $REPOSITORY .
+          docker build -f backend/Dockerfile -t $REPOSITORY .
           docker tag $REPOSITORY:$IMAGE_TAG $REGISTRY/$REPOSITORY:$IMAGE_TAG
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG

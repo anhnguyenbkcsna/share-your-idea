@@ -10,12 +10,6 @@ env:
   AWS_ECR_PASSWORD: ${{ secrets.AWS_ECR_PASSWORD }}
 
 jobs:
-  # install-aws-cli:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v4
-    
   build:
     runs-on: ubuntu-latest
     steps:
@@ -23,16 +17,34 @@ jobs:
         name: Checkout
         uses: actions/checkout@v4
       - 
+        name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: $AWS_REGION
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      -
         name: Login to AWS ECR
-        run: 
-          aws ecr get-login-password --region $AWS_REGION
-          | docker login --username $AWS_ECR_USERNAME --password-stdin $AWS_ECR_PASSWORD  
-      - 
-        name: Build the Image
-        run: docker build -t woridea .
-      - 
-        name: Tag the Image
-        run: docker tag woridea:latest $AWS_ECR_URI/woridea:latest
-      - 
-        name: Push to AWS ECR
-        run: docker push $AWS_ECR_URI/woridea:latest
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+      -  
+        name: Build, tag, and push docker image to Amazon ECR
+        env:
+          REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          REPOSITORY: woridea
+          IMAGE_TAG: latest
+        run: |
+          docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
+          docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+
+          
+      
+      # - 
+      #   name: Build the Image
+      #   run: docker build -t woridea .
+      # - 
+      #   name: Tag the Image
+      #   run: docker tag woridea:latest $AWS_ECR_URI/woridea:latest
+      # - 
+      #   name: Push to AWS ECR
+      #   run: docker push $AWS_ECR_URI/woridea:latest

@@ -1,6 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './styles.module.scss'
-import { Button, Divider, Card, ConfigProvider } from 'antd'
+import { Button, Divider, ConfigProvider } from 'antd'
+import { useParams } from 'react-router-dom'
+import { getContestById } from '../../../api/contest'
+import { ContestNotFoundElement } from '../Components/error'
+
 
 const ContestInfo = () => {
   const [firstPrizeValue, setFirstPrizeValue] = useState(2500)
@@ -9,7 +13,21 @@ const ContestInfo = () => {
   const [submissions, setSubmissions] = useState(232)
   const [vote, setVote] = useState(23142)
 
-  return (
+  const [idea, setIdea] = useState()
+  const { contestId } = useParams()
+
+  useEffect(() => {
+    getContestById(contestId)
+      .then(res => {
+        console.log(res)
+        setIdea(res)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }, [])
+
+  return idea ? (
     <ConfigProvider
       theme={{
         token: {
@@ -34,7 +52,7 @@ const ContestInfo = () => {
             </div>
           </div>
           {/* First prize box */}
-          <div className={styles.prizeBox} style={{ margin: '0 40px'}}>
+          <div className={styles.prizeBox} style={{ margin: '0 40px' }}>
             <h3 className={styles.prizeValue}>${firstPrizeValue}</h3>
             <div className={styles.firstPrizeBox}>
               <div className={styles.prizeBoxTitle}>1st Prize</div>
@@ -112,6 +130,8 @@ const ContestInfo = () => {
         </div>
       </div>
     </ConfigProvider>
+  ) : (
+    <ContestNotFoundElement/>
   )
 }
 

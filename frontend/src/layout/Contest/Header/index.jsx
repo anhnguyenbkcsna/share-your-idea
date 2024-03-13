@@ -1,12 +1,19 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import styles from './styles.module.scss'
+import { useDomain } from '../../../hooks/domain'
+
 
 export default function ContestHeader() {
   const navigate = useNavigate()
+  const { domain } = useDomain()
 
   const handleLogoClick = () => {
     navigate('/')
+  }
+
+  const handleSignInClick = (e) => {
+    window.location.href = `${window.location.protocol}//${domain}/login?subdomain=contest`
   }
 
   return (
@@ -31,7 +38,10 @@ export default function ContestHeader() {
         <div style={{ marginRight: 56 }}>Events</div>
         <div>About us</div>
       </div>
-      <div>
+      <div
+        className={styles.signIn}
+        onClick={handleSignInClick}
+      >
         Sign In
       </div>
     </div>

@@ -34,7 +34,7 @@ export function ContestInput({
           padding: '10px 12px',
           color: '#fff',
           fontFamily: 'inherit',
-          width: '100%',
+          width: '100%'
         }}
       />
     </div>
@@ -75,72 +75,11 @@ export function ContestTextarea({
   label,
   setFunc = () => { },
   style = {},
-  fieldName,
-  type = 'text',
+  fieldName
 }) {
-  const ref = React.createRef()
-  const [isInputList, setIsInputList] = React.useState(false)
 
-  // const handleKeyDown = (e) => {
-  //   // console.log(e)
-  //   if (e.key === 'b' && e.ctrlKey)
-  //   {
-  //     e.preventDefault()
-  //     console.log(window.getSelection().toString())
-  //     console.log(e)
-  //   }
-  //   else if (e.key === 'i' && e.ctrlKey)
-  //   {
-
-  //   }
-
-
-  //   if (e.key === 'Tab')
-  //   {
-  //     e.preventDefault()
-  //     ref.current.value += '\t'
-  //   }
-  //   else if (e.key === ' ')
-  //   {
-  //     try
-  //     {
-  //       if (ref.current.value[ref.current.value.length - 1] === '-')
-  //       {
-  //         e.preventDefault()
-  //         ref.current.value += '\t'
-  //         setIsInputList(true)
-  //       }
-  //     }
-  //     catch (exception) { }
-  //   }
-  //   else if (e.key === 'Enter' && isInputList)
-  //   {
-  //     e.preventDefault()
-  //     ref.current.value += '\n-\t'
-  //   }
-  //   else if (e.key === 'Backspace')
-  //   {
-  //     if (isInputList)
-  //     {
-  //       try
-  //       {
-  //         if (ref.current.value.slice(-2) === '-\t')
-  //         {
-  //           e.preventDefault()
-  //           ref.current.value = ref.current.value.slice(0, -2)
-  //           setIsInputList(false)
-  //         }
-  //       }
-  //       catch (exception) { }
-  //     }
-  //   }
-
-  //   setFunc((prev) => {
-  //     console.log(prev[fieldName])
-  //     return { ...prev, [fieldName]: ref.current.value }
-  //   })
-  // }
   const handleChange = (value) => {
+    // console.log(value)
     setFunc((prev) => {
       return { ...prev, [fieldName]: value }
     })
@@ -152,31 +91,11 @@ export function ContestTextarea({
         {label}
       </label>
       <br />
-      {/* <textarea
-        ref={ref}
-        type={type}
-        onKeyDown={handleKeyDown}
-        style={{
-          outline: 'none',
-          background: 'transparent',
-          border: '1px solid #fff',
-          fontSize: '1.7rem',
-          marginTop: 10,
-          marginBottom: 40,
-          padding: '10px 12px',
-          color: '#fff',
-          fontFamily: 'inherit',
-          width: '100%',
-          height: 300,
-          'resize': 'none'
-        }}
-      /> */}
       <ReactQuill
         className={styles.textEditor}
         theme="snow"
         modules={QuillModules}
         formats={QuillFormats}
-        placeholder="write your content ...."
         onChange={handleChange}
       />
     </div>

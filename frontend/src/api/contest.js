@@ -13,6 +13,21 @@ export const getContestList = () => {
     })
 }
 
+export const getContestById = (id) => {
+  // if (!id) {
+  //   return null
+  // }
+  return axios
+    .get(`${contestEndpoint}${id}/`)
+    .then((res) => {
+      return res?.data?.data
+    })
+    .catch((err) => {
+      console.log('Error', err)
+      return null
+    })
+}
+
 export const createContest = (data) => {
   return axios
     .post(`${contestEndpoint}`, data)
@@ -26,17 +41,4 @@ export const createContest = (data) => {
     })
 }
 
-export const getContestById = (id) => {
-  if (!id) {
-    return null
-  }
-  return axios
-    .get(`${contestEndpoint}${id}/`)
-    .then((res) => {
-      return res?.data?.data
-    })
-    .catch((err) => {
-      console.log('Error', err)
-      return null
-    })
-}
+

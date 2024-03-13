@@ -12,6 +12,8 @@ import { createProfileApi } from '../../api/google'
 import CusCard from '../../components/CusCard'
 import { useNavigate } from 'react-router-dom'
 import { userRoles } from '../../utils/global.constants'
+import { useSearchParams } from 'react-router-dom'
+
 
 const dummyRequest = ({ file, onSuccess }) => {
   setTimeout(() => {
@@ -27,8 +29,9 @@ const getBase64 = (img, callback) => {
 }
 
 const normFile = (fileInfo) => {
-  const {fileList} = fileInfo
-  if (Array.isArray(fileList)) {
+  const { fileList } = fileInfo
+  if (Array.isArray(fileList))
+  {
     console.log(
       '>>>>>>  e?.fileInfo',
       fileList.map((file) => file.originFileObj)
@@ -40,11 +43,13 @@ const normFile = (fileInfo) => {
 
 const beforeUpload = (file) => {
   const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png'
-  if (!isJpgOrPng) {
+  if (!isJpgOrPng)
+  {
     message.error('Chỉ tải được định dạng JPG/PNG!')
   }
   const isLt2M = file.size / 1024 / 1024 < 2
-  if (!isLt2M) {
+  if (!isLt2M)
+  {
     message.error('Dung lượng không được quá 2MB!')
   }
   return isJpgOrPng && isLt2M
@@ -55,16 +60,19 @@ const CreateProfileForm = (props) => {
   const navigate = useNavigate()
   const [profileRole, setProfileRole] = useState('')
   const [loading, setLoading] = useState(false)
-  const [fileList ,setFileList] = useState([])
+  const [fileList, setFileList] = useState([])
   const [imageUrl, setImageUrl] = useState()
+  const [searchParams] = useSearchParams()
 
   const uploadFile = (info) => {
     console.log('info', info)
-    if (info.file.status === 'uploading') {
+    if (info.file.status === 'uploading')
+    {
       setLoading(true)
       return
     }
-    if (info.file.status === 'done') {
+    if (info.file.status === 'done')
+    {
       console.log('info.file.originFileObj', info.file.originFileObj)
       // Get this url from response in real world.
       getBase64(info.file.originFileObj, (url) => {
@@ -86,8 +94,15 @@ const CreateProfileForm = (props) => {
       data: values,
       files: fileList
     },
-    () => navigate('/'),
-    () => console.log('Cant submit profile form'))
+    () => {
+      // navigate('/')
+      let subdomain = searchParams.get('subdomain') !== null ? `${searchParams.get('subdomain')}.` : ''
+      window.location.href = `${window.location.protocol}//${subdomain}${window.location.host}/`
+      // console.log(`${window.location.protocol}//${subdomain}${window.location.host}/`)
+    },
+    () => {
+      console.log('Cant submit profile form')
+    })
   }
 
   // If possible, upload Avatar Photo
@@ -133,7 +148,7 @@ const CreateProfileForm = (props) => {
               label='Tên'
               rules={[{ required: true, message: 'Đây là trường bắt buộc!' }]}
             >
-              <Input.TextArea rows={1} allowClear maxLength={30}/>
+              <Input.TextArea rows={1} allowClear maxLength={30} />
             </Form.Item>
             <Form.Item
               name="email"
@@ -166,8 +181,8 @@ const CreateProfileForm = (props) => {
                 >
                   <Select
                     mode="tags"
-                    placeholder= "Lĩnh vực liên quan"
-                    onChange={(value, opts) => {console.log('major value', value)}}
+                    placeholder="Lĩnh vực liên quan"
+                    onChange={(value, opts) => { console.log('major value', value) }}
                     options={occupationGroups}
                   />
                 </Form.Item>
@@ -177,7 +192,7 @@ const CreateProfileForm = (props) => {
                   label="Số điện thoại"
                   rules={[{ required: true, message: 'Đây là trường bắt buộc!' }]}
                 >
-                  <Input.TextArea rows={1} allowClear maxLength={15}/>
+                  <Input.TextArea rows={1} allowClear maxLength={15} />
                 </Form.Item>
 
                 <Form.Item

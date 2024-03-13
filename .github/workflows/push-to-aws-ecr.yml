@@ -35,10 +35,11 @@ jobs:
       -  
         name: Build, tag, and push docker image to Amazon ECR
         env:
-          REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          REGISTRY: ${{ job.login-to-ecr.steps.login-ecr.outputs.registry }}
           REPOSITORY: woridea
           IMAGE_TAG: latest
-        run:
+        run: |
+          cd ./backend
           docker build -t $REPOSITORY .
           docker tag $REPOSITORY:$IMAGE_TAG $REGISTRY/$REPOSITORY:$IMAGE_TAG
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG

@@ -1,0 +1,38 @@
+name: Push Docker Image to AWS ECR
+on:
+  push:
+    branches: [main]
+
+env:
+  AWS_REGION: ${{ vars.AWS_REGION }}
+  AWS_ECR_URI: ${{ vars.AWS_ECR_URI }}
+  AWS_ECR_USERNAME: ${{ secrets.AWS_ECR_USERNAME }}
+  AWS_ECR_PASSWORD: ${{ secrets.AWS_ECR_PASSWORD }}
+
+jobs:
+  # install-aws-cli:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
+    
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - 
+        name: Checkout
+        uses: actions/checkout@v4
+      - 
+        name: Login to AWS ECR
+        run: 
+          aws ecr get-login-password --region $AWS_REGION
+          | docker login --username $AWS_ECR_USERNAME --password-stdin $AWS_ECR_PASSWORD  
+      - 
+        name: Build the Image
+        run: docker build -t woridea .
+      - 
+        name: Tag the Image
+        run: docker tag woridea:latest $AWS_ECR_URI/woridea:latest
+      - 
+        name: Push to AWS ECR
+        run: docker push $AWS_ECR_URI/woridea:latest

@@ -41,6 +41,7 @@ jobs:
           REPOSITORY: woridea
           IMAGE_TAG: latest
         run: |
-          docker build -t $REPOSITORY /backend
+          cd backend
+          docker build -t $REPOSITORY .
           docker tag $REPOSITORY:$IMAGE_TAG $REGISTRY/$REPOSITORY:$IMAGE_TAG
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG

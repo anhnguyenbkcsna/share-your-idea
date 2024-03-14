@@ -50,7 +50,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           # context: "{{defaultContext}}:backend"
-          file: "{context}/backend/Dockerfile"
+          file: "{{defaultContext}}:backend/Dockerfile"
           push: false
       -  
         name: Tag and push docker image to Amazon ECR

@@ -38,7 +38,7 @@ jobs:
     steps:
       - 
         name: Create .env file
-        run:
+        run: |
           mkdir backend
           cd backend
           echo "${{ secrets.BACKEND_ENV }}" > .env

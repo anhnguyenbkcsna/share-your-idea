@@ -36,23 +36,20 @@ jobs:
         run: |
           cd backend
           echo -e "$BACKEND_ENV" > .env
-          pwd
         env:
           BACKEND_ENV: ${{ secrets.BACKEND_ENV }}
         shell: bash
       -
         name: Build image
         run: |
-          ls -al
           cd backend
           docker build -t woridea .
-          pwd
-      # -  
-      #   name: Tag and push docker image to Amazon ECR
-      #   env:
-      #     REGISTRY: ${{ needs.login-to-ecr.outputs.registry }}
-      #     REPOSITORY: woridea
-      #     IMAGE_TAG: latest
-      #   run: |
-      #     docker tag $REPOSITORY:$IMAGE_TAG $REGISTRY/$REPOSITORY:$IMAGE_TAG
-      #     docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+      -  
+        name: Tag and push docker image to Amazon ECR
+        env:
+          REGISTRY: ${{ needs.login-to-ecr.outputs.registry }}
+          REPOSITORY: woridea
+          IMAGE_TAG: latest
+        run: |
+          docker tag $REPOSITORY:$IMAGE_TAG $REGISTRY/$REPOSITORY:$IMAGE_TAG
+          docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG

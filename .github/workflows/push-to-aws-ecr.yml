@@ -39,7 +39,7 @@ jobs:
       - 
         name: Create .env file
         run: |
-          cd ${{ runner.temp }}
+          cd ${{ runner.tool_cache }}
           echo -e "$BACKEND_ENV" > .env
           pwd
         env:

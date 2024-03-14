@@ -39,31 +39,18 @@ jobs:
       - 
         name: Create .env file
         run: |
-          mkdir backend
-          cd backend
+          # mkdir backend
+          # cd backend
           echo -e "$BACKEND_ENV" > .env
         env:
           BACKEND_ENV: ${{ secrets.BACKEND_ENV }}
         shell: bash
-
-      -
-        name: Read file contents
-        id: read_file
-        uses: andstor/file-reader-action@v1
-        with:
-          path: "backend/.env"
-
-      - name: File contents
-        run: echo "${ steps.read_file.outputs.contents }"
-
-
-
-        
       -
         name: Build image
         uses: docker/build-push-action@v5
         with:
-          context: "{{defaultContext}}:backend"
+          # context: "{{defaultContext}}:backend"
+          file: "{context}/backend/Dockerfile"
           push: false
       -  
         name: Tag and push docker image to Amazon ECR

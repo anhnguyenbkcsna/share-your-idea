@@ -45,16 +45,18 @@ jobs:
         env:
           BACKEND_ENV: ${{ secrets.BACKEND_ENV }}
         shell: bash
-      -
-        name: Copy .env
-        run: |
-          cp ../.env .
+      # -
+      #   name: Copy .env
+      #   run: |
+      #     cp ../.env .
       -
         name: Build image
         uses: docker/build-push-action@v5
         with:
           context: "{{defaultContext}}:backend"
           push: false
+          secret-files: |
+            MY_SECRET=../.env
       -  
         name: Tag and push docker image to Amazon ECR
         env:

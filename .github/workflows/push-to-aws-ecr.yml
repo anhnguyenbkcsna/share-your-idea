@@ -54,14 +54,15 @@ jobs:
       -
         name: Build image
         run: |
-          cd backend
+          cd ${{ github.workspace }}/backend
           docker build -t woridea .
-      -  
-        name: Tag and push docker image to Amazon ECR
-        env:
-          REGISTRY: ${{ needs.login-to-ecr.outputs.registry }}
-          REPOSITORY: woridea
-          IMAGE_TAG: latest
-        run: |
-          docker tag $REPOSITORY:$IMAGE_TAG $REGISTRY/$REPOSITORY:$IMAGE_TAG
-          docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+          pwd
+      # -  
+      #   name: Tag and push docker image to Amazon ECR
+      #   env:
+      #     REGISTRY: ${{ needs.login-to-ecr.outputs.registry }}
+      #     REPOSITORY: woridea
+      #     IMAGE_TAG: latest
+      #   run: |
+      #     docker tag $REPOSITORY:$IMAGE_TAG $REGISTRY/$REPOSITORY:$IMAGE_TAG
+      #     docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG

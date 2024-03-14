@@ -54,7 +54,8 @@ jobs:
       -
         name: Build image
         run: |
-          cd ${{ github.workspace }}/backend
+          cd ${{ github.workspace }}
+          ls -al
           docker build -t woridea .
           pwd
       # -  

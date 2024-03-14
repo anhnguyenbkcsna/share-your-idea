@@ -54,7 +54,7 @@ jobs:
       -
         name: Build image
         run: |
-          cd ${{ runner.temp }}/backend
+          cd backend
           docker build -t woridea .
       -  
         name: Tag and push docker image to Amazon ECR

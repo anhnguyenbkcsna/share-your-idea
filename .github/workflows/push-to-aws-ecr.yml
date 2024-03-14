@@ -42,6 +42,7 @@ jobs:
           # mkdir backend
           # cd backend
           echo -e "$BACKEND_ENV" > .env
+          pwd
         env:
           BACKEND_ENV: ${{ secrets.BACKEND_ENV }}
         shell: bash

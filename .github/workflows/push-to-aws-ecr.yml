@@ -6,17 +6,9 @@ on:
 env:
   AWS_REGION: ${{ vars.AWS_REGION }}
 
-jobs:
-  check-out: 
-    runs-on: ubuntu-latest
-    steps:
-      - 
-        name: Checkout
-        uses: actions/checkout@v4
-          
+jobs:    
   login-to-ecr:
     runs-on: ubuntu-latest
-    needs: check-out
     steps:
       - 
         name: Configure AWS credentials
@@ -36,26 +28,23 @@ jobs:
     needs: login-to-ecr
     runs-on: ubuntu-latest
     steps:
-      # - 
-      #   name: Create .env file
-      #   run: |
-      #     cd ${{ runner.tool_cache }}
-      #     echo -e "$BACKEND_ENV" > .env
-      #     pwd
-      #   env:
-      #     BACKEND_ENV: ${{ secrets.BACKEND_ENV }}
-      #   shell: bash
-      # -
-      #   name: Build image
-      #   uses: docker/build-push-action@v5
-      #   with:
-      #     context: "{{defaultContext}}:backend"
-      #     push: false
+      - 
+        name: Checkout
+        uses: actions/checkout@v4
+      -
+        name: Create .env file
+        run: |
+          cd backend
+          echo -e "$BACKEND_ENV" > .env
+          pwd
+        env:
+          BACKEND_ENV: ${{ secrets.BACKEND_ENV }}
+        shell: bash
       -
         name: Build image
         run: |
-          cd ${{ github.workspace }}
           ls -al
+          cd backend
           docker build -t woridea .
           pwd
       # -  

@@ -39,7 +39,7 @@ jobs:
       - 
         name: Create .env file
         run: |
-          cd
+          # cd ${{ github. }}
           echo -e "$BACKEND_ENV" > .env
           pwd
         env:
@@ -51,8 +51,6 @@ jobs:
         with:
           context: "{{defaultContext}}:backend"
           push: false
-          secret-files: |
-            MY_SECRET=/home/runner/.env
       -  
         name: Tag and push docker image to Amazon ECR
         env:

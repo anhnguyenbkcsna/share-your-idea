@@ -41,7 +41,9 @@ jobs:
         run: |
           mkdir backend
           cd backend
-          echo "${{ secrets.BACKEND_ENV }}" > .env
+          echo -e "$BACKEND_ENV" > .env
+        env:
+          BACKEND_ENV: ${{ secrets.BACKEND_ENV }}
         shell: bash
       -
         name: Build image

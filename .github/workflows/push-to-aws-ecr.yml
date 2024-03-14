@@ -45,6 +45,20 @@ jobs:
         env:
           BACKEND_ENV: ${{ secrets.BACKEND_ENV }}
         shell: bash
+
+      -
+        name: Read file contents
+        id: read_file
+        uses: andstor/file-reader-action@v1
+        with:
+          path: "backend/.env"
+
+      - name: File contents
+        run: echo "${ steps.read_file.outputs.contents }"
+
+
+
+        
       -
         name: Build image
         uses: docker/build-push-action@v5

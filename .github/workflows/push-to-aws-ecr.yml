@@ -40,8 +40,8 @@ jobs:
         name: Create .env file
         uses: 1arp/create-a-file-action@0.4.4
         with:
-          path: ./backend
-          file: .env
+          path: 'backend'
+          file: '.env'
           content: ${{ secrets.BACKEND_ENV }}
       -
         name: Build image

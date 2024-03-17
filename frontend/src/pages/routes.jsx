@@ -22,6 +22,7 @@ import Faq from './FAQ'
 import SubmittedIdeasPage from './Contest/SubmittedIdeas'
 import ContestIdeaDetailPage from './Contest/IdeaDetail'
 import { useDomain } from '../hooks/domain'
+import { SubmitIdeaPage } from './Contest/SubmitIdea'
 
 
 export const getRouter = () => {
@@ -86,6 +87,7 @@ export const getRouter = () => {
         <Route path="submitted-ideas" Component={SubmittedIdeasPage} />
         <Route path="submitted-ideas/:id" Component={ContestIdeaDetailPage} />
         <Route path=":contestId" Component={ContestInfo} />
+        <Route path=":contestId/submit" Component={SubmitIdeaPage} />
       </Route>
 
       <Route path="/" Component={PublicLayout}>

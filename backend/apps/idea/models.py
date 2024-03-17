@@ -42,7 +42,7 @@ class Idea(models.Model):
     views = models.IntegerField(default=0)
     
     # Other
-    innovator_id = models.CharField(max_length=255, default=None)
+    innovatorId = models.CharField(max_length=255, default=None)
     upvote = models.IntegerField(default=0)
     downvote = models.IntegerField(default=0)
     

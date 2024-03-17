@@ -6,8 +6,12 @@ import { getContestById } from '../../../api/contest'
 import { ContestNotFoundElement } from '../Components/error'
 import { GlowingBall } from '../Components/glowingBall'
 import Parser from 'html-react-parser'
+import { useNavigate } from 'react-router-dom'
+
 
 const ContestInfo = () => {
+  const navigate = useNavigate()
+
   const [firstPrizeValue, setFirstPrizeValue] = useState(2500)
   const [secondPrizeValue, setSecondPrizeValue] = useState(1000)
   const [thirdPrizeValue, setThirdPrizeValue] = useState(500)
@@ -39,6 +43,10 @@ const ContestInfo = () => {
       res = idea?.description
     }
     return res
+  }
+
+  const handleSubmitIdea = (e) => {
+    navigate('submit')
   }
 
   return idea ? (
@@ -91,7 +99,10 @@ const ContestInfo = () => {
           margin: '100px auto'
         }}>
           {idea?.status ? (
-            <Button type="primary" className={styles.submitButton}>
+            <Button
+              type="primary"
+              onClick={handleSubmitIdea}
+              className={styles.submitButton}>
               Nộp ý tưởng
             </Button>)
             : <div style={{ fontSize: '4rem', fontWeight: 'bold' }}>* Cuộc thi đã kết thúc *</div>

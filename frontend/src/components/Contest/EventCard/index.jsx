@@ -18,7 +18,7 @@ const ContestEventCard = ({ contest }) => {
   const dateInStr = formatDate(deadline)
 
   const handleViewClick = () => {
-    navigate(`/${id}`)
+    navigate(`${id}`)
   }
 
   return (

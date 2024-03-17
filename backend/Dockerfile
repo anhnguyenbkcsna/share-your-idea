@@ -5,6 +5,9 @@ ENV DockerHOME=/home/code/share-your-idea
 RUN mkdir -p $DockerHOME 
 WORKDIR $DockerHOME  
 
+# Create and activate virtual environment
+RUN python3 -m venv idea_venv
+RUN . idea_venv/bin/activate
 
 # Copy the Django project code into the container
 COPY . $DockerHOME 

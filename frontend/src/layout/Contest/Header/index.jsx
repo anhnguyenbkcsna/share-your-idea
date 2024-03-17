@@ -10,11 +10,12 @@ export default function ContestHeader() {
   const { domain } = useDomain()
 
   const handleLogoClick = () => {
-    navigate('/')
+    navigate('/contest')
   }
 
   const handleSignInClick = (e) => {
-    window.location.href = `${window.location.protocol}//${domain}/login?subdomain=contest`
+    navigate('/login', { state: { sys: 'contest' } })
+    // window.location.href = `${window.location.protocol}//${domain}/login?subdomain=contest`
   }
 
   const scrollToElm = (elm) => {
@@ -34,6 +35,7 @@ export default function ContestHeader() {
         }} />
       </div>
       <div
+        className={styles.navContainer}
         style={{
           display: 'flex',
           alignItems: 'center',
@@ -51,7 +53,11 @@ export default function ContestHeader() {
         className={styles.signIn}
         onClick={handleSignInClick}
       >
-        Sign In
+        {localStorage.getItem('name') ?
+          <div className={styles.userName}>
+            {localStorage.getItem('name')}
+          </div>
+          : 'Sign In'}
       </div>
     </div>
   )

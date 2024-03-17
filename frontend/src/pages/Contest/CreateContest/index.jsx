@@ -16,7 +16,7 @@ export default function CreateContestPage() {
       .then(res => {
         if (res?.status === 200)
         {
-          navigate('/')
+          navigate('/contest')
         }
       })
       .catch()

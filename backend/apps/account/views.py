@@ -45,32 +45,37 @@ class AccountViewSet(viewsets.ViewSet):
 
     @action(detail=False, methods=["POST"], permission_classes=[AllowAny], url_path=r"accounts/auth")
     def auth(self, request):
-        check, response = validate_google_id_token(request.data.get("id_token"))
-        role = request.data.get("role")
+        check, gg_response = validate_google_id_token(request.data.get("id_token"))
+        # role = request.data.get("role")
 
         # Validate google ID token
         if not check:
-            return Response({"message": response}, status=400)
+            return Response({"message": gg_response}, status=400)
 
         # Validate role
-        if not (role in Role.values()):
-            return Response({"message": "Invalid role"}, status=400)
+        # if not (role in Role.values()):
+        #     return Response({"message": "Invalid role"}, status=400)
 
         # Find in database
-        res = self.collection.find_one({"email": response["email"], "role": role})
+        res = self.collection.find_one({"email": gg_response["email"]})
 
         if res:
             _id = str(res["_id"])
         else:
             # Insert if not found
             result = self.collection.insert_one(
-                {"name": response["name"], "email": response["email"], "role": role}
+                {"name": gg_response["name"], "email": gg_response["email"], "role": res["role"]}
             )
             _id = result.inserted_id
 
         token = RefreshToken.for_user(Account(_id=_id))
+        # query_res = self.collection.find_one({"_id": ObjectId(_id)})
         return Response(
             {
+                # "id": _id,
+                "name": gg_response["name"],
+                "email": gg_response["email"],
+                "role": res["role"],
                 "refresh": str(token),
                 "access": str(token.access_token),
             },

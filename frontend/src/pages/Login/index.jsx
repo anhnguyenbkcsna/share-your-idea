@@ -13,7 +13,7 @@ import { useSearchParams } from 'react-router-dom'
 const LoginPage = () => {
   const navigate = useNavigate()
   const { login } = useAuth()
-  const [searchParams] = useSearchParams()
+  // const [searchParams] = useSearchParams()
 
   const validateUserToken = (token) => {
     let newFormdata = new FormData()
@@ -26,27 +26,29 @@ const LoginPage = () => {
         },
       })
       .then((res) => {
-        let data = res.data.data
-        localStorage.setItem(localStorageConstant.ACCESS_TOKEN, res.access)
+        let data = res.data
+        localStorage.setItem(localStorageConstant.ACCESS_TOKEN, data.access)
         localStorage.setItem(localStorageConstant.NAME, data.name)
         localStorage.setItem(localStorageConstant.EMAIL, data.email)
         localStorage.setItem(localStorageConstant.ROLE, data.role)
-        localStorage.setItem(localStorageConstant.ID, data.id)
+        localStorage.setItem(localStorageConstant.API_TOKEN, token)
+        // localStorage.setItem(localStorageConstant.ID, data.id)
         login({
           name: data.name,
           email: data.email,
           role: data.role,
         })
-        // navigate('/')
-        let subdomain = searchParams.get('subdomain') !== null ? `${searchParams.get('subdomain')}.` : ''
-        window.location.href = `${window.location.protocol}//${subdomain}${window.location.host}/`
+
+        navigate('/')
+        // let subdomain = searchParams.get('subdomain') !== null ? `${searchParams.get('subdomain')}.` : ''
+        // window.location.href = `${window.location.protocol}//${subdomain}${window.location.host}/`
       })
       .catch((err) => {
-        console.log(err.message)
+        console.log(err)
 
-        const subDomainQueryParam = searchParams.get('subdomain') !== null ?
-          `?subdomain=${searchParams.get('subdomain')}` : ''
-        navigate('/profile' + subDomainQueryParam)
+        // const subDomainQueryParam = searchParams.get('subdomain') !== null ?
+        //   `?subdomain=${searchParams.get('subdomain')}` : ''
+        // navigate('/profile' + subDomainQueryParam)
       })
   }
 

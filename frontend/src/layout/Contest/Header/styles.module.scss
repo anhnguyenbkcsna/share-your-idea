@@ -1,16 +1,24 @@
 
 @import '../../../styles/variable.scss';
 
+$header-height: 80px;
+
 .container {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+	position: relative;
+	display: grid;
+	grid-template-columns: 2fr 1.4fr 2fr;
+	gap: 20px;
 	font-family: $contest-heading-font-family;
 	background: #000;
-	font-size: 2rem;
+	font-size: 2.4rem;
 	padding: 0 78px;
 	color: #fff;
-	height: 94px;
+	height: $header-height;
+}
+
+.contestLogo {
+	height: 100%;
+	line-height: $header-height;
 }
 
 .contestLogo:hover {
@@ -19,5 +27,19 @@
 }
 
 .signIn {
+	font-size: 2.2rem;
+	font-family: $contest-font-family;
+	text-align: right;
 	@extend .contestLogo;
+	// .userName {}
+}
+
+.navContainer {
+	background-color: transparent;
+}
+
+.navItem {
+	@extend .signIn;
+	text-align: center;
+	text-decoration: underline;
 }

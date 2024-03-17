@@ -3,14 +3,25 @@ import styles from './styles.module.scss'
 import ContestEventCard from '../../../components/Contest/EventCard'
 import { useNavigate } from 'react-router-dom'
 import { getContestList } from '../../../api/contest'
+import { ModalBox } from '../Components/modalBox'
+import { userRole } from '../../../utils/profile.constants'
+import { localStorageConstant, userRoles } from '../../../utils/global.constants'
 // import contestBackground from '../../../assets/contest-bg.jpg'
 
 export default function HomePage() {
   const navigate = useNavigate()
   const [contestList, setContestList] = React.useState([])
+  const [isModalOpen, setIsModalOpen] = React.useState(false)
 
   const handleCreateEventClick = () => {
-    navigate('/new')
+    if (localStorage.getItem(localStorageConstant.ROLE) === userRoles.COMPANY)
+    {
+      navigate('new')
+    }
+    else
+    {
+      setIsModalOpen(true)
+    }
   }
 
   useEffect(() => {
@@ -19,9 +30,7 @@ export default function HomePage() {
 
   return (
     <>
-      <div
-        className={styles.contestHomeContainer}
-      >
+      <div className={styles.contestHomeContainer}>
         <div className={styles.contestHomeBg} />
         <h1
           style={{
@@ -55,12 +64,16 @@ export default function HomePage() {
         >
           CREATE NEW EVENT
         </button>
-
-        {/* List event card */}
+        <ModalBox
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+          handleOk={() => navigate('/login')}
+        />
       </div>
 
       <div className={styles.contestEventContainer}>
         <h1
+          id='contest-heading'
           style={{
             color: '#FF7510',
             fontSize: '5rem',

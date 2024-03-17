@@ -8,7 +8,6 @@ import ContestFooter from '../Footer'
 
 
 const PublicLayout = (props) => {
-
   return (
     <Layout>
       <ContestHeader />

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { deployedAPI } from '../utils/form.constants'
+import { ideaEndpoint } from '../utils/api.constants'
 
 const backend = 'http://127.0.0.1:8000'
 
@@ -11,11 +12,12 @@ export const createNewIdea = async (ideaObj) => {
 
   for (let key in flattenIdeaObj)
   {
-    if (key === 'files') continue
+    if (key === 'files') {continue}
     formData.append(key, JSON.stringify(flattenIdeaObj[key]))
   }
 
-  if (flattenIdeaObj.files) {
+  if (flattenIdeaObj.files)
+  {
     // append files
     for (let file of flattenIdeaObj.files)
     {
@@ -37,4 +39,23 @@ export const createNewIdea = async (ideaObj) => {
       console.log('err', err)
       return err
     })
+}
+
+
+export const getIdeaOfCurrentUser = async () => {
+  if (localStorage.getItem('token'))
+  {
+    return await axios
+      .get(`${ideaEndpoint}`, {
+        headers: {
+          Authorization: `Token ${localStorage.getItem('token')}`,
+        }
+      })
+      .then((res) => {
+        return res.data
+      })
+      .catch((err) => {
+        return err
+      })
+  }
 }

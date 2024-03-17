@@ -22,61 +22,101 @@ import Faq from './FAQ'
 import SubmittedIdeasPage from './Contest/SubmittedIdeas'
 import ContestIdeaDetailPage from './Contest/IdeaDetail'
 import { useDomain } from '../hooks/domain'
+import { SubmitIdeaPage } from './Contest/SubmitIdea'
 
 
 export const getRouter = () => {
   const { subDomain } = useDomain()
 
-  let routes = []
-  if (subDomain === 'contest')
-  {
-    routes = (
-      <Route path='/'>
-        <Route path="/" Component={ContestPublicLayout}>
-          <Route index Component={ContestHomePage} />
-          <Route path='new' Component={CreateContestPage} />
-          <Route path="submitted-ideas" Component={SubmittedIdeasPage} />
-          <Route path="submitted-ideas/:id" Component={ContestIdeaDetailPage} />
-          <Route path=":contestId" Component={ContestInfo} />
-        </Route>
-        <Route path="/">
-          <Route path="login" Component={LoginPage} />
-        </Route>
+  // let routes = []
+  // if (subDomain === 'contest')
+  // {
+  //   routes = (
+  //     <Route path='/'>
+  //       <Route path="/" Component={ContestPublicLayout}>
+  //         <Route index Component={ContestHomePage} />
+  //         <Route path='new' Component={CreateContestPage} />
+  //         <Route path="submitted-ideas" Component={SubmittedIdeasPage} />
+  //         <Route path="submitted-ideas/:id" Component={ContestIdeaDetailPage} />
+  //         <Route path=":contestId" Component={ContestInfo} />
+  //       </Route>
+  //       <Route path="/">
+  //         <Route path="login" Component={LoginPage} />
+  //       </Route>
+  //     </Route>
+  //   )
+  // }
+  // else
+  // {
+  //   routes = (
+  //     <Route path="/">
+  //       <Route path="/" Component={PublicLayout}>
+  //         <Route index Component={HomePage} />
+  //       </Route>
+  //       <Route path="login" Component={LoginPage} />
+  //       <Route path='profile' Component={PublicLayout} >
+  //         <Route index Component={CreateProfileForm} />
+  //       </Route>
+  //       <Route path="innovator" Component={PrivateLayout}>
+  //         <Route index Component={InnovatorIdea} />
+  //         <Route path='idea' Component={CreateIdeaFormPage} />
+  //         {/* <Route path='profile' Component={CreateProfileForm} /> */}
+  //       </Route>
+  //       <Route path="company" Component={PrivateLayout}>
+  //         <Route index Component={CompanyRequirementFormPage} />
+  //         {/* <Route path='profile' Component={CreateProfileForm} /> */}
+  //       </Route>
+  //       <Route path="match-idea" Component={PrivateLayout}>
+  //         <Route index Component={MatchIdea} />
+  //       </Route>
+  //       <Route path="idea" Component={PrivateLayout}>
+  //         <Route path=':ideaId' Component={IdeaDescriptionPage} />
+  //       </Route>
+  //       <Route path="faq" Component={PrivateLayout} >
+  //         <Route index Component={Faq} />
+  //       </Route>
+  //     </Route>
+  //   )
+  // }
+
+  const routes = (
+    <Route path="/">
+      <Route path="contest" Component={ContestPublicLayout}>
+        <Route index Component={ContestHomePage} />
+        <Route path='new' Component={CreateContestPage} />
+        <Route path="submitted-ideas" Component={SubmittedIdeasPage} />
+        <Route path="submitted-ideas/:id" Component={ContestIdeaDetailPage} />
+        <Route path=":contestId" Component={ContestInfo} />
+        <Route path=":contestId/submit" Component={SubmitIdeaPage} />
       </Route>
-    )
-  }
-  else
-  {
-    routes = (
-      <Route path="/">
-        <Route path="/" Component={PublicLayout}>
-          <Route index Component={HomePage} />
-        </Route>
-        <Route path="login" Component={LoginPage} />
-        <Route path='profile' Component={PublicLayout} >
-          <Route index Component={CreateProfileForm} />
-        </Route>
-        <Route path="innovator" Component={PrivateLayout}>
-          <Route index Component={InnovatorIdea} />
-          <Route path='idea' Component={CreateIdeaFormPage} />
-          {/* <Route path='profile' Component={CreateProfileForm} /> */}
-        </Route>
-        <Route path="company" Component={PrivateLayout}>
-          <Route index Component={CompanyRequirementFormPage} />
-          {/* <Route path='profile' Component={CreateProfileForm} /> */}
-        </Route>
-        <Route path="match-idea" Component={PrivateLayout}>
-          <Route index Component={MatchIdea} />
-        </Route>
-        <Route path="idea" Component={PrivateLayout}>
-          <Route path=':ideaId' Component={IdeaDescriptionPage} />
-        </Route>
-        <Route path="faq" Component={PrivateLayout} >
-          <Route index Component={Faq} />
-        </Route>
+
+      <Route path="/" Component={PublicLayout}>
+        <Route index Component={HomePage} />
       </Route>
-    )
-  }
+      <Route path="login" Component={LoginPage} />
+      <Route path='profile' Component={PublicLayout} >
+        <Route index Component={CreateProfileForm} />
+      </Route>
+      <Route path="innovator" Component={PrivateLayout}>
+        <Route index Component={InnovatorIdea} />
+        <Route path='idea' Component={CreateIdeaFormPage} />
+        {/* <Route path='profile' Component={CreateProfileForm} /> */}
+      </Route>
+      <Route path="company" Component={PrivateLayout}>
+        <Route index Component={CompanyRequirementFormPage} />
+        {/* <Route path='profile' Component={CreateProfileForm} /> */}
+      </Route>
+      <Route path="match-idea" Component={PrivateLayout}>
+        <Route index Component={MatchIdea} />
+      </Route>
+      <Route path="idea" Component={PrivateLayout}>
+        <Route path=':ideaId' Component={IdeaDescriptionPage} />
+      </Route>
+      <Route path="faq" Component={PrivateLayout} >
+        <Route index Component={Faq} />
+      </Route>
+    </Route>
+  )
 
   const browserRouter = createBrowserRouter(
     createRoutesFromElements(

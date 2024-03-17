@@ -1,4 +1,4 @@
-export const deployedAPI = 'https://share-your-idea.onrender.com'
+export const deployedAPI = 'http://localhost:8000'
 
 export const ideaEndpoint = deployedAPI + '/ideas/'
 

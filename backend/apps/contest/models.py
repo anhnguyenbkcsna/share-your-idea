@@ -1,4 +1,5 @@
 from django.db import models
+from classes.model_fields import DateRangeField
 
 
 class Contest(models.Model):
@@ -17,8 +18,8 @@ class Contest(models.Model):
     organizer = models.TextField()
     email = models.EmailField()
     
-    round2Time = models.DateTimeField()
-    round3Time = models.DateTimeField()
+    round2Time = DateRangeField()
+    round3Time = DateRangeField()
     location = models.TextField(default="")
     
     contestant = models.TextField(default="")

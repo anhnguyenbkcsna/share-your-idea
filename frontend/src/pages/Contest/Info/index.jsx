@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import styles from './styles.module.scss'
-import { Button, Divider, ConfigProvider } from 'antd'
+import { Button, Divider, ConfigProvider, Flex } from 'antd'
 import { useParams } from 'react-router-dom'
 import { getContestById } from '../../../api/contest'
 import { ContestNotFoundElement } from '../Components/error'
+import { GlowingBall } from '../Components/glowingBall'
+import Parser from 'html-react-parser'
+import { useNavigate } from 'react-router-dom'
 
 
 const ContestInfo = () => {
+  const navigate = useNavigate()
+
   const [firstPrizeValue, setFirstPrizeValue] = useState(2500)
   const [secondPrizeValue, setSecondPrizeValue] = useState(1000)
   const [thirdPrizeValue, setThirdPrizeValue] = useState(500)
@@ -27,6 +32,23 @@ const ContestInfo = () => {
       })
   }, [])
 
+  const convertToHtml = () => {
+    let res = ''
+    try
+    {
+      res = Parser(idea?.description)
+    }
+    catch (e)
+    {
+      res = idea?.description
+    }
+    return res
+  }
+
+  const handleSubmitIdea = (e) => {
+    navigate('submit')
+  }
+
   return idea ? (
     <ConfigProvider
       theme={{
@@ -41,28 +63,33 @@ const ContestInfo = () => {
         alt="Banner"
       />
       <div className={styles.container}>
-        <h1 className={styles.contestName}>Contest Info</h1>
+        <h1 className={styles.contestName}>{idea?.name}</h1>
 
         <div className={styles.contestPrize}>
           {/* Second Prize Box */}
           <div className={styles.prizeBox}>
-            <h3 className={styles.prizeValue}>${secondPrizeValue}</h3>
+            <h3 className={styles.prizeValue}>{idea?.secondPrize}</h3>
             <div className={styles.secondPrizeBox}>
-              <div className={styles.prizeBoxTitle}>2nd Prize</div>
+              <div className={styles.prizeBoxTitle}>2nd<br />Prize</div>
             </div>
           </div>
           {/* First prize box */}
           <div className={styles.prizeBox} style={{ margin: '0 40px' }}>
-            <h3 className={styles.prizeValue}>${firstPrizeValue}</h3>
+            <h3 className={styles.prizeValue}>{idea?.firstPrize}</h3>
             <div className={styles.firstPrizeBox}>
-              <div className={styles.prizeBoxTitle}>1st Prize</div>
+              <div className={styles.prizeBoxTitle}>1st<br />Prize</div>
+              <GlowingBall
+                style={{
+                  bottom: '-40%'
+                }}
+              />
             </div>
           </div>
           {/* Third prize box */}
           <div className={styles.prizeBox}>
-            <h3 className={styles.prizeValue}>${thirdPrizeValue}</h3>
+            <h3 className={styles.prizeValue}>{idea?.thirdPrize}</h3>
             <div className={styles.thirdPrizeBox}>
-              <div className={styles.prizeBoxTitle}>3rd Prize</div>
+              <div className={styles.prizeBoxTitle}>3rd<br />Prize</div>
             </div>
           </div>
         </div>
@@ -71,24 +98,23 @@ const ContestInfo = () => {
           justifyContent: 'center',
           margin: '100px auto'
         }}>
-          <Button type="primary" className={styles.submitButton}>
-            Nộp ý tưởng
-          </Button>
+          {idea?.status ? (
+            <Button
+              type="primary"
+              onClick={handleSubmitIdea}
+              className={styles.submitButton}>
+              Nộp ý tưởng
+            </Button>)
+            : <div style={{ fontSize: '4rem', fontWeight: 'bold' }}>* Cuộc thi đã kết thúc *</div>
+          }
         </div>
         <Divider />
-        <div className={styles.contestDescription}>
-          <div className={styles.description}>
-            <ol>
-              <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. </li>
-              <li>Distinctio cumque, ea ut animi rerum totam facere nostrum corporis nam provident, eius voluptas.</li>
-              <li>Dolores aliquid saepe quod recusandae harum similique esse?</li>
-            </ol>
-          </div>
 
+        <div className={styles.contestDescription}>
           <div className={styles.timeline}>
             <div className={styles.submitTime}>
               <h3>Thời gian gửi bài</h3>
-              <h3>Từ <span className={styles.time}>06/09/2023</span></h3>
+              <h3>Từ <span className={styles.time}>&#9;&#9;06/09/2023</span></h3>
               <h3>Đến <span className={styles.time}>06/09/2023</span></h3>
             </div>
             <div className={styles.contestTime}>
@@ -103,6 +129,10 @@ const ContestInfo = () => {
             <div>
               <h3>Tổng số lượt bình chọn</h3>
               <h3><span className={styles.time}>{vote}</span></h3>
+            </div>
+
+            <div className={styles.contestDetail}>
+              {convertToHtml()}
             </div>
           </div>
 
@@ -131,7 +161,7 @@ const ContestInfo = () => {
       </div>
     </ConfigProvider>
   ) : (
-    <ContestNotFoundElement/>
+    <ContestNotFoundElement />
   )
 }
 

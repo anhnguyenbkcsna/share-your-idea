@@ -8,11 +8,13 @@
 	align-items: center;
 }
 .container {
-	padding: 20px;
+	font-size: 1.8rem;
+	padding: 20px 78px;
 }
 .contestName {
-	font-size: 5rem;
-	color: #ff7510;
+	text-align: center;
+	font-size: 6rem;
+	color: $contest-primary-color;
 }
 .contestPrize {
 	display: flex;
@@ -21,24 +23,26 @@
 	text-align: center;
 }
 .prizeValue {
-	font-size: 6rem;
-	color: #ff7510;
+	width: 100%;
+	font-size: 4rem;
+	color: $contest-primary-color;
 	margin-bottom: 20px;
 	font-weight: bold;
 }
 .submitButton {
-	width: 450px;
-	height: 100px;
+	// width: 300px;
+	padding: 10px 40px;
 	text-transform: uppercase;
-	font-size: 4rem;
+	font-size: 3rem;
 	font-weight: bold;
 	border-radius: 25px;
-	background-color: #ff7510;
+	background-color: $contest-primary-color;
 	box-shadow: 4px 4px 10px 0 rgba($color: #fff, $alpha: 0.7);
 }
 
 .prizeBoxParent {
 	margin: 0;
+	margin: 0 auto;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
@@ -46,11 +50,13 @@
 	padding: 20px;
 	background-color: #1e1e1e;
 	border-radius: 10px;
-	width: 200px;
+	min-width: 200px;
 	box-shadow: 4px 4px 10px #444;
 }
 
 .firstPrizeBox {
+	position: relative;
+	overflow: hidden;
 	@extend .prizeBoxParent;
 	height: 250px;
 }
@@ -65,13 +71,12 @@
 
 .prizeBoxTitle {
 	font-family: $contest-heading-font-family;
-	font-size: 3.4rem;
+	font-size: 3.2rem;
 	color: white;
 }
 .contestDescription {
-	display: grid;
-	grid-template-columns: 4fr 3fr 3fr;
-	gap: 10px;
+	display: flex;
+	justify-content: space-between;
 }
 
 .timeline {
@@ -80,14 +85,15 @@
 	gap: 10px;
 }
 .time {
-	font-size: 2rem;
+	font-size: 2.4rem;
+	line-height: 2rem;
 	color: #ff7510;
 }
 .roundCard {
-	width: 80%;
+	width: 100%;
 	background-color: #1e1e1e;
-	padding: 10px;
-	margin: 10px 0 0 10px;
+	padding: 10px 20px;
+	margin: 10px 0;
 	border-radius: 10px;
 }
 .roundTitle {
@@ -99,4 +105,32 @@
 }
 .roundDescription {
 	color: #888;
+	margin: 0;
+}
+
+.description {
+	flex-shrink: 0;
+	margin-left: 10%;
+}
+
+.contestDetail {
+	margin: 30px 0;
+	grid-column-start: 1;
+	grid-column-end: 3;
+	line-height: 1.4;
+
+	ol {
+		padding: 0;
+	}
+	p {
+		font-size: 2.2rem;
+		margin: 0 0 4px 0;
+	}
+	ul {
+		margin: 10px 0;
+		list-style: circle;
+	}
+	ul li {
+		margin-left: 2rem;
+	}
 }

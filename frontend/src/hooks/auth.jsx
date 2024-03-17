@@ -10,26 +10,37 @@ import { validateGoogleResponse } from '../utils/validate'
 
 const AuthContext = createContext()
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState(null)
   const navigate = useNavigate()
 
-  useEffect(() => {
+  const getUser = async () => {
     const apiToken = localStorage.getItem(localStorageConstant.API_TOKEN)
-    console.log('apiToken', apiToken)
-    isUserAuthorized(apiToken).then((authorized) => {
+    // console.log('apiToken', apiToken)
+    let returnDat = null
+
+    await isUserAuthorized(apiToken).then((authorized) => {
       if (authorized === true) {
-        setUser({
+        returnDat = {
           name: localStorage.getItem(localStorageConstant.NAME),
           email: localStorage.getItem(localStorageConstant.EMAIL),
           role: localStorage.getItem(localStorageConstant.ROLE)
-        })
-        console.log('AuthProvider', authorized)
-      } else {
+        }
+        // console.log('AuthProvider', authorized)
+      } else
+      {
+        returnDat = null
         localStorage.clear()
-        setUser(null)
       }
     })
+
+    setUser(returnDat)
+    return returnDat
+  }
+
+  useEffect(() => {
+    getUser()
   }, [])
+
 
   // call this function when you want to authenticate the user
   // Check if first time (from BE => create profile)
@@ -50,6 +61,7 @@ export const AuthProvider = ({ children }) => {
   const value = useMemo(
     () => ({
       user,
+      getUser,
       login,
       logout
     }),

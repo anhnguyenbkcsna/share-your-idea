@@ -1,6 +1,6 @@
 from rest_framework.views import APIView
 from .serializers import IdeaSerializer
-from utils.utils import parse_json, connect_db
+from utils.utils import parse_json, connect_db, get_id_from_request
 from utils.crud import CrudHelper
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework import viewsets
@@ -13,13 +13,14 @@ from .models import Idea
 from django.db.models.query import QuerySet
 import requests
 import json
+from bson.objectid import ObjectId
 
 
 class IdeaViewSet(viewsets.ViewSet):
     collection = db_connection.get_collection("idea")
     serializer_class = IdeaSerializer
     ENT_TYPE = "idea"
-    permission_classes = (AllowAny,)
+    permission_classes = [IsAuthenticated]
     queryset = QuerySet(model=Idea, query=[])
     authentication_classes = [CustomAuthentication]
 
@@ -27,20 +28,18 @@ class IdeaViewSet(viewsets.ViewSet):
     def get_ideas(self, request):
         return CrudHelper.get_all(self.collection, self.ENT_TYPE)
 
-    @action(detail=False, methods=["GET"], url_path=r"ideas/innovator/(?P<id>[^/.]+)")
-    def get_idea_by_innovator_id(self, request, id=None):
-        if not id:
-            return Response({"message": f"Cannot find {self.ENT_TYPE}"}, status=400)
-        
-        idea = parse_json(self.collection.find({"innovator_id": id}))
-        return Response({"message": f"Got all ideas of innovator", "data": idea}, status=200)
-
     @action(detail=False, methods=["GET"], url_path=r"ideas/(?P<id>[^/.]+)")
     def get_idea_by_idea_id(self, request, id=None):
-        if not id:
-            return Response({"message": f"Cannot find {self.ENT_TYPE}"}, status=400)
-        if request.method == "GET":
-            return CrudHelper.get_by_id(id, self.collection, self.ENT_TYPE)
+        if id == "current":
+            inno_id = get_id_from_request(request)
+            if not inno_id:
+                return Response({"message": f"Cannot find {self.ENT_TYPE}"}, status=400)
+            idea = parse_json(self.collection.find({"innovator_ids": {"$in": [inno_id]}}))
+            return Response(
+                {"message": f"Got all ideas of innovator", "data": idea}, status=200
+            )
+
+        return CrudHelper.get_by_id(id, self.collection, self.ENT_TYPE)
 
     @action(detail=False, methods=["PATCH"], url_path=r"ideas/(?P<id>[^/.]+)")
     def patch(self, request, id=None):
@@ -55,12 +54,11 @@ class IdeaViewSet(viewsets.ViewSet):
     def post(self, request):
         serializer = IdeaSerializer(data=request.data)
         file_list = request.FILES.getlist("files")
-        print('Nums of Files is uploading: ', len(file_list))
-        
+        print("Nums of Files is uploading: ", len(file_list))
+
         return CrudHelper.post_with_file(
             self.collection, serializer, file_list, self.ENT_TYPE
         )
-
 
     # def delete(self, request):
     #     id = request.query_params.get("id")

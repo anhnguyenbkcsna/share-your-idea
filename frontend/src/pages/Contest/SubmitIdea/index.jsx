@@ -5,7 +5,7 @@ import { getIdeaOfCurrentUser } from '../../../api/idea'
 
 export function SubmitIdeaPage() {
   useEffect(() => {
-    getIdeaOfCurrentUser().then(res => console.log(res))
+    getIdeaOfCurrentUser()
   }, [])
 
   return (

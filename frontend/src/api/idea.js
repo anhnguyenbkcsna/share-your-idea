@@ -42,20 +42,24 @@ export const createNewIdea = async (ideaObj) => {
 }
 
 
-export const getIdeaOfCurrentUser = async () => {
-  if (localStorage.getItem('token'))
+export const getIdeaOfCurrentUser = () => {
+  const accessToken = localStorage.getItem('access_token')
+  if (accessToken)
   {
-    return await axios
-      .get(`${ideaEndpoint}`, {
+    return axios
+      .get(`${ideaEndpoint}current/`, {
         headers: {
-          Authorization: `Token ${localStorage.getItem('token')}`,
+          Authorization: `Bearer ${accessToken}`,
         }
       })
       .then((res) => {
-        return res.data
+        console.log(res)
+        return res
       })
       .catch((err) => {
+        console.log(err)
         return err
       })
   }
+  console.log('No access token found')
 }

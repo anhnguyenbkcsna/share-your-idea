@@ -1,5 +1,5 @@
 from rest_framework.response import Response
-from utils.utils import connect_db, validate_google_id_token
+from utils.utils import connect_db, get_id_from_request, validate_google_id_token
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
 from .models import Account
@@ -37,42 +37,46 @@ class AccountViewSet(viewsets.ViewSet):
             if role == Role.COMPANY:
                 serializer = CompanySerializer(data=request.data, partial=True)
             return CrudHelper.patch(id, self.collection, serializer, self.ENT_TYPE)
-    
-    @action(detail=False, methods=["GET"], permission_classes=[IsAuthenticated], url_path=r"accounts/profile")
+
+    @action(
+        detail=False,
+        methods=["GET"],
+        permission_classes=[IsAuthenticated],
+        url_path=r"accounts/profile",
+    )
     def profile(self, request):
         id = request._auth["user_id"]
         return CrudHelper.get_by_id(id, self.collection, self.ENT_TYPE)
 
-    @action(detail=False, methods=["POST"], permission_classes=[AllowAny], url_path=r"accounts/auth")
-    def auth(self, request):
+    @action(
+        detail=False,
+        methods=["POST"],
+        permission_classes=[AllowAny],
+        url_path=r"accounts/login",
+    )
+    def login(self, request):
         check, gg_response = validate_google_id_token(request.data.get("id_token"))
-        # role = request.data.get("role")
-
         # Validate google ID token
         if not check:
             return Response({"message": gg_response}, status=400)
-
-        # Validate role
-        # if not (role in Role.values()):
-        #     return Response({"message": "Invalid role"}, status=400)
-
         # Find in database
         res = self.collection.find_one({"email": gg_response["email"]})
-
         if res:
             _id = str(res["_id"])
         else:
             # Insert if not found
             result = self.collection.insert_one(
-                {"name": gg_response["name"], "email": gg_response["email"], "role": res["role"]}
+                {
+                    "name": gg_response["name"],
+                    "email": gg_response["email"],
+                    "role": res["role"],
+                }
             )
             _id = result.inserted_id
 
         token = RefreshToken.for_user(Account(_id=_id))
-        # query_res = self.collection.find_one({"_id": ObjectId(_id)})
         return Response(
             {
-                # "id": _id,
                 "name": gg_response["name"],
                 "email": gg_response["email"],
                 "role": res["role"],
@@ -81,3 +85,20 @@ class AccountViewSet(viewsets.ViewSet):
             },
             status=200,
         )
+
+
+    @action(
+        detail=False,
+        methods=["GET"],
+        permission_classes=[IsAuthenticated],
+        url_path=r"accounts/auth",
+    )
+    def authenticate(self, request):
+        return Response({
+            "message": "Authenticated",
+            "data": {
+                "name": request.user.name,
+                "email": request.user.email,
+                "role": request.user.role,
+            }
+        }, status=200)

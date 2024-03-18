@@ -5,9 +5,10 @@ import axios from 'axios'
 import loginImg from '../../assets/login.png'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/auth'
-import { authEndpoint } from '../../utils/api.constants.js'
+import { loginEndpoint } from '../../utils/api.constants.js'
 import { localStorageConstant } from '../../utils/global.constants'
 import { useSearchParams } from 'react-router-dom'
+import { cookiesConstant } from '../../utils/global.constants'
 
 
 const LoginPage = () => {
@@ -20,7 +21,7 @@ const LoginPage = () => {
 
     newFormdata.append('id_token', token)
     axios
-      .post(authEndpoint, newFormdata, {
+      .post(loginEndpoint, newFormdata, {
         headers: {
           'Content-Type': 'application/json',
         },

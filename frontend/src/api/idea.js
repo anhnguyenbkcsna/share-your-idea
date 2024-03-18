@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { deployedAPI } from '../utils/form.constants'
 import { ideaEndpoint } from '../utils/api.constants'
+import { localStorageConstant } from '../utils/global.constants'
 
 const backend = 'http://127.0.0.1:8000'
 
@@ -12,8 +13,17 @@ export const createNewIdea = async (ideaObj) => {
 
   for (let key in flattenIdeaObj)
   {
-    if (key === 'files') {continue}
+    if (key === 'files') { continue }
+
     formData.append(key, JSON.stringify(flattenIdeaObj[key]))
+    // if (typeof flattenIdeaObj[key] === 'object')
+    // {
+    //   formData.append(key, JSON.stringify(flattenIdeaObj[key]))
+    // }
+    // else
+    // {
+    //   formData.append(key, flattenIdeaObj[key])
+    // }
   }
 
   if (flattenIdeaObj.files)
@@ -28,7 +38,7 @@ export const createNewIdea = async (ideaObj) => {
   return await axios
     .post(`${deployedAPI}/ideas/`, formData, {
       headers: {
-        'Content-Type': 'multipart/form-data',
+        Authorization: `Bearer ${localStorage.getItem(localStorageConstant.ACCESS_TOKEN)}`,
       }
     })
     .then((res) => {
@@ -42,8 +52,32 @@ export const createNewIdea = async (ideaObj) => {
 }
 
 
+export const getAllIdeas = () => {
+  const accessToken = localStorage.getItem(localStorageConstant.ACCESS_TOKEN)
+  if (accessToken)
+  {
+    return axios
+      .get(`${ideaEndpoint}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        }
+      })
+      .then((res) => {
+        console.log(res)
+        return res.data.data
+      })
+      .catch((err) => {
+        console.log(err)
+        return []
+      })
+  }
+  console.log('No access token found')
+}
+
+
+
 export const getIdeaOfCurrentUser = () => {
-  const accessToken = localStorage.getItem('access_token')
+  const accessToken = localStorage.getItem(localStorageConstant.ACCESS_TOKEN)
   if (accessToken)
   {
     return axios
@@ -54,11 +88,11 @@ export const getIdeaOfCurrentUser = () => {
       })
       .then((res) => {
         console.log(res)
-        return res
+        return res.data
       })
       .catch((err) => {
         console.log(err)
-        return err
+        return []
       })
   }
   console.log('No access token found')

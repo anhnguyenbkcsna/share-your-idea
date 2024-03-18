@@ -166,7 +166,7 @@ const CreateIdeaFormPage = () => {
           }
         })}
       </Modal> */}
-      
+
       {contextHolder}
       <FormProgress
         onFormFinish={onFormFinish}

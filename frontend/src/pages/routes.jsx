@@ -24,6 +24,10 @@ import ContestIdeaDetailPage from './Contest/IdeaDetail'
 import { useDomain } from '../hooks/domain'
 import { SubmitIdeaPage } from './Contest/SubmitIdea'
 
+import DonateHomePage from './Donate/DonateHomePage'
+import DonatePublicLayout from '../layout/Donate/Public'
+import DonateList from './Donate/DonateList'
+import DonateProject from './Donate/DonateProject'
 
 export const getRouter = () => {
   const { subDomain } = useDomain()
@@ -88,6 +92,12 @@ export const getRouter = () => {
         <Route path="submitted-ideas/:id" Component={ContestIdeaDetailPage} />
         <Route path=":contestId" Component={ContestInfo} />
         <Route path=":contestId/submit" Component={SubmitIdeaPage} />
+      </Route>
+
+      <Route path="donate" Component={DonatePublicLayout}>
+        <Route index Component={DonateHomePage} />
+        <Route path="projects" Component={DonateList} />
+        <Route path="projects/:id" Component={DonateProject} />
       </Route>
 
       <Route path="/" Component={PublicLayout}>

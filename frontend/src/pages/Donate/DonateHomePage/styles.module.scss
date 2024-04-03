@@ -1,0 +1,69 @@
+.container {
+  margin: 0 auto;
+  margin-top: 24px;
+  padding: 10px;
+  max-width: 60%;
+  border-radius: 32px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  
+}
+.headerBanner{
+  text-align: center;
+  align-items: center;
+  padding: 20px;
+  background-image: url("https://img.freepik.com/free-vector/green-background-modern-design_677411-2176.jpg?size=626&ext=jpg&ga=GA1.1.672697106.1706227200&semt=ais");
+  // background-color: #4bb65d46;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 60vh;
+  border-radius: 30px;
+}
+.slogan{
+  margin-top: 10vh;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 4rem;
+}
+.btnContainer{
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+.btn{
+  width: 150px;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 10px;
+}
+.primaryBtn{
+  background-color: #4bb65d;
+  color: #fff;
+  width: 150px;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 10px;
+}
+.statistics{
+  display: grid;
+  width: 100%;
+  justify-content: space-around;
+  margin-top: 100px;
+  grid-template-columns: auto auto auto;
+}
+.elementCard{
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  min-width: 250px;
+  padding: 20px;
+  border-radius: 30px;
+  text-align: center;
+  vertical-align: middle;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+}
+.slogan{
+  font-size: 4rem;
+  font-weight: bold;
+  color: white;
+}

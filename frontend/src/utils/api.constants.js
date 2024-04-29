@@ -6,6 +6,8 @@ export const accountEndpoint = deployedAPI + '/accounts/'
 
 export const authEndpoint = deployedAPI + '/accounts/auth/'
 
+export const loginEndpoint = deployedAPI + '/accounts/login/'
+
 export const filesEndpoint = deployedAPI + '/files/'
 
 export const signupEndpoint = deployedAPI + '/accounts/signup/'

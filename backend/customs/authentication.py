@@ -11,6 +11,7 @@ class CustomAuthentication(authentication.BaseAuthentication):
 
     def authenticate(self, request, username=None, password=None):
         jwt_authenticator = JWTAuthentication()
+
         header = jwt_authenticator.get_header(request)
         if header is None:
             return None
@@ -26,5 +27,7 @@ class CustomAuthentication(authentication.BaseAuthentication):
     def get_user(self, validated_token):
         user_id = validated_token["user_id"]
         res = self.collection.find_one({"_id": ObjectId(user_id)})
-        user = Account(res["_id"], res["name"], res["email"], res["role"])
+        user = Account(
+            _id=user_id, name=res["name"], email=res["email"], role=res["role"]
+        )
         return user

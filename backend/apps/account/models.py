@@ -21,9 +21,9 @@ class AccountManager(models.Manager):
 
 class Account(AbstractUser):
     _id = models.CharField(max_length=255, primary_key=True)
-    name = models.CharField(max_length=255)
-    email = models.CharField(max_length=255)
-    role = models.CharField(max_length=255)
+    name = models.TextField()
+    email = models.TextField()
+    role = models.TextField()
     is_authenticated = models.BooleanField(default=True)
     objects = AccountManager()
 

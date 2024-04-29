@@ -3,10 +3,9 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import { createContext, useContext, useMemo } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
-import { isUserAuthorized } from '../api/google'
-import { localStorageConstant, userRoles } from '../utils/global.constants'
+import { isAuthenticated } from '../api/auth'
+import { cookiesConstant, localStorageConstant, userRoles } from '../utils/global.constants'
 import { userRole } from '../utils/profile.constants'
-import { validateGoogleResponse } from '../utils/validate'
 
 const AuthContext = createContext()
 export const AuthProvider = ({ children }) => {
@@ -14,18 +13,16 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate()
 
   const getUser = async () => {
-    const apiToken = localStorage.getItem(localStorageConstant.API_TOKEN)
-    // console.log('apiToken', apiToken)
     let returnDat = null
 
-    await isUserAuthorized(apiToken).then((authorized) => {
-      if (authorized === true) {
+    // check role hien tai va role trong localStorage
+    await isAuthenticated().then(({ authenticated, data }) => {
+      if (authenticated === true) {
         returnDat = {
-          name: localStorage.getItem(localStorageConstant.NAME),
-          email: localStorage.getItem(localStorageConstant.EMAIL),
-          role: localStorage.getItem(localStorageConstant.ROLE)
+          name: data.name,
+          email: data.email,
+          role: data.role
         }
-        // console.log('AuthProvider', authorized)
       } else
       {
         returnDat = null

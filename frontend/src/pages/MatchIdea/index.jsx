@@ -7,6 +7,7 @@ import CusCard from '../../components/CusCard'
 import axios from 'axios'
 
 import { deployedAPI } from '../../utils/form.constants'
+import { getAllIdeas } from '../../api/idea'
 
 const ideas = [
   {
@@ -66,9 +67,8 @@ const MatchIdea = () => {
 
   useEffect(() => {
     const fetchIdea = async () => {
-      let response = await axios.get(`${deployedAPI}/ideas/`).then(res => res.data)
-      console.log(response.data)
-      setFetchIdeas(response.data)
+      const allIdeas = await getAllIdeas()
+      setFetchIdeas(allIdeas)
     }
     fetchIdea()
   }, [])

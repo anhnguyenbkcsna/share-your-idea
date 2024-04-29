@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styles from './styles.module.scss'
-import { Button, Modal } from 'antd'
+import { Button, Modal, ConfigProvider, theme } from 'antd'
 
 export const ModalBox = ({ isModalOpen, setIsModalOpen, handleOk = () => { }, handleCancel = () => { } }) => {
   // const showModal = () => {
@@ -15,7 +15,14 @@ export const ModalBox = ({ isModalOpen, setIsModalOpen, handleOk = () => { }, ha
     setIsModalOpen(false)
   }
   return (
-    <>
+    <ConfigProvider
+      theme={{
+        token: {
+          fontFamily: 'Play',
+        },
+        algorithm: theme.darkAlgorithm,
+      }}
+    >
       <Modal
         title="Không thể tạo sự kiện"
         open={isModalOpen}
@@ -26,6 +33,6 @@ export const ModalBox = ({ isModalOpen, setIsModalOpen, handleOk = () => { }, ha
       >
         Bạn cần đăng nhập với tư cách là doanh nghiệp để tạo sự kiện
       </Modal>
-    </>
+    </ConfigProvider>
   )
 }

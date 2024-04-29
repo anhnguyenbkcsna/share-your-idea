@@ -161,7 +161,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 REST_FRAMEWORK = {
     "DEFAULT_PARSER_CLASSES": (
         "rest_framework.parsers.JSONParser",
-        "rest_framework.parsers.MultiPartParser"
+        "rest_framework.parsers.MultiPartParser",
     ),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.AllowAny',
@@ -180,3 +180,4 @@ SIMPLE_JWT = {
 AUTH_USER_MODEL = "account.Account"
 AUTH_PROFILE_MODULE = "account.Account"
 CORS_ALLOW_ALL_ORIGINS=True
+CORS_ALLOW_CREDENTIALS =True

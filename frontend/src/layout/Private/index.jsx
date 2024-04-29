@@ -11,7 +11,7 @@ import UnauthorizedPage from '../../pages/Error/E403'
 import { useEffect } from 'react'
 import Footer from '../Footer'
 
-const PrivateLayout = (props) => {
+const PrivateLayout = ({ requiredRoles = [userRoles.COMPANY, userRoles.INNOVATOR] }) => {
   const { getUser } = useAuth()
   const navigate = useNavigate()
   let location = useLocation()
@@ -19,16 +19,22 @@ const PrivateLayout = (props) => {
   useEffect(() => {
     getUser()
       .then(user => {
-        // console.log('Innovator user', user)
-        if (!user) {
+        if (!user)
+        {
           navigate('/login')
         }
-        else if (user.role) {
-          const userHasRequiredRole = user && userRoles.hasOwnProperty(user.role.toUpperCase()) ? true : false
-          if (!userHasRequiredRole) {
-            return <UnauthorizedPage />
-          }
+
+        // const userHasRequiredRole = user && userRoles.hasOwnProperty(user.role.toUpperCase()) ? true : false
+        const userHasRequiredRole = requiredRoles.includes(user?.role)
+        console.log('userHasRequiredRole', userHasRequiredRole)
+        if (!userHasRequiredRole)
+        {
+          alert('Unauthorized')
+          // const res = new Response('Unauthorized', { status: 403 })
+          // console.log('response', res)
+          // return res
         }
+
       })
   }, [])
 

@@ -48,7 +48,9 @@ INSTALLED_APPS = [
     "apps.file_upload",
     'apps.company',
     'apps.account',
-    'apps.contest'
+    'apps.contest',
+    'apps.sponsor',
+    'apps.sponsor_package',
     # "innovator",
 ]
 

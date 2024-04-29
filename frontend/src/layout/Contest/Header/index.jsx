@@ -28,7 +28,7 @@ export default function ContestHeader() {
         onClick={handleLogoClick}
         className={styles.contestLogo}
       >
-        WorIdea
+        WorIdea.
         <GlowingBall style={{
           top: -80,
           left: -60

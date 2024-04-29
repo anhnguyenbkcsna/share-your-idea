@@ -84,8 +84,10 @@ export const getRouter = () => {
       <Route path="contest" Component={ContestPublicLayout}>
         <Route index Component={ContestHomePage} />
         <Route path='new' Component={CreateContestPage} />
-        <Route path="submitted-ideas" Component={SubmittedIdeasPage} />
-        <Route path="submitted-ideas/:id" Component={ContestIdeaDetailPage} />
+        {/* <Route path="submitted-ideas" Component={SubmittedIdeasPage} /> */}
+        {/* <Route path="submitted-ideas/:id" Component={ContestIdeaDetailPage} /> */}
+        {/* <Route path=":contestId/submitted-ideas" Component={SubmittedIdeasPage} /> */}
+        <Route path=":contestId/ideas/:id" Component={ContestIdeaDetailPage} />
         <Route path=":contestId" Component={ContestInfo} />
         <Route path=":contestId/submit" Component={SubmitIdeaPage} />
       </Route>

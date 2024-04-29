@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import styles from './styles.module.scss'
-import ContestEventCard from '../../../components/Contest/EventCard'
+import ContestEventCard from './Components/EventCard'
 import { useNavigate } from 'react-router-dom'
 import { getContestList } from '../../../api/contest'
 import { ModalBox } from '../Components/modalBox'

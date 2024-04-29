@@ -23,7 +23,6 @@ export const AuthProvider = ({ children }) => {
           email: data.email,
           role: data.role
         }
-        // console.log('AuthProvider', authorized)
       } else
       {
         returnDat = null

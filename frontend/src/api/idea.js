@@ -78,22 +78,17 @@ export const getAllIdeas = () => {
 
 export const getIdeaOfCurrentUser = () => {
   const accessToken = localStorage.getItem(localStorageConstant.ACCESS_TOKEN)
-  if (accessToken)
-  {
-    return axios
-      .get(`${ideaEndpoint}current/`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        }
-      })
-      .then((res) => {
-        console.log(res)
-        return res.data
-      })
-      .catch((err) => {
-        console.log(err)
-        return []
-      })
-  }
-  console.log('No access token found')
+  return axios
+    .get(`${ideaEndpoint}current/`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      }
+    })
+    .then((res) => {
+      return res.data.data
+    })
+    .catch((err) => {
+      console.log(err)
+      return []
+    })
 }

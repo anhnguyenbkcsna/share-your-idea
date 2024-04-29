@@ -1,8 +1,8 @@
 import React from 'react'
 import styles from './styles.module.scss'
-import { formatDate } from '../../../utils/utils'
-import { OrangeWhiteShadowButton } from '../../../pages/Contest/Components/button'
+import { OrangeWhiteShadowButton } from '../../../Components/button'
 import { useNavigate } from 'react-router-dom'
+import { isGreaterDate, formatDate } from '../../../../../utils/utils'
 
 const ContestEventCard = ({ contest }) => {
   const navigate = useNavigate()
@@ -24,7 +24,9 @@ const ContestEventCard = ({ contest }) => {
   return (
     <div className={styles.cardContainer}>
       <div className={styles.headerContainer}>
-        <div className={styles.headerTitle}>{contest?.status ? 'opening' : 'closed'}</div>
+        <div className={styles.headerTitle}>
+          {contest?.status ? 'opening' : 'closed'}
+        </div>
         <div className={styles.headerDate}>{dateInStr}</div>
       </div>
       <h3 className={styles.title}>{organizer}</h3>

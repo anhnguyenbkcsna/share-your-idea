@@ -4,7 +4,7 @@ from .utils import parse_json
 from pymongo.collection import ReturnDocument
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
-from customs.response import CustomResponse
+from common.response import CustomResponse
 import copy
 
 

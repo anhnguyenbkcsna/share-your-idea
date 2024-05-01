@@ -1,14 +1,10 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from django.core.files.storage import default_storage
-from django.core.files.base import ContentFile
-from utils.utils import parse_json, connect_db
-from bson.objectid import ObjectId
 from django.conf import settings
 import json
 import boto3
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from customs.authentication import CustomAuthentication
+from config.authentication import CustomAuthentication
 
 
 class FileUploadApiView(APIView):

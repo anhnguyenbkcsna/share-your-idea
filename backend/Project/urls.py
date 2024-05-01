@@ -23,6 +23,8 @@ from apps.file_upload.views import FileUploadApiView
 from apps.account.views import AccountViewSet
 from apps.contest.views import ContestViewSet
 from apps.idea.views import IdeaViewSet
+from apps.sponsor_event.views import SponsorEventViewSet
+from apps.sponsor_package.views import SponsorPackageViewSet
 from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
@@ -34,6 +36,8 @@ router = routers.DefaultRouter()
 router.register(r'', AccountViewSet, basename='account')
 router.register(r'', IdeaViewSet, basename='idea')
 router.register(r'', ContestViewSet, basename='contest')
+router.register(r'', SponsorEventViewSet, basename='sponsor')
+router.register(r'', SponsorPackageViewSet, basename='sponsor')
 
 urlpatterns = [
     path(r"files/", FileUploadApiView.as_view(), name="file"),

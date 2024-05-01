@@ -1,5 +1,4 @@
 from django.db import models
-from utils.utils import connect_db, parse_json
 from django.contrib.auth.models import AbstractUser
 from django.db.models.query import QuerySet
 

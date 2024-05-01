@@ -34,3 +34,8 @@ venv/
 
 # Pipfile
 Project/static
+
+# credentials from Google
+*.credentials.json
+credentials.json
+token.json

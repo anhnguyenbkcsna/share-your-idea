@@ -1,5 +1,5 @@
 from django.db import models
-from classes.model_fields import DateRangeField
+from fields.model_fields import DateRangeField
 
 
 class Sponsor(models.Model):

@@ -1,14 +1,12 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from utils.utils import connect_db
 from .models import RequirementSerializer
-from utils.crud import CrudHelper
 from bson.objectid import ObjectId
-from customs.authentication import CustomAuthentication
-from customs.db_connection import db_connection
+from config.authentication import CustomAuthentication
+from config.db_connection import db_connection
 from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
-from utils.utils import get_id_from_request
-from utils.constants import Role
+from common.utils import get_id_from_request
+from common.constants import Role
 
 
 class CompanyApiView(APIView):

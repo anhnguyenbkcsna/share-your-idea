@@ -51,10 +51,9 @@ INSTALLED_APPS = [
     'apps.contest',
     'apps.sponsor',
     'apps.sponsor_package',
+    'apps.sponsor_event',
     # "innovator",
 ]
-
-CORS_ORIGIN_ALLOW_ALL = True
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

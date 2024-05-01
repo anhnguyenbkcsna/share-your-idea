@@ -1,19 +1,16 @@
 from rest_framework.views import APIView
 from .serializers import IdeaSerializer
-from utils.utils import parse_json, connect_db, get_id_from_request
-from utils.crud import CrudHelper
+from common.utils import parse_json, get_id_from_request
+from common.crud_helper import CrudHelper
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework import viewsets
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from customs.db_connection import db_connection
-from customs.authentication import CustomAuthentication
+from config.db_connection import db_connection
+from config.authentication import CustomAuthentication
 from .models import Idea
 from django.db.models.query import QuerySet
-import requests
-import json
-from bson.objectid import ObjectId
 
 
 class IdeaViewSet(viewsets.ViewSet):
@@ -34,7 +31,9 @@ class IdeaViewSet(viewsets.ViewSet):
             inno_id = get_id_from_request(request)
             if not inno_id:
                 return Response({"message": f"Cannot find {self.ENT_TYPE}"}, status=400)
-            idea = parse_json(self.collection.find({"innovator_ids": {"$in": [inno_id]}}))
+            idea = parse_json(
+                self.collection.find({"innovator_ids": {"$in": [inno_id]}})
+            )
             return Response(
                 {"message": f"Got all ideas of innovator", "data": idea}, status=200
             )

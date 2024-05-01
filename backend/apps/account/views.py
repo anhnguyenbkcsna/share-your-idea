@@ -1,15 +1,15 @@
 from rest_framework.response import Response
-from utils.utils import connect_db, get_id_from_request, validate_google_id_token
+from common.utils import validate_google_id_token
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
 from .models import Account
-from utils.constants import Role
+from common.constants import Role
 from rest_framework import viewsets
 from bson.objectid import ObjectId
 from rest_framework.decorators import action
-from utils.crud import CrudHelper
-from customs.authentication import CustomAuthentication
-from customs.db_connection import db_connection
+from common.crud_helper import CrudHelper
+from config.authentication import CustomAuthentication
+from config.db_connection import db_connection
 from .serializers import InnovatorSerializer, CompanySerializer
 
 

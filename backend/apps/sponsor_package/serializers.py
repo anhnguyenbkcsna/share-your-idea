@@ -6,4 +6,4 @@ class SponsorPackageSerializer(ModelSerializer):
     
     class Meta:
         model = SponsorPackage
-        include = "__all__"
+        fields = '__all__'

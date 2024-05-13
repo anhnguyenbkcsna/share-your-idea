@@ -20,7 +20,7 @@ from django.forms.models import model_to_dict
 class EmailServiceViewSet(viewsets.ViewSet):
     collection = db_connection.get_collection("email")
     ENT_TYPE = "email"
-    permission_classes = (AllowAny,)
+    permission_classes = (IsAuthenticated,)
     queryset = QuerySet(model=Email, query=[])
     authentication_classes = [CustomAuthentication]
     serializer_class = EmailSerializer

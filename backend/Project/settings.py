@@ -49,8 +49,6 @@ INSTALLED_APPS = [
     'apps.account',
     'apps.contest',
     'apps.sponsor',
-    'apps.sponsor_package',
-    'apps.sponsor_event',
     # services
     "apps.file_service",
     'apps.email_service'

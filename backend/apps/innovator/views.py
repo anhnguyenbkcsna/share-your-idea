@@ -1,6 +1,6 @@
 from rest_framework.views import APIView
 from common.utils import connect_db
-from common.crud_helper import CrudHelper
+from common.classes.crud_helper import CrudHelper
 from rest_framework.response import Response
 from .models import InnovatorSerializer
 

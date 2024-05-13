@@ -7,7 +7,7 @@ from common.constants import Role
 from rest_framework import viewsets
 from bson.objectid import ObjectId
 from rest_framework.decorators import action
-from common.crud_helper import CrudHelper
+from common.classes.crud_helper import CrudHelper
 from config.authentication import CustomAuthentication
 from config.db_connection import db_connection
 from .serializers import InnovatorSerializer, CompanySerializer

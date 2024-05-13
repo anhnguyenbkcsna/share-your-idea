@@ -1,5 +1,5 @@
 from django.db import models
-from fields.model_fields import DateRangeField
+from common.fields.model_fields import DateRangeField
 
 
 class Contest(models.Model):

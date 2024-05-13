@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from .serializers import IdeaSerializer
 from common.utils import parse_json, get_id_from_request
-from common.crud_helper import CrudHelper
+from common.classes.crud_helper import CrudHelper
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework import viewsets
 from django.core.files.uploadedfile import InMemoryUploadedFile

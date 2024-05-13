@@ -1,7 +1,6 @@
 from rest_framework.views import APIView
 from common.utils import get_id_from_request, parse_json
-from common.crud_helper import CrudHelper
-from common.response import CustomResponse
+from common.classes.response import CustomResponse
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework import viewsets
 from rest_framework.decorators import action

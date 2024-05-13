@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 from .models import Contest
-from common.validate_fields import validate_date_range
+from common.validators.validate_fields import validate_date_range
 
 
 class ContestSerializer(ModelSerializer):

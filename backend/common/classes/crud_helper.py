@@ -1,10 +1,10 @@
 from bson.objectid import ObjectId
 from rest_framework.response import Response
-from .utils import parse_json
+from ..utils import parse_json
 from pymongo.collection import ReturnDocument
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
-from common.response import CustomResponse
+from common.classes.response import CustomResponse
 import copy
 
 

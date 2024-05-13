@@ -1,6 +1,6 @@
 from rest_framework.views import APIView
 from common.utils import parse_json, connect_db, get_id_from_request
-from common.crud_helper import CrudHelper
+from common.classes.crud_helper import CrudHelper
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework import viewsets
 from django.core.files.uploadedfile import InMemoryUploadedFile
@@ -56,12 +56,12 @@ class SponsorViewSet(viewsets.ViewSet):
             get_id_from_request(request), self.collection, self.ENT_TYPE
         )
 
-    @action(
-        detail=False,
-        methods=["GET"],
-        url_path=r"sponsors/meets/(?P<id>[^/.]+)",
-    )
-    def get_event_by_id(self, request):
-        return CrudHelper.get_by_id(
-            get_id_from_request(request), self.collection, self.ENT_TYPE
-        )
+    # @action(
+    #     detail=False,
+    #     methods=["GET"],
+    #     url_path=r"sponsors/meets/(?P<id>[^/.]+)",
+    # )
+    # def get_event_by_id(self, request):
+    #     return CrudHelper.get_by_id(
+    #         get_id_from_request(request), self.collection, self.ENT_TYPE
+    #     )

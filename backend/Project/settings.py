@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'adrf',
     "rest_framework",
     "storages",
+    "drf_yasg",
     # custom apps
     "apps.idea",
     'apps.company',

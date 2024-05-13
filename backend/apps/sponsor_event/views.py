@@ -26,29 +26,29 @@ class SponsorEventViewSet(viewsets.ViewSet):
         methods=["GET", "PATCH", "POST", "DELETE"],
         url_path=r"sponsors/meets",
     )
-    def crud_events(self, request):
-        if request.method == "GET":
-            return CrudHelper.get_all(self.collection, self.ENT_TYPE)
-        elif request.method == "POST":
-            calendar_link, meet_link = create_google_meet(
-                "Meet abc", datetime.datetime(2024, 5, 5, 18, 0), 60
-            )
+    # def crud_events(self, request):
+    #     if request.method == "GET":
+    #         return CrudHelper.get_all(self.collection, self.ENT_TYPE)
+    #     elif request.method == "POST":
+    #         calendar_link, meet_link = create_google_meet(
+    #             "Meet abc", datetime.datetime(2024, 5, 5, 18, 0), 60
+    #         )
 
-            return Response({"calendar_link": calendar_link, "meet_link": meet_link})
-            # return CrudHelper.post(
-            #     self.collection, self.serializer_class(data=request.data), self.ENT_TYPE
-            # )
-        elif request.method == "PATCH":
-            return CrudHelper.patch(
-                get_id_from_request(request),
-                self.collection,
-                self.serializer_class(data=request.data, partial=True),
-                self.ENT_TYPE,
-            )
-        else:
-            return CrudHelper.delete(
-                get_id_from_request(request), self.collection, self.ENT_TYPE
-            )
+    #         return Response({"calendar_link": calendar_link, "meet_link": meet_link})
+    #         # return CrudHelper.post(
+    #         #     self.collection, self.serializer_class(data=request.data), self.ENT_TYPE
+    #         # )
+    #     elif request.method == "PATCH":
+    #         return CrudHelper.patch(
+    #             get_id_from_request(request),
+    #             self.collection,
+    #             self.serializer_class(data=request.data, partial=True),
+    #             self.ENT_TYPE,
+    #         )
+    #     else:
+    #         return CrudHelper.delete(
+    #             get_id_from_request(request), self.collection, self.ENT_TYPE
+    #         )
 
     @action(
         detail=False,

@@ -19,7 +19,8 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from apps.company.views import CompanyApiView
-from apps.file_upload.views import FileUploadApiView
+from apps.file_service.views import FileUploadApiView
+from apps.email_service.views import EmailServiceViewSet
 from apps.account.views import AccountViewSet
 from apps.contest.views import ContestViewSet
 from apps.idea.views import IdeaViewSet
@@ -38,12 +39,11 @@ router.register(r'', IdeaViewSet, basename='idea')
 router.register(r'', ContestViewSet, basename='contest')
 router.register(r'', SponsorEventViewSet, basename='sponsor')
 router.register(r'', SponsorPackageViewSet, basename='sponsor')
+router.register(r'', EmailServiceViewSet, basename='email')
 
 urlpatterns = [
     path(r"files/", FileUploadApiView.as_view(), name="file"),
     path(r"requirements/", CompanyApiView.as_view(), name="requirement"),
-    # path("user", UserApiView.as_view(), name="user"),
-    # path("innovator", InnovatorApiView.as_view(), name="innovator"),
     path(r"accounts/refresh/", TokenRefreshView.as_view(), name='token-refresh'),
     path('', include(router.urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

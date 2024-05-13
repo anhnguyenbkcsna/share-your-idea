@@ -29,7 +29,7 @@ class SponsorPackageViewSet(viewsets.ViewSet):
         methods=["GET", "PATCH", "POST", "DELETE"],
         url_path=r"sponsors/packages",
     )
-    def crud_packages(self, request):
+    def manage_packages(self, request):
         if request.method == "GET":
             return CrudHelper.get_all(self.collection, self.ENT_TYPE)
         elif request.method == "POST":

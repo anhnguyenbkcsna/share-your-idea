@@ -1,6 +1,6 @@
 from django.db import models
 from django.db.models import fields
-from .classes import DateRange
+from .field_classes import DateRange
 import datetime
 
 
@@ -20,6 +20,5 @@ class DateRangeField(models.JSONField):
             return value
 
         return DateRange(value["start"], value["end"])
-
 
 fields.DateRangeField = DateRangeField

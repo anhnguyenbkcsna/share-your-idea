@@ -1,22 +1,9 @@
 from django.db import models
-from utils.utils import connect_db, parse_json
 from django.contrib.auth.models import AbstractUser
 from django.db.models.query import QuerySet
 
 class AccountManager(models.Manager):
     def get_queryset(self):
-        # def getModelObject(account):
-        #     if account.get("role") == None or account["role"] == "innovator":
-        #         return Innovator(account)
-        #     elif account["role"] == "company":
-        #         return Company(account)
-        #     else:
-        #         return Account(account)
-        
-        # db = connect_db()
-        # collection = db.get_collection("profile")
-        # all_accounts = parse_json(collection.find({}))
-        # all_accounts = list(map(getModelObject, all_accounts))
         return QuerySet(model=Account, query=[])
 
 class Account(AbstractUser):
@@ -24,6 +11,7 @@ class Account(AbstractUser):
     name = models.TextField()
     email = models.TextField()
     role = models.TextField()
+    password = models.TextField(default=None)
     is_authenticated = models.BooleanField(default=True)
     objects = AccountManager()
 

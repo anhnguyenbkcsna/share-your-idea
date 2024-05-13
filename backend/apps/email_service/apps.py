@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class FileUploadConfig(AppConfig):
+class EmailServiceConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'apps.file_upload'
+    name = 'apps.email_service'

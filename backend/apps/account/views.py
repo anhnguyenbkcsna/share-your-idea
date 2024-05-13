@@ -1,15 +1,15 @@
 from rest_framework.response import Response
-from utils.utils import connect_db, get_id_from_request, validate_google_id_token
+from common.utils import validate_google_id_token
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
 from .models import Account
-from utils.constants import Role
+from common.constants import Role
 from rest_framework import viewsets
 from bson.objectid import ObjectId
 from rest_framework.decorators import action
-from utils.crud import CrudHelper
-from customs.authentication import CustomAuthentication
-from customs.db_connection import db_connection
+from common.classes.crud_helper import CrudHelper
+from config.authentication import CustomAuthentication
+from config.db_connection import db_connection
 from .serializers import InnovatorSerializer, CompanySerializer
 
 
@@ -55,20 +55,32 @@ class AccountViewSet(viewsets.ViewSet):
         url_path=r"accounts/login",
     )
     def login(self, request):
-        check, gg_response = validate_google_id_token(request.data.get("id_token"))
-        # Validate google ID token
-        if not check:
-            return Response({"message": gg_response}, status=400)
-        # Find in database
-        res = self.collection.find_one({"email": gg_response["email"]})
+        name = None
+        email = None
+        if request.data.get("email") and request.data.get("password"):
+            email = request.data.get("email")
+            password = request.data.get("password")
+            res = self.collection.find_one({"email": email, "password": password})
+            if not res:
+                return Response({"message": "Invalid email or password"}, status=400)
+        else:
+            check, gg_response = validate_google_id_token(request.data.get("id_token"))
+            if not check:
+                return Response({"message": gg_response}, status=400)
+            else:
+                name = gg_response["name"]
+                email = gg_response["email"]
+
+
+        res = self.collection.find_one({"email": email})
         if res:
             _id = str(res["_id"])
         else:
             # Insert if not found
             result = self.collection.insert_one(
                 {
-                    "name": gg_response["name"],
-                    "email": gg_response["email"],
+                    "name": name,
+                    "email": email,
                     "role": res["role"],
                 }
             )
@@ -77,8 +89,8 @@ class AccountViewSet(viewsets.ViewSet):
         token = RefreshToken.for_user(Account(_id=_id))
         return Response(
             {
-                "name": gg_response["name"],
-                "email": gg_response["email"],
+                "name": name,
+                "email": email,
                 "role": res["role"],
                 "refresh": str(token),
                 "access": str(token.access_token),

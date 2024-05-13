@@ -1,4 +1,5 @@
 from rest_framework.response import Response
+from common.utils import parse_json
 
 
 class CustomResponse(Response):
@@ -7,6 +8,6 @@ class CustomResponse(Response):
       if message:
         returnDat["message"] = message
       if data:
-        returnDat["data"] = data
+        returnDat["data"] = parse_json(data)
       
       super().__init__(returnDat, status=status, **kwargs)

@@ -1,10 +1,10 @@
 from bson.objectid import ObjectId
 from rest_framework.response import Response
-from .utils import parse_json
+from ..utils import parse_json
 from pymongo.collection import ReturnDocument
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
-from customs.response import CustomResponse
+from common.classes.response import CustomResponse
 import copy
 
 
@@ -33,7 +33,7 @@ class CrudHelper:
 
 
     @staticmethod
-    def post(collection, serializer, ent_type=""):
+    def post(collection, serializer, ent_type="", message=None):
         if serializer.is_valid(raise_exception=True):
             inserted_document_id = collection.insert_one(
                 serializer.validated_data
@@ -42,6 +42,9 @@ class CrudHelper:
                 message=f"Created {ent_type} successfully",
                 data=parse_json(inserted_document_id)
             )
+        
+        if message:
+            return CustomResponse(message=message, status=400)
         return CustomResponse(message=f"Error when creating {ent_type}", status=400)
 
     @staticmethod

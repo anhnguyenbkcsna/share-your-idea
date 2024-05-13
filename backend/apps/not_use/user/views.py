@@ -1,10 +1,10 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import serializers
-from utils.utils import parse_json, connect_db, validate_google_id_token
+from common.utils import parse_json, connect_db, validate_google_id_token
 from bson.objectid import ObjectId
 from django.conf import settings
-from utils.crud import CrudHelper
+from common.classes import CrudHelper
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
 from bson.objectid import ObjectId

@@ -74,7 +74,43 @@ export const getAllIdeas = () => {
   console.log('No access token found')
 }
 
+export const editIdea = async (ideaObj) => {
+  const flattenIdeaObj = ideaObj
+  console.log('ideaObj', ideaObj)
 
+  const formData = new FormData()
+
+  for (let key in flattenIdeaObj)
+  {
+    if (key === 'files') { continue }
+
+    formData.append(key, JSON.stringify(flattenIdeaObj[key]))
+  }
+
+  if (flattenIdeaObj.files)
+  {
+    // append files
+    for (let file of flattenIdeaObj.files)
+    {
+      formData.append('files', file.originFileObj, file.name)
+    }
+  }
+
+  return await axios
+    .patch(`${deployedAPI}/ideas/`, formData, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem(localStorageConstant.ACCESS_TOKEN)}`,
+      }
+    })
+    .then((res) => {
+      console.log('res', res)
+      return res
+    })
+    .catch((err) => {
+      console.log('err', err)
+      return err
+    })
+}
 
 export const getIdeaOfCurrentUser = () => {
   const accessToken = localStorage.getItem(localStorageConstant.ACCESS_TOKEN)

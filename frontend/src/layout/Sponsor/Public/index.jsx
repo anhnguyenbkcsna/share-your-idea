@@ -1,8 +1,11 @@
+import "./styles.css"
+
+import SponsorHeader from "../Header"
+import SponsorFooter from "../Footer"
+
 import { Content, Header } from "antd/es/layout/layout"
 import React, { useState } from "react"
-import Footer from "../Footer"
 import { Link, Outlet } from "react-router-dom"
-import NavHeader from "../NavHeader"
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -13,15 +16,21 @@ import {
 import { Button, Layout, Menu, theme } from "antd"
 const { Sider } = Layout
 
-const PublicLayout = (props) => {
-  // const {user, logout} = useAuth()
+const SponsorPublicLayout = (props) => {
   const [collapsed, setCollapsed] = useState(true)
   const {
     token: { colorBgContainer },
   } = theme.useToken()
-
   return (
-    <Layout>
+    <div>
+      <ul className="background">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
       <Sider
         trigger={null}
         collapsible
@@ -77,22 +86,23 @@ const PublicLayout = (props) => {
           />
         </div>
       </Sider>
-      <Layout>
-        <NavHeader role="innovator" />
-        <Content
-          style={{
-            margin: "24px 16px",
-            padding: 24,
-            minHeight: 280,
-            background: colorBgContainer,
-          }}
-        >
-          <Outlet />
-        </Content>
-        <Footer />
-      </Layout>
-    </Layout>
+      <SponsorHeader />
+      <div
+        style={{
+          height: "50px",
+        }}
+      ></div>
+      <Content>
+        <Outlet />
+      </Content>
+      <div
+        style={{
+          height: "15vh",
+        }}
+      ></div>
+      <SponsorFooter />
+    </div>
   )
 }
 
-export default PublicLayout
+export default SponsorPublicLayout

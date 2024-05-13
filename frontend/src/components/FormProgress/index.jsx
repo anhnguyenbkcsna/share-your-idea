@@ -4,10 +4,27 @@ import { domains, localStorageStepFormat } from '../../utils/form.constants'
 import { useState } from 'react'
 import { useForm } from 'antd/es/form/Form'
 
+import axios from 'axios'
+import { ideaEndpoint } from '../../utils/api.constants'
+
 const SingleFormProgress = (props) => {
-  const {first, last, name, children, next, prev, done} = props
+  const {first, last, name, children, next, prev, done, edit} = props
+  const [fetchIdeas, setFetchIdeas] = useState([])
   const [initValues, setInitValues] = useState({})
   const [form] = useForm()
+  
+  // Fetch and set initial values for form
+  useEffect(() => {
+    const fetchIdea = async () => {
+      const allIdeas = await axios.get(ideaEndpoint)
+        .then((res) => {
+          console.log("Fetch: ", res)
+          return res.data.data
+        })
+      setFetchIdeas(allIdeas)
+    }
+    fetchIdea()
+  }, [])
 
   useEffect(() => {
     const keep = localStorage.getItem(localStorageStepFormat(0))

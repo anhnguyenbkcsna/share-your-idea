@@ -1,3 +1,5 @@
+import { title } from "process"
+
 export const labelValueGenerate = (strList) => {
   return strList.map((item) => {
     return {
@@ -113,6 +115,12 @@ export const userFormStepItem = [
     title: 'Hoàn tất',
     // icon: <SmileOutlined />,
   },
+]
+
+export const companyRequirementStep = [
+  {
+    title: 'Yêu cầu'
+  }
 ]
 
 export const localStorageStepFormat = (stepCount) => {

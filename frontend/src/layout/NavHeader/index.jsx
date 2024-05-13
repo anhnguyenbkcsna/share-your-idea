@@ -4,7 +4,7 @@ import styles from './styles.module.scss'
 import React from 'react'
 import logosvg from '../../assets/Worldea.svg'
 import Footer from '../Footer'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/auth'
 import { useState } from 'react'
 
@@ -12,17 +12,17 @@ const guestMenu = [
   {
     key: '1',
     label: (
-      <NavLink to={'/'}>
+      <Link to={'/'}>
         Về chúng tôi
-      </NavLink>
+      </Link>
     )
   },
   {
     key: '2',
     label: (
-      <NavLink to={'/faq'}>
+      <Link to={'/faq'}>
         Câu hỏi thường gặp
-      </NavLink>
+      </Link>
     )
   }
 ]
@@ -30,25 +30,25 @@ const innovatorMenu = [
   {
     key: '1',
     label: (
-      <NavLink to={'/'}>
+      <Link to={'/'}>
         Về chúng tôi
-      </NavLink>
+      </Link>
     ),
   },
   {
     key: '2',
     label: (
-      <NavLink to={'/innovator'}>
+      <Link to={'/innovator'}>
         Danh sách ý tưởng
-      </NavLink>
+      </Link>
     )
   },
   {
     key: '3',
     label: (
-      <NavLink to={'/faq'}>
+      <Link to={'/faq'}>
         Câu hỏi thường gặp
-      </NavLink>
+      </Link>
     )
   }
 ]
@@ -56,25 +56,25 @@ const companyMenu = [
   {
     key: '1',
     label: (
-      <NavLink to={'/'}>
+      <Link to={'/'}>
         Về chúng tôi
-      </NavLink>
+      </Link>
     ),
   },
   {
     key: '2',
     label: (
-      <NavLink to={'/match-idea'}>
+      <Link to={'/match-idea'}>
         Ý tưởng đề xuất
-      </NavLink>
+      </Link>
     )
   },
   {
     key: '3',
     label: (
-      <NavLink to={'/faq'}>
+      <Link to={'/faq'}>
         Câu hỏi thường gặp
-      </NavLink>
+      </Link>
     )
   }
 ]
@@ -94,7 +94,7 @@ const NavHeader = (props) => {
         position: 'sticky',
         top: 0,
         zIndex: 1,
-        padding: '0 50px',
+        padding: '0 75px',
         height: 'auto',
         display: 'flex',
         flexDirection: 'row',
@@ -117,12 +117,12 @@ const NavHeader = (props) => {
       />
       {!user ?
         <div>
-          <NavLink to={'login'}>
+          <Link to={'login'}>
             <Button type='text'>Đăng nhập</Button>
-          </NavLink>
-          <NavLink to={'profile'}>
+          </Link>
+          <Link to={'profile'}>
             <Button type='primary'>Đăng ký</Button>
-          </NavLink>
+          </Link>
         </div> :
         <div>
           <span>{`Xin chào ${user.name}!`}</span>

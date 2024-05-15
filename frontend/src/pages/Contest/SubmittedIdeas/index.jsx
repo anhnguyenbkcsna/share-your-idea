@@ -307,7 +307,7 @@ export default function SubmittedIdeasPage() {
 
   return (
     <div className={styles.container}>
-      <div
+      {/* <div
         className={styles.top}
       >
         <div>
@@ -328,9 +328,9 @@ export default function SubmittedIdeasPage() {
             {organizer}
           </div>
         </div>
-      </div>
+      </div> */}
 
-      <Carousel autoplay arrows prevArrow={<PrevArrow />} nextArrow={<NextArrow />}>
+      <Carousel arrows prevArrow={<PrevArrow />} nextArrow={<NextArrow />}>
         {ideasToShow}
       </Carousel>
     </div>

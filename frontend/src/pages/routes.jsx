@@ -1,29 +1,42 @@
 import React from 'react'
 import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom'
 import { AuthProvider } from '../hooks/auth'
+import { useDomain } from '../hooks/domain'
+
+// Layouts
 import PrivateLayout from '../layout/Private'
 import PublicLayout from '../layout/Public'
-// import UnauthorizedPage from './Error/E403'
-import CreateIdeaFormPage from './IdeaForm'
+
+// Pages
 import HomePage from './Home'
 import LoginPage from './Login'
 import CreateProfileForm from './Profile'
-import MatchIdea from './MatchIdea'
 import ErrorBoundary from './Error'
-import InnovatorIdea from './IdeaList'
-import IdeaDescriptionPage from './IdeaDescription'
-import CompanyRequirementFormPage from './CompanyRequirement'
+import Faq from './FAQ'
+// import UnauthorizedPage from './Error/E403'
 
+// Innovation
+import CreateIdeaFormPage from './InnovationIdea/IdeaForm'
+import MatchIdea from './InnovationIdea/MatchIdea'
+import InnovatorIdea from './InnovationIdea/IdeaList'
+import IdeaDescriptionPage from './InnovationIdea/IdeaDescription'
+import CompanyRequirementFormPage from './InnovationIdea/CompanyRequirement'
+
+// Contest
 import { default as ContestHomePage } from './Contest/Home'
 import { default as CreateContestPage } from './Contest/CreateContest'
 import { default as ContestPublicLayout } from '../layout/Contest/Public'
 import ContestInfo from './Contest/Info'
-import Faq from './FAQ'
 import SubmittedIdeasPage from './Contest/SubmittedIdeas'
 import ContestIdeaDetailPage from './Contest/IdeaDetail'
-import { useDomain } from '../hooks/domain'
 import { SubmitIdeaPage } from './Contest/SubmitIdea'
 
+// Donation
+import SponsorHomePage from './Sponsor/SponsorHomePage'
+import SponsorPublicLayout from '../layout/Sponsor/Public'
+import SponsorList from './Sponsor/SponsorList'
+import SponsorProject from './Sponsor/SponsorProject'
+import SponsorEditor from './Sponsor/SponsorEditor'
 
 export const getRouter = () => {
   const { subDomain } = useDomain()
@@ -84,10 +97,19 @@ export const getRouter = () => {
       <Route path="contest" Component={ContestPublicLayout}>
         <Route index Component={ContestHomePage} />
         <Route path='new' Component={CreateContestPage} />
-        <Route path="submitted-ideas" Component={SubmittedIdeasPage} />
-        <Route path="submitted-ideas/:id" Component={ContestIdeaDetailPage} />
+        {/* <Route path="submitted-ideas" Component={SubmittedIdeasPage} /> */}
+        {/* <Route path="submitted-ideas/:id" Component={ContestIdeaDetailPage} /> */}
+        {/* <Route path=":contestId/submitted-ideas" Component={SubmittedIdeasPage} /> */}
+        <Route path=":contestId/ideas/:id" Component={ContestIdeaDetailPage} />
         <Route path=":contestId" Component={ContestInfo} />
         <Route path=":contestId/submit" Component={SubmitIdeaPage} />
+      </Route>
+
+      <Route path="sponsor" Component={PublicLayout}>
+        <Route index Component={SponsorHomePage} />
+        <Route path="projects" Component={SponsorList} />
+        <Route path="projects/:id" Component={SponsorProject} />
+        <Route path="projects/:id/edit" Component={SponsorEditor} />
       </Route>
 
       <Route path="/" Component={PublicLayout}>

@@ -23,8 +23,8 @@ const FormSlogan = (props) => {
         ))}
       </div>
       <div className={styles.percentage}>
-        <Progress type="circle" percent={percentage.value} strokeColor={twoColors} />
-        {/* <img height={120} src='https://about.swip.world/wp-content/uploads/2020/05/img5.png' alt='slogan' /> */}
+        {/* <Progress type="circle" percent={percentage.value} strokeColor={twoColors} /> */}
+        <img height={120} src='https://about.swip.world/wp-content/uploads/2020/05/img5.png' alt='slogan' />
       </div>
     </div>
   )

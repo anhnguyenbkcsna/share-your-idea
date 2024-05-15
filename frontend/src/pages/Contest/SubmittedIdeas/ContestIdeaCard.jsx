@@ -20,7 +20,7 @@ export default function ContestIdeaCard({ idea }) {
 
   const handleOnClick = () => {
     idea.id = 1
-    navigate(`/submitted-ideas/${idea.id}`)
+    navigate(`ideas/${idea.id}`)
   }
 
   const { ideaImgUrl, title, field, innovatorAvtUrl, innovatorName } = idea
@@ -45,8 +45,8 @@ export default function ContestIdeaCard({ idea }) {
         <div className={genericStyles.authorLine}>
           <div className={genericStyles.authorAvtWrapper}>
             <img
-              className={styles.avt}
-              alt='contest'
+              className={genericStyles.avt}
+              alt='contest-innovator'
               src={innovatorAvtUrl}
             />
           </div>

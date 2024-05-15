@@ -2,7 +2,9 @@
 @import "../styles.module.scss";
 
 .container {
-	padding: 0 78px;
+	// padding: 0 78px;
+	// padding: 60px 0;
+	padding-bottom: 40px;
 }
 
 .top {
@@ -28,7 +30,7 @@
 	justify-content: space-between;
 	margin-top: 40px;
 	margin-bottom: 40px;
-	padding: 0 20px;
+	padding: 0 10px;
 	flex-wrap: wrap;
 }
 

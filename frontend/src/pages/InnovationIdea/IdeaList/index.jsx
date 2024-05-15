@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Button, Input } from 'antd'
 import styles from './styles.module.scss'
-import { deployedAPI } from '../../utils/form.constants'
-import IdeaListComponent from '../../components/IdeaListComponent'
+import { deployedAPI } from '../../../utils/form.constants'
+import IdeaListComponent from '../../../components/IdeaListComponent'
 import { useNavigate } from 'react-router-dom'
 
 const sortTypes = [

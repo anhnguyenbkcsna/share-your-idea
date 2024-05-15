@@ -9,7 +9,7 @@ import ProgressBar from '../ProgressBar'
 // formSource should be () => React.JSX.Element with props.children passed
 
 const FormProgress = (props) => {
-  const {onFormFinish, formSource, dataSteps, slogans} = props
+  const {onFormFinish, formSource, dataSteps, slogans, edit} = props
   const [currentStep, setCurrentStep] = useState(0)
   const [eachStepData, setEachStepData] = useState([])
 
@@ -65,6 +65,7 @@ const FormProgress = (props) => {
         next={next}
         prev={prev}
         done={done}
+        edit={edit}
         key={currentStep}
       >{formSource[currentStep]().props.children}
       </SingleFormProgress>

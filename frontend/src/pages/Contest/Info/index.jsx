@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import styles from './styles.module.scss'
-import { Button, Divider, ConfigProvider, Flex } from 'antd'
+import { Button, Divider, ConfigProvider, Flex, theme } from 'antd'
 import { useParams } from 'react-router-dom'
 import { getContestById } from '../../../api/contest'
 import { ContestNotFoundElement } from '../Components/error'
 import { GlowingBall } from '../Components/glowingBall'
 import Parser from 'html-react-parser'
 import { useNavigate } from 'react-router-dom'
+import SubmittedIdeasPage from '../SubmittedIdeas'
+import { HrHeading } from '../Components/hrheading'
 
 
 const ContestInfo = () => {
@@ -55,6 +57,7 @@ const ContestInfo = () => {
         token: {
           fontFamily: 'Play',
         },
+        algorithm: theme.darkAlgorithm,
       }}
     >
       <img
@@ -96,7 +99,7 @@ const ContestInfo = () => {
         <div style={{
           display: 'flex',
           justifyContent: 'center',
-          margin: '100px auto'
+          margin: '70px auto'
         }}>
           {idea?.status ? (
             <Button
@@ -110,6 +113,7 @@ const ContestInfo = () => {
         </div>
         <Divider />
 
+        <HrHeading title="Thông tin cuộc thi" />
         <div className={styles.contestDescription}>
           <div className={styles.timeline}>
             <div className={styles.submitTime}>
@@ -158,6 +162,9 @@ const ContestInfo = () => {
             </div>
           </div>
         </div>
+
+        <HrHeading title="Các bài dự thi" />
+        <SubmittedIdeasPage />
       </div>
     </ConfigProvider>
   ) : (

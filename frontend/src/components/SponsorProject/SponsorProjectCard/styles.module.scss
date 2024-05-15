@@ -1,0 +1,29 @@
+.container {
+  margin: 0 auto;
+  margin-top: 24px;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  gap: 20px;
+}
+img{
+  width: 100%;
+  border-radius: 10px;
+}
+.carouselCard{
+  margin-top: 20px;
+}
+.title{
+  display: grid;
+  grid-template-rows: 4fr 1fr;
+}
+button{
+  width: 50%;
+  padding: 10px;
+  margin: 10px auto;
+  border-radius: 10px;
+}
+.primaryBtn{
+  background-color: #4bb65d;
+  color: #fff; 
+}

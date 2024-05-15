@@ -4,8 +4,8 @@ import { Button, Col, Divider, Row, Tag, Descriptions } from 'antd'
 import axios from 'axios'
 import classNames from 'classnames'
 import styles from './styles.module.scss'
-import CusCard from '../../components/CusCard'
-import { deployedAPI } from '../../utils/form.constants'
+import CusCard from '../../../components/CusCard'
+import { deployedAPI } from '../../../utils/form.constants'
 import {
   UserOutlined,
   TeamOutlined,
@@ -14,8 +14,8 @@ import {
   BulbOutlined,
 } from '@ant-design/icons'
 
-import NotFoundPage from '../Error/E404'
-import CommentList from '../../components/Comment/commentList'
+import NotFoundPage from '../../Error/E404'
+import CommentList from '../../../components/IdeaListComponent'
 
 // const iconKey = {
 //   name: <UserOutlined />,

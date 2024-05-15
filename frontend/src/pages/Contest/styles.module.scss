@@ -50,17 +50,20 @@
 	justify-self: flex-end;
 }
 
+$avt-width: 50px;
 .authorAvtWrapper {
 	border-radius: 50%;
 	overflow: hidden;
-	width: 50px;
+	width: $avt-width;
+	height: $avt-width;
 	aspect-ratio: 1/1;
 }
 
 .authorAvtWrapper .avt {
 	object-fit: cover;
-	height: 100%;
-	width: 100%;
+	width: $avt-width;
+	height: $avt-width;
+	aspect-ratio: 1/1;
 }
 
 .authorName {

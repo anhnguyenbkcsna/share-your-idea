@@ -1,10 +1,65 @@
 @import "../../../styles/variable.scss";
 
-
 .container {
+	display: grid;
+	grid-template-columns: 2fr 2fr;
+	grid-gap: 10%;
 	font-size: 1.8rem;
 	padding: 20px 78px;
 }
+
 .heading1 {
 	color: $contest-primary-color;
+}
+
+.ideaListItem {
+	display: block;
+	border-radius: 20px;
+	background-color: #303030;
+	color: #fff;
+	overflow: hidden;
+	box-shadow: 4px 4px 10px 0px rgba($color: #fff, $alpha: 0.5);
+	padding: 14px;
+	width: 100%;
+	cursor: pointer;
+
+	h3 {
+		margin-top: 0;
+	}
+
+	&:hover {
+		background-color: #404040;
+		box-shadow: 4px 4px 10px 0px rgba($color: #fff, $alpha: 0.9);
+	}
+
+	.title {
+		margin-bottom: 6px;
+	}
+
+	.label {
+		font-size: 1.4rem;
+		color: $contest-primary-color;
+		font-weight: bold;
+	}
+
+	.line {
+		display: -webkit-box;
+		font-size: 1.4rem;
+		text-align: justify;
+		-webkit-line-clamp: 2; /* number of lines to show */
+		line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+}
+
+.ideaDetailViewer {
+	display: block;
+	border-radius: 20px;
+	background-color: #303030;
+	color: #fff;
+	overflow: hidden;
+	box-shadow: 4px 4px 10px 0px rgba($color: #fff, $alpha: 0.5);
+	padding: 14px;
+	width: 100%;
 }

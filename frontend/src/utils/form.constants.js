@@ -111,6 +111,24 @@ export const userFormStepItem = [
     // icon: <SmileOutlined />,
   },
 ]
+export const userSponsorFormStepItem = [
+  {
+    title: 'Idea Overview',
+    // icon: <UserOutlined />,
+  },
+  {
+    title: 'Customer Segments',
+    // icon: <SolutionOutlined />,
+  },
+  {
+    title: 'Value Propositions',
+    // icon: <LoadingOutlined />,
+  },
+  {
+    title: 'Sponsor Package',
+    // icon: <SmileOutlined />,
+  },
+]
 export const companyRequirementStep = [
   {
     title: 'Yêu cầu từ doanh nghiệp',

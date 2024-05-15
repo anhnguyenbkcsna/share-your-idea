@@ -1,0 +1,15 @@
+@import "../../../styles/variable.scss";
+
+.lineHeading {
+	hr {
+		border: 1px solid $contest-primary-color;
+		width: 100%;
+	}
+	h1 {
+		font-size: 4rem;
+		font-weight: 700;
+		color: $contest-primary-color;
+		margin-bottom: 30px;
+		margin-top: 20px;
+	}
+}

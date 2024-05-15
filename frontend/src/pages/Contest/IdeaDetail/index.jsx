@@ -48,6 +48,10 @@ export default function ContestIdeaDetailPage() {
     },
   ]
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   return (
     <div className={styles.container}>
       <div className={styles.contestHeading}>

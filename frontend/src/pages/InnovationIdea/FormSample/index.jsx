@@ -8,8 +8,8 @@ import FormCustomerSegment from '../../components/FormComponent/CustomerSegment'
 import FormValuePropositions from '../../components/FormComponent/ValuePropositions'
 import FormDone from '../../components/FormComponent/Done'
 import FormOverview from '../../components/FormComponent/Overview'
-import { localStorageStepFormat, userFormStepItem } from '../../utils/constants'
-import FormButtons from '../../components/FormButtons'
+import { localStorageStepFormat, userFormStepItem } from '../../../utils/constants'
+import FormButtons from '../../../components/FormButtons'
 
 const FormPage = () => {
   const [currentStep, setCurrentStep] = useState(0)

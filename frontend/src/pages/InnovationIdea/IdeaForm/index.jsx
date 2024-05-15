@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import FormCustomerSegment from '../../components/FormIdeaSteps/CustomerSegment'
-import FormValuePropositions from '../../components/FormIdeaSteps/ValuePropositions'
-import FormDone from '../../components/FormIdeaSteps/Done'
-import FormOverview from '../../components/FormIdeaSteps/Overview'
-import { localStorageStepFormat, userFormStepItem } from '../../utils/form.constants'
-import FormProgress from '../../components/FormProgress/progress'
-import CusCard from '../../components/CusCard'
-import { createNewIdea } from '../../api/idea'
+import FormCustomerSegment from '../../../components/FormIdeaSteps/CustomerSegment'
+import FormValuePropositions from '../../../components/FormIdeaSteps/ValuePropositions'
+import FormDone from '../../../components/FormIdeaSteps/Done'
+import FormOverview from '../../../components/FormIdeaSteps/Overview'
+import { localStorageStepFormat, userFormStepItem } from '../../../utils/form.constants'
+import FormProgress from '../../../components/FormProgress/progress'
+import CusCard from '../../../components/CusCard'
+import { createNewIdea, editIdea } from '../../../api/idea'
 import { useNavigate, Navigate } from 'react-router-dom'
 import { Modal, message } from 'antd'
 import styles from './styles.module.scss'
@@ -45,6 +45,8 @@ const CreateIdeaFormPage = () => {
   const [eachStepData, setEachStepData] = useState([])
   const [fileList, setFileList] = useState([])
   const [projectIdea, setProjectIdea] = useState({})
+  const [edit, setEdit] = useState(false)
+
   const next = (curData) => {
     localStorage.setItem('currentStep', currentStep + 1)
     handler(curData)
@@ -91,11 +93,21 @@ const CreateIdeaFormPage = () => {
   }, [])
 
   const onFormFinish = (formObj) => {
-    createNewIdea(formObj).then(res => {
-      window.scrollTo({top: 0, left: 0, behavior: 'smooth'})
-      // setStatus('warning')
-      warning()
-    })
+    if(edit) {
+      console.log('Edit idea')
+      editIdea(formObj).then(res => {
+        window.scrollTo({top: 0, left: 0, behavior: 'smooth'})
+        // setStatus('success')
+        success()
+      })
+    }
+    else{
+      createNewIdea(formObj).then(res => {
+        window.scrollTo({top: 0, left: 0, behavior: 'smooth'})
+        // setStatus('warning')
+        warning()
+      })
+    }
   }
 
   const handleOk = () => {
@@ -173,6 +185,7 @@ const CreateIdeaFormPage = () => {
         slogans={['We are helping you', 'Your idea is awesome']}
         formSource={[FormOverview, FormCustomerSegment, FormValuePropositions, FormDone]}
         dataSteps={userFormStepItem}
+        edit={false}
       />
     </CusCard>
   )

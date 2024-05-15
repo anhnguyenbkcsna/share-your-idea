@@ -33,3 +33,24 @@ export const formatDate = (date) => {
   })
   return dateInString
 }
+
+
+export const parseJsonString = (json) => {
+  try {
+    return JSON.parse(json)
+  } catch (e) {
+    return json
+  }
+}
+
+export const isGreaterDate = (date, otherDate) => {
+  if (!date)
+  {
+    throw new Error('date is not defined')
+  }
+  if (!otherDate)
+  {
+    otherDate = Date.now()
+  }
+  return date > otherDate
+}

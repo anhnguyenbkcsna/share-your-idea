@@ -1,31 +1,26 @@
-FROM python:3.10
+FROM python:3.10-slim
 
-ENV DockerHOME=/home/code/share-your-idea  
+ENV home=/code
 
-RUN mkdir -p $DockerHOME 
-WORKDIR $DockerHOME  
+RUN mkdir -p $home 
+WORKDIR $home  
 
 # Create and activate virtual environment
 RUN python3 -m venv idea_venv
 RUN . idea_venv/bin/activate
 
-# Copy the Django project code into the container
-COPY . $DockerHOME 
+# Install dependencies
+COPY requirements.txt $home 
 RUN pip install -r ./requirements.txt
-
-# Install gunicorn
-RUN pip install gunicorn
+COPY . $home 
 
 # collect static files
 RUN python manage.py collectstatic --no-input
-
 
 # Expose the port that the Django app will run on
 EXPOSE 8000
 # Run the Gunicorn server
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "Project.wsgi:application"]
-
-
 
 # old 
 # FROM python:3.9

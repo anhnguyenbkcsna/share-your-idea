@@ -14,3 +14,4 @@ djangorestframework-simplejwt==5.3.0
 # google-auth-httplib2
 # google-auth-oauthlib
 drf-yasg==1.21.7
+gunicorn

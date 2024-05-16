@@ -6,8 +6,8 @@ RUN mkdir -p $home
 WORKDIR $home  
 
 # Create and activate virtual environment
-RUN python3 -m venv idea_venv
-RUN . idea_venv/bin/activate
+RUN python -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
 
 # Install dependencies
 COPY requirements.txt $home 

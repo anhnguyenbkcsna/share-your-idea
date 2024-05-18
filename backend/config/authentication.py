@@ -1,4 +1,4 @@
-from utils.utils import connect_db
+from common.utils import connect_db
 from bson.objectid import ObjectId
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework import authentication

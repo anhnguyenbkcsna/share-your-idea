@@ -43,22 +43,23 @@ INSTALLED_APPS = [
     'adrf',
     "rest_framework",
     "storages",
+    "drf_yasg",
     # custom apps
     "apps.idea",
-    "apps.file_upload",
     'apps.company',
     'apps.account',
-    'apps.contest'
-    # "innovator",
+    'apps.contest',
+    'apps.sponsor',
+    # services
+    "apps.file_service",
+    'apps.email_service'
 ]
-
-CORS_ORIGIN_ALLOW_ALL = True
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
+    # "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
@@ -181,3 +182,11 @@ AUTH_USER_MODEL = "account.Account"
 AUTH_PROFILE_MODULE = "account.Account"
 CORS_ALLOW_ALL_ORIGINS=True
 CORS_ALLOW_CREDENTIALS =True
+
+# Email settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp-mail.outlook.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")

@@ -16,6 +16,14 @@ const PackageCard = (props) => {
         </Form.Item>
 
         <Form.Item
+          name="packageDescription"
+          rules={[{ required: true, message: "Hãy nhập mô tả còn thiếu" }]}
+          label="Mô tả gói tài trợ"
+        >
+          <TextArea rows={3} placeholder="Gói hỗ trợ nhà phát triển xây dựng..." />
+        </Form.Item>
+
+        <Form.Item
           name="packageValue"
           rules={[{ required: true, message: "Hãy nhập mô tả còn thiếu" }]}
           label="Giá trị gói tài trợ"

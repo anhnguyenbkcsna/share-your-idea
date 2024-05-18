@@ -2,17 +2,9 @@ import React, { useEffect, useState } from 'react'
 import styles from './styles.module.scss'
 import { useNavigate } from 'react-router-dom'
 import genericStyles from '../styles.module.scss'
-import ContestCommentInput from './CommentInput'
-import ContestCommentCard from './CommentCard'
-import ContestCommentList from './CommentList'
-import RankingBox from './Ranking'
-import { OrangeBasicButton } from '../Components/button'
-import { Button, Input } from 'antd'
-import { localStorageConstant } from '../../../utils/global.constants'
-import { DiffFilled, DislikeFilled, DislikeOutlined, LikeFilled, LikeOutlined } from '@ant-design/icons'
-import TextArea from 'antd/es/input/TextArea'
+import { Input, Table } from 'antd'
 
-export default function ContestIdeaDetailPage() {
+export default function MarkPage() {
   const navigate = useNavigate()
   const [vote, setVote] = useState('none')
   const [like, setLike] = useState(5331)
@@ -54,26 +46,6 @@ export default function ContestIdeaDetailPage() {
     },
   ]
 
-  const handleNavigateMarkPage = () => {
-    let role = localStorage.getItem(localStorageConstant.ROLE)
-    if (role === 'company'){
-      navigate('mark')
-    }
-    else {
-      alert('Bạn không có quyền truy cập trang này')
-    }
-  }
-
-  const handleVote = (e) => {
-    let user = localStorage.getItem(localStorageConstant.EMAIL)
-    if (e === 'like') {
-      setVote('like')
-    }
-    else if (e === 'dislike'){
-      setVote('dislike')
-    }
-  }
-
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
@@ -82,23 +54,6 @@ export default function ContestIdeaDetailPage() {
     <div className={styles.container}>
       <div className={styles.contestHeading}>
         {organizer}
-        <button 
-          style={{
-            float: 'right',
-            backgroundColor: '#ff7510',
-            color: 'white',
-            border: 'none',
-            borderRadius: 5,
-            padding: '10px 20px',
-            cursor: 'pointer',
-            width: 200,
-            height: 50,
-            fontSize: '2rem',
-          }}
-          onClick={handleNavigateMarkPage}
-        >
-          Chấm điểm
-        </button>
       </div>
       <div className={styles.mediaBox}>
         Video
@@ -152,8 +107,20 @@ export default function ContestIdeaDetailPage() {
         />
         <div className={styles.evaluation}>
           <div className={styles.evaluationTable}>
-            <div className={styles.tblItem}>Tính cấp thiết</div>
-            <div className={styles.tblItem}>8</div>
+            <div className={styles.tblHeader}>Tiêu chí</div>
+            <div className={styles.tblHeader}>Điểm</div>
+            <div className={styles.tblHeader}>Nhận xét</div>
+
+            <div className={styles.tblItem}>
+              Tính cấp thiết
+            </div>
+            <div className={styles.tblItem}>
+              <Input
+                type='number'
+                style={{ width: '100%' }}
+                value={8}               
+              />
+            </div>
             <div className={styles.tblItem}>Tính cấp thiếtTính cấp thiếtTính cấp thiếtTính cấp thiếtTính cấp thiếtTính cấp thiếtTính cấp thiết</div>
             <div className={styles.tblItem}>Tính thuyết phục</div>
             <div className={styles.tblItem}>8.4</div>
@@ -171,55 +138,6 @@ export default function ContestIdeaDetailPage() {
           <h2 className={styles.point}>
             8.5
           </h2>
-        </div>
-      </div>
-      <div className={styles.bottom}>
-        <div className={styles.commentWrapper}>
-          <div className={styles.h2}>
-            Bình luận
-          </div>
-          <div className={styles.commentInputWrapper}>
-            <div className={styles.commentAvtWrapper}>
-              <img
-                alt='commentAvt'
-                src={innovatorAvtUrl}
-              />
-            </div>
-            <ContestCommentInput />
-          </div>
-          <div className={styles.comments}>
-            <ContestCommentList />
-          </div>
-        </div>
-        <div className={styles.rankingWrapper}>
-          <RankingBox />
-          <div className={styles.votingWrapper}>
-            <div className={styles.votingTitle}>
-              Đánh giá bài dự thi
-            </div>
-            <div className={styles.votingContent}>
-              <Button 
-                type={vote == 'like' ? 'primary' : 'default'}
-                icon={vote == 'like' ? <LikeFilled /> : <LikeOutlined />} 
-                onClick={() => handleVote('like')}
-                className={styles.votingBtn}
-              >
-                {like}
-              </Button>
-              <Button 
-                type={vote == 'dislike' ? 'primary' : 'default'}
-                icon={vote == 'dislike' ? <DislikeFilled /> : <DislikeOutlined/>} 
-                onClick={() => handleVote('dislike')}
-                className={styles.votingBtn}
-              >
-                {dislike}
-              </Button>
-            </div>
-            {vote != 'none' ? <TextArea placeholder='Nhận xét' rows={4}/> : null}
-            <Button tpye='primary'  style={{ marginTop: 20 }}>
-              Gửi bình chọn
-            </Button>
-          </div>
         </div>
       </div>
     </div >

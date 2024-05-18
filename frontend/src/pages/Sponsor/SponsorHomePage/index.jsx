@@ -17,7 +17,7 @@ const SponsorHomePage = () => {
             </Link>
           </Button>
           <Button type="default" className={styles.btn}>
-            <Link to="projects">
+            <Link to="projects/1/edit">
               Kêu gọi tài trợ
             </Link>
           </Button>

@@ -29,10 +29,10 @@ export default function ContestHeader() {
         className={styles.contestLogo}
       >
         WorIdea.
-        <GlowingBall style={{
+        {/* <GlowingBall style={{
           top: -80,
           left: -60
-        }} />
+        }} /> */}
       </div>
       <div
         className={styles.navContainer}

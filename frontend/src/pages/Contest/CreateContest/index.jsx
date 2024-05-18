@@ -5,6 +5,7 @@ import genericStyles from '../styles.module.scss'
 import { ContestStartAndEndDateInput, ContestInput, ContestTextarea } from '../Components/input'
 import { OrangeBasicButton } from '../Components/button'
 import { createContest } from '../../../api/contest'
+import { Upload } from 'antd'
 // import contestBackground from '../../../assets/contest-bg.jpg'
 
 export default function CreateContestPage() {
@@ -40,11 +41,12 @@ export default function CreateContestPage() {
       </h1>
       <div className={styles.inputContainer}>
         <div className={styles.left}>
-          <ContestInput label={'Tên cuộc thi'} setFunc={setData} fieldName={'name'} />
+          <ContestInput label={'Tên cuộc thi'} setFunc={setData} fieldName={'name'} type='text'/>
           <ContestInput label={'Hạn chót nộp đề tài'} setFunc={setData} fieldName={'deadline'} type={'datetime-local'} />
-          <ContestInput label={'Chủ đề'} setFunc={setData} fieldName={'topic'} />
-          <ContestInput label={'Địa điểm tổ chức'} setFunc={setData} fieldName={'location'} />
-          <ContestInput label={'Thông tin thêm'} setFunc={setData} fieldName={'otherInfo'} />
+          <ContestInput label={'Chủ đề'} setFunc={setData} fieldName={'topic'} type='text'/>
+          <ContestInput label={'Địa điểm tổ chức'} setFunc={setData} fieldName={'location'} type='text'/>
+          <ContestInput label={'Thông tin thêm'} setFunc={setData} fieldName={'otherInfo'} type='text'/>
+          <ContestInput label={'Ảnh banner cuộc thi (1920x 640)'} setFunc={setData} fieldName={'otherInfo'} type='file'/>
         </div>
         <div className={styles.right}>
           <div
@@ -68,8 +70,9 @@ export default function CreateContestPage() {
               setFunc={setData}
               fieldName={'thirdPrize'} />
           </div>
-          <ContestInput label={'Hội đồng tổ chức'} setFunc={setData} fieldName={'organizer'} />
-          <ContestInput label={'Email liên hệ'} setFunc={setData} type='email' fieldName={'email'} />
+          <ContestInput label={'Hội đồng tổ chức'} setFunc={setData} fieldName={'organizer'} type='text'/>
+          <ContestInput label={'Gmail giám khảo (cách nhau bởi dấu ",")'} setFunc={setData} fieldName={'judge'} type='text'/>
+          <ContestInput label={'Thông tin liên hệ'} setFunc={setData} type='email' fieldName={'email'} />
           {/* <ContestInput label={'Đối tượng tham gia'} setFunc={setData} fieldName={'contestant'} />
           <ContestInput label={'Hình thức dự thi'} setFunc={setData} fieldName={'teamFormat'} /> */}
           <ContestStartAndEndDateInput
@@ -82,7 +85,7 @@ export default function CreateContestPage() {
             fieldName={'round3Time'} />
         </div>
         <div className={styles.bottom}>
-          <ContestTextarea label={'Mô tả cụ thể'} setFunc={setData} fieldName={'description'} />
+          <ContestTextarea label={'Mô tả cụ thể'} setFunc={setData} fieldName={'description'} type='text'/>
         </div>
         <OrangeBasicButton
           style={{ marginBottom: 90 }}

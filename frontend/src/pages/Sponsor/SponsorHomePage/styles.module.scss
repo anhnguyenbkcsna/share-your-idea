@@ -2,7 +2,7 @@
   margin: 0 auto;
   margin-top: 24px;
   padding: 10px;
-  max-width: 60%;
+  max-width: 60vw;
   border-radius: 32px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
   background-color: #fff;
@@ -12,11 +12,12 @@
   text-align: center;
   align-items: center;
   padding: 20px;
-  background-image: url("https://img.freepik.com/free-vector/green-background-modern-design_677411-2176.jpg?size=626&ext=jpg&ga=GA1.1.672697106.1706227200&semt=ais");
+  background-image: url("https://img.freepik.com/premium-photo/concept-creativity-innovation-presented-orange-background_1137529-311.jpg?w=1380");
   // background-color: #4bb65d46;
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 60vh;
+  background-size: 100% auto;
   border-radius: 30px;
 }
 .slogan{
@@ -37,7 +38,7 @@
   border-radius: 10px;
 }
 .primaryBtn{
-  background-color: #4bb65d;
+  background-color: #ef4d09;
   color: #fff;
   width: 150px;
   padding: 10px;

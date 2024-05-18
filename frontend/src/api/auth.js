@@ -7,7 +7,7 @@ export const isAuthenticated = async () => {
     .get(`${authEndpoint}`, {
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + localStorage.getItem(localStorageConstant.ACCESS_TOKEN),
+        'Authorization': `Bearer ${localStorage.getItem(localStorageConstant.ACCESS_TOKEN)}`,
       },
     })
     .then((res) => {

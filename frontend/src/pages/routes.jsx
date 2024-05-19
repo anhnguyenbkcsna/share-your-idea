@@ -138,9 +138,9 @@ export const getRouter = () => {
       <Route path='idea' Component={PublicLayout}>
         <Route path=':ideaId' Component={IdeaDescriptionPage} />
       </Route>
-      <Route path='faq' Component={PrivateLayout} >
+      {/* <Route path='faq' Component={PrivateLayout} >
         <Route index Component={Faq} />
-      </Route>
+      </Route> */}
 
     </Route>
   )

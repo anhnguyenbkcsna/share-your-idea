@@ -1,8 +1,5 @@
-import "./styles.css"
-
 import SponsorHeader from "../Header"
 import SponsorFooter from "../Footer"
-
 import { Content, Header } from "antd/es/layout/layout"
 import React, { useState } from "react"
 import { Link, Outlet } from "react-router-dom"
@@ -23,14 +20,7 @@ const SponsorPublicLayout = (props) => {
   } = theme.useToken()
   return (
     <div>
-      <ul className="background">
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-      </ul>
+
       <Sider
         trigger={null}
         collapsible

@@ -8,13 +8,15 @@ export default function RankingBox() {
         Xếp hạng {'#' + 20}/128
       </div>
       <div className={styles.other}>
+        {/* <span href='#'>Bài thứ hạng 17</span>
         <span href='#'>Bài thứ hạng 17</span>
         <span href='#'>Bài thứ hạng 17</span>
         <span href='#'>Bài thứ hạng 17</span>
         <span href='#'>Bài thứ hạng 17</span>
-        <span href='#'>Bài thứ hạng 17</span>
-        <span href='#'>Bài thứ hạng 17</span>
+        <span href='#'>Bài thứ hạng 17</span> */}
+        <span href='#'>Xem bảng xếp hạng</span>
       </div>
+
     </div>
   )
 }

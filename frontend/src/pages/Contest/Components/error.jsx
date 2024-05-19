@@ -8,9 +8,9 @@ export const ContestNotFoundElement = () => {
 
   return (
     <div className={styles.notFoundElementContainer}>
-      <span style={{ marginBottom: 20 }}>
-        404 NOT FOUND
-      </span>
+      <h3 style={{ marginBottom: '10vw', fontWeight: 'bold' }}>
+        Cuộc thi không tồn tại hoặc đã bị xóa
+      </h3>
       <OrangeBasicButton
         text='Về trang chủ'
         onClick={() => navigate('/')}

@@ -45,7 +45,7 @@ const PrivateLayout = ({ requiredRoles = [userRoles.COMPANY, userRoles.INNOVATOR
 
   return (
     <Layout style={{ background: colorBgContainer }} >
-      <NavHeader role='innovator' />
+      <NavHeader />
       <Content>
         <Outlet />
       </Content>

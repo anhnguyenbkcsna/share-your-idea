@@ -9,7 +9,7 @@ export function ContestInput({
   setFunc = () => { },
   style = {},
   fieldName,
-  type = 'text',
+  type,
 }) {
   const handleOnChange = (e) => {
     setFunc((prev) => ({ ...prev, [fieldName]: e.target.value }))
@@ -17,7 +17,7 @@ export function ContestInput({
 
   return (
     <div style={{ ...style, }}>
-      <label style={{ fontSize: '1.7rem', }}>
+      <label style={{ fontSize: '1.7rem', color: '#000' }}>
         {label}
       </label>
       <br />
@@ -27,12 +27,12 @@ export function ContestInput({
         style={{
           outline: 'none',
           background: 'transparent',
-          border: '1px solid #fff',
+          border: '1px solid #000',
           fontSize: '1.7rem',
           marginTop: 10,
           marginBottom: 40,
           padding: '10px 12px',
-          color: '#fff',
+          color: '#000',
           fontFamily: 'inherit',
           width: '100%'
         }}
@@ -73,7 +73,7 @@ export function ContestStartAndEndDateInput({
 
   return (
     <div style={{ ...style, }}>
-      <label style={{ fontSize: '1.7rem', }}>
+      <label style={{ fontSize: '1.7rem', color: '#000' }}>
         {label}
       </label>
       <br />
@@ -84,12 +84,12 @@ export function ContestStartAndEndDateInput({
           style={{
             outline: 'none',
             background: 'transparent',
-            border: '1px solid #fff',
+            border: '1px solid #000',
             fontSize: '1.7rem',
             marginTop: 10,
             marginBottom: 40,
             padding: '10px 12px',
-            color: '#fff',
+            color: '#000',
             fontFamily: 'inherit',
             width: '48%',
             marginRight: '4%'
@@ -101,12 +101,12 @@ export function ContestStartAndEndDateInput({
           style={{
             outline: 'none',
             background: 'transparent',
-            border: '1px solid #fff',
+            border: '1px solid #000',
             fontSize: '1.7rem',
             marginTop: 10,
             marginBottom: 40,
             padding: '10px 12px',
-            color: '#fff',
+            color: '#000',
             fontFamily: 'inherit',
             width: '48%'
           }}
@@ -162,7 +162,7 @@ export function ContestTextarea({
 
   return (
     <div style={{ ...style, }}>
-      <label style={{ fontSize: '1.7rem', }}>
+      <label style={{ fontSize: '1.7rem', color: '#000' }}>
         {label}
       </label>
       <br />

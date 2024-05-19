@@ -11,13 +11,11 @@ export default function ContestCommentList() {
   return (
     <ConfigProvider
       theme={{
-        algorithm: theme.darkAlgorithm,
         components: {
           Pagination: {
-            fontFamily: 'Play',
             fontSize: '1.7rem',
             paddingXXS: 0,
-            itemSize: 40,
+            itemSize: 40  ,
           }
         }
       }}

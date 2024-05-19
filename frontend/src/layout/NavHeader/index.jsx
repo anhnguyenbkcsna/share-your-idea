@@ -107,14 +107,14 @@ const NavHeader = (props) => {
           <img src={logosvg} alt="logo"/>
         </div>
       </div>
-      <Menu
+      {/* <Menu
         style={{width: 'auto'}}
         mode="horizontal"
         disabledOverflow={true}
         defaultSelectedKeys={['2']}
         items={role === 'innovator' ? innovatorMenu : role === 'company' ? companyMenu : guestMenu}
         className={'w-90'}
-      />
+      /> */}
       {!user ?
         <div>
           <Link to={'login'}>

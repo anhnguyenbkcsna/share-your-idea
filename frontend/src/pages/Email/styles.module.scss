@@ -1,0 +1,14 @@
+.emailContainer {
+  width: 60vw;
+  margin: 0 auto;
+  min-width: 400px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  padding: 20px;
+}
+.receiver {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

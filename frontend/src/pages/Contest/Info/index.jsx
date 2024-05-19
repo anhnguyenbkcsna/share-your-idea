@@ -11,7 +11,7 @@ import SubmittedIdeasPage from '../SubmittedIdeas'
 import { HrHeading } from '../Components/hrheading'
 
 
-const ContestInfo = () => {
+const   ContestInfo = () => {
   const navigate = useNavigate()
 
   const [firstPrizeValue, setFirstPrizeValue] = useState(2500)

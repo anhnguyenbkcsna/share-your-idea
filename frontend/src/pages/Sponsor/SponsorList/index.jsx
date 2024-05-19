@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react"
 import styles from "./styles.module.scss"
 import { Input } from "antd"
 import { useNavigate } from "react-router-dom"
+import { sponsorProjectEndpoint } from "../../../utils/api.constants"
+import axios from "axios"
 const { Search } = Input
 
 const SponsorList = () => {
   const navigate = useNavigate()
+  const [projectList, setProjectList] = useState([])
   const [projects, setProjects] = useState(192321)
   const [projectName, setProjectName] = useState("Tên dự án")
   const [projectDescription, setProjectDescription] = useState("Mô tả ngắn")
@@ -31,7 +34,18 @@ const SponsorList = () => {
     const getRandomName = async () => {
       const response = await fetch("https://randomuser.me/api")
       const data = await response.json()
-      setProjectCreator(data.results[0].name.first) 
+      setProjectCreator(data.results[0].name.first)
+    }
+    const fetchSponsorProjects = async () => {
+      const res = await axios
+        .get(sponsorProjectEndpoint)
+        .then((res) => {
+          let data = res.data
+          console.log("Fetch All Sponsor Project: ", data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     }
   }, [])
   return (
@@ -51,29 +65,36 @@ const SponsorList = () => {
       </div>
       <div className={styles.projectList}>
         {Array.from({ length: 50 }).map((_, index) => (
-          <div key={index} className={styles.projectCard} onClick={() => handleNavigateToProject(index)}>
+          <div
+            key={index}
+            className={styles.projectCard}
+            onClick={() => handleNavigateToProject(index)}
+          >
             <div className={styles.projectImage}>
               <img src={getRandomPlaceholder(index)} alt="Project" />
             </div>
             <div className={styles.projectInfo}>
-              <h1>{projectName} {index}</h1>
+              <h1>
+                {projectName} {index}
+              </h1>
             </div>
             <div className={styles.projectDescription}>
-              <p><i>{projectDescription}</i></p>
+              <p>
+                <i>{projectDescription}</i>
+              </p>
             </div>
             <div className={styles.projectFooter}>
               <div className={styles.projectFooterLeft}>
                 <h3>{projectCreator}</h3>
               </div>
               <div className={styles.projectFooterRight}>
-                <h3>Thời gian còn lại: {projectTimeLeft} ngày</h3>  
+                <h3>Thời gian còn lại: {projectTimeLeft} ngày</h3>
               </div>
             </div>
           </div>
         ))}
       </div>
     </div>
-
   )
 }
 

@@ -1,29 +1,41 @@
-import React from 'react'
-import styles from './styles.module.scss'
-import { GoogleLogin } from '@react-oauth/google'
-import axios from 'axios'
-import loginImg from '../../assets/login.png'
-import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../../hooks/auth'
-import { authEndpoint } from '../../utils/api.constants.js'
-import { localStorageConstant } from '../../utils/global.constants'
-import { useSearchParams } from 'react-router-dom'
-import { cookiesConstant } from '../../utils/global.constants'
-
+import React from "react"
+import styles from "./styles.module.scss"
+import { GoogleLogin } from "@react-oauth/google"
+import axios from "axios"
+import loginImg from "../../assets/login.png"
+import { useNavigate } from "react-router-dom"
+import { useAuth } from "../../hooks/auth"
+import { loginEndpoint } from "../../utils/api.constants.js"
+import { localStorageConstant } from "../../utils/global.constants"
 
 const LoginPage = () => {
   const navigate = useNavigate()
   const { login } = useAuth()
   // const [searchParams] = useSearchParams()
+  const parseJwt = (token) => {
+    var base64Url = token.split(".")[1]
+    var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/")
+    var jsonPayload = decodeURIComponent(
+      atob(base64)
+        .split("")
+        .map(function (c) {
+          return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2)
+        })
+        .join("")
+    )
+    return JSON.parse(jsonPayload)
+  }
 
   const validateUserToken = (token) => {
     let newFormdata = new FormData()
 
-    newFormdata.append('id_token', token)
+    newFormdata.append("id_token", token)
+    console.log(">> Bearer", parseJwt(token))
     axios
-      .post(authEndpoint, newFormdata, {
+      .post(loginEndpoint, newFormdata, {
         headers: {
-          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': "application/json",
         },
       })
       .then((res) => {
@@ -40,7 +52,7 @@ const LoginPage = () => {
           role: data.role,
         })
 
-        navigate('/')
+        navigate("/")
         // let subdomain = searchParams.get('subdomain') !== null ? `${searchParams.get('subdomain')}.` : ''
         // window.location.href = `${window.location.protocol}//${subdomain}${window.location.host}/`
       })
@@ -65,7 +77,7 @@ const LoginPage = () => {
               validateUserToken(credentialResponse.credential)
             }}
             onError={() => {
-              console.log('Login Failed')
+              console.log("Login Failed")
               // raise alert
             }}
           />

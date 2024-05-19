@@ -1,84 +1,74 @@
-import React, { useEffect } from 'react'
-import styles from './styles.module.scss'
-import { getIdeaOfCurrentUser } from '../../../api/idea'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { Button, Flex, Table } from 'antd'
 import { HrHeading } from '../Components/hrheading'
-import { IdeaDetailViewer } from './Components/ideaDetailViewer'
-import { IdeaListItem } from './Components/ideaListItem'
-import { ConfigProvider, List, theme } from 'antd'
-
-
-export function SubmitIdeaPage() {
-  const [ideas, setIdeas] = React.useState([])
-  const [selectedIdea, setSelectedIdea] = React.useState({})
-
-  useEffect(() => {
-    getIdeaOfCurrentUser().then(res => {
-      setIdeas(Array(6).fill(res[0]))
+import { OrangeBasicButton } from '../Components/button'
+const columns = [
+  {
+    title: 'Tên bài dự thi',
+    dataIndex: 'name',
+  },
+  {
+    title: 'Tác giả',
+    dataIndex: 'author',
+  },
+  {
+    title: 'Bình chọn',
+    dataIndex: 'vote',
+  },
+  {
+    title: 'Điểm trung bình',
+    dataIndex: 'averageMark',
+  }
+]
+const data = []
+for (let i = 0; i < 24; i++) {
+  data.push({
+    key: i,
+    name: `Bài dự thi số ${i}`,
+    author: `Tác giả ${i}`,
+    vote: 32,
+    averageMark: 4.5,
+  })
+}
+const SubmitIdeaPage = () => {
+  const navigate = useNavigate()
+  const [selectedRowKeys, setSelectedRowKeys] = useState([])
+  const [loading, setLoading] = useState(false)
+  
+  const sendResultMail = () => {
+    let emailList = []
+    selectedRowKeys.forEach((key) => {
+      console.log(data[key].author)
+      // Get author's email through API
+      // emailList.push(authorEmail)
+      emailList.push(data[key].author)
     })
-  }, [])
-
-  const onSelectIdeaClick = (idea, idx) => {
-    setSelectedIdea({ ...idea })
+    localStorage.setItem('email', emailList)
+    navigate('/email')
+    
   }
 
-  useEffect(() => {
-    console.log(selectedIdea)
-  }, [selectedIdea])
-
+  const onSelectChange = (newSelectedRowKeys) => {
+    console.log('selectedRowKeys changed: ', newSelectedRowKeys)
+    setSelectedRowKeys(newSelectedRowKeys)
+  }
+  const rowSelection = {
+    selectedRowKeys,
+    onChange: onSelectChange,
+  }
+  const hasSelected = selectedRowKeys.length > 0
   return (
-    <div className={styles.container}>
-      <div className={styles.left}>
-        <HrHeading title="Ý tưởng của bạn" line={false} />
-        <ConfigProvider
-          theme={{
-            algorithm: theme.darkAlgorithm,
-            components: {
-              Pagination: {
-                fontFamily: 'Play',
-                fontSize: '1.7rem',
-                paddingXXS: 0,
-                itemSize: 40,
-              }
-            }
-          }}
-        >
-          <List
-            className={styles.comments}
-            itemLayout="vertical"
-            size="large"
-            pagination={{
-              pageSize: 5,
-              style: {
-                width: '80%',
-                fontWeight: 'bold'
-              },
-              align: 'center',
-              showSizeChanger: false,
-            }}
-            dataSource={ideas}
-            renderItem={(idea, idx) => (
-              <List.Item
-                key={idx}
-                style={{
-                  border: 'none',
-                  fontFamily: 'Play',
-                  padding: 0
-                }}
-              >
-                <IdeaListItem
-                  idea={idea}
-                  onClick={() => onSelectIdeaClick(idea, idx)}
-                />
-                <List.Item.Meta />
-              </List.Item>
-            )}
-          />
-        </ConfigProvider>
+    <div style={{ maxWidth: '80%', margin: '0 auto' }}>
+      <HrHeading title="Danh sách bài dự thi" />
+      <div style={{ marginBottom: 16 }}>
+        <span style={{ marginLeft: 8 }} >
+          {hasSelected ? `Selected ${selectedRowKeys.length} items` : ''}
+        </span>
       </div>
-      <div className={styles.right}>
-        <HrHeading title="Ý tưởng đã chọn" line={false} />
-        <IdeaDetailViewer idea={selectedIdea} />
-      </div>
+      <Table rowSelection={rowSelection} columns={columns} dataSource={data} />
+      <OrangeBasicButton onClick={sendResultMail} disabled={!hasSelected} loading={loading} text='Gửi kết quả'/>
     </div>
   )
 }
+export default SubmitIdeaPage

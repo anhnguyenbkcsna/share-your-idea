@@ -39,3 +39,6 @@ Project/static
 *.credentials.json
 credentials.json
 token.json
+
+static
+media

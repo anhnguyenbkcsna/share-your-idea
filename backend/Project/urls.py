@@ -46,9 +46,9 @@ router.register(r'', EmailServiceViewSet, basename='email')
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="Your API",
+        title="Woridea API",
         default_version='v1',
-        description="Description of your API",
+        description="Description of Woridea API",
         terms_of_service="https://www.example.com/policies/terms/",
         contact=openapi.Contact(email="contact@example.com"),
         license=openapi.License(name="BSD License"),
@@ -64,4 +64,4 @@ urlpatterns = [
     path('docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     path('', include(router.urls)),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

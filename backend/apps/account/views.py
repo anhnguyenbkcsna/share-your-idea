@@ -61,6 +61,7 @@ class AccountViewSet(viewsets.ViewSet):
             email = request.data.get("email")
             password = request.data.get("password")
             res = self.collection.find_one({"email": email, "password": password})
+            name = res["name"]
             if not res:
                 return Response({"message": "Invalid email or password"}, status=400)
         else:
@@ -81,7 +82,7 @@ class AccountViewSet(viewsets.ViewSet):
                 {
                     "name": name,
                     "email": email,
-                    "role": res["role"],
+                    "role": res["role"] if res else Role.INNOVATOR,
                 }
             )
             _id = result.inserted_id
@@ -91,7 +92,7 @@ class AccountViewSet(viewsets.ViewSet):
             {
                 "name": name,
                 "email": email,
-                "role": res["role"],
+                "role": res["role"] if res else Role.INNOVATOR,
                 "refresh": str(token),
                 "access": str(token.access_token),
             },

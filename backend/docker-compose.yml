@@ -1,0 +1,29 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  django:
+    build: .
+    volumes:
+      - .:/code
+      - static_volume:/code/static
+      - media_volume:/code/media
+    expose:
+      - "8000:8000"
+    env_file:
+      - .env
+
+  nginx:
+    image: nginx:latest
+    volumes:
+      - static_volume:/code/static
+      - media_volume:/code/media
+      - ../nginx/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - "80:80"
+    depends_on:
+      - django
+
+volumes:
+  static_volume:
+  media_volume:

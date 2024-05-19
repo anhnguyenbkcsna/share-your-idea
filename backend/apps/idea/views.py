@@ -27,18 +27,17 @@ class IdeaViewSet(viewsets.ViewSet):
 
     @action(detail=False, methods=["GET"], url_path=r"ideas/(?P<id>[^/.]+)")
     def get_idea_by_idea_id(self, request, id=None):
-        if id == "current":
-            inno_id = get_id_from_request(request)
-            if not inno_id:
-                return Response({"message": f"Cannot find {self.ENT_TYPE}"}, status=400)
-            idea = parse_json(
-                self.collection.find({"innovator_ids": {"$in": [inno_id]}})
-            )
-            return Response(
-                {"message": f"Got all ideas of innovator", "data": idea}, status=200
-            )
-
         return CrudHelper.get_by_id(id, self.collection, self.ENT_TYPE)
+
+    @action(detail=False, methods=["GET"], url_path=r"innovators/(?P<id>[^/.]+)/ideas")
+    def get_ideas_by_innovator_id(self, request, id=None):
+        inno_id = get_id_from_request(request)
+        if not inno_id:
+            return Response({"message": f"Cannot find {self.ENT_TYPE}"}, status=400)
+        idea = parse_json(self.collection.find({"innovator_ids": {"$in": [inno_id]}}))
+        return Response(
+            {"message": f"Got all ideas of innovator", "data": idea}, status=200
+        )
 
     @action(detail=False, methods=["PATCH"], url_path=r"ideas/(?P<id>[^/.]+)")
     def patch(self, request, id=None):

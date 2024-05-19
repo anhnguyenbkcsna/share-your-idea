@@ -1,5 +1,5 @@
 from rest_framework.views import APIView
-from .serializers import IdeaSerializer
+from .serializers import IdeaSerializer, CommentSerializer
 from common.utils import parse_json, get_id_from_request
 from common.classes.crud_helper import CrudHelper
 from rest_framework.permissions import IsAuthenticated, AllowAny
@@ -11,6 +11,10 @@ from config.db_connection import db_connection
 from config.authentication import CustomAuthentication
 from .models import Idea
 from django.db.models.query import QuerySet
+from bson.objectid import ObjectId
+from common.classes.response import CustomResponse
+import requests
+from common.constants import AI_SERVER_URL
 
 
 class IdeaViewSet(viewsets.ViewSet):
@@ -24,6 +28,80 @@ class IdeaViewSet(viewsets.ViewSet):
     @action(detail=False, methods=["GET"], url_path=r"ideas")
     def get_ideas(self, request):
         return CrudHelper.get_all(self.collection, self.ENT_TYPE)
+
+    @action(detail=False, methods=["GET"], url_path=r"ideas/recommend/list")
+    def get_recommend_ideas(self, request):
+        url = AI_SERVER_URL + "/topk/"
+        requirement = {
+            "domain": ["Phần mềm (Software)"],
+            "problem": '"Những hệ thống đăng tải ý tưởng ngày nay chưa đáp ứng đủ nhu cầu của nhà sáng tạo. Các ý tưởng đăng lên nhưng không quá chú trọng về nội dung mà chỉ quan tâm đến số lượng."',
+            "acceptance_criteria": "Một hệ thống mới giúp người dùng có thể đăng tải những ý tưởng sáng kiến của bản thân về một vấn đề gì đó trong cuộc sống.",
+            "constraints": "",
+            "_id": "398723wsjb29",
+        }
+
+        try:
+            # Make a GET request to the API endpoint using requests.get()
+            response = requests.get(url, data=parse_json(requirement))
+
+            # Check if the request was successful (status code 200)
+            if response.status_code == 200:
+                posts = response.json()
+                return CustomResponse(
+                    message="Get recommend ideas", data=posts, status=200
+                )
+            else:
+                return CustomResponse(
+                    message="Error when getting recommend ideas",
+                    status=response.status_code,
+                )
+        except requests.exceptions.RequestException as e:
+            return CustomResponse(
+                message="Error when getting recommend ideas", status=400, error=str(e)
+            )
+
+    def filter_idea(self, request):
+        url = AI_SERVER_URL + "/spam_filtering/"
+        idea = {
+            "_id": "65509e7e35a5fe8ab15550a0",
+            "domain": ["Phần mềm (Software)"],
+            "professional": ["Mọi người"],
+            "geographical": ["Vietnam"],
+            "ageRange": [0, 29],
+            "outstand": ["Ứng dụng cao"],
+            "name": '"Sàn kết nối ý tưởng với doanh nghiệp"',
+            "slogan": '"Ý tưởng không còn là ý tưởng"',
+            "problem": '"Những hệ thống đăng tải ý tưởng ngày nay chưa đáp ứng đủ nhu cầu của nhà sáng tạo. Các ý tưởng đăng lên nhưng không quá chú trọng về nội dung mà chỉ quan tâm đến số lượng."',
+            "solution": '"Hiện thực một hệ thống mới giúp người dùng có thể đăng tải những ý tưởng sáng kiến của bản thân về một vấn đề gì đó trong cuộc sống. Ở đây, các ý tưởng với độ hoàn thiện và được đánh giá cao sẽ có khả năng lớn trong việc kết hợp với doanh nghiệp trong ngành liên quan"',
+            "teamDescription": '"<5 thành viên"',
+            "teamExperience": '"Có kinh nghiệm trong việc xây dựng hệ thống. Có kiến thức về xử lý ngôn ngữ tự nhiên"',
+            "gender": '"Male"',
+            "behavior": '"Sàn ý tưởng giúp thu hẹp khoảng cách giữa ý tưởng và thực tế. Thông qua việc kết nối với doanh nghiệp, nhà sáng tạo có thể cơ hội, học hỏi thêm kinh nghiệm và những góp ý từ phía doanh nghiệp"',
+            "apps": '"ytuongsangtao.net, ytuongsangtaohcm Quá nhiều ý tưởng, tuy nhiên nội dung ý tưởng không chất lượng"',
+            "currentDev": '"[Hiện thực] Ý tưởng đang được hiện thực và thử nghiệm trong môi trường phát triển"',
+            "support": "undefined",
+            "files": ["65509e7e35a5fe8ab15550a0/Cave-bg.png"],
+        }
+
+        try:
+            # Make a GET request to the API endpoint using requests.get()
+            response = requests.get(url, data=idea)
+
+            # Check if the request was successful (status code 200)
+            if response.status_code == 200:
+                posts = response.json()
+                return CustomResponse(
+                    message="Get filtering result", data=posts, status=200
+                )
+            else:
+                return CustomResponse(
+                    message="Error when filtering idea",
+                    status=response.status_code,
+                )
+        except requests.exceptions.RequestException as e:
+            return CustomResponse(
+                message="Error when filtering idea", status=400, error=str(e)
+            )
 
     @action(detail=False, methods=["GET"], url_path=r"ideas/(?P<id>[^/.]+)")
     def get_idea_by_idea_id(self, request, id=None):
@@ -53,11 +131,94 @@ class IdeaViewSet(viewsets.ViewSet):
         serializer = IdeaSerializer(data=request.data)
         file_list = request.FILES.getlist("files")
         print("Nums of Files is uploading: ", len(file_list))
+        innovator_id = get_id_from_request(request)
 
         return CrudHelper.post_with_file(
-            self.collection, serializer, file_list, self.ENT_TYPE
+            self.collection,
+            serializer,
+            file_list,
+            self.ENT_TYPE,
+            innovator_id=innovator_id,
         )
 
     # def delete(self, request):
     #     id = request.query_params.get("id")
     #     return CrudHelper.delete(id, self.collection, self.ENT_TYPE)
+
+
+class CommentViewSet(viewsets.ViewSet):
+    collection = db_connection.get_collection("idea")
+    serializer_class = CommentSerializer
+    ENT_TYPE = "comment"
+    permission_classes = [IsAuthenticated]
+    queryset = QuerySet(model=Idea, query=[])
+    authentication_classes = [CustomAuthentication]
+
+    @action(
+        detail=False,
+        methods=["GET", "POST"],
+        url_path=r"ideas/(?P<id>[^/.]+)/comments",
+    )
+    def get_comments_by_idea_id(self, request, id=None):
+        idea = self.collection.find_one({"_id": ObjectId(id)})
+        if not idea:
+            return Response({"message": f"Cannot find {self.ENT_TYPE}"}, status=400)
+
+        if request.method == "POST":
+            serializer = self.serializer_class(data=request.data)
+            if serializer.is_valid(raise_exception=True):
+                comment = serializer.data
+
+                if not db_connection.get_collection("profile").find_one(
+                    {"_id": ObjectId(comment["innovator_id"])}
+                ):
+                    return Response({"message": f"Cannot find innovator"}, status=400)
+
+                self.collection.update_one(
+                    {"_id": ObjectId(id)},
+                    {"$push": {"comments": comment}},
+                )
+                return Response(
+                    {"message": f"Added comment to idea", "data": comment}, status=200
+                )
+            else:
+                return Response({"message": f"Cannot add comment to idea"}, status=400)
+        else:
+            comments = parse_json(idea["comments"]) if idea.get("comments") else []
+            innovator_ids = [comment["innovator_id"] for comment in comments]
+
+            innovator_docs = list(
+                db_connection.get_collection("profile").find(
+                    {
+                        "_id": {
+                            "$in": [
+                                ObjectId(innovator_id) for innovator_id in innovator_ids
+                            ]
+                        }
+                    }
+                )
+            )
+
+            def map_comm(comment):
+                innovator = next(
+                    filter(
+                        lambda x: str(x["_id"]) == comment["innovator_id"],
+                        innovator_docs,
+                    )
+                )
+                return {
+                    "content": comment["content"],
+                    "innovator_id": comment["innovator_id"],
+                    "innovator": {
+                        "name": innovator.get("name"),
+                        "email": innovator.get("email"),
+                        "role": innovator.get("role"),
+                        "avt_url": innovator.get("avt_url") or "",
+                    },
+                }
+
+            comments = list(map(map_comm, comments))
+
+            return Response(
+                {"message": f"Got all comments of idea", "data": comments}, status=200
+            )

@@ -12,6 +12,7 @@ class Account(AbstractUser):
     email = models.TextField()
     role = models.TextField()
     password = models.TextField(default=None)
+    avt_url = models.TextField(default=None)
     is_authenticated = models.BooleanField(default=True)
     objects = AccountManager()
 
@@ -38,7 +39,7 @@ class Company(Account):
     website = models.TextField(default=None)
     number = models.TextField(default=None)
     address = models.TextField(default=None)
-    requirement = models.JSONField(default=dict)
+    requirement = models.JSONField(default=list)
     specialties = models.JSONField(default=list)
     idea_ids = models.JSONField(default=list)
 

@@ -20,11 +20,21 @@ class AccountViewSet(viewsets.ViewSet):
     queryset = Account.objects.all()
     ENT_TYPE = "account"
 
-    @action(detail=False, methods=["GET"], url_path=r"accounts")
+    @action(
+        detail=False,
+        methods=["GET"],
+        permission_classes=[IsAuthenticated],
+        url_path=r"accounts",
+    )
     def users(self, request):
         return CrudHelper.get_all(self.collection, self.ENT_TYPE)
 
-    @action(detail=False, methods=["GET", "PATCH"], url_path=r"accounts/(?P<id>[^/.]+)")
+    @action(
+        detail=False,
+        methods=["GET", "PATCH"],
+        permission_classes=[IsAuthenticated],
+        url_path=r"accounts/(?P<id>[^/.]+)",
+    )
     def user(self, request, id=None):
         if not id:
             return Response({"message": f"Cannot find {self.ENT_TYPE}"}, status=400)
@@ -72,7 +82,6 @@ class AccountViewSet(viewsets.ViewSet):
                 name = gg_response["name"]
                 email = gg_response["email"]
 
-
         res = self.collection.find_one({"email": email})
         if res:
             _id = str(res["_id"])
@@ -99,7 +108,6 @@ class AccountViewSet(viewsets.ViewSet):
             status=200,
         )
 
-
     @action(
         detail=False,
         methods=["GET"],
@@ -107,11 +115,14 @@ class AccountViewSet(viewsets.ViewSet):
         url_path=r"accounts/auth",
     )
     def authenticate(self, request):
-        return Response({
-            "message": "Authenticated",
-            "data": {
-                "name": request.user.name,
-                "email": request.user.email,
-                "role": request.user.role,
-            }
-        }, status=200)
+        return Response(
+            {
+                "message": "Authenticated",
+                "data": {
+                    "name": request.user.name,
+                    "email": request.user.email,
+                    "role": request.user.role,
+                },
+            },
+            status=200,
+        )

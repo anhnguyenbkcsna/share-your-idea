@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 from rest_framework import serializers
-from .models import Idea
+from .models import Idea, Comment
 
 
 class IdeaSerializer(ModelSerializer):
@@ -13,3 +13,8 @@ class IdeaSerializer(ModelSerializer):
     class Meta:
         model = Idea
         exclude = ["upvote", "downvote"]
+
+class CommentSerializer(ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = "__all__"

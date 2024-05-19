@@ -20,3 +20,5 @@ GOOGLE_AUTH_SCOPES = [
 ]
 GOOGLE_ID_TOKEN_INFO_URL = "https://www.googleapis.com/oauth2/v3/tokeninfo"
 GOOGLE_AUTH_CREDENTIALS = os.path.join(BASE_DIR, "credentials.json")
+
+AI_SERVER_URL = os.getenv("AI_SERVER_URL")

@@ -29,7 +29,7 @@ class CompanyApiView(APIView):
         id = get_id_from_request(request)
         
         company_doc = self.collection.find_one({"_id": ObjectId(id)})
-        company_requirements = company_doc["requirement"] if hasattr(company_doc, "requirement") else []
+        company_requirements = company_doc["requirement"] if company_doc.get("requirement") else []
         return Response(
             {
                 "message": f"Get requirements successfully!",
@@ -42,10 +42,12 @@ class CompanyApiView(APIView):
         company_id = get_id_from_request(request)
         serializer = RequirementSerializer(data=request.data)
         
+        print("Data: ", request.data)
+        
         if company_id and serializer.is_valid(raise_exception=True):
             self.collection.update_one(
                 {"_id": ObjectId(company_id)},
-                {"$set": {"requirement": serializer.validated_data}},
+                {"$push": {"requirement": serializer.validated_data}},
             )
             return Response(
                 {

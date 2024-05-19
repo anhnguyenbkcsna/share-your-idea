@@ -42,11 +42,20 @@ class Idea(models.Model):
     views = models.IntegerField(default=0)
     
     # Other
-    innovator_ids = models.JSONField(default=list)
+    innovator_id = models.TextField(default=None)
     upvote = models.IntegerField(default=0)
     downvote = models.IntegerField(default=0)
+    comments = models.JSONField(default=list)
     
     # publish = models.BooleanField(default=False)
-
     def __str__(self):
         return """Idea: {self.title}"""
+
+class Comment(models.Model):
+    idea_id = models.TextField()
+    innovator_id = models.TextField()
+    content = models.TextField()
+    datetime = models.DateTimeField(auto_now_add=True)
+    isSpam = models.BooleanField(default=False)
+    def __str__(self):
+        return """Comment: {self.title}"""

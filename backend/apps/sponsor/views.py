@@ -29,11 +29,12 @@ class SponsorPackageViewSet(viewsets.ViewSet):
         url_path=r"sponsors/packages",
     )
     def manage_packages(self, request):
+        company_id = get_id_from_request(request)
         if request.method == "GET":
             return CrudHelper.get_all(self.collection, self.ENT_TYPE)
         elif request.method == "POST":
             return CrudHelper.post(
-                self.collection, self.serializer_class(data=request.data), self.ENT_TYPE
+                self.collection, self.serializer_class(data=request.data), self.ENT_TYPE, company_id=company_id
             )
         elif request.method == "PATCH":
             return CrudHelper.patch(
@@ -71,11 +72,12 @@ class SponsorEventViewSet(viewsets.ViewSet):
         url_path=r"sponsors/events",
     )
     def manage_packages(self, request):
+        innovator_id = get_id_from_request(request)
         if request.method == "GET":
             return CrudHelper.get_all(self.collection, self.ENT_TYPE)
         elif request.method == "POST":
             return CrudHelper.post(
-                self.collection, self.serializer_class(data=request.data), self.ENT_TYPE
+                self.collection, self.serializer_class(data=request.data), self.ENT_TYPE, innovator_id=innovator_id
             )
         elif request.method == "PATCH":
             return CrudHelper.patch(

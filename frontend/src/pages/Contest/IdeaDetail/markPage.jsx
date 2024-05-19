@@ -1,50 +1,61 @@
-import React, { useEffect, useState } from 'react'
-import styles from './styles.module.scss'
-import { useNavigate } from 'react-router-dom'
-import genericStyles from '../styles.module.scss'
-import { Input, Table } from 'antd'
+import React, { useEffect, useState } from "react"
+import styles from "./styles.module.scss"
+import { useNavigate } from "react-router-dom"
+import genericStyles from "../styles.module.scss"
+import { Button, Input, Table } from "antd"
+import { Form, InputNumber } from "antd"
+import MarkItem from "./markItem"
+const { TextArea } = Input
 
 export default function MarkPage() {
   const navigate = useNavigate()
-  const [vote, setVote] = useState('none')
+  const [form] = Form.useForm()
+  const [criterias, setCriterias] = useState(['creative', 'feasibility', 'effective', 'utility', 'applicability'])
+  const [averageMark, setAverageMark] = useState(0.0)
+  const [vote, setVote] = useState("none")
   const [like, setLike] = useState(5331)
   const [dislike, setDislike] = useState(212)
-  const organizer = 'GDSC HCMC'
-  const innovatorName = 'Nguyễn'
-  const innovatorAvtUrl = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s'
+  const organizer = "GDSC HCMC"
+  const innovatorName = "Nguyễn"
+  const innovatorAvtUrl =
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s"
 
   const dataSource = [
     {
-      key: '1',
-      criteria: 'Mike',
+      key: "1",
+      criteria: "Mike",
       point: 32,
-      comment: '10 Downing Street',
+      comment: "10 Downing Street",
     },
     {
-      key: '2',
-      criteria: 'John',
+      key: "2",
+      criteria: "John",
       point: 42,
-      comment: '10 Downing Street',
+      comment: "10 Downing Street",
     },
   ]
 
   const columns = [
     {
-      title: 'Tiêu chí',
-      dataIndex: 'criteria',
-      key: 'criteria',
+      title: "Tiêu chí",
+      dataIndex: "criteria",
+      key: "criteria",
     },
     {
-      title: 'Điểm',
-      dataIndex: 'point',
-      key: 'point',
+      title: "Điểm",
+      dataIndex: "point",
+      key: "point",
     },
     {
-      title: 'Nhận xét',
-      dataIndex: 'comment',
-      key: 'comment',
+      title: "Nhận xét",
+      dataIndex: "comment",
+      key: "comment",
     },
   ]
+
+  const onFinish = (values) => {
+    console.log(values)
+  }
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -52,94 +63,70 @@ export default function MarkPage() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.contestHeading}>
-        {organizer}
-      </div>
-      <div className={styles.mediaBox}>
-        Video
-      </div>
+      <div className={styles.contestHeading}>{organizer}</div>
+      <div className={styles.mediaBox}>Video</div>
       <div className={styles.mainContent}>
         <div className={styles.information}>
-          <div className={styles.ideaHeading}>
-            Thông tin
-          </div>
+          <div className={styles.ideaHeading}>Thông tin</div>
           <div
             className={genericStyles.authorLine}
             style={{ marginBottom: 40 }}
           >
             <div className={genericStyles.authorAvtWrapper}>
-              <img
-                alt='contest'
-                src={innovatorAvtUrl}
-              />
+              <img alt="contest" src={innovatorAvtUrl} />
             </div>
-            <div className={genericStyles.authorName}>
-              {innovatorName}
-            </div>
+            <div className={genericStyles.authorName}>{innovatorName}</div>
           </div>
 
+          <div className={styles.line}>Số lượng: 5 thành viên</div>
+          <div className={styles.line}>Lĩnh vực: Công nghệ Hóa học</div>
           <div className={styles.line}>
-            Số lượng: 5 thành viên
-          </div>
-          <div className={styles.line}>
-            Lĩnh vực: Công nghệ Hóa học
-          </div>
-          <div className={styles.line}>
-            <div className={styles.ideaStatus}>
-              Trạng thái dự án
-            </div>
+            <div className={styles.ideaStatus}>Trạng thái dự án</div>
             Đã có prototype thực thi tốt trong môi trường dev
           </div>
         </div>
 
         <div className={styles.detail}>
-          <div className={styles.ideaHeading}>
-            Hệ thống phân loại tái chế
-          </div>
+          <div className={styles.ideaHeading}>Hệ thống phân loại tái chế</div>
           <div className={styles.para}>
-            Tái chế và sử dụng các phế thải và sản phẩm phụ trong quá trình công nghiệp và nông nghiệp để chế tạo một
+            Tái chế và sử dụng các phế thải và sản phẩm phụ trong quá trình công
+            nghiệp và nông nghiệp để chế tạo một
           </div>
         </div>
       </div>
-      <div className={styles.evaluationWrapper}>
-        <hr
-          style={{ color: '#FBFBFB', marginBottom: 20 }}
-        />
-        <div className={styles.evaluation}>
-          <div className={styles.evaluationTable}>
-            <div className={styles.tblHeader}>Tiêu chí</div>
-            <div className={styles.tblHeader}>Điểm</div>
-            <div className={styles.tblHeader}>Nhận xét</div>
-
-            <div className={styles.tblItem}>
-              Tính cấp thiết
+      <div className={styles.markWrapper}>
+        <hr style={{ color: "#FBFBFB", marginBottom: 20 }} />
+        <h1 className={styles.markHeading}>Chấm điểm</h1>
+        <div className={styles.mark}>
+          <Form
+            form={form}
+            style={{
+              minWidth: 1000,
+            }}
+            onFinish={onFinish}
+          >
+            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+              <div style={{
+                display: "flex",
+                flexDirection: "column",
+                minWidth: 500,
+              }}>
+                <MarkItem criteria="Độ sáng tạo" formName="creative" />
+                <MarkItem criteria="Khả thi" formName="feasibility" />
+                <MarkItem criteria="Hiệu quả" formName="effective" />
+                <MarkItem criteria="Tính tiện ích" formName="utility" />
+                <MarkItem criteria="Tính ứng dụng" formName="applicability" />
+              </div>
+              <TextArea placeholder="Nhận xét" autoSize={{
+                minRows: 11,
+              }} />
             </div>
-            <div className={styles.tblItem}>
-              <Input
-                type='number'
-                style={{ width: '100%' }}
-                value={8}               
-              />
-            </div>
-            <div className={styles.tblItem}>Tính cấp thiếtTính cấp thiếtTính cấp thiếtTính cấp thiếtTính cấp thiếtTính cấp thiếtTính cấp thiết</div>
-            <div className={styles.tblItem}>Tính thuyết phục</div>
-            <div className={styles.tblItem}>8.4</div>
-            <div className={styles.tblItem}>Tính thuyết phục</div>
-            <div className={styles.tblItem}>Tính khả thi</div>
-            <div className={styles.tblItem}>8.2</div>
-            <div className={styles.tblItem}>Tính khả thi</div>
-            <div className={styles.tblItem}>Thuyết trình</div>
-            <div className={styles.tblItem}>8.9</div>
-            <div className={styles.tblItem}>Thuyết trình</div>
-            <div className={styles.tblItem}>Kiến thức nghiên cứu</div>
-            <div className={styles.tblItem}>7</div>
-            <div className={styles.tblItem}>Kiến thức nghiên cứu</div>
-          </div>
-          <h2 className={styles.point}>
-            8.5
-          </h2>
+            <Button type="primary" style={{ width: 200, height: 50, display: "flex", justifyContent: 'center', paddingTop: 15 }} htmlType="submit">
+              Gửi điểm
+            </Button>
+          </Form>
         </div>
       </div>
-    </div >
+    </div>
   )
 }

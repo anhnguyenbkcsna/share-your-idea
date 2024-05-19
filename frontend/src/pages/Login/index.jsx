@@ -34,7 +34,7 @@ const LoginPage = () => {
     axios
       .post(loginEndpoint, newFormdata, {
         headers: {
-          'Authorization': `Bearer ${token}`,
+          // 'Authorization': `Bearer ${token}`,
           'Content-Type': "application/json",
         },
       })

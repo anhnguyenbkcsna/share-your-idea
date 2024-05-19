@@ -117,10 +117,10 @@ const NavHeader = (props) => {
       /> */}
       {!user ?
         <div>
-          <Link to={'login'}>
+          <Link to={'/login'}>
             <Button type='text'>Đăng nhập</Button>
           </Link>
-          <Link to={'profile'}>
+          <Link to={'/profile'}>
             <Button type='primary'>Đăng ký</Button>
           </Link>
         </div> :

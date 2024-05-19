@@ -61,7 +61,7 @@ const EmailPage = () => {
   }
 
   useEffect(() => {
-    setReceivers(localStorage.getItem('email').split(','))
+    localStorage.getItem('email') && setReceivers(localStorage.getItem('email').split(','))
     form.setFieldsValue({ Receiver: localStorage.getItem('email') })
   }, [])
 

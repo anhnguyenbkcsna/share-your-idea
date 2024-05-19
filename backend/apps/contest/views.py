@@ -17,7 +17,10 @@ class ContestViewSet(viewsets.ViewSet):
     serializer_class = ContestSerializer
     ENT_TYPE = "contest"
 
-    @action(detail=False, methods=["GET", "POST"], url_path=r"contests")
+    @action(detail=False, 
+            methods=["GET", "POST"], 
+            permission_classes=[AllowAny],
+            url_path=r"contests")
     def get_and_post_contests(self, request):
         if request.method == "POST":
             serializer = ContestSerializer(data=request.data)

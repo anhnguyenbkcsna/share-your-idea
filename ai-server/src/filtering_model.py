@@ -12,13 +12,17 @@ from tensorflow.keras.models import load_model, save_model
 from gibberish_detector import detector
 from filtering_data import get_data_by_column
 from entity import Idea, IdeaObj
+import os
+
+current_directory = os.getcwd()
+print("Current Directory:", current_directory)
 
 # model_pkl_file='model/spam_filtering.pkl'
 # model_json_file = "model/spam_filtering.json"
 # model_weights_file = "model/weights.h5py"
 # word2vec_path='model/word2vec.vie.model.bin'
-gibberish_path='model/gibberish.vie.model'
-filtering_model_path = 'model/saved_model.keras'
+gibberish_path= './model/gibberish.vie.model'
+filtering_model_path = './model/saved_model.keras'
 max_words = 1000
 max_len = 150
 

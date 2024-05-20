@@ -11,12 +11,12 @@ from app_setting import app
 ## pyenv -> 3.10.14
 # pip freeze > requirements.txt
 
-@app.get("/spam_filtering")
+@app.get("/spam_filtering", name="spam filtering")
 def spam_filtering(idea: Idea):
   return filter(idea)
 
-@app.get("/topk")
-def search_topk_similarity(req: Requirement):
+@app.get("/topk", name="search topk")
+def search_topk(req: Requirement):
   try:
     query = f'{req.problem}. {req.acceptance_criteria}'
     topk_id = topk_idea_search(query)

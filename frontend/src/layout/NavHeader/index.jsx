@@ -124,9 +124,16 @@ const NavHeader = (props) => {
             <Button type='primary'>Đăng ký</Button>
           </Link>
         </div> :
-        <div>
-          <span>{`Xin chào ${user.name}!`}</span>
-          <Button onClick={() => logout()} type='primary'>Thoát</Button>
+        <div style={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'end',
+          minWidth: '300px'
+        }}>
+          <span>{`${user.name}`}</span>
+          <Button onClick={() => logout()} type='primary' style={{
+            maxWidth: '100px',
+          }}>Thoát</Button>
         </div>}
     </Header>
   )

@@ -16,6 +16,7 @@ import {
 
 import NotFoundPage from '../../Error/E404'
 import CommentList from '../../../components/IdeaListComponent'
+import { getAllIdeas } from '../../../api/idea'
 
 // const iconKey = {
 //   name: <UserOutlined />,
@@ -78,10 +79,8 @@ const IdeaDescriptionPage = () => {
 
   useEffect(() => {
     const fetchIdea = async () => {
-      let response = await axios
-        .get(`${deployedAPI}/ideas/`)
-        .then((res) => res.data)
-      setFetchIdeas(response.data)
+      const allIdeas = await getAllIdeas()
+      setFetchIdeas(allIdeas)
     }
     fetchIdea()
   }, [])

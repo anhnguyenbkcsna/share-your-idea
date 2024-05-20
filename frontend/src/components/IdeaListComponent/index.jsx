@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { LikeOutlined, MessageOutlined, StarOutlined } from '@ant-design/icons'
 import { Avatar, List, Space } from 'antd'
 import { NavLink } from 'react-router-dom'
 import styles from './styles.module.scss'
+import { getAllUsers } from '../../api/user'
 
 const IconText = ({ icon, text }) => (
   <Space>
@@ -30,7 +31,6 @@ const IdeaListComponent = (props) => {
         pageSize: 3,
       }}
       dataSource={fetchIdeas}
-      
       renderItem={(item) => (
         <List.Item
           className={styles.item}
@@ -52,13 +52,6 @@ const IdeaListComponent = (props) => {
               key='list-vertical-message'
             />,
           ]}
-          extra={
-            <img
-              width={272}
-              alt='logo'
-              src='https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png'
-            />
-          }
         >
           <List.Item.Meta
             avatar={<Avatar src={item.avatar} />}
@@ -70,7 +63,7 @@ const IdeaListComponent = (props) => {
             description={rmvQuote(item.slogan)}
           />
           <div className={styles.description}>
-            {rmvQuote(item.problem)}
+            {rmvQuote(item.content)}
           </div>
         </List.Item>
       )}

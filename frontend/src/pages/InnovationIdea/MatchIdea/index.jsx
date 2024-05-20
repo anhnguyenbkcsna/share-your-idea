@@ -75,7 +75,18 @@ const MatchIdea = () => {
   console.log('>>>> fetchIdea', fetchIdeas)
 
   return (
-    <CusCard>
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: '#fff',
+      padding: '20px',
+      borderRadius: '10px',
+      boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+      maxWidth: '80%',
+      margin: '0 auto',
+    }}>
       <OwlCarousel
         className='owl-theme'
         loop margin={15} lazyLoad dots smartSpeed={450} style={{zIndex: 0}}
@@ -88,7 +99,7 @@ const MatchIdea = () => {
           />
         ))}
       </OwlCarousel>
-    </CusCard>
+    </div>
   )
 }
 export default MatchIdea

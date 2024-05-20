@@ -182,7 +182,7 @@ const CreateIdeaFormPage = () => {
       {contextHolder}
       <FormProgress
         onFormFinish={onFormFinish}
-        slogans={['We are helping you', 'Your idea is awesome']}
+        slogans={['Hãy thể hiện ý tưởng sáng tạo của bạn', 'Bắt đầu từ bước đầu tiên!']}
         formSource={[FormOverview, FormCustomerSegment, FormValuePropositions, FormDone]}
         dataSteps={userFormStepItem}
         edit={false}

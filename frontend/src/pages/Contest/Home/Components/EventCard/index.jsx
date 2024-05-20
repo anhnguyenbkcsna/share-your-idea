@@ -23,7 +23,7 @@ const ContestEventCard = ({ contest }) => {
 
   return (
     <div className={styles.cardContainer}>
-      <div className={styles.headerContainer}>
+      <div className={contest?.status ? styles.headerContainer : styles.closeContainer}>
         <div className={styles.headerTitle}>
           {contest?.status ? 'opening' : 'closed'}
         </div>

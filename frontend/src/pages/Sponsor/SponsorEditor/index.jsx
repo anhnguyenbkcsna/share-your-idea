@@ -6,10 +6,6 @@ import { editIdea } from '../../../api/idea'
 // Components
 import FormProgress from '../../../components/FormProgress/progress'
 import CusCard from '../../../components/CusCard'
-import FormOverview from '../../../components/FormIdeaSteps/Overview'
-import FormCustomerSegment from '../../../components/FormIdeaSteps/CustomerSegment'
-import FormValuePropositions from '../../../components/FormIdeaSteps/ValuePropositions'
-import FormDone from '../../../components/FormIdeaSteps/Done'
 import SponsorPackage from '../../../components/FormIdeaSteps/SponsorPackage'
 import axios from 'axios'
 import { sponsorProjectEndpoint } from '../../../utils/api.constants'
@@ -43,9 +39,9 @@ const SponsorEditor = () => {
     <CusCard>
       <FormProgress
         onFormFinish={onFormFinish}
-        slogans={['We are helping you', 'Your idea is awesome']}
+        slogans={['Gói tài trợ cho dự án']}
         // formSource={[FormOverview, FormCustomerSegment, FormValuePropositions, SponsorPackage]}
-        formSource={[FormOverview, FormCustomerSegment, FormValuePropositions, SponsorPackage]}
+        formSource={[SponsorPackage]}
         dataSteps={userSponsorFormStepItem}
         edit={false}
       />

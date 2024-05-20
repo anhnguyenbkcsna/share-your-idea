@@ -26,16 +26,23 @@ const items = [
   getItem('Ý tưởng sáng tạo', 'innovation', <BulbOutlined />, [
     getItem(<Link to='/innovator/idea'>Tạo mới ý tưởng</Link>, 'create'),
     getItem(<Link to='/innovator'>Ý tưởng của tôi</Link>, 'ideaList'),
-    getItem(<Link to='/match-idea'>Kết nối ý tưởng</Link>, 'ideaDetail'),
+    getItem(<Link to='/company'>Tạo yêu cầu</Link>, 'ideaDetail'),
+    getItem(<Link to='/company/requirement'>Yêu cầu của tôi</Link>, 'requirementList'),
+    getItem(<Link to='/match-idea'>Kết nối ý tưởng</Link>, 'ideaMatch'),
   ]),
   getItem('Triển khai cuộc thi', 'contest', <ProjectOutlined />, [
-    getItem(<Link to='/contest'>Các cuộc thi </Link>, 'contest'), 
+    getItem(<Link to='/contest'>Các cuộc thi</Link>, 'contest'), 
     getItem(<Link to='/contest/new'>Tạo cuộc thi</Link>, 'mySubmission'),
-    getItem(<Link to='/:contestId'>Danh sách dự thi</Link>, 'submissionList'),
+    getItem(<Link to='/contest/:contestId'>Thông tin cuộc thi</Link>, 'submissionList'),
+    getItem(<Link to='/contest/submit'>Bài dự thi</Link>, 'submission'),
+    getItem(<Link to='/contest/ideas/:id'>Chi tiết bài dự thi</Link>, 'submissionDescription'),
+    getItem(<Link to='/contest/ideas/:id/mark'>Chấm điểm</Link>, 'submissionMark'),
+    
   ]),
   getItem('Kêu gọi tài trợ', 'sponsor', <DollarOutlined />, [
-    getItem(<Link to='/sponsor/projects'>Tạo mới kêu gọi</Link>, 'createSponsor'),
-    getItem(<Link to='/sponsor/projects'>Dự án kêu gọi của tôi</Link>, 'sponsorDetail'),
+    getItem(<Link to='/sponsor/projects'>Các dự án kêu gọi</Link>, 'createSponsor'),
+    getItem(<Link to='/sponsor/projects/:id'>Chi tiết dự án</Link>, 'sponsorDescription'),
+    getItem(<Link to='/sponsor/projects/:id/edit'>Chỉnh sửa dự án tài trợ</Link>, 'sponsorDetail'),
   ]), 
   getItem(<Link to='/email'>Liên hệ</Link>, 'email', <MailOutlined />),
 ]

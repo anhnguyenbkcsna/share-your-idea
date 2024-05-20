@@ -21,6 +21,7 @@ import MatchIdea from './InnovationIdea/MatchIdea'
 import InnovatorIdea from './InnovationIdea/IdeaList'
 import IdeaDescriptionPage from './InnovationIdea/IdeaDescription'
 import CompanyRequirementFormPage from './InnovationIdea/CompanyRequirement'
+import CompanyRequirementList from './InnovationIdea/CompanyRequirement/requirementList'
 
 // Contest
 import { default as ContestHomePage } from './Contest/Home'
@@ -130,13 +131,15 @@ export const getRouter = () => {
       </Route>
       <Route path='company' Component={PublicLayout}>
         <Route index Component={CompanyRequirementFormPage} />
-        {/* <Route path='profile' Component={CreateProfileForm} /> */}
+        <Route path='requirement' Component={CompanyRequirementList} />
       </Route>
       <Route path='match-idea' Component={PublicLayout}>
         <Route index Component={MatchIdea} />
       </Route>
       <Route path='idea' Component={PublicLayout}>
         <Route path=':ideaId' Component={IdeaDescriptionPage} />
+        <Route path=':ideaId/edit' Component={CreateIdeaFormPage} />
+        
       </Route>
       {/* <Route path='faq' Component={PrivateLayout} >
         <Route index Component={Faq} />

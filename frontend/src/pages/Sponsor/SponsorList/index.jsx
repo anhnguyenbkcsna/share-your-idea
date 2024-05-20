@@ -51,7 +51,7 @@ const SponsorList = () => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h1>Sponsor Home Page</h1>
+        <h1>Kêu gọi tài trợ cho ý tưởng sáng tạo</h1>
         <Search
           placeholder="Tìm kiếm dự án"
           onSearch={onSearch}

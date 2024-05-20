@@ -8,7 +8,7 @@ const SponsorPackage = () => {
   return (
     <>
       <Button type="primary" className={styles.addPackageBtn} onClick={() => setNumberOfPackage(numberOfPackage + 1)}>
-        Add Package
+        Thêm gói tài trợ
       </Button>
       
       <div className={styles.packageContainer}>

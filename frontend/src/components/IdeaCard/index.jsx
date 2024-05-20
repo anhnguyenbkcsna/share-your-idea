@@ -84,9 +84,6 @@ const IdeaCard = (props) => {
                 {idea.name}
               </Typography.Title>
             </a>
-            <Tooltip title='Complete percentage'>
-              <Progress type="circle" percent={69} size='small' />
-            </Tooltip>
           </div>
           <Typography.Paragraph className={styles.description}>{idea.solution}
           </Typography.Paragraph>

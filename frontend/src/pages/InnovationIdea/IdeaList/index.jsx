@@ -5,6 +5,7 @@ import styles from './styles.module.scss'
 import { deployedAPI } from '../../../utils/form.constants'
 import IdeaListComponent from '../../../components/IdeaListComponent'
 import { useNavigate } from 'react-router-dom'
+import { getAllIdeas } from '../../../api/idea'
 
 const sortTypes = [
   {
@@ -44,10 +45,9 @@ const InnovatorIdea = () => {
 
   useEffect(() => {
     const fetchIdea = async () => {
-      let response = await axios
-        .get(`${deployedAPI}/ideas/`)
-        .then((res) => res.data)
-      setFetchIdeas(response.data)
+      let ideas = await getAllIdeas()
+      console.log('>> ideas', ideas)
+      setFetchIdeas(ideas)
     }
     fetchIdea()
   }, [])
@@ -69,18 +69,16 @@ const InnovatorIdea = () => {
 
   return (
     <div className={styles.container}>
+      <h1>Ý tưởng của tôi</h1>
       <div style={{display: 'flex', justifyContent: 'space-between'}}>
-        <Input.Search
-          placeholder="Find your idea"
-          onChange={handleSearch}
-          style={{
-            width: 200,
-          }}
-        />
-        <Button onClick={handleSort}>
+        {/* <Button onClick={handleSort} style={{
+          minWidth: 150
+        }}>
           {sortTypes[sortIndex].name}
-        </Button>
-        <Button type='primary' onClick={() => navigate('/innovator/idea')}>
+        </Button> */}
+        <Button type='primary' onClick={() => navigate('/innovator/idea')} style={{
+          minWidth: 150
+        }}>
           Tạo ý tưởng
         </Button>
       </div>

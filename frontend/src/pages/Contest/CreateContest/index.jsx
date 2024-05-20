@@ -13,6 +13,7 @@ export default function CreateContestPage() {
   const [data, setData] = useState({})
 
   const handleSubmitClick = () => {
+    console.log(data)
     createContest(data)
       .then(res => {
         if (res?.status === 200)
@@ -37,7 +38,7 @@ export default function CreateContestPage() {
           marginBottom: 40
         }}
       >
-        NEW CONTEST
+        Tạo cuộc thi
       </h1>
       <div className={styles.inputContainer}>
         <div className={styles.left}>
@@ -46,7 +47,7 @@ export default function CreateContestPage() {
           <ContestInput label={'Chủ đề'} setFunc={setData} fieldName={'topic'} type='text'/>
           <ContestInput label={'Địa điểm tổ chức'} setFunc={setData} fieldName={'location'} type='text'/>
           <ContestInput label={'Thông tin thêm'} setFunc={setData} fieldName={'otherInfo'} type='text'/>
-          <ContestInput label={'Ảnh banner cuộc thi (1920x 640)'} setFunc={setData} fieldName={'otherInfo'} type='file'/>
+          <ContestInput label={'Ảnh banner cuộc thi (1920x640)'} setFunc={setData} fieldName={'banner'} type='file'/>
         </div>
         <div className={styles.right}>
           <div

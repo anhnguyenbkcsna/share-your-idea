@@ -150,23 +150,29 @@ export default function ContestIdeaDetailPage() {
         <hr
           style={{ color: '#FBFBFB', marginBottom: 20 }}
         />
+        <h1 style={{ color: '#FF7510' }}>
+          Đánh giá
+        </h1>
         <div className={styles.evaluation}>
           <div className={styles.evaluationTable}>
-            <div className={styles.tblItem}>Tính cấp thiết</div>
-            <div className={styles.tblItem}>8</div>
-            <div className={styles.tblItem}>Tính cấp thiếtTính cấp thiếtTính cấp thiếtTính cấp thiếtTính cấp thiếtTính cấp thiếtTính cấp thiết</div>
-            <div className={styles.tblItem}>Tính thuyết phục</div>
-            <div className={styles.tblItem}>8.4</div>
-            <div className={styles.tblItem}>Tính thuyết phục</div>
-            <div className={styles.tblItem}>Tính khả thi</div>
-            <div className={styles.tblItem}>8.2</div>
-            <div className={styles.tblItem}>Tính khả thi</div>
-            <div className={styles.tblItem}>Thuyết trình</div>
-            <div className={styles.tblItem}>8.9</div>
-            <div className={styles.tblItem}>Thuyết trình</div>
-            <div className={styles.tblItem}>Kiến thức nghiên cứu</div>
-            <div className={styles.tblItem}>7</div>
-            <div className={styles.tblItem}>Kiến thức nghiên cứu</div>
+            <div>
+              <RankingBox />
+            </div>
+            <div></div>
+            <div>
+              <div className={styles.tblItem}>Độ sáng tạo</div>
+              <div className={styles.tblItem}>Khả thi</div>
+              <div className={styles.tblItem}>Độ hiệu quả</div>
+              <div className={styles.tblItem}>Tính tiện ích</div>
+              <div className={styles.tblItem}>Tính ứng dụng</div>
+            </div>
+            <div>
+              <div className={styles.tblItem}>8</div>
+              <div className={styles.tblItem}>8.4</div>
+              <div className={styles.tblItem}>8.2</div>
+              <div className={styles.tblItem}>8.9</div>
+              <div className={styles.tblItem}>7</div>
+            </div>
           </div>
           <h2 className={styles.point}>
             8.5
@@ -188,11 +194,10 @@ export default function ContestIdeaDetailPage() {
             <ContestCommentInput />
           </div>
           <div className={styles.comments}>
-            <ContestCommentList />
+            {/* <ContestCommentList /> */}
           </div>
         </div>
         <div className={styles.rankingWrapper}>
-          <RankingBox />
           <div className={styles.votingWrapper}>
             <div className={styles.votingTitle}>
               Đánh giá bài dự thi

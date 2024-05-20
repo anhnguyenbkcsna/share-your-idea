@@ -18,3 +18,9 @@ class ContestSerializer(ModelSerializer):
 
     def validate_round3Time(self, value):
         return validate_date_range(value)
+
+
+class SubmissionSerializer(ModelSerializer):
+    class Meta:
+        model = Contest
+        fields = "__all__"

@@ -23,7 +23,7 @@ from apps.file_service.views import FileUploadApiView
 from apps.email_service.views import EmailServiceViewSet
 from apps.account.views import AccountViewSet
 from apps.contest.views import ContestViewSet
-from apps.idea.views import IdeaViewSet
+from apps.idea.views import IdeaViewSet, CommentViewSet
 from apps.sponsor.views import SponsorEventViewSet, SponsorPackageViewSet
 from rest_framework_simplejwt.views import (
     TokenRefreshView,
@@ -43,6 +43,7 @@ router.register(r'', ContestViewSet, basename='contest')
 router.register(r'', SponsorEventViewSet, basename='sponsor-event')
 router.register(r'', SponsorPackageViewSet, basename='sponsor-package')
 router.register(r'', EmailServiceViewSet, basename='email')
+router.register(r'', CommentViewSet, basename='comment')
 
 schema_view = get_schema_view(
     openapi.Info(

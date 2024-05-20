@@ -11,6 +11,7 @@ from .constants import (
     GOOGLE_AUTH_CREDENTIALS,
     GOOGLE_ID_TOKEN_INFO_URL,
 )
+import random
 # from google.oauth2.credentials import Credentials
 # from google.auth.transport.requests import Request
 # from google_auth_oauthlib.flow import InstalledAppFlow
@@ -91,3 +92,6 @@ def create_google_meet(
 #     print(f"Google Meet: {meet_link}")
 #     return calendar_link, meet_link
     pass
+
+def random_int(start, end):
+    return random.randint(start, end)

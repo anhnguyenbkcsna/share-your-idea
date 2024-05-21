@@ -14,7 +14,7 @@ from common.classes.response import CustomResponse
 import requests
 from common.constants import AI_SERVER_URL
 import json
-import uuid 
+import uuid
 
 
 class IdeaViewSet(viewsets.ViewSet):
@@ -25,40 +25,11 @@ class IdeaViewSet(viewsets.ViewSet):
     queryset = QuerySet(model=Idea, query=[])
     authentication_classes = [CustomAuthentication]
 
-    @action(detail=False, methods=["GET"], url_path=r"ideas")
+    @action(
+        detail=False, methods=["GET"], permission_classes=[AllowAny], url_path=r"ideas"
+    )
     def get_ideas(self, request):
         return CrudHelper.get_all(self.collection, self.ENT_TYPE)
-
-    # @action(detail=False, methods=["GET"], url_path=r"ideas/recommend/list")
-    # def get_recommend_ideas(self, request):
-    #     url = AI_SERVER_URL + "/topk/"
-    #     requirement = {
-    #         "domain": ["Phần mềm (Software)"],
-    #         "problem": '"Những hệ thống đăng tải ý tưởng ngày nay chưa đáp ứng đủ nhu cầu của nhà sáng tạo. Các ý tưởng đăng lên nhưng không quá chú trọng về nội dung mà chỉ quan tâm đến số lượng."',
-    #         "acceptance_criteria": "Một hệ thống mới giúp người dùng có thể đăng tải những ý tưởng sáng kiến của bản thân về một vấn đề gì đó trong cuộc sống.",
-    #         "constraints": "",
-    #         "_id": "398723wsjb29",
-    #     }
-
-    #     try:
-    #         # Make a GET request to the API endpoint using requests.get()
-    #         response = requests.get(url, data=parse_json(requirement))
-
-    #         # Check if the request was successful (status code 200)
-    #         if response.status_code == 200:
-    #             posts = response.json()
-    #             return CustomResponse(
-    #                 message="Get recommend ideas", data=posts, status=200
-    #             )
-    #         else:
-    #             return CustomResponse(
-    #                 message="Error when getting recommend ideas",
-    #                 status=response.status_code,
-    #             )
-    #     except requests.exceptions.RequestException as e:
-    #         return CustomResponse(
-    #             message="Error when getting recommend ideas", status=400, error=str(e)
-    #         )
 
     @action(detail=False, methods=["GET"], url_path=r"ideas/filter")
     def filter_idea(self, request):
@@ -73,8 +44,11 @@ class IdeaViewSet(viewsets.ViewSet):
 
             if response.status_code == 200:
                 posts = response.json()
+                retrnDat = {
+                    "isValid": posts["label"],
+                }
                 return CustomResponse(
-                    message="Get filtering result", data=posts, status=200
+                    message="Get filtering result", data=retrnDat, status=200
                 )
             else:
                 return CustomResponse(
@@ -85,7 +59,7 @@ class IdeaViewSet(viewsets.ViewSet):
             return CustomResponse(
                 message="Error when filtering idea", status=400, error=str(e)
             )
-    
+
     @action(detail=False, methods=["GET"], url_path=r"ideas/topk")
     def match_idea(self, request):
         url = AI_SERVER_URL + "/topk"
@@ -94,13 +68,20 @@ class IdeaViewSet(viewsets.ViewSet):
 
         try:
             response = requests.get(
-                url, data=json.dumps(requirement), headers={"Content-Type": "application/json"}
+                url,
+                data=json.dumps(requirement),
+                headers={"Content-Type": "application/json"},
             )
 
             if response.status_code == 200:
                 posts = response.json()
+                idea_ranks = posts["rank"]
+                LIMIT = 10
+
+                ideas_by_ranks = []
+
                 return CustomResponse(
-                    message="Get topk results", data=posts, status=200
+                    message="Get topk results", data=ideas_by_ranks, status=200
                 )
             else:
                 return CustomResponse(

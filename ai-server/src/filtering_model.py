@@ -47,11 +47,13 @@ class FilteringModel:
     self.tok = IdeaTokenize()
   
   def predict(self, idea_object: Idea):
-    for form_input in idea_object.__dict__.values():
-      is_gibberish_input = self.detector.is_gibberish(form_input)
-      if (is_gibberish_input):
-        print('==== GIBBERISH DETECT')
-        return ("SPAM", idea_object)
+    idea_dict = idea_object.dict()
+    for key, form_input in idea_dict.items():
+      if key != 'id':
+        is_gibberish_input = self.detector.is_gibberish(form_input)
+        if (is_gibberish_input):
+          print('==== GIBBERISH DETECT')
+          return ("SPAM", idea_object)
 
     # filtering solution
     idea_solution = idea_object.solution
@@ -63,21 +65,9 @@ class FilteringModel:
       label = "VALID"
     elif prediction > 0.4:
       label = "WARNING"
-    print(prediction, f' -> {label} :: "{idea_solution[:30]}..."')
+    print(prediction, f' -> {label} :: "{idea_solution}..."')
     result = {
       "label": label,
       "_id": idea_id
     }
     return result
-
-# problem = 'khả năng kích hoạt enzyme'
-# solution = """Một hệ thống phân tích sinh học cơ thể, trực quan số liệu về hồng cầu, hệ miễn dịch,
-# xem bệnh nhân, đang dần hồi phục qua các lần tái khám"""
-# solution = 'Chào bạn, mình là Nghi sinh viên trường Đại học Bách khoa.'
-# idea = Idea(id='234', problem = problem, solution = solution)
-# predict_model = FilteringModel()
-# res = predict_model.predict(idea)
-
-# def filter(idea: Idea):
-#   predict_model = FilteringModel()
-#   return predict_model.predict(idea)

@@ -56,7 +56,7 @@ def find_topk(req: str, idea_db: list = None):
   embedding_model = Embedding()
   
   # read db into smaller batches (1000)
-  db = get_db()['sentence'].to_list() if not idea_db else idea_db
+  db = get_db()['sentence'].to_list()[:200]
 
   # split db into smaller batches (1000)
   batch_size = 100
@@ -90,7 +90,7 @@ def find_topk(req: str, idea_db: list = None):
     # Get the top 20 tuples (or fewer if the list has less than 20 items)
     top_20_tuples = sorted_list[:20]
     result = top_20_tuples
-
+    print('------ ', batch_num)
   return result
 
 

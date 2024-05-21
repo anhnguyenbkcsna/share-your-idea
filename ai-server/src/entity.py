@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-from typing import Union
+from typing import Union, List
 from pydantic.functional_validators import AfterValidator
 from bson import ObjectId
 
@@ -29,6 +29,21 @@ class Idea(BaseModel):
   id: str = Field(alias="_id", default=None)
   problem: str
   solution: str
+  domain: List[str]
+  professional: List[str]
+  geographical: List[str]
+  # ageRange: List[int]
+  outstand: List[str]
+  name: str
+  slogan: str
+  teamDescription: str
+  teamExperience: str
+  gender: str
+  behavior: str
+  apps: str
+  currentDev: str
+  support: str
+  # files: 
 
 class Requirement(BaseModel):
   id: str = Field(alias="_id", default=None)

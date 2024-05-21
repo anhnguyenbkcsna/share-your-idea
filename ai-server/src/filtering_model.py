@@ -48,26 +48,41 @@ class FilteringModel:
   
   def predict(self, idea_object: Idea):
     idea_dict = idea_object.dict()
-    for key, form_input in idea_dict.items():
-      if key != 'id':
-        is_gibberish_input = self.detector.is_gibberish(form_input)
-        if (is_gibberish_input):
-          print('==== GIBBERISH DETECT')
-          return ("SPAM", idea_object)
-
-    # filtering solution
     idea_solution = idea_object.solution
     idea_id = idea_object.id
+    label = 'VALID'
+    result = {
+      "label": label,
+      "_id": idea_id,
+      "error": ''
+    }
+    for key, form_input in idea_dict.items():
+      if key != 'id':
+        if (isinstance(form_input, list)):
+          for input in form_input:
+            is_gibberish_input = self.detector.is_gibberish(input)
+            if (is_gibberish_input):
+              print('==== GIBBERISH DETECT')
+              result["label"] = "SPAM"
+              result["error"] = key
+              return result
+        else:
+          is_gibberish_input = self.detector.is_gibberish(form_input)
+          if (is_gibberish_input):
+            print('==== GIBBERISH DETECT')
+            result["label"] = "SPAM"
+            result["error"] = key
+            return result
+
+    # filtering solution
+    
     tok_solution = self.tok.tokenize_text(idea_solution)
     prediction = self.lstm_model.predict(tok_solution)
     label = "SPAM"
-    if prediction > 0.7:
+    if prediction > 0.75:
       label = "VALID"
     elif prediction > 0.4:
       label = "WARNING"
     print(prediction, f' -> {label} :: "{idea_solution}..."')
-    result = {
-      "label": label,
-      "_id": idea_id
-    }
+    result["label"] = label
     return result

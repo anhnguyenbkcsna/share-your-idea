@@ -30,7 +30,7 @@ def search_topk(req: Requirement):
     raise HTTPException(status_code=500, detail="An unexpected error occurred")
 
 
-@app.get("/topk_internal", response_model=List[Tuple[str, float]])
+@app.get("/topk_internal", response_model = List[Tuple[int, float]])
 def search_topk_similarity(req: Requirement):
   try:
     query = f'{req.problem}. {req.acceptance_criteria}'

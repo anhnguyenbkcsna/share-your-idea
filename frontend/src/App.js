@@ -1,17 +1,14 @@
 import React from 'react'
 import './App.css'
-import { ConfigProvider } from 'antd'
-import { RouterProvider } from 'react-router-dom'
+import { ConfigProvider, theme } from 'antd'
+import { RouterProvider, useLocation } from 'react-router-dom'
 import { getRouter } from './pages/routes'
+import { useState, useEffect } from 'react'
 
 import store from './redux/store'
 import { Provider } from 'react-redux'
 
 function App() {
-  // if (process.env.NODE_ENV) {
-  //   console.log(process.env.NODE_ENV)
-  // }
-  // console.log(process.argv)
   return (
     <Provider store={store}>
       <ConfigProvider
@@ -23,7 +20,8 @@ function App() {
             fontFamily: 'Nunito Sans',
 
             // Alias Token
-            colorBgContainer: '#f5efe6',
+            // colorBgContainer: '#f5efe6',
+            colorBgContainer: '#ffffff',
           },
         }}
       >

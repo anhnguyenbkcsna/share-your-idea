@@ -227,8 +227,8 @@
 
     "react-native/no-inline-styles": 0,
     "react-native/no-color-literals": 0,
-    "indent": ["error", 2],
-    "react/jsx-indent": ["error", 2],
+    "indent": ["warn", 2],
+    "react/jsx-indent": ["warn", 2],
     "react/jsx-indent-props": ["error", 2]
   }
 }

@@ -2,9 +2,13 @@ import React from 'react'
 import styles from './styles.module.scss'
 import logosvg from '../../assets/Worldea.svg'
 
-const Footer = () => {
+const Footer = (props) => {
+  const {colorBgContainer} = props
   return (
     <footer className={styles.footer}>
+      <div style={{backgroundColor: colorBgContainer, padding: '20px'}}>
+        <img src={logosvg} alt="logo" height={'fit-content'}/>
+      </div>
       <div className={styles.inner}>
         <div>
           <h3
@@ -21,7 +25,9 @@ const Footer = () => {
           </h3>
         </div>
         <div>
-          <h3>Về chúng tôi</h3>
+          <h3 style={{
+            fontWeight: 900
+          }}>Về chúng tôi</h3>
           <ul>
             <li>Nhà sáng tạo</li>
             <li>Đối tác</li>
@@ -29,7 +35,9 @@ const Footer = () => {
           </ul>
         </div>
         <div>
-          <h3>Nhà tài trợ</h3>
+          <h3 style={{
+            fontWeight: 900
+          }}>Nhà tài trợ</h3>
           <ul>
             <li>Blogs</li>
             <li>Kết nối</li>

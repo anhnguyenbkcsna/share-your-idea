@@ -81,14 +81,13 @@ const PublicLayout = (props) => {
   const {
     token: { colorBgContainer },
   } = theme.useToken()
-  const currentPath = location.pathname.split('/')[1]
+  const currentPath = location.pathname.split('/')[1] ? location.pathname.split('/')[1] : 'default'
   const [colorStyle, setColorStyle] = useState(styleConfig[currentPath])
   // const currentStyle = styleConfig[currentPath] || styleConfig.default
 
   useEffect(() => {
     const newStyle = styleConfig[currentPath] || styleConfig.default
     setColorStyle(newStyle)
-    console.log("color --- ", currentPath, newStyle.backgroundColor)
   }, [currentPath])
 
   return (

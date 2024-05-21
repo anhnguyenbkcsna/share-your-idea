@@ -15,24 +15,23 @@ export const ModalBox = ({ isModalOpen, setIsModalOpen, handleOk = () => { }, ha
     setIsModalOpen(false)
   }
   return (
-    <ConfigProvider
-      theme={{
-        token: {
-          fontFamily: 'Play',
-        },
-        algorithm: theme.darkAlgorithm,
-      }}
+    // <ConfigProvider
+    //   theme={{
+    //     token: {
+    //       fontFamily: 'Play',
+    //     },
+    //   }}
+    // >
+    <Modal
+      title="Không thể tạo sự kiện"
+      open={isModalOpen}
+      onOk={_handleOk}
+      onCancel={_handleCancel}
+      okText="Đăng nhập"
+      cancelText="Hủy"
     >
-      <Modal
-        title="Không thể tạo sự kiện"
-        open={isModalOpen}
-        onOk={_handleOk}
-        onCancel={_handleCancel}
-        okText="Đăng nhập"
-        cancelText="Hủy"
-      >
-        Bạn cần đăng nhập với tư cách là doanh nghiệp để tạo sự kiện
-      </Modal>
-    </ConfigProvider>
+      Bạn cần đăng nhập với tư cách là doanh nghiệp để tạo sự kiện
+    </Modal>
+    // </ConfigProvider>
   )
 }

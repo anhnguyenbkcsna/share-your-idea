@@ -22,27 +22,12 @@
   border-radius: 10px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
 }
-img{
-  width: 100%;
-  max-height: 400px;
-  max-width: 600px;
-  object-fit: cover;
-  display: flex;
-  margin: 0 auto;
-  border-radius: 10px;
-}
 .carouselCard{
   margin-top: 20px;
 }
 .title{
   display: grid;
   grid-template-rows: 4fr 1fr;
-}
-button{
-  width: 100%;
-  padding: 10px;
-  margin: 10px;
-  border-radius: 10px;
 }
 .primaryBtn{
   background-color: #4bb65d;

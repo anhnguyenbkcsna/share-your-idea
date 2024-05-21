@@ -112,7 +112,7 @@ export const editIdea = async (ideaObj) => {
     })
 }
 
-export const getIdeaOfCurrentUser = () => {
+export const getIdeaOfCurrentUser = async (userId) => {
   const accessToken = localStorage.getItem(localStorageConstant.ACCESS_TOKEN)
   return axios
     .get(`${ideaEndpoint}current/`, {

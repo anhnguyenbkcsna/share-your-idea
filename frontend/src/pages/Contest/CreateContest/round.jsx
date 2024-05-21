@@ -26,10 +26,6 @@ const scoringTypes = [
   {
     value: 'mark',
     label: 'Chấm điểm'
-  },
-  {
-    value: 'both',
-    label: 'Bình chọn và chấm điểm'
   }
 ]
 
@@ -46,7 +42,8 @@ export default function Round({ roundId, setData }) {
   }
 
   const handleOnChange = (e, fieldName) => {
-    setData((prev) => ({ ...prev, [fieldName]: e.target.value }))
+    // console.log(e, fieldName)
+    setData((prev) => ({ ...prev, [fieldName]: e }))
   }
 
   return (
@@ -73,7 +70,7 @@ export default function Round({ roundId, setData }) {
           fieldName={`roundType${roundId}`}
           defaultValue="Chọn loại vòng thi"
           options={roundTypes}
-          style={{ width: '48%', height: 50 }}
+          style={{ width: '48%', height: 50, background: 'f5f5f5', border: '1px solid #000'}}
         />
         <Select 
           onClick={handleScoringType} 
@@ -81,7 +78,7 @@ export default function Round({ roundId, setData }) {
           fieldName={`scoringType${roundId}`}
           defaultValue="Chọn hình thức chấm điểm"
           options={scoringTypes}
-          style={{ width: '48%', height: 50 }}
+          style={{ width: '48%', height: 50, background: 'f5f5f5', border: '1px solid #000' }}
         />
       </div>
       <ContestStartAndEndDateInput label={'Thời gian bắt đầu và kết thúc'} setFunc={setData} fieldName={`time${roundId}`}/>

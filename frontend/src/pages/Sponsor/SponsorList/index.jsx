@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react"
 import styles from "./styles.module.scss"
-import { Input } from "antd"
+import { Button, Input } from "antd"
 import { useNavigate } from "react-router-dom"
+import { Pagination } from "antd"
 import { sponsorProjectEndpoint } from "../../../utils/api.constants"
 import axios from "axios"
 const { Search } = Input
@@ -9,7 +10,7 @@ const { Search } = Input
 const SponsorList = () => {
   const navigate = useNavigate()
   const [projectList, setProjectList] = useState([])
-  const [projects, setProjects] = useState(192321)
+  const [projects, setProjects] = useState(13)
   const [projectName, setProjectName] = useState("Tên dự án")
   const [projectDescription, setProjectDescription] = useState("Mô tả ngắn")
   const [projectCreator, setProjectCreator] = useState()
@@ -71,7 +72,7 @@ const SponsorList = () => {
         <h2>Có {numberWithComma(projects)} dự án đang kêu gọi</h2>
       </div>
       <div className={styles.projectList}>
-        {Array.from({ length: 50 }).map((_, index) => (
+        {Array.from({ length: projects }).map((_, index) => (
           <div
             key={index}
             className={styles.projectCard}
@@ -94,13 +95,18 @@ const SponsorList = () => {
               <div className={styles.projectFooterLeft}>
                 <h3>{projectCreator}</h3>
               </div>
-              <div className={styles.projectFooterRight}>
-                <h3>Thời gian còn lại: {projectTimeLeft} ngày</h3>
-              </div>
             </div>
+            <Button type="primary" style={{
+              width: '50%',
+              borderRadius: 5,
+              backgroundColor: '#f08080',
+            }}>
+              Xem chi tiết
+            </Button>
           </div>
         ))}
       </div>
+      <Pagination defaultCurrent={1} total={50} />;
     </div>
   )
 }

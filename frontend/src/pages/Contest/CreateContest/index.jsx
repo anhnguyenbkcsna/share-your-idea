@@ -5,7 +5,8 @@ import genericStyles from '../styles.module.scss'
 import { ContestStartAndEndDateInput, ContestInput, ContestTextarea } from '../Components/input'
 import { OrangeBasicButton } from '../Components/button'
 import { createContest } from '../../../api/contest'
-import { Button, Checkbox, Upload } from 'antd'
+import { Button, Checkbox, Upload, Alert } from 'antd'
+import { PlusOutlined } from '@ant-design/icons'
 import Round from './round'
 // import contestBackground from '../../../assets/contest-bg.jpg'
 
@@ -15,6 +16,7 @@ export default function CreateContestPage() {
 
   const [multipleRound, setMultipleRound] = useState(false)
   const [rounds, setRounds] = useState(1)
+  const [prizes, setPrizes] = useState(1)
 
   const handleSubmitClick = () => {
     console.log(data)
@@ -29,7 +31,12 @@ export default function CreateContestPage() {
   }
 
   const increaseRounds = () => {
+    if(rounds >= 5) return
     setRounds(1 + rounds)
+  }
+  const increasePrizes = () => {
+    if(prizes >= 5) return
+    setPrizes(1 + prizes)
   }
 
   return (
@@ -60,11 +67,37 @@ export default function CreateContestPage() {
             Thông tin cuộc thi
           </h2>
           <ContestInput label={'Tên cuộc thi'} setFunc={setData} fieldName={'name'} type='text'/>
-          {/* <ContestInput label={'Hạn chót nộp đề tài'} setFunc={setData} fieldName={'deadline'} type={'datetime-local'} /> */}
           <ContestInput label={'Chủ đề'} setFunc={setData} fieldName={'topic'} type='text'/>
           <ContestInput label={'Địa điểm tổ chức'} setFunc={setData} fieldName={'location'} type='text'/>
           <ContestInput label={'Thông tin thêm'} setFunc={setData} fieldName={'otherInfo'} type='text'/>
           <ContestInput label={'Ảnh banner cuộc thi (1920x640)'} setFunc={setData} fieldName={'banner'} type='file'/>
+          <div style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}>
+            <label style={{ fontSize: '1.7rem', color: '#000' }}>
+              Cơ cấu giải thưởng
+            </label>
+            <Button type='primary' style={{ width: 50, height: 50, borderRadius: 16 }} onClick={increasePrizes}>
+              <PlusOutlined />
+            </Button>
+          </div>
+          {prizes >= 5 && <Alert message="Số giải thưởng tối đa là 5 giải" type="error" showIcon style={{
+            marginTop: 10,
+          }}/>}
+          {[...Array(prizes)].map((_, index) => 
+            <div style={{
+              display: 'grid',
+              alignItems: 'center',
+              gap: 10,
+              gridTemplateColumns: '3fr 1fr 1fr',
+            }}>
+              <ContestInput label={'Tên giải'} setFunc={setData} fieldName={`prize${index+1}`} />
+              <ContestInput label={'Giá trị'} setFunc={setData} fieldName={`prize${index+1}Value`} />
+              <ContestInput label={'Số lượng'} setFunc={setData} fieldName={`prize${index+1}Quantity`} />
+            </div>
+          )}
         </div>
         <div className={styles.right}>
           <h2
@@ -90,6 +123,10 @@ export default function CreateContestPage() {
               </Button>
             }
           </div>
+          {rounds >= 5 && <Alert message="Số vòng thi tối đa là 5 vòng" type="error" showIcon style={{
+            marginTop: 10,
+          }}/>}
+
           <Round roundId={1} setData={setData}/>
           {rounds > 1 && Array.from({ length: rounds - 1 }).map((_, index) => 
             <Round key={index} roundId={index + 2} setData={setData}/>)

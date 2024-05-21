@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styles from './styles.module.scss'
-import { Button, Divider, ConfigProvider, Flex, theme } from 'antd'
+import { Button, Divider, ConfigProvider, Flex, theme, Modal } from 'antd'
 import { useParams } from 'react-router-dom'
 import { getContestById } from '../../../api/contest'
 import { ContestNotFoundElement } from '../Components/error'
@@ -9,10 +9,15 @@ import Parser from 'html-react-parser'
 import { useNavigate } from 'react-router-dom'
 import SubmittedIdeasPage from '../SubmittedIdeas'
 import { HrHeading } from '../Components/hrheading'
-
+import MyIdeaList from './myIdeaList'
+import { getAllIdeas } from '../../../api/idea'
 
 const   ContestInfo = () => {
   const navigate = useNavigate()
+
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [fetchIdeas, setFetchIdeas] = useState([])
+  const [yourSubmit, setYourSubmit] = useState([])
 
   const [firstPrizeValue, setFirstPrizeValue] = useState(2500)
   const [secondPrizeValue, setSecondPrizeValue] = useState(1000)
@@ -34,6 +39,15 @@ const   ContestInfo = () => {
       })
   }, [])
 
+  useEffect(() => {
+    const fetchIdea = async () => {
+      let ideas = await getAllIdeas()
+      console.log('>> ideas', ideas)
+      setFetchIdeas(ideas)
+    }
+    fetchIdea()
+  }, [isModalOpen])
+
   const convertToHtml = () => {
     let res = ''
     try
@@ -47,8 +61,18 @@ const   ContestInfo = () => {
     return res
   }
 
-  const handleSubmitIdea = (e) => {
-    navigate('submit')
+  const handleSubmitIdea = () => {
+    // navigate('/innovator')
+    // window.scrollTo(0, 0)
+    setIsModalOpen(true)
+  }
+
+  const handleOk = () => {
+    console.log('>>> Submit idea', yourSubmit)
+    setIsModalOpen(false)
+  }
+  const handleCancel = () => {
+    setIsModalOpen(false)
   }
 
   return idea ? (
@@ -57,9 +81,29 @@ const   ContestInfo = () => {
         token: {
           fontFamily: 'Play',
         },
-        algorithm: theme.darkAlgorithm,
       }}
     >
+      <Modal 
+        title="Nộp ý tưởng" 
+        open={isModalOpen} 
+        onOk={handleOk} 
+        onCancel={handleCancel}
+        footer={[
+          <Button key="submit" type="primary" onClick={handleOk}>
+            Nộp bài
+          </Button>,
+        ]}
+        width={800}
+      >
+        { fetchIdeas.length > 0 ? 
+          <MyIdeaList fetchIdeas={fetchIdeas} submissions={yourSubmit} setSubmissions={setYourSubmit}/>
+          : <Button type="primary" onClick={() => navigate('/innovator/idea')}
+              style={{ width: 200 }}
+          >
+            Thêm ý tưởng
+          </Button>
+        }
+      </Modal>
       <img
         className={styles.banner}
         src="https://www.pvoil.com.vn/Data/Sites/1/media/tinpvoil/2021/20210924-p1.jpg"
@@ -68,40 +112,15 @@ const   ContestInfo = () => {
       <div className={styles.container}>
         <h1 className={styles.contestName}>{idea?.name}</h1>
 
-        <div className={styles.contestPrize}>
-          {/* Second Prize Box */}
-          <div className={styles.prizeBox}>
-            <h3 className={styles.prizeValue}>{idea?.secondPrize}</h3>
-            <div className={styles.secondPrizeBox}>
-              <div className={styles.prizeBoxTitle}>2nd<br />Prize</div>
-            </div>
-          </div>
-          {/* First prize box */}
-          <div className={styles.prizeBox} style={{ margin: '0 40px' }}>
-            <h3 className={styles.prizeValue}>{idea?.firstPrize}</h3>
-            <div className={styles.firstPrizeBox}>
-              <div className={styles.prizeBoxTitle}>1st<br />Prize</div>
-              <GlowingBall
-                style={{
-                  bottom: '-40%'
-                }}
-              />
-            </div>
-          </div>
-          {/* Third prize box */}
-          <div className={styles.prizeBox}>
-            <h3 className={styles.prizeValue}>{idea?.thirdPrize}</h3>
-            <div className={styles.thirdPrizeBox}>
-              <div className={styles.prizeBoxTitle}>3rd<br />Prize</div>
-            </div>
-          </div>
-        </div>
+        {/* Contest Prize */}
+        
+
         <div style={{
           display: 'flex',
           justifyContent: 'center',
           margin: '70px auto'
         }}>
-          {idea?.status ? (
+          {!idea?.status ? (
             <Button
               type="primary"
               onClick={handleSubmitIdea}
@@ -118,7 +137,7 @@ const   ContestInfo = () => {
           <div className={styles.timeline}>
             <div className={styles.submitTime}>
               <h3>Thời gian gửi bài</h3>
-              <h3>Từ <span className={styles.time}>&#9;&#9;06/09/2023</span></h3>
+              <h3>Từ <span className={styles.time}>&#9&#906/09/2023</span></h3>
               <h3>Đến <span className={styles.time}>06/09/2023</span></h3>
             </div>
             <div className={styles.contestTime}>

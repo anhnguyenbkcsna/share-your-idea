@@ -31,6 +31,14 @@ class SponsorPackageViewSet(viewsets.ViewSet):
     def manage_packages(self, request):
         company_id = get_id_from_request(request)
         if request.method == "GET":
+            if request.GET.get("idea_id"):
+                return CrudHelper.get_by_query(
+                    {"idea_id": request.GET.get("idea_id")}, self.collection, self.ENT_TYPE
+                )
+            if request.GET.get("company_id"):
+                return CrudHelper.get_by_query(
+                    {"company_id": request.GET.get("company_id")}, self.collection, self.ENT_TYPE
+                )
             return CrudHelper.get_all(self.collection, self.ENT_TYPE)
         elif request.method == "POST":
             return CrudHelper.post(
@@ -51,9 +59,9 @@ class SponsorPackageViewSet(viewsets.ViewSet):
     @action(
         detail=False,
         methods=["GET"],
-        url_path=r"sponsors/packages/(?P<id>[^/.]+)",
+        url_path=r"sponsors/packages/?(?P<id>[^/.]+)",
     )
-    def get_package_by_id(self, request):
+    def get_package_by_idea_id(self, request):
         return CrudHelper.get_by_id(
             get_id_from_request(request), self.collection, self.ENT_TYPE
         )

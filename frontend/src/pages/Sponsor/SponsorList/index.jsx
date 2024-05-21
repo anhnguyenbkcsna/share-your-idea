@@ -16,7 +16,13 @@ const SponsorList = () => {
   const [projectTimeLeft, setProjectTimeLeft] = useState(13)
   const [projectPercentage, setProjectPercentage] = useState(66)
 
-  const onSearch = (value, _e, info) => console.log(info?.source, value)
+  // SEARCHING ????
+  const onSearch = (value, _e, info) => {
+    console.log(info?.source, value)
+
+    let projectId = info
+    navigate(`${projectId}`)
+  }
   const numberWithComma = (x) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
   }
@@ -36,17 +42,18 @@ const SponsorList = () => {
       const data = await response.json()
       setProjectCreator(data.results[0].name.first)
     }
-    const fetchSponsorProjects = async () => {
-      const res = await axios
-        .get(sponsorProjectEndpoint)
-        .then((res) => {
-          let data = res.data
-          console.log("Fetch All Sponsor Project: ", data)
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-    }
+    // const fetchSponsorProjects = async () => {
+    //   const res = await axios
+    //     .get(sponsorProjectEndpoint)
+    //     .then((res) => {
+    //       let data = res.data
+    //       console.log("Fetch All Sponsor Project: ", data)
+    //     })
+    //     .catch((err) => {
+    //       console.log("Error", err)
+    //       // return []
+    //     })
+    // }
   }, [])
   return (
     <div className={styles.container}>
@@ -56,7 +63,7 @@ const SponsorList = () => {
           placeholder="Tìm kiếm dự án"
           onSearch={onSearch}
           style={{
-            width: 200,
+            width: 400,
           }}
         />
       </div>

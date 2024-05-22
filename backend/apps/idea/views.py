@@ -92,7 +92,10 @@ class IdeaViewSet(viewsets.ViewSet):
                     {"_id": {"$in": [ObjectId(idea_id) for idea_id in posts["rank"]]}}
                 )
 
-                result_map = {str(result["_id"]): result for result in results}
+                result_map = {
+                    str(result["_id"]): {**result, "_id": str(result["_id"])}
+                    for result in results
+                }
 
                 ordered_results = [result_map.get(id) for id in posts["rank"]]
 

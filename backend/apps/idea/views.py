@@ -15,6 +15,7 @@ import requests
 from common.constants import AI_SERVER_URL
 import json
 import uuid
+from django.core.cache import cache
 
 
 class IdeaViewSet(viewsets.ViewSet):
@@ -64,9 +65,19 @@ class IdeaViewSet(viewsets.ViewSet):
     def match_idea(self, request):
         url = AI_SERVER_URL + "/topk"
         requirement = request.data
-        requirement["_id"] = uuid.uuid4().hex
+        if requirement.get("_id") is None:
+            return CustomResponse(
+                message="Please add requirement id", status=400, error="Bad request"
+            )
 
         try:
+            cache_key = "idea_matching_" + requirement["_id"]
+            if cache.has_key(cache_key):
+                return CustomResponse(
+                    message="Get topk results", data=cache.get(cache_key), status=200
+                )
+
+            # If not found in cache
             response = requests.get(
                 url,
                 data=json.dumps(requirement),
@@ -75,13 +86,20 @@ class IdeaViewSet(viewsets.ViewSet):
 
             if response.status_code == 200:
                 posts = response.json()
-                idea_ranks = posts["rank"]
-                LIMIT = 10
+                print("Idea Ranking: ", posts["rank"])
 
-                ideas_by_ranks = []
+                results = self.collection.find(
+                    {"_id": {"$in": [ObjectId(idea_id) for idea_id in posts["rank"]]}}
+                )
+
+                result_map = {str(result["_id"]): result for result in results}
+
+                ordered_results = [result_map.get(id) for id in posts["rank"]]
+
+                cache.set(cache_key, ordered_results, timeout=60 * 5)
 
                 return CustomResponse(
-                    message="Get topk results", data=ideas_by_ranks, status=200
+                    message="Get topk results", data=ordered_results, status=200
                 )
             else:
                 return CustomResponse(

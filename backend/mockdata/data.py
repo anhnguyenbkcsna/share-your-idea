@@ -1,3 +1,418 @@
+idea_data = [
+    {
+        "name": "Artificial Intelligence-Driven Document Analysis",
+        "domain": ["Phần mềm (Software)"],
+        "slogan": "Proof of concept leading to scale-up, joint development, supplier agreement, licensing.",
+        "problem": "The Ministry of Labor of Qatar seeks to digitalize the document analysis process by adopting AI-driven technologies that offer a high level of automation, accuracy, and security. They are seeking a custom made, multi-language solution that leverages advanced Artificial Intelligence and Natural Language Processing capabilities to ensure compliance with Qatari Labour law.",
+        "solution": "The Ministry of Labor (MoL) in Qatar plays a crucial role in shaping labor policies and regulations. MoL handles a substantial volume of contracts and documents associated with employment, labor laws, and business operations. Ensuring the compliance of these documents with established procedures and Qatari Labour law is of paramount importance to uphold fairness, protect workers\' rights, and maintain a healthy labor environment. Document analysis is a critical procedure for MoL as it enables them to monitor and validate the legality of contracts, assess potential risks, and ensure that all parties involved adhere to the relevant labor laws. Manual document analysis has proven to be time-consuming, labor-intensive, and prone to errors, leading to delays in processing and potential oversights.",
+        "teamDescription": "<5 thành viên",
+        "teamExperience": "",
+        "gender": "Global",
+        "ageRange": [0, 54],
+        "professional": ["Mọi người"],
+        "geographical": ["Vietnam"],
+        "behavior": "Implementation of an efficient and secure Contract Management System that uses a combination of advanced AI and NLP technologies",
+        "apps": "Non-smart contract analysis based solutions\\nSolutions that do not work or have not potential to work with the Arabic language\\nLow TRL solutions",
+        "outstand": "Joint Development Technology Acquisition Technology Licensing To Be Negotiated",
+        "currentDev": "[Ý tưởng] Ý tưởng chưa được thực hiện",
+        "support": "",
+        "files": [
+            "656085987981d95b28f942a7/tu-tuong-ho-chi-minh__van-dung-tu-tuong-dai-doan-ket-dan-toc-cua-ho-chi-minh-vao-xay-dung-tinh-thandoan-ket-trong-sinh-vien-dai-hoc-bach-khoa-ha-noi - [cuuduongthancong.com].pdf"
+        ],
+        "innovator_ids": ["65f4602b14c88ec7dd8dd787", "656344aaf0f3a439f9d88ce9"],
+        "comments": [
+            {
+                "innovator_id": "65635d423ec6e1780b1df38c",
+                "content": "Hãy tổ chức một buổi brainstorming để phát triển thêm ý tưởng này.",
+            },
+            {
+                "innovator_id": "66499608bc5feffef11b1b31",
+                "content": "Ý tưởng này có thể chắc chắn làm gọn các quy trình của chúng ta.",
+            },
+            {
+                "innovator_id": "65634ba6e123614f424fe9e9",
+                "content": "Chúng ta có thể nhận được một số ý kiến chuyên gia về điều này không?",
+            },
+            {
+                "innovator_id": "65635d423ec6e1780b1df38c",
+                "content": "Tuyệt vời! Điều này có thể tiết kiệm rất nhiều thời gian cho chúng ta.",
+            },
+            {
+                "innovator_id": "65635cc73ec6e1780b1df38b",
+                "content": "Tôi có một vài lo ngại về hậu cần.",
+            },
+            {
+                "innovator_id": "65635d423ec6e1780b1df38c",
+                "content": "Tôi có một vài lo ngại về hậu cần.",
+            },
+            {
+                "innovator_id": "65635cc73ec6e1780b1df38b",
+                "content": "Chúng ta nên thực hiện phân tích chi phí-lợi ích.",
+            },
+        ],
+        "innovator_id": "66499608bc5feffef11b1b31",
+    },
+    {
+        "name": "Licensing and Establishing a DMS, DMDS Manufacturing Process",
+        "domain": ["Dịch vụ chuyên nghiệp (Professional Services)"],
+        "slogan": "Technology Licensing; Technology Acquisition, Turnkey solution; Supplier agreement; Consulting",
+        "problem": "Licensing and Establishing a DMS, DMDS Manufacturing Process\\n",
+        "solution": "NineSigma, representing a large industrial company, is seeking organizations that can support with the establishment of high purity dimethyl sulfide (DMS) and/ or dimethyl disulfide (DMDS) production facilities at scales of minimally 1000 metric tons annually.",
+        "teamDescription": "<20 thành viên",
+        "teamExperience": "",
+        "gender": "Male",
+        "ageRange": [0, 20],
+        "professional": ["Doanh nghiệp"],
+        "geographical": ["Asia"],
+        "behavior": "Organizations who can license the technology\\nOrganizations with turn-key solutions\\nOrganizations who can share relevant know-how to establish the production facility\\nExperts who can advise to establish the production facility\\nSecond priority: Organizations who can supply high quality (>99% purity) DMS /DMDS globally",
+        "apps": "Organizations with processes that cannot meet the minimum purity of >99%.",
+        "outstand": "ConsultingSupply AgreementTechnology AcquisitionTechnology LicensingTo Be Negotiated",
+        "currentDev": "[Hiện thực] Ý tưởng đang được hiện thực và thử nghiệm trong môi trường phát triển",
+        "support": "",
+        "files": ["656098e48287b361ff02f953/A3_230315.pdf"],
+        "comments": [
+            {
+                "innovator_id": "65f4602b14c88ec7dd8dd787",
+                "content": "Tôi có một số lo ngại về khả thi.",
+            },
+            {
+                "innovator_id": "65f4602b14c88ec7dd8dd787",
+                "content": "Chúng ta nên tham gia đội tiếp thị để lấy ý kiến của họ.",
+            },
+            {
+                "innovator_id": "65635cc73ec6e1780b1df38b",
+                "content": "Điều này hoàn toàn phù hợp với các mục tiêu dài hạn của chúng ta.",
+            },
+            {
+                "innovator_id": "66499608bc5feffef11b1b31",
+                "content": "Tuyệt vời! Điều này có thể tiết kiệm rất nhiều thời gian cho chúng ta.",
+            },
+            {
+                "innovator_id": "655e012d9bce09ceaefabb64",
+                "content": "Hãy tổ chức một buổi brainstorming để phát triển thêm ý tưởng này.",
+            },
+            {
+                "innovator_id": "65f4602b14c88ec7dd8dd787",
+                "content": "Đây là một ý tưởng vững chắc, nhưng hãy tinh chỉnh thêm một chút.",
+            },
+            {
+                "innovator_id": "66497d4600c0ba90647d3778",
+                "content": "Tôi nghĩ điều này có tiềm năng lớn cho sự phát triển tương lai của chúng ta.",
+            },
+        ],
+        "innovator_id": "66499608bc5feffef11b1b31",
+    },
+    {
+        "name": "Thúc đẩy chuyển đổi xanh trong thời đại công nghệ 4.0",
+        "domain": ["Năng lượng (Energy)"],
+        "slogan": "Sản xuất xanh và phát triển bền vững",
+        "problem": "Những chiến lược và cơ chế lãnh đạo nào có thể hỗ trợ hiệu quả cho hoạt động đồng sáng tạo, học hỏi và đổi mới theo hướng chuyển đổi xanh?",
+        "solution": "Nghiên cứu sẽ dựa trên các nghiên cứu điển hình và các hành động đồng sáng tạo ở các thành phố Oslo, Gothenburg và Copenhagen. Hơn nữa, GREENGOV sẽ tạo điều kiện thuận lợi cho hoạt động học tập mang tính đột phá bằng cách đưa ra các ví dụ về khả năng lãnh đạo đồng sáng tạo từ Cape Town; một thành phố đầy tham vọng nhưng khác biệt về các hoạt động và chính sách khí hậu. Mistra Urban Futures sẽ đặc biệt tham gia vào nghiên cứu điển hình ở Gothenburg và phát triển lý thuyết.\\n\\nDự án sẽ kết hợp nghiên cứu xuyên ngành với 'CityLabs', dự án sẽ hoạt động như các thử nghiệm thiết kế để điều tra xem các can thiệp lãnh đạo khác nhau ảnh hưởng như thế nào đến hoạt động đồng sáng tạo xanh trong các bối cảnh khác nhau.\\n\\nTrong các thành phố nghiên cứu điển hình, chúng tôi xác định và so sánh các mô hình quản trị của chúng nhằm thúc đẩy hơn nữa sự chuyển đổi xanh trong các bối cảnh chính trị và quản trị khác nhau: trong thành phố; trong khu vực đô thị và quốc gia rộng lớn hơn; và trong mối quan hệ giữa thành phố với thành phố",
+        "teamDescription": "<5 thành viên",
+        "teamExperience": "Nhóm được lãnh đạo bởi Viện Nghiên cứu Đô thị và Khu vực Na Uy (NIBR) tại Đại học Thủ đô Oslo do Tiến sĩ Hege Hofstad (trưởng nhóm) đại diện; Trond Vedeld, Tiến sĩ; Tiến sĩ Marianne Millstein; Geir Heierstad, Tiến sĩ; Jan-Tore Berghei, MA; và Gro Sandkjær Hanssen, Tiến sĩ.",
+        "gender": "Male",
+        "ageRange": [0, 47],
+        "professional": ["Học sinh, sinh viên", "Doanh nghiệp", "Người tiêu dùng"],
+        "geographical": ["Vietnam"],
+        "behavior": "Chúng tôi bắt đầu từ tiền đề rằng thách thức cấp bách nhất đối với các thành phố liên quan đến 'sự chuyển đổi xanh' không phải là việc tìm kiếm các giải pháp công nghệ phù hợp mà là tìm ra những cách thức mới để quản lý quá trình chuyển đổi hướng tới tương lai thông minh về khí hậu, tiết kiệm năng lượng, toàn diện, kiên cường và bền vững. . Tuy nhiên, các cấu trúc và hệ thống thông thường của khu vực công không được thiết lập để giải quyết các nhiệm vụ về khái niệm hóa, lập bản đồ và giải quyết các vấn đề có mức độ phức tạp cao như vậy.",
+        "apps": "1. Đóng góp kiến thức tiên tiến về lãnh đạo đồng sáng tạo như một phương tiện để nâng cao năng lực quản lý quá trình chuyển đổi xanh, thông qua nghiên cứu xuyên ngành và học tập chung trong các lĩnh vực đồng sáng tạo ('CityLabs').\\n2. Dự án sẽ phát triển kiến thức và bài học chính sách về “kinh nghiệm của Scandinavia” trong việc quản lý chuyển đổi xanh ở cấp thành phố – so sánh năng lực lãnh đạo, học tập và đổi mới đồng sáng tạo ở các thành phố Oslo, Copenhagen và Gothenburg.",
+        "outstand": "Cụ thể hơn, chúng tôi quan tâm đến cách các thành phố có thể xây dựng các đấu trường đồng sáng tạo và thông qua những đấu trường này nâng cao năng lực của họ trong việc tạo ra sự phối hợp giữa các lớp thể chế của các biện pháp mạng lưới, lấy cảm hứng từ thị trường và phân cấp cùng nhau tạo nên các cơ chế quản trị dành cho các nhà lãnh đạo chính trị và hành chính khi phấn đấu chuyển đổi carbon thấp bền vững.",
+        "currentDev": "[Ý tưởng] Ý tưởng chưa được thực hiện",
+        "support": "Về tài chính, chúng tôi cần hỗ trợ tài chính để xây dựng hệ thống từ giai đoạn ban đầu của ý tưởng",
+        "files": ["6564a720fe8eec62f4140b47/Mô tả BTL2.pdf"],
+        "comments": [
+            {
+                "innovator_id": "66499608bc5feffef11b1b31",
+                "content": "Điều này hoàn toàn phù hợp với các mục tiêu dài hạn của chúng ta.",
+            },
+            {
+                "innovator_id": "656344aaf0f3a439f9d88ce9",
+                "content": "Bạn đã nghĩ đến các rủi ro tiềm ẩn chưa?",
+            },
+            {
+                "innovator_id": "65635cc73ec6e1780b1df38b",
+                "content": "Chúng ta nên tham gia đội tiếp thị để lấy ý kiến của họ.",
+            },
+            {
+                "innovator_id": "65f4602b14c88ec7dd8dd787",
+                "content": "Đây là một thay đổi lớn!",
+            },
+            {
+                "innovator_id": "65634ba6e123614f424fe9e9",
+                "content": "Sáng kiến tuyệt vời! Hãy lấy thêm phản hồi.",
+            },
+            {
+                "innovator_id": "65634ba6e123614f424fe9e9",
+                "content": "Tôi có một số đề xuất để cải thiện ý tưởng này.",
+            },
+            {
+                "innovator_id": "66497d4600c0ba90647d3778",
+                "content": "Ý tưởng này sáng tạo và tiên tiến.",
+            },
+            {
+                "innovator_id": "656344aaf0f3a439f9d88ce9",
+                "content": "Tôi lo lắng về thời gian cho ý tưởng này.",
+            },
+        ],
+        "innovator_id": "65f4602b14c88ec7dd8dd787",
+    },
+    {
+        "name": "Thúc đẩy chuyển đổi xanh trong thời đại công nghệ 4.0",
+        "domain": ["Năng lượng (Energy)"],
+        "slogan": "Sản xuất xanh và phát triển bền vững",
+        "problem": "Những chiến lược và cơ chế lãnh đạo nào có thể hỗ trợ hiệu quả cho hoạt động đồng sáng tạo, học hỏi và đổi mới theo hướng chuyển đổi xanh?",
+        "solution": "Nghiên cứu sẽ dựa trên các nghiên cứu điển hình và các hành động đồng sáng tạo ở các thành phố Oslo, Gothenburg và Copenhagen. Hơn nữa, GREENGOV sẽ tạo điều kiện thuận lợi cho hoạt động học tập mang tính đột phá bằng cách đưa ra các ví dụ về khả năng lãnh đạo đồng sáng tạo từ Cape Town; một thành phố đầy tham vọng nhưng khác biệt về các hoạt động và chính sách khí hậu. Mistra Urban Futures sẽ đặc biệt tham gia vào nghiên cứu điển hình ở Gothenburg và phát triển lý thuyết.\\n\\nDự án sẽ kết hợp nghiên cứu xuyên ngành với 'CityLabs', dự án sẽ hoạt động như các thử nghiệm thiết kế để điều tra xem các can thiệp lãnh đạo khác nhau ảnh hưởng như thế nào đến hoạt động đồng sáng tạo xanh trong các bối cảnh khác nhau.\\n\\nTrong các thành phố nghiên cứu điển hình, chúng tôi xác định và so sánh các mô hình quản trị của chúng nhằm thúc đẩy hơn nữa sự chuyển đổi xanh trong các bối cảnh chính trị và quản trị khác nhau: trong thành phố; trong khu vực đô thị và quốc gia rộng lớn hơn; và trong mối quan hệ giữa thành phố với thành phố",
+        "teamDescription": "<5 thành viên",
+        "teamExperience": "Nhóm được lãnh đạo bởi Viện Nghiên cứu Đô thị và Khu vực Na Uy (NIBR) tại Đại học Thủ đô Oslo do Tiến sĩ Hege Hofstad (trưởng nhóm) đại diện; Trond Vedeld, Tiến sĩ; Tiến sĩ Marianne Millstein; Geir Heierstad, Tiến sĩ; Jan-Tore Berghei, MA; và Gro Sandkjær Hanssen, Tiến sĩ.",
+        "gender": "Male",
+        "ageRange": [0, 47],
+        "professional": ["Học sinh, sinh viên", "Doanh nghiệp", "Người tiêu dùng"],
+        "geographical": ["Vietnam"],
+        "behavior": "Chúng tôi bắt đầu từ tiền đề rằng thách thức cấp bách nhất đối với các thành phố liên quan đến 'sự chuyển đổi xanh' không phải là việc tìm kiếm các giải pháp công nghệ phù hợp mà là tìm ra những cách thức mới để quản lý quá trình chuyển đổi hướng tới tương lai thông minh về khí hậu, tiết kiệm năng lượng, toàn diện, kiên cường và bền vững. . Tuy nhiên, các cấu trúc và hệ thống thông thường của khu vực công không được thiết lập để giải quyết các nhiệm vụ về khái niệm hóa, lập bản đồ và giải quyết các vấn đề có mức độ phức tạp cao như vậy.",
+        "apps": "1. Đóng góp kiến thức tiên tiến về lãnh đạo đồng sáng tạo như một phương tiện để nâng cao năng lực quản lý quá trình chuyển đổi xanh, thông qua nghiên cứu xuyên ngành và học tập chung trong các lĩnh vực đồng sáng tạo ('CityLabs').\\n2. Dự án sẽ phát triển kiến thức và bài học chính sách về “kinh nghiệm của Scandinavia” trong việc quản lý chuyển đổi xanh ở cấp thành phố – so sánh năng lực lãnh đạo, học tập và đổi mới đồng sáng tạo ở các thành phố Oslo, Copenhagen và Gothenburg.",
+        "outstand": "Cụ thể hơn, chúng tôi quan tâm đến cách các thành phố có thể xây dựng các đấu trường đồng sáng tạo và thông qua những đấu trường này nâng cao năng lực của họ trong việc tạo ra sự phối hợp giữa các lớp thể chế của các biện pháp mạng lưới, lấy cảm hứng từ thị trường và phân cấp cùng nhau tạo nên các cơ chế quản trị dành cho các nhà lãnh đạo chính trị và hành chính khi phấn đấu chuyển đổi carbon thấp bền vững.",
+        "currentDev": "[Ý tưởng] Ý tưởng chưa được thực hiện",
+        "support": "Về tài chính, chúng tôi cần hỗ trợ tài chính để xây dựng hệ thống từ giai đoạn ban đầu của ý tưởng",
+        "files": ["6564a727fe8eec62f4140b48/Mô tả BTL2.pdf"],
+        "comments": [
+            {
+                "innovator_id": "65f4602b14c88ec7dd8dd787",
+                "content": "Điều này rất tiên tiến.",
+            },
+            {
+                "innovator_id": "65f4602b14c88ec7dd8dd787",
+                "content": "Hãy ưu tiên ý tưởng này và phân bổ tài nguyên.",
+            },
+            {
+                "innovator_id": "66497d4600c0ba90647d3778",
+                "content": "Điều này rất tiên tiến.",
+            },
+            {
+                "innovator_id": "65635d423ec6e1780b1df38c",
+                "content": "Chúng ta cần tạo một kế hoạch triển khai chi tiết.",
+            },
+            {
+                "innovator_id": "65635cc73ec6e1780b1df38b",
+                "content": "Tôi nghĩ điều này có thể thực sự cải thiện trải nghiệm của khách hàng.",
+            },
+            {
+                "innovator_id": "66497d4600c0ba90647d3778",
+                "content": "Tôi lo lắng về thời gian cho ý tưởng này.",
+            },
+        ],
+        "innovator_id": "66499608bc5feffef11b1b31",
+    },
+    {
+        "name": "Thúc đẩy chuyển đổi xanh trong thời đại công nghệ 4.0",
+        "domain": ["Năng lượng (Energy)"],
+        "slogan": "Sản xuất xanh và phát triển bền vững",
+        "problem": "Những chiến lược và cơ chế lãnh đạo nào có thể hỗ trợ hiệu quả cho hoạt động đồng sáng tạo, học hỏi và đổi mới theo hướng chuyển đổi xanh?",
+        "solution": "Nghiên cứu sẽ dựa trên các nghiên cứu điển hình và các hành động đồng sáng tạo ở các thành phố Oslo, Gothenburg và Copenhagen. Hơn nữa, GREENGOV sẽ tạo điều kiện thuận lợi cho hoạt động học tập mang tính đột phá bằng cách đưa ra các ví dụ về khả năng lãnh đạo đồng sáng tạo từ Cape Town; một thành phố đầy tham vọng nhưng khác biệt về các hoạt động và chính sách khí hậu. Mistra Urban Futures sẽ đặc biệt tham gia vào nghiên cứu điển hình ở Gothenburg và phát triển lý thuyết.\\n\\nDự án sẽ kết hợp nghiên cứu xuyên ngành với 'CityLabs', dự án sẽ hoạt động như các thử nghiệm thiết kế để điều tra xem các can thiệp lãnh đạo khác nhau ảnh hưởng như thế nào đến hoạt động đồng sáng tạo xanh trong các bối cảnh khác nhau.\\n\\nTrong các thành phố nghiên cứu điển hình, chúng tôi xác định và so sánh các mô hình quản trị của chúng nhằm thúc đẩy hơn nữa sự chuyển đổi xanh trong các bối cảnh chính trị và quản trị khác nhau: trong thành phố; trong khu vực đô thị và quốc gia rộng lớn hơn; và trong mối quan hệ giữa thành phố với thành phố",
+        "teamDescription": "<5 thành viên",
+        "teamExperience": "Nhóm được lãnh đạo bởi Viện Nghiên cứu Đô thị và Khu vực Na Uy (NIBR) tại Đại học Thủ đô Oslo do Tiến sĩ Hege Hofstad (trưởng nhóm) đại diện; Trond Vedeld, Tiến sĩ; Tiến sĩ Marianne Millstein; Geir Heierstad, Tiến sĩ; Jan-Tore Berghei, MA; và Gro Sandkjær Hanssen, Tiến sĩ.",
+        "gender": "Global",
+        "ageRange": [18, 30],
+        "professional": ["Học sinh, sinh viên", "Doanh nghiệp"],
+        "geographical": ["Vietnam"],
+        "behavior": "1. Đóng góp kiến thức tiên tiến về lãnh đạo đồng sáng tạo như một phương tiện để nâng cao năng lực quản lý quá trình chuyển đổi xanh, thông qua nghiên cứu xuyên ngành và học tập chung trong các lĩnh vực đồng sáng tạo ('CityLabs').\\n2. Dự án sẽ phát triển kiến thức và bài học chính sách về “kinh nghiệm của Scandinavia” trong việc quản lý chuyển đổi xanh ở cấp thành phố – so sánh năng lực lãnh đạo, học tập và đổi mới đồng sáng tạo ở các thành phố Oslo, Copenhagen và Gothenburg.",
+        "apps": "1. Đóng góp kiến thức tiên tiến về lãnh đạo đồng sáng tạo như một phương tiện để nâng cao năng lực quản lý quá trình chuyển đổi xanh, thông qua nghiên cứu xuyên ngành và học tập chung trong các lĩnh vực đồng sáng tạo ('CityLabs').\\n2. Dự án sẽ phát triển kiến thức và bài học chính sách về “kinh nghiệm của Scandinavia” trong việc quản lý chuyển đổi xanh ở cấp thành phố – so sánh năng lực lãnh đạo, học tập và đổi mới đồng sáng tạo ở các thành phố Oslo, Copenhagen và Gothenburg.",
+        "outstand": "Cụ thể hơn, chúng tôi quan tâm đến cách các thành phố có thể xây dựng các đấu trường đồng sáng tạo và thông qua những đấu trường này nâng cao năng lực của họ trong việc tạo ra sự phối hợp giữa các lớp thể chế của các biện pháp mạng lưới, lấy cảm hứng từ thị trường và phân cấp cùng nhau tạo nên các cơ chế quản trị dành cho các nhà lãnh đạo chính trị và hành chính khi phấn đấu chuyển đổi carbon thấp bền vững.",
+        "currentDev": "[Hoàn thiện] Ý tưởng đã có thể đưa ra thị trường và hoạt động tốt",
+        "support": "",
+        "files": ["6564ab51fe8eec62f4140b49/6_SQL.pdf"],
+        "comments": [
+            {
+                "innovator_id": "65635d423ec6e1780b1df38c",
+                "content": "Đây là một thay đổi lớn!",
+            },
+            {
+                "innovator_id": "65635cc73ec6e1780b1df38b",
+                "content": "Tôi nghĩ điều này có thể thực sự cải thiện trải nghiệm của khách hàng.",
+            },
+            {
+                "innovator_id": "66497d4600c0ba90647d3778",
+                "content": "Các bước tiếp theo để thực hiện điều này là gì?",
+            },
+            {
+                "innovator_id": "65635cc73ec6e1780b1df38b",
+                "content": "Điều này có tiềm năng, nhưng chúng ta cần tham gia nhiều bên liên quan hơn.",
+            },
+            {
+                "innovator_id": "656344aaf0f3a439f9d88ce9",
+                "content": "Điều này rất tiên tiến.",
+            },
+        ],
+        "innovator_id": "66499608bc5feffef11b1b31",
+    },
+    {
+        "name": "Thúc đẩy chuyển đổi xanh trong thời đại công nghệ 4.0",
+        "domain": ["Năng lượng (Energy)"],
+        "slogan": "Sản xuất xanh và phát triển bền vững",
+        "problem": "Những chiến lược và cơ chế lãnh đạo nào có thể hỗ trợ hiệu quả cho hoạt động đồng sáng tạo, học hỏi và đổi mới theo hướng chuyển đổi xanh?",
+        "solution": "Nghiên cứu sẽ dựa trên các nghiên cứu điển hình và các hành động đồng sáng tạo ở các thành phố Oslo, Gothenburg và Copenhagen. Hơn nữa, GREENGOV sẽ tạo điều kiện thuận lợi cho hoạt động học tập mang tính đột phá bằng cách đưa ra các ví dụ về khả năng lãnh đạo đồng sáng tạo từ Cape Town; một thành phố đầy tham vọng nhưng khác biệt về các hoạt động và chính sách khí hậu. Mistra Urban Futures sẽ đặc biệt tham gia vào nghiên cứu điển hình ở Gothenburg và phát triển lý thuyết.\\n\\nDự án sẽ kết hợp nghiên cứu xuyên ngành với 'CityLabs', dự án sẽ hoạt động như các thử nghiệm thiết kế để điều tra xem các can thiệp lãnh đạo khác nhau ảnh hưởng như thế nào đến hoạt động đồng sáng tạo xanh trong các bối cảnh khác nhau.\\n\\nTrong các thành phố nghiên cứu điển hình, chúng tôi xác định và so sánh các mô hình quản trị của chúng nhằm thúc đẩy hơn nữa sự chuyển đổi xanh trong các bối cảnh chính trị và quản trị khác nhau: trong thành phố; trong khu vực đô thị và quốc gia rộng lớn hơn; và trong mối quan hệ giữa thành phố với thành phố",
+        "teamDescription": "<5 thành viên",
+        "teamExperience": "Nhóm được lãnh đạo bởi Viện Nghiên cứu Đô thị và Khu vực Na Uy (NIBR) tại Đại học Thủ đô Oslo do Tiến sĩ Hege Hofstad (trưởng nhóm) đại diện; Trond Vedeld, Tiến sĩ; Tiến sĩ Marianne Millstein; Geir Heierstad, Tiến sĩ; Jan-Tore Berghei, MA; và Gro Sandkjær Hanssen, Tiến sĩ.",
+        "gender": "Global",
+        "ageRange": [18, 30],
+        "professional": ["Học sinh, sinh viên", "Doanh nghiệp"],
+        "geographical": ["Vietnam"],
+        "behavior": "1. Đóng góp kiến thức tiên tiến về lãnh đạo đồng sáng tạo như một phương tiện để nâng cao năng lực quản lý quá trình chuyển đổi xanh, thông qua nghiên cứu xuyên ngành và học tập chung trong các lĩnh vực đồng sáng tạo ('CityLabs').\\n2. Dự án sẽ phát triển kiến thức và bài học chính sách về “kinh nghiệm của Scandinavia” trong việc quản lý chuyển đổi xanh ở cấp thành phố – so sánh năng lực lãnh đạo, học tập và đổi mới đồng sáng tạo ở các thành phố Oslo, Copenhagen và Gothenburg.",
+        "apps": "1. Đóng góp kiến thức tiên tiến về lãnh đạo đồng sáng tạo như một phương tiện để nâng cao năng lực quản lý quá trình chuyển đổi xanh, thông qua nghiên cứu xuyên ngành và học tập chung trong các lĩnh vực đồng sáng tạo ('CityLabs').\\n2. Dự án sẽ phát triển kiến thức và bài học chính sách về “kinh nghiệm của Scandinavia” trong việc quản lý chuyển đổi xanh ở cấp thành phố – so sánh năng lực lãnh đạo, học tập và đổi mới đồng sáng tạo ở các thành phố Oslo, Copenhagen và Gothenburg.",
+        "outstand": "Cụ thể hơn, chúng tôi quan tâm đến cách các thành phố có thể xây dựng các đấu trường đồng sáng tạo và thông qua những đấu trường này nâng cao năng lực của họ trong việc tạo ra sự phối hợp giữa các lớp thể chế của các biện pháp mạng lưới, lấy cảm hứng từ thị trường và phân cấp cùng nhau tạo nên các cơ chế quản trị dành cho các nhà lãnh đạo chính trị và hành chính khi phấn đấu chuyển đổi carbon thấp bền vững.",
+        "currentDev": "[Hoàn thiện] Ý tưởng đã có thể đưa ra thị trường và hoạt động tốt",
+        "support": "",
+        "files": ["6564ab5cfe8eec62f4140b4a/6_SQL.pdf"],
+        "comments": [
+            {
+                "innovator_id": "65635cc73ec6e1780b1df38b",
+                "content": "Tôi có một số lo ngại về khả thi.",
+            },
+            {
+                "innovator_id": "656344aaf0f3a439f9d88ce9",
+                "content": "Tuyệt vời! Điều này có thể tiết kiệm rất nhiều thời gian cho chúng ta.",
+            },
+            {
+                "innovator_id": "66499608bc5feffef11b1b31",
+                "content": "Tôi có một vài lo ngại về hậu cần.",
+            },
+            {
+                "innovator_id": "66497d4600c0ba90647d3778",
+                "content": "Chúng ta cần đánh giá tác động tiềm năng lên đội ngũ của mình.",
+            },
+            {
+                "innovator_id": "66497d4600c0ba90647d3778",
+                "content": "Bạn hình dung quá trình triển khai như thế nào?",
+            },
+            {
+                "innovator_id": "655e012d9bce09ceaefabb64",
+                "content": "Tôi có một vài lo ngại về hậu cần.",
+            },
+            {
+                "innovator_id": "65635cc73ec6e1780b1df38b",
+                "content": "Chúng ta cần tạo một kế hoạch triển khai chi tiết.",
+            },
+            {
+                "innovator_id": "65f4602b14c88ec7dd8dd787",
+                "content": "Tôi nghĩ điều này có tiềm năng lớn cho sự phát triển tương lai của chúng ta.",
+            },
+            {
+                "innovator_id": "66499608bc5feffef11b1b31",
+                "content": "Chúng ta có thể cần tiến hành thử nghiệm thử trước.",
+            },
+        ],
+        "innovator_id": "66499608bc5feffef11b1b31",
+    },
+    {
+        "name": "Thúc đẩy chuyển đổi xanh trong thời đại công nghệ 4.0",
+        "domain": ["Năng lượng (Energy)"],
+        "slogan": "Sản xuất xanh và phát triển bền vững",
+        "problem": "Những chiến lược và cơ chế lãnh đạo nào có thể hỗ trợ hiệu quả cho hoạt động đồng sáng tạo, học hỏi và đổi mới theo hướng chuyển đổi xanh?",
+        "solution": "Nghiên cứu sẽ dựa trên các nghiên cứu điển hình và các hành động đồng sáng tạo ở các thành phố Oslo, Gothenburg và Copenhagen. Hơn nữa, GREENGOV sẽ tạo điều kiện thuận lợi cho hoạt động học tập mang tính đột phá bằng cách đưa ra các ví dụ về khả năng lãnh đạo đồng sáng tạo từ Cape Town; một thành phố đầy tham vọng nhưng khác biệt về các hoạt động và chính sách khí hậu. Mistra Urban Futures sẽ đặc biệt tham gia vào nghiên cứu điển hình ở Gothenburg và phát triển lý thuyết.\\nDự án sẽ kết hợp nghiên cứu xuyên ngành với 'CityLabs', dự án sẽ hoạt động như các thử nghiệm thiết kế để điều tra xem các can thiệp lãnh đạo khác nhau ảnh hưởng như thế nào đến hoạt động đồng sáng tạo xanh trong các bối cảnh khác nhau.\\n\\nTrong các thành phố nghiên cứu điển hình, chúng tôi xác định và so sánh các mô hình quản trị của chúng nhằm thúc đẩy hơn nữa sự chuyển đổi xanh trong các bối cảnh chính trị và quản trị khác nhau: trong thành phố; trong khu vực đô thị và quốc gia rộng lớn hơn; và trong mối quan hệ giữa thành phố với thành phố",
+        "teamDescription": "Cá nhân",
+        "teamExperience": "Nhóm được lãnh đạo bởi Viện Nghiên cứu Đô thị và Khu vực Na Uy (NIBR) tại Đại học Thủ đô Oslo do Tiến sĩ Hege Hofstad (trưởng nhóm) đại diện; Trond Vedeld, Tiến sĩ; Tiến sĩ Marianne Millstein; Geir Heierstad, Tiến sĩ; Jan-Tore Berghei, MA; và Gro Sandkjær Hanssen, Tiến sĩ.",
+        "gender": "Global",
+        "ageRange": [18, 56],
+        "professional": ["Mọi người"],
+        "geographical": ["Vietnam"],
+        "behavior": "Dự án sẽ phát triển kiến thức và bài học chính sách về “kinh nghiệm của Scandinavia” trong việc quản lý chuyển đổi xanh ở cấp thành phố – so sánh năng lực lãnh đạo, học tập và đổi mới đồng sáng tạo ở các thành phố Oslo, Copenhagen và Gothenburg.",
+        "apps": "1. Đóng góp kiến thức tiên tiến về lãnh đạo đồng sáng tạo như một phương tiện để nâng cao năng lực quản lý quá trình chuyển đổi xanh, thông qua nghiên cứu xuyên ngành và học tập chung trong các lĩnh vực đồng sáng tạo ('CityLabs').\\n2. Dự án sẽ phát triển kiến thức và bài học chính sách về “kinh nghiệm của Scandinavia” trong việc quản lý chuyển đổi xanh ở cấp thành phố – so sánh năng lực lãnh đạo, học tập và đổi mới đồng sáng tạo ở các thành phố Oslo, Copenhagen và Gothenburg.",
+        "outstand": "Cụ thể hơn, chúng tôi quan tâm đến cách các thành phố có thể xây dựng các đấu trường đồng sáng tạo và thông qua những đấu trường này nâng cao năng lực của họ trong việc tạo ra sự phối hợp giữa các lớp thể chế của các biện pháp mạng lưới, lấy cảm hứng từ thị trường và phân cấp cùng nhau tạo nên các cơ chế quản trị dành cho các nhà lãnh đạo chính trị và hành chính khi phấn đấu chuyển đổi carbon thấp bền vững.",
+        "currentDev": "[Hiện thực] Ý tưởng đang được hiện thực và thử nghiệm trong môi trường phát triển",
+        "support": "Về tài chính, chúng tôi cần hỗ trợ tài chính để xây dựng hệ thống từ giai đoạn ban đầu của ý tưởng",
+        "files": ["657359ccf7604b2675a6eb9c/Masterarbeit_A.Pommer.pdf"],
+        "comments": [
+            {
+                "innovator_id": "66497d4600c0ba90647d3778",
+                "content": "Có một số rủi ro, nhưng lợi ích nhiều hơn.",
+            },
+            {
+                "innovator_id": "65635cc73ec6e1780b1df38b",
+                "content": "Chúng ta nên thực hiện phân tích chi phí-lợi ích.",
+            },
+            {
+                "innovator_id": "65635cc73ec6e1780b1df38b",
+                "content": "Chúng ta có thể tích hợp điều này với các hệ thống hiện tại của mình không?",
+            },
+            {
+                "innovator_id": "65634ba6e123614f424fe9e9",
+                "content": "Chúng ta nên thu thập thêm dữ liệu trước khi tiến xa hơn.",
+            },
+            {
+                "innovator_id": "65634ba6e123614f424fe9e9",
+                "content": "Điều này rất tiên tiến.",
+            },
+        ],
+        "innovator_id": "66499608bc5feffef11b1b31",
+    },
+    {
+        "name": "dark wang thank",
+        "domain": ["Kinh doanh buôn bán (Sales)"],
+        "slogan": "dark wang thank",
+        "problem": "dark wang thank",
+        "solution": "dark wang thank dark wang thankdark wang thankdark wang thankdark wang thankdark wang thankdark wang thank",
+        "teamDescription": "<20 thành viên",
+        "teamExperience": "dark wang thankdark wang thankdark wang thankdark wang thankdark wang thank",
+        "gender": "Global",
+        "ageRange": [0, 24],
+        "professional": ["Mọi người"],
+        "geographical": ["Europe"],
+        "behavior": "thisch",
+        "apps": "dark wang thank",
+        "outstand": "dark wang thank",
+        "currentDev": "[Hiện thực] Ý tưởng đang được hiện thực và thử nghiệm trong môi trường phát triển",
+        "support": "",
+        "files": [],
+        "comments": [
+            {
+                "innovator_id": "65635d423ec6e1780b1df38c",
+                "content": "Điều này có thể cách mạng hóa cách chúng ta tiếp cận các dự án!",
+            },
+            {
+                "innovator_id": "66497d4600c0ba90647d3778",
+                "content": "Tôi thấy rất nhiều tiềm năng trong điều này!",
+            },
+            {
+                "innovator_id": "65635d423ec6e1780b1df38c",
+                "content": "Điều này có thể phù hợp với các dự án hiện tại của chúng ta.",
+            },
+            {
+                "innovator_id": "66499608bc5feffef11b1b31",
+                "content": "Chúng ta nên tham gia đội tiếp thị để lấy ý kiến của họ.",
+            },
+            {
+                "innovator_id": "66497d4600c0ba90647d3778",
+                "content": "Tôi rất hào hứng xem điều này sẽ đi đến đâu.",
+            },
+            {
+                "innovator_id": "66499608bc5feffef11b1b31",
+                "content": "Chúng ta cần đánh giá tác động tiềm năng lên đội ngũ của mình.",
+            },
+        ],
+        "innovator_id": "65f4602b14c88ec7dd8dd787",
+    },
+    {
+        "name": "Sàn kết nối ý tưởng với doanh nghiệp",
+        "domain": ["Phần mềm (Software)"],
+        "slogan": "Ý tưởng không còn là ý tưởng",
+        "problem": "Những hệ thống đăng tải ý tưởng ngày nay chưa đáp ứng đủ nhu cầu của nhà sáng tạo. Các ý tưởng đăng lên nhưng không quá chú trọng về nội dung mà chỉ quan tâm đến số lượng.",
+        "solution": "Hiện thực một hệ thống mới giúp người dùng có thể đăng tải những ý tưởng sáng kiến của bản thân về một vấn đề gì đó trong cuộc sống. Ở đây, các ý tưởng với độ hoàn thiện và được đánh giá cao sẽ có khả năng lớn trong việc kết hợp với doanh nghiệp trong ngành liên quan",
+        "teamDescription": "<5 thành viên",
+        "teamExperience": "Có kinh nghiệm trong việc xây dựng hệ thống. Có kiến thức về xử lý ngôn ngữ tự nhiên",
+        "gender": "Male",
+        "ageRange": [0, 29],
+        "professional": ["Mọi người"],
+        "geographical": ["Vietnam"],
+        "behavior": "Sàn ý tưởng giúp thu hẹp khoảng cách giữa ý tưởng và thực tế. Thông qua việc kết nối với doanh nghiệp, nhà sáng tạo có thể cơ hội, học hỏi thêm kinh nghiệm và những góp ý từ phía doanh nghiệp",
+        "apps": "ytuongsangtao.net, ytuongsangtaohcm Quá nhiều ý tưởng, tuy nhiên nội dung ý tưởng không chất lượng",
+        "outstand": ["Ứng dụng cao"],
+        "currentDev": "[Hiện thực] Ý tưởng đang được hiện thực và thử nghiệm trong môi trường phát triển",
+        "support": "",
+        "innovator_id": "65f4602b14c88ec7dd8dd787",
+        "files": [],
+    },
+]
+
+
 contest_data = [
     {
         "name": "Học tập kỷ nguyên 4.0",
@@ -33,8 +448,8 @@ contest_data = [
                 "idea_id": "657359ccf7604b2675a6eb9c",
             },
             {
-				"idea_id": "6573f4138276323dd10d84ce",
-			},
+                "idea_id": "6573f4138276323dd10d84ce",
+            },
         ],
     },
     {
@@ -60,20 +475,6 @@ contest_data = [
         "scoringType2": "mark",
         "time2": {"start": "2024-06-20T00:00:00Z", "end": "2024-06-25T00:00:00Z"},
         "description": "Cuộc thi viết về thầy cô giáo",
-        "submission_list": [
-            {
-                "idea_id": "656085987981d95b28f942a7",
-            },
-            {
-                "idea_id": "6564a727fe8eec62f4140b48",
-            },
-            {
-                "idea_id": "657359ccf7604b2675a6eb9c",
-            },
-            {
-				"idea_id": "6573f4138276323dd10d84ce",
-			},
-        ],
     },
     {
         "name": "Khám phá khoa học",
@@ -98,20 +499,6 @@ contest_data = [
         "scoringType2": "mark",
         "time2": {"start": "2024-07-20T00:00:00Z", "end": "2024-07-25T00:00:00Z"},
         "description": "Cuộc thi khám phá khoa học dành cho học sinh THCS",
-        "submission_list": [
-            {
-                "idea_id": "656085987981d95b28f942a7",
-            },
-            {
-                "idea_id": "6564a727fe8eec62f4140b48",
-            },
-            {
-                "idea_id": "657359ccf7604b2675a6eb9c",
-            },
-            {
-				"idea_id": "6573f4138276323dd10d84ce",
-			},
-        ],
     },
     {
         "name": "Sáng tạo thời trang",
@@ -136,20 +523,6 @@ contest_data = [
         "scoringType2": "mark",
         "time2": {"start": "2024-08-20T00:00:00Z", "end": "2024-08-25T00:00:00Z"},
         "description": "Cuộc thi sáng tạo thời trang dành cho sinh viên",
-        "submission_list": [
-            {
-                "idea_id": "656085987981d95b28f942a7",
-            },
-            {
-                "idea_id": "6564a727fe8eec62f4140b48",
-            },
-            {
-                "idea_id": "657359ccf7604b2675a6eb9c",
-            },
-            {
-				"idea_id": "6573f4138276323dd10d84ce",
-			},
-        ],
     },
     {
         "name": "Viết về quê hương",

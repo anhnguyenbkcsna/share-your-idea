@@ -10,7 +10,7 @@ from pyvi.ViTokenizer import tokenize as pyvi_tokenizer
 from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
 from db_collection import get_ideas_key
-from filtering_data import get_data_by_column, get_db
+from filtering_data import get_data_by_column, get_valid_idea_db
 from db_connection import db_connection
 
 PhobertTokenizer = AutoTokenizer.from_pretrained("VoVanPhuc/sup-SimCSE-VietNamese-phobert-base")
@@ -56,7 +56,7 @@ def find_topk(req: str, idea_db: list = None):
   embedding_model = Embedding()
   
   # read db into smaller batches (1000)
-  db = get_db()['sentence'].to_list()[:200]
+  db = get_valid_idea_db()['sentence'].to_list()[:200]
 
   # split db into smaller batches (1000)
   batch_size = 100

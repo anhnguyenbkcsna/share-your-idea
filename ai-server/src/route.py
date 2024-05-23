@@ -2,10 +2,10 @@ from entity import Idea
 from filtering_model import FilteringModel
 from matching import find_topk, find_topk_idea
 import time
-from filtering_data import get_db
+from filtering_data import get_valid_idea_db
 from db_collection import get_ideas, get_idea_by_id
 
-db = get_db()['sentence'].to_list()[:3000]
+db = get_valid_idea_db()['sentence'].to_list()[:3000]
 ideas = get_ideas()
 
 def filter(idea: Idea):

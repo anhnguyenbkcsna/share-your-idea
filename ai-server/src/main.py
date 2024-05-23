@@ -60,18 +60,3 @@ def get_ideas():
   for doc in readable_data:
       print(doc)
   return 1
-
-# @app.on_event("startup")
-# async def startup():
-#   await connect_get_db()
-
-# @app.on_event("shutdown")
-# async def shutdown():
-#     await db_connection.disconnect()
-
-# if __name__ == '__main__':
-#   # connect db
-#   mongodb_url = os.getenv('MONGODB_URL')
-#   db_name = os.getenv('MONGODB_DATABASE')
-#   print(mongodb_url, db_name)
-#   db.MongoDBClass(db_name, mongodb_url)

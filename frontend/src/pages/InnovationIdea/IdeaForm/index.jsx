@@ -1,36 +1,43 @@
-import React, { useEffect, useState } from 'react'
-import FormCustomerSegment from '../../../components/FormIdeaSteps/CustomerSegment'
-import FormValuePropositions from '../../../components/FormIdeaSteps/ValuePropositions'
-import FormDone from '../../../components/FormIdeaSteps/Done'
-import FormOverview from '../../../components/FormIdeaSteps/Overview'
-import { localStorageStepFormat, userFormStepItem } from '../../../utils/form.constants'
-import FormProgress from '../../../components/FormProgress/progress'
-import CusCard from '../../../components/CusCard'
-import { createNewIdea, editIdea } from '../../../api/idea'
-import { useNavigate, Navigate } from 'react-router-dom'
-import { Modal, message } from 'antd'
-import styles from './styles.module.scss'
-import { CheckCircleOutlined, CloseCircleOutlined, WarningOutlined } from '@ant-design/icons'
+import React, { useEffect, useState } from "react"
+import FormCustomerSegment from "../../../components/FormIdeaSteps/CustomerSegment"
+import FormValuePropositions from "../../../components/FormIdeaSteps/ValuePropositions"
+import FormDone from "../../../components/FormIdeaSteps/Done"
+import FormOverview from "../../../components/FormIdeaSteps/Overview"
+import {
+  localStorageStepFormat,
+  userFormStepItem,
+} from "../../../utils/form.constants"
+import FormProgress from "../../../components/FormProgress/progress"
+import CusCard from "../../../components/CusCard"
+import { createNewIdea, editIdea, getAllIdeas, sendIdeaToAIServer } from "../../../api/idea"
+import { useNavigate, Navigate } from "react-router-dom"
+import { Modal, message } from "antd"
+import styles from "./styles.module.scss"
+import {
+  CheckCircleOutlined,
+  CloseCircleOutlined,
+  WarningOutlined,
+} from "@ant-design/icons"
 
 const notificationModal = [
   {
     key: 1,
-    status: 'success',
-    text: 'Success',
-    icon: <CheckCircleOutlined />
+    status: "success",
+    text: "Success",
+    icon: <CheckCircleOutlined />,
   },
   {
     key: 2,
-    status: 'warning',
-    text: 'Warning',
-    icon: <WarningOutlined />
+    status: "warning",
+    text: "Warning",
+    icon: <WarningOutlined />,
   },
   {
     key: 3,
-    status: 'error',
-    text: 'Error',
-    icon: <CloseCircleOutlined />
-  }
+    status: "error",
+    text: "Error",
+    icon: <CloseCircleOutlined />,
+  },
 ]
 
 const CreateIdeaFormPage = () => {
@@ -39,21 +46,22 @@ const CreateIdeaFormPage = () => {
   const [messageApi, contextHolder] = message.useMessage()
 
   const navigate = useNavigate()
-  const delay = ms => new Promise(res => setTimeout(res, ms))
+  const delay = (ms) => new Promise((res) => setTimeout(res, ms))
 
   const [currentStep, setCurrentStep] = useState(0)
   const [eachStepData, setEachStepData] = useState([])
   const [fileList, setFileList] = useState([])
   const [projectIdea, setProjectIdea] = useState({})
+  const [serverAIresponse, setServerAIresponse] = useState("success")
   const [edit, setEdit] = useState(false)
 
   const next = (curData) => {
-    localStorage.setItem('currentStep', currentStep + 1)
+    localStorage.setItem("currentStep", currentStep + 1)
     handler(curData)
     setCurrentStep(currentStep + 1)
   }
   const prev = (curData) => {
-    localStorage.setItem('currentStep', currentStep - 1)
+    localStorage.setItem("currentStep", currentStep - 1)
     handler(curData)
     setCurrentStep(currentStep - 1)
   }
@@ -75,83 +83,50 @@ const CreateIdeaFormPage = () => {
 
   const finishForm = async () => {
     const data = new FormData()
-    data.append('image', new Blob(fileList), 'file_list_name')
-    console.log('------- data', fileList, eachStepData)
+    data.append("image", new Blob(fileList), "file_list_name")
+    console.log("------- data", fileList, eachStepData)
 
     for (let i = 0; i < userFormStepItem.length; i++) {
       localStorage.removeItem(localStorageStepFormat(i))
     }
-    localStorage.removeItem('currentStep')
+    localStorage.removeItem("currentStep")
   }
 
   useEffect(() => {
-    const curStep = localStorage.getItem('currentStep')
-      ? localStorage.getItem('currentStep')
+    const curStep = localStorage.getItem("currentStep")
+      ? localStorage.getItem("currentStep")
       : 0
-    console.log('curStep', parseInt(curStep))
+    console.log("curStep", parseInt(curStep))
     setCurrentStep(parseInt(curStep))
   }, [])
 
   const onFormFinish = (formObj) => {
-    if(edit) {
-      console.log('Edit idea')
-      editIdea(formObj).then(res => {
-        window.scrollTo({top: 0, left: 0, behavior: 'smooth'})
-        // setStatus('success')
-        success()
-      })
-    }
-    else{
-      createNewIdea(formObj).then(res => {
-        window.scrollTo({top: 0, left: 0, behavior: 'smooth'})
-        // setStatus('warning')
-        warning()
-      })
-    }
-  }
-
-  const handleOk = () => {
-    navigate('/innovator')
-  }
-
-  const navigateToIdeaList = async () => {
-    await delay(5000)
-    console.log('Waited 5s')
-    navigate('/innovator')
-  }
-  const success = () => {
     messageApi.open({
-      type: 'success',
-      content: 'This is a success message',
-      duration: 5,
-      style: {
-        marginTop: '8vh',
-      },
+      type: "loading",
+      content: "Đang gửi...",
     })
-    navigateToIdeaList() // Success add idea, navigate to idea list
-  }
+    
+    console.log("Send idea to AI server: ", formObj)
 
-  const error = () => {
-    messageApi.open({
-      type: 'error',
-      content: 'This is an error message',
-      duration: 5,
-      style: {
-        marginTop: '8vh',
-      },
+    sendIdeaToAIServer(formObj).then((res) => {
+      console.log(">> AI respond: ", res)
+      switch (res) {
+        case "VALID":
+          message.success("Gửi ý tưởng thành công", 2.5)
+          delay(3000)
+          // Send idea to backend server
+          finishForm()
+          navigate("/innovator")
+          break
+        case "WARNING":
+          message.warning("Ý tưởng của bạn cần được kiểm duyệt", 2.5)
+          break
+        case "SPAM":
+          message.error("Ý tưởng của bạn không hợp lệ", 2.5)
+          break
+      }
     })
-  }
-
-  const warning = () => {
-    messageApi.open({
-      type: 'warning',
-      content: 'This is a warning message',
-      duration: 5,
-      style: {
-        marginTop: '8vh',
-      },
-    })
-    navigateToIdeaList() // Add warning idea, navigate to idea list
+    .catch(() => message.error("Gửi ý tưởng thất bại", 2.5))
   }
 
   return (
@@ -178,12 +153,19 @@ const CreateIdeaFormPage = () => {
           }
         })}
       </Modal> */}
-
       {contextHolder}
       <FormProgress
         onFormFinish={onFormFinish}
-        slogans={['Hãy thể hiện ý tưởng sáng tạo của bạn', 'Bắt đầu từ bước đầu tiên!']}
-        formSource={[FormOverview, FormCustomerSegment, FormValuePropositions, FormDone]}
+        slogans={[
+          "Hãy thể hiện ý tưởng sáng tạo của bạn",
+          "Bắt đầu từ bước đầu tiên!",
+        ]}
+        formSource={[
+          FormOverview,
+          FormCustomerSegment,
+          FormValuePropositions,
+          FormDone,
+        ]}
         dataSteps={userFormStepItem}
         edit={false}
       />

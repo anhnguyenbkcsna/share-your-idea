@@ -12,27 +12,25 @@ import { HrHeading } from '../Components/hrheading'
 import MyIdeaList from './myIdeaList'
 import { getAllIdeas } from '../../../api/idea'
 
-const   ContestInfo = () => {
+const ContestInfo = () => {
   const navigate = useNavigate()
+  const [idea, setIdea] = useState()
+  const [contest, setContest] = useState()
 
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [fetchIdeas, setFetchIdeas] = useState([])
-  const [yourSubmit, setYourSubmit] = useState([])
+  const [yourSubmit, setYourSubmit] = useState()
 
-  const [firstPrizeValue, setFirstPrizeValue] = useState(2500)
-  const [secondPrizeValue, setSecondPrizeValue] = useState(1000)
-  const [thirdPrizeValue, setThirdPrizeValue] = useState(500)
-  const [submissions, setSubmissions] = useState(232)
+  const [submissions, setSubmissions] = useState(0)
   const [vote, setVote] = useState(23142)
 
-  const [idea, setIdea] = useState()
   const { contestId } = useParams()
 
   useEffect(() => {
     getContestById(contestId)
       .then(res => {
         console.log(res)
-        setIdea(res)
+        setContest(res)
       })
       .catch(err => {
         console.log(err)
@@ -52,11 +50,11 @@ const   ContestInfo = () => {
     let res = ''
     try
     {
-      res = Parser(idea?.description)
+      res = Parser(contest?.description)
     }
     catch (e)
     {
-      res = idea?.description
+      res = contest?.description
     }
     return res
   }
@@ -75,7 +73,15 @@ const   ContestInfo = () => {
     setIsModalOpen(false)
   }
 
-  return idea ? (
+   const dateToString = (date) => {
+    return new Date(date).toLocaleDateString('vi-VN')
+   }
+
+   useEffect(() => {
+    contest && setSubmissions(contest.submission_list ? contest. submission_list.length : 0)
+   }, [contest])
+
+  return contest ? (
     <ConfigProvider
       theme={{
         token: {
@@ -96,7 +102,7 @@ const   ContestInfo = () => {
         width={800}
       >
         { fetchIdeas.length > 0 ? 
-          <MyIdeaList fetchIdeas={fetchIdeas} submissions={yourSubmit} setSubmissions={setYourSubmit}/>
+          <MyIdeaList fetchIdeas={fetchIdeas} submissions={yourSubmit} setSubmissions={setYourSubmit} />
           : <Button type="primary" onClick={() => navigate('/innovator/idea')}
               style={{ width: 200 }}
           >
@@ -110,7 +116,7 @@ const   ContestInfo = () => {
         alt="Banner"
       />
       <div className={styles.container}>
-        <h1 className={styles.contestName}>{idea?.name}</h1>
+        <h1 className={styles.contestName}>{contest?.name}</h1>
 
         {/* Contest Prize */}
         
@@ -120,7 +126,7 @@ const   ContestInfo = () => {
           justifyContent: 'center',
           margin: '70px auto'
         }}>
-          {!idea?.status ? (
+          {!contest?.status ? (
             <Button
               type="primary"
               onClick={handleSubmitIdea}
@@ -135,23 +141,9 @@ const   ContestInfo = () => {
         <HrHeading title="Thông tin cuộc thi" />
         <div className={styles.contestDescription}>
           <div className={styles.timeline}>
-            <div className={styles.submitTime}>
-              <h3>Thời gian gửi bài</h3>
-              <h3>Từ <span className={styles.time}>&#9&#906/09/2023</span></h3>
-              <h3>Đến <span className={styles.time}>06/09/2023</span></h3>
-            </div>
-            <div className={styles.contestTime}>
-              <h3>Thời gian cuộc thi</h3>
-              <h3>Từ <span className={styles.time}>06/09/2023</span></h3>
-              <h3>Đến <span className={styles.time}>06/09/2023</span></h3>
-            </div>
             <div>
               <h3>Số bài dự thi </h3>
               <h3><span className={styles.time}>{submissions}</span></h3>
-            </div>
-            <div>
-              <h3>Tổng số lượt bình chọn</h3>
-              <h3><span className={styles.time}>{vote}</span></h3>
             </div>
 
             <div className={styles.contestDetail}>
@@ -161,29 +153,66 @@ const   ContestInfo = () => {
 
           <div className={styles.description}>
             <h3>Danh sách vòng thi</h3>
-            <div className={styles.roundCard}>
+            {contest.round1 && <div className={styles.roundCard}>
               <a className={styles.roundTitle}><p>
-                Vòng 1: Vòng loại
+                {contest.round1}
               </p></a>
-              <span className={styles.roundDescription}>13/04/2023 08:00 - 01/08/2023 12:00</span>
-            </div>
-            <div className={styles.roundCard}>
+              <p>Hình thức: {contest.scoringType1 === 'mark' ? "Chấm điểm" : "Bình chọn"}</p>
+              <span className={styles.roundDescription}>
+                {dateToString(contest.time1["start"])} - {dateToString(contest.time1["end"])}
+              </span>
+            </div>}
+            {contest.round2 && <div className={styles.roundCard}>
               <a className={styles.roundTitle}><p>
-                Vòng 2: Vòng thi bán kết
+                {contest.round2}
               </p></a>
-              <span className={styles.roundDescription}>13/04/2023 08:00 - 01/08/2023 12:00</span>
-            </div>
-            <div className={styles.roundCard}>
+              <p>Hình thức: {contest.scoringType2 === 'mark' ? "Chấm điểm" : "Bình chọn"}</p>
+              <span className={styles.roundDescription}>
+                {dateToString(contest.time2["start"])} - {dateToString(contest.time2["end"])}
+              </span>
+            </div>}
+            {contest.round3 && <div className={styles.roundCard}>
               <a className={styles.roundTitle}><p>
-                Vòng 3: Vòng thi chung kết
+                {contest.round3}
               </p></a>
-              <span className={styles.roundDescription}>13/04/2023 08:00 - 01/08/2023 12:00</span>
-            </div>
+              <p>Hình thức: {contest.scoringType3 === 'mark' ? "Chấm điểm" : "Bình chọn"}</p>
+              <span className={styles.roundDescription}>
+                {dateToString(contest.time3["start"])} - {dateToString(contest.time3["end"])}
+              </span>
+            </div>}
+            {contest.round4 && <div className={styles.roundCard}>
+              <a className={styles.roundTitle}><p>
+                {contest.round4}
+              </p></a>
+              <p>Hình thức: {contest.scoringType4 === 'mark' ? "Chấm điểm" : "Bình chọn"}</p>
+              <span className={styles.roundDescription}>
+                {dateToString(contest.time4["start"])} - {dateToString(contest.time4["end"])}
+              </span>
+            </div>}
+            {contest.round5 && <div className={styles.roundCard}>
+              <a className={styles.roundTitle}><p>
+                {contest.round5}
+              </p></a>
+              <p>Hình thức: {contest.scoringType5 === 'mark' ? "Chấm điểm" : "Bình chọn"}</p>
+              <span className={styles.roundDescription}>
+                {dateToString(contest.time5["start"])} - {dateToString(contest.time5["end"])}
+              </span>
+            </div>}
+            
+            
           </div>
         </div>
 
-        <HrHeading title="Các bài dự thi" />
-        <SubmittedIdeasPage />
+        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+          <HrHeading title="Các bài dự thi" />
+          <Button type="primary" onClick={() => navigate('submit')} style={{
+            height: 50,
+            borderRadius: 10,
+          }}>
+            Xem tất cả
+          </Button>
+        </div>
+        <SubmittedIdeasPage submissionsList={contest.submissions_list}/>
       </div>
     </ConfigProvider>
   ) : (

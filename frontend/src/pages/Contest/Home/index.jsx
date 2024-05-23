@@ -32,6 +32,7 @@ export default function HomePage() {
     <>
       <div className={styles.contestHomeContainer}>
         <div className={styles.contestHomeBg} />
+        {console.log(contestList)}
         <h1
           style={{
             color: '#FF7510',

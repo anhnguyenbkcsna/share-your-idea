@@ -8,7 +8,7 @@ const PackageCard = (props) => {
     <Collapse defaultActiveKey={["1"]}>
       <Collapse.Panel header="Gói tài trợ" key="1">
         <Form.Item
-          name="packageName"
+          name="name"
           rules={[{ required: true, message: "Hãy nhập mô tả còn thiếu" }]}
           label="Tên gói tài trợ"
         >
@@ -16,7 +16,7 @@ const PackageCard = (props) => {
         </Form.Item>
 
         <Form.Item
-          name="packageDescription"
+          name="description"
           rules={[{ required: true, message: "Hãy nhập mô tả còn thiếu" }]}
           label="Mô tả gói tài trợ"
         >
@@ -24,14 +24,14 @@ const PackageCard = (props) => {
         </Form.Item>
 
         <Form.Item
-          name="packageValue"
+          name="value"
           rules={[{ required: true, message: "Hãy nhập mô tả còn thiếu" }]}
           label="Giá trị gói tài trợ"
         >
           <TextArea rows={3} placeholder="10.000$" />
         </Form.Item>
         <Form.Item
-          name="packageBenefits"
+          name="benefits"
           rules={[{ required: true, message: "Hãy nhập mô tả còn thiếu" }]}
           label="Lợi ích gói tài trợ"
         >

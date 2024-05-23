@@ -93,7 +93,6 @@ const NavHeader = (props) => {
       <Header
         style={{
           background: colorBgContainer,
-          // position: 'sticky',
           top: 0,
           zIndex: 1,
           padding: '0 75px',
@@ -124,7 +123,7 @@ const NavHeader = (props) => {
             justifyContent: 'end',
             minWidth: '300px'
           }}>
-            <span>{`${user.name}`}</span>
+            <span>{user.name ?? 'Bạn chưa đăng nhập'}</span>
             <Button onClick={() => logout()} type='primary' style={{
               maxWidth: '100px',
             }}>Thoát</Button>

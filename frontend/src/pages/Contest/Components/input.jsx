@@ -79,7 +79,7 @@ export function ContestStartAndEndDateInput({
       <br />
       <div>
         <input
-          type={'datetime-local'}
+          type={'date'}
           onChange={handleOnChangeStart}
           style={{
             outline: 'none',
@@ -96,7 +96,7 @@ export function ContestStartAndEndDateInput({
           }}
         />
         <input
-          type={'datetime-local'}
+          type={'date'}
           onChange={handleOnChangeEnd}
           style={{
             outline: 'none',

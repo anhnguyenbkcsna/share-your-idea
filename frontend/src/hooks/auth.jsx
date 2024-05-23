@@ -15,20 +15,32 @@ export const AuthProvider = ({ children }) => {
   const getUser = async () => {
     let returnDat = null
 
-    // check role hien tai va role trong localStorage
-    await isAuthenticated().then(({ authenticated, data }) => {
-      if (authenticated === true) {
-        returnDat = {
-          name: data.name,
-          email: data.email,
-          role: data.role
-        }
-      } else
-      {
-        returnDat = null
-        localStorage.clear()
+    // check localStorage
+    if(localStorage.getItem(localStorageConstant.ACCESS_TOKEN) !== null){
+      console.log('>> LocalStorage')
+      console.log(localStorage.getItem(localStorageConstant.NAME))
+      returnDat = {
+        name: localStorage.getItem(localStorageConstant.NAME),
+        email: localStorage.getItem(localStorageConstant.EMAIL),
+        role: localStorage.getItem(localStorageConstant.ROLE)
       }
-    })
+    }
+    else {
+      // check role hien tai va role trong localStorage
+      await isAuthenticated().then(({ authenticated, data }) => {
+        if (authenticated === true) {
+          returnDat = {
+            name: data.name,
+            email: data.email,
+            role: data.role
+          }
+        } else
+        {
+          returnDat = null
+          localStorage.clear()
+        }
+      })
+    }
 
     setUser(returnDat)
     return returnDat

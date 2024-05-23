@@ -5,6 +5,7 @@ import genericStyles from "../styles.module.scss"
 import { Button, Input, Table } from "antd"
 import { Form, InputNumber } from "antd"
 import MarkItem from "./markItem"
+import { postContestSubmissionMark } from "../../../api/contest"
 const { TextArea } = Input
 
 export default function MarkPage() {
@@ -54,7 +55,23 @@ export default function MarkPage() {
   ]
 
   const onFinish = (values) => {
+    const grades = [values.creative, values.feasibility, values.effective, values.utility, values.applicability]
+    const ideaId = window.location.pathname.split("/")[4]
+    const contestId = window.location.pathname.split("/")[2]
+    const comment = values.comment
+
+    let obj = {
+      idea_id: ideaId,
+      grades: grades,
+      comment: comment,
+    }
+
     console.log(values)
+    postContestSubmissionMark(obj, contestId).then((res) => {
+      console.log(res)
+    }).catch((err) => {
+      console.log(err)
+    })
   }
 
   useEffect(() => {
@@ -117,9 +134,13 @@ export default function MarkPage() {
                 <MarkItem criteria="Tính tiện ích" formName="utility" />
                 <MarkItem criteria="Tính ứng dụng" formName="applicability" />
               </div>
-              <TextArea placeholder="Nhận xét" autoSize={{
-                minRows: 11,
-              }} />
+              <Form.Item
+                name="comment"
+              >
+                <TextArea placeholder="Nhận xét" autoSize={{
+                  minRows: 11,
+                }} />
+              </Form.Item>
             </div>
             <Button type="primary" style={{ width: 200, height: 50, display: "flex", justifyContent: 'center', paddingTop: 15 }} htmlType="submit">
               Gửi điểm

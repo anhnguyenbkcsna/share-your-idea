@@ -1,5 +1,5 @@
-export const deployedAPI = 'https://sri-6v0u.onrender.com'
-// export const deployedAPI = 'http://192.168.111.197:8000'
+// export const deployedAPI = 'https://sri-6v0u.onrender.com'
+export const deployedAPI = 'http://192.168.1.51:8000'
 
 export const ideaEndpoint = deployedAPI + '/ideas/'
 
@@ -19,6 +19,8 @@ const localApi = 'http://localhost:8000'
 
 export const contestEndpoint = deployedAPI + '/contests/'
 
-export const sponsorProjectEndpoint = deployedAPI + '/sponsor/events/'
+export const sponsorEventEndpoint = deployedAPI + '/sponsors/events/'
 
-export const sponsorPackageEndpoint = deployedAPI + '/sponsor/packages/'
+export const sponsorPackageEndpoint = deployedAPI + '/sponsors/packages/'
+
+export const serverAIEndPoint = deployedAPI + '/ideas/filter/'

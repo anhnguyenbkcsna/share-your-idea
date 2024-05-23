@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { deployedAPI } from '../utils/form.constants'
-import { userEndPoint } from '../utils/api.constants'
+import { accountEndpoint } from '../utils/api.constants'
 import { localStorageConstant } from '../utils/global.constants'
 
 export const getAllUsers = () => {
@@ -8,7 +8,7 @@ export const getAllUsers = () => {
   if (accessToken)
   {
     return axios
-      .get(`${userEndPoint}`, {
+      .get(`${accountEndpoint}`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         }
@@ -20,6 +20,28 @@ export const getAllUsers = () => {
       .catch((err) => {
         console.log(err)
         return []
+      })
+  }
+  console.log('No access token found')
+}
+
+export const getUserById = (userId) => {
+  const accessToken = localStorage.getItem(localStorageConstant.ACCESS_TOKEN)
+  if (accessToken)
+  {
+    return axios
+      .get(`${accountEndpoint}/${userId}/`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        }
+      })
+      .then((res) => {
+        console.log(res)
+        return res.data.data
+      })
+      .catch((err) => {
+        console.log(err)
+        return null
       })
   }
   console.log('No access token found')

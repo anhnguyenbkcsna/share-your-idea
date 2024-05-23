@@ -57,11 +57,11 @@
   -webkit-line-clamp: 2;
   overflow: hidden;
   text-overflow: ellipsis;
+
 }
 
 .line {
   display: -webkit-box;
-  font-weight: bold;
   padding: 6px 0;
   line-clamp: 2;
   -webkit-line-clamp: 2;
@@ -76,4 +76,9 @@
   width: 100%;
   bottom: 20px;
   left: 0px;
+}
+.highlightText {
+  color: $contest-primary-color;
+  font-size: 2rem;
+  font-weight: bold;
 }

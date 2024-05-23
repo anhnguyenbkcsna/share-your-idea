@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import styles from "./styles.module.scss"
 import { Carousel, Button } from "antd"
+import { useNavigate } from "react-router-dom"
 import SponsorProjectCard from "../../../components/SponsorProject/SponsorProjectCard"
 
 const contentStyle = {
@@ -13,6 +14,7 @@ const contentStyle = {
 }
 
 const SponsorProject = () => {
+  const navigate = useNavigate()
   const [projects, setProjects] = useState(192321)
   const [projectName, setProjectName] = useState("Tên dự án")
   const [projectDescription, setProjectDescription] = useState("")
@@ -34,14 +36,23 @@ const SponsorProject = () => {
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-        <h1
-          style={{
-            color: "#ff8c00",
-          }}
-        >
-          Dự Án Sáng Tạo về Năng Lượng Xanh: "Mạng Lưới Năng Lượng Tái Tạo Cộng
-          Đồng (Community Renewable Energy Network - CREN)"
-        </h1>
+        <div style={{
+          display: "flex",
+          flexDirection: "row",
+        }}>
+          <h1
+            style={{
+              color: "#ff8c00",
+            }}
+          >
+            Dự Án Sáng Tạo về Năng Lượng Xanh: "Mạng Lưới Năng Lượng Tái Tạo Cộng
+            Đồng (Community Renewable Energy Network - CREN)"
+          </h1>
+          <Button type="primary" style={{ marginTop: 20, height: 50 }} onClick={() => navigate('edit')}>
+            Thêm gói tài trợ
+          </Button>
+        </div>
+
         <img
           className={styles.image}
           src="https://vista.gov.vn/vn-uploads/news/2022_08/31-8-2022/0.jpg"

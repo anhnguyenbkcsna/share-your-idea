@@ -41,6 +41,7 @@ const items = [
     
   ]),
   getItem('Kêu gọi tài trợ', 'sponsor', <DollarOutlined />, [
+    getItem(<Link to='/sponsor'>Kêu gọi tài trợ</Link>, 'sponsor'),
     getItem(<Link to='/sponsor/projects'>Các dự án kêu gọi</Link>, 'createSponsor'),
     getItem(<Link to='/sponsor/projects/:id'>Chi tiết dự án</Link>, 'sponsorDescription'),
     getItem(<Link to='/sponsor/projects/:id/edit'>Chỉnh sửa dự án tài trợ</Link>, 'sponsorDetail'),

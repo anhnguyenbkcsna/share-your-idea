@@ -32,7 +32,7 @@ class IdeaViewSet(viewsets.ViewSet):
     def get_ideas(self, request):
         return CrudHelper.get_all(self.collection, self.ENT_TYPE)
 
-    @action(detail=False, methods=["GET"], url_path=r"ideas/filter")
+    @action(detail=False, methods=["POST"], url_path=r"ideas/filter")
     def filter_idea(self, request):
         url = AI_SERVER_URL + "/spam_filtering"
         idea = request.data
@@ -61,7 +61,7 @@ class IdeaViewSet(viewsets.ViewSet):
                 message="Error when filtering idea", status=400, error=str(e)
             )
 
-    @action(detail=False, methods=["GET"], url_path=r"ideas/topk")
+    @action(detail=False, methods=["POST"], url_path=r"ideas/topk")
     def match_idea(self, request):
         url = AI_SERVER_URL + "/topk"
         requirement = request.data
@@ -114,7 +114,7 @@ class IdeaViewSet(viewsets.ViewSet):
                 message="Error when getting appropriate ideas", status=400, error=str(e)
             )
 
-    @action(detail=False, methods=["GET"], url_path=r"ideas/(?P<id>[^/.]{24})")
+    @action(detail=False, methods=["GET"], permission_classes=[AllowAny], url_path=r"ideas/(?P<id>[^/.]{24})")
     def get_idea_by_idea_id(self, request, id=None):
         return CrudHelper.get_by_id(id, self.collection, self.ENT_TYPE)
 

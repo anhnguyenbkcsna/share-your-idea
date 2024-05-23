@@ -2,9 +2,9 @@ from django.db import models
 
 class Idea(models.Model):
     class IsSpamEnum(models.TextChoices):
-        IS_VALID = 'isValid'
-        IS_SPAM = 'isSpam'
-        WARNING = 'warning'
+        IS_VALID = 'VALID'
+        IS_SPAM = 'SPAM'
+        WARNING = 'WARNING'
         
     # Idea Overview
     name = models.TextField()

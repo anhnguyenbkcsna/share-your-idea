@@ -7,10 +7,11 @@ class Contest(models.Model):
         UPLOAD = "upload"
         ONLINE = "online"
         OFFLINE = "offline"
+
     class ScoringType(models.TextChoices):
         VOTE = "vote"
         MARK = "mark"
-    
+
     name = models.TextField()
     topic = models.TextField()
     location = models.TextField(default="")
@@ -35,28 +36,48 @@ class Contest(models.Model):
 
     # == ROUNDS ==
     round1 = models.TextField()
-    roundType1 = models.CharField(max_length=15, choices=RoundType.choices) # upload, online, offline
-    scoringType1 = models.CharField(max_length=10, choices=ScoringType.choices) # vote, mark
+    roundType1 = models.CharField(
+        max_length=15, choices=RoundType.choices
+    )  # upload, online, offline
+    scoringType1 = models.CharField(
+        max_length=10, choices=ScoringType.choices
+    )  # vote, mark
     time1 = DateRangeField()
 
     round2 = models.TextField(default="")
-    roundType2 = models.CharField(max_length=15, choices=RoundType.choices)
-    scoringType2 = models.CharField(max_length=10, choices=ScoringType.choices)
+    roundType2 = models.CharField(
+        max_length=15, choices=RoundType.choices, default=None
+    )
+    scoringType2 = models.CharField(
+        max_length=10, choices=ScoringType.choices, default=None
+    )
     time2 = DateRangeField(default=None)
 
     round3 = models.TextField(default="")
-    roundType3 = models.CharField(max_length=15, choices=RoundType.choices)
-    scoringType3 = models.CharField(max_length=10, choices=ScoringType.choices)
+    roundType3 = models.CharField(
+        max_length=15, choices=RoundType.choices, default=None
+    )
+    scoringType3 = models.CharField(
+        max_length=10, choices=ScoringType.choices, default=None
+    )
     time3 = DateRangeField(default=None)
 
     round4 = models.TextField(default="")
-    roundType4 = models.CharField(max_length=15, choices=RoundType.choices)
-    scoringType4 = models.CharField(max_length=10, choices=ScoringType.choices)
+    roundType4 = models.CharField(
+        max_length=15, choices=RoundType.choices, default=None
+    )
+    scoringType4 = models.CharField(
+        max_length=10, choices=ScoringType.choices, default=None
+    )
     time4 = DateRangeField(default=None)
 
     round5 = models.TextField(default="")
-    roundType5 = models.CharField(max_length=15, choices=RoundType.choices)
-    scoringType5 = models.CharField(max_length=10, choices=ScoringType.choices)
+    roundType5 = models.CharField(
+        max_length=15, choices=RoundType.choices, default=None
+    )
+    scoringType5 = models.CharField(
+        max_length=10, choices=ScoringType.choices, default=None
+    )
     time5 = DateRangeField(default=None)
 
     description = models.TextField(default="")

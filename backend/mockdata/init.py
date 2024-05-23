@@ -53,6 +53,7 @@ def gen_contest():
 def execute():
     try:
         gen_contest()
+        gen_idea()
     except Exception as e:
         print_error(f"{e}")
     client.close()

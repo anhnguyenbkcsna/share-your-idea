@@ -138,8 +138,12 @@ export default function MarkPage() {
                 name="comment"
               >
                 <TextArea placeholder="Nhận xét" autoSize={{
-                  minRows: 11,
-                }} />
+                  minRows: 11
+                }}
+                  style={{
+                    minWidth: 600,
+                  }}
+                />
               </Form.Item>
             </div>
             <Button type="primary" style={{ width: 200, height: 50, display: "flex", justifyContent: 'center', paddingTop: 15 }} htmlType="submit">

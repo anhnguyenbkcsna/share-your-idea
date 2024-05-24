@@ -75,6 +75,7 @@ const SubmitIdeaPage = () => {
     let listIdea = []
     data.forEach((idea) => {
       listIdea.push(idea.idea)
+      // Chưa làm nè
     })
     console.log(listIdea)
     return listIdea

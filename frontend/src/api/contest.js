@@ -87,3 +87,20 @@ export const postContestSubmissionMark = async (data, contestId) => {
     return null
   }
 }
+
+export const getContestSubmissionMark = async (contestId, ideaId) => {
+  try {
+    const res = await axios
+      .get(`${contestEndpoint}${contestId}/submissions/${ideaId}/mark/`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem(localStorageConstant.ACCESS_TOKEN)}`
+        }
+      })
+    return res
+  }
+  catch (err) {
+    console.log('Error', err)
+    return null
+  }
+}

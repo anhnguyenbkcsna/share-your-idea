@@ -143,3 +143,16 @@ export const sendIdeaToAIServer = async (ideaObj) => {
       return err
     })
 }
+
+export const getTopKIdeas = async (requirement) => {
+  return await axios
+    .post(`${ideaEndpoint}ideas/topk/`, requirement ,{
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem(localStorageConstant.ACCESS_TOKEN)}`,
+      }
+    })
+    .catch((err) => {
+      console.log(err)
+      return []
+    })
+}

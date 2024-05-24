@@ -1,5 +1,5 @@
 // export const deployedAPI = 'https://sri-6v0u.onrender.com'
-export const deployedAPI = 'http://192.168.1.51:8000'
+export const deployedAPI = 'http://18.141.194.119'
 
 export const ideaEndpoint = deployedAPI + '/ideas/'
 

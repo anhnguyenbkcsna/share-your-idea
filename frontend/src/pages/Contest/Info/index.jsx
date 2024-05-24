@@ -79,6 +79,7 @@ const ContestInfo = () => {
 
    useEffect(() => {
     contest && setSubmissions(contest.submission_list ? contest. submission_list.length : 0)
+    console.log('>> contest', contest)
    }, [contest])
 
   return contest ? (

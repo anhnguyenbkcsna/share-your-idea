@@ -50,6 +50,14 @@ const items = [
 ]
 
 const styleConfig = {
+  'match-idea': {
+    backgroundColor: '#ffde78',
+    textColor: 'darkgreen'
+  },
+  idea: {
+    backgroundColor: '#ffde78',
+    textColor: 'darkgreen'
+  },
   contest: {
     backgroundColor: '#f69d3c',
     textColor: 'darkblue'

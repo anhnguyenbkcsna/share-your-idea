@@ -65,10 +65,9 @@ class IdeaViewSet(viewsets.ViewSet):
     def match_idea(self, request):
         url = AI_SERVER_URL + "/topk"
         requirement = request.data
+        
         if requirement.get("_id") is None:
-            return CustomResponse(
-                message="Please add requirement id", status=400, error="Bad request"
-            )
+            requirement["_id"] = uuid.uuid4().hex
 
         try:
             cache_key = "idea_matching_" + requirement["_id"]

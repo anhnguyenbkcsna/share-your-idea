@@ -139,8 +139,12 @@ class SubmissionViewSet(viewsets.ViewSet):
 
         else:
             submission = self.collection.find_one(
-                {"_id": ObjectId(id), "submission_list._id": ObjectId(sub_id)}
+                {"_id": ObjectId(id), "submission_list.idea_id": sub_id}
             )
+            submission = submission.get("submission_list")
+            submission = next(
+				filter(lambda x: x.get("idea_id") == sub_id, submission), None
+			)
             return CustomResponse(
                 message="Get a submission", data=submission, status=200
             )

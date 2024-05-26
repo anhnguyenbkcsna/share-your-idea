@@ -25,8 +25,14 @@ const IdeaCard = (props) => {
     //   let url = URL.createObjectURL(file)
     //   setImageSrc(url)
     // }
-    // fetchImage()
-    idea.src ? setImageSrc(idea.src) : null
+	  // fetchImage()
+	  if (idea.src)
+	  {
+		  setImageSrc(idea.src)
+	  }
+	  else {
+		  setImageSrc(null)
+	  }
   }, [])
 
   return (

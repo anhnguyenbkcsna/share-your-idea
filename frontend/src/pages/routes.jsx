@@ -39,9 +39,10 @@ import SponsorList from './Sponsor/SponsorList'
 import SponsorProject from './Sponsor/SponsorProject'
 import SponsorEditor from './Sponsor/SponsorEditor'
 import EmailPage from './Email'
+import MeetPage from './Meet'
 
 export const getRouter = () => {
-  const { subDomain } = useDomain()
+//   const { subDomain } = useDomain()
 
   // let routes = []
   // if (subDomain === 'contest')
@@ -140,6 +141,9 @@ export const getRouter = () => {
       </Route>
       <Route path='faq' Component={PrivateLayout} >
         <Route index Component={Faq} />
+      </Route>
+      <Route path='sponsor/create-meet' Component={PublicLayout} >
+        <Route index Component={MeetPage} />
       </Route>
 
     </Route>

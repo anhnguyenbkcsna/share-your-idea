@@ -91,16 +91,12 @@ export const getRouter = () => {
         <Route path=':ideaId/edit' Component={CreateIdeaFormPage} />
         
       </Route>
-      {/* <Route path='faq' Component={PrivateLayout} >
+      <Route path='faq' Component={PrivateLayout} >
         <Route index Component={Faq} />
-<<<<<<< HEAD
       </Route>
       <Route path='sponsor/create-meet' Component={PublicLayout} >
         <Route index Component={MeetPage} />
       </Route>
-=======
-      </Route> */}
->>>>>>> origin
 
     </Route>
   )

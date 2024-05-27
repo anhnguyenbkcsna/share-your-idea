@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useNavigation, useParams } from 'react-router-dom'
 import { Button, Col, Divider, Row, Tag, Descriptions } from 'antd'
 import axios from 'axios'
 import classNames from 'classnames'
@@ -16,6 +16,8 @@ import {
 
 import NotFoundPage from '../../Error/E404'
 import CommentList from '../../../components/IdeaListComponent'
+import { getAllIdeas } from '../../../api/idea'
+import { localStorageConstant } from '../../../utils/global.constants'
 
 // const iconKey = {
 //   name: <UserOutlined />,
@@ -25,7 +27,8 @@ import CommentList from '../../../components/IdeaListComponent'
 // }
 
 const rmvQuote = (str) => {
-  return str && str.split('"').join('')
+  // return str && str.split('"').join('')
+  return str
 }
 
 const comments = [
@@ -47,6 +50,7 @@ const comments = [
 
 const IdeaDescriptionPage = () => {
   let params = useParams()
+  const navigate = useNavigate()
   const { ideaId } = params
   
   const [author, setAuthor] = useState({})
@@ -78,10 +82,8 @@ const IdeaDescriptionPage = () => {
 
   useEffect(() => {
     const fetchIdea = async () => {
-      let response = await axios
-        .get(`${deployedAPI}/ideas/`)
-        .then((res) => res.data)
-      setFetchIdeas(response.data)
+      const allIdeas = await getAllIdeas()
+      setFetchIdeas(allIdeas)
     }
     fetchIdea()
   }, [])
@@ -177,7 +179,13 @@ const IdeaDescriptionPage = () => {
                   {rmvQuote(idea.teamExperience)}
                 </h3>
 
-                <Button type='primary' className={styles.btn}>
+                <Button type='primary' className={styles.btn} onClick={() => 
+                  {
+                    localStorage.setItem('ideaId', idea.id)
+                    localStorage.setItem('email', localStorage.getItem(localStorageConstant.EMAIL))
+                    navigate('/email')
+                  }
+                }>
                   <MailOutlined />
                   Liên hệ
                 </Button>

@@ -6,6 +6,7 @@ import { useForm } from 'antd/es/form/Form'
 
 import axios from 'axios'
 import { ideaEndpoint } from '../../utils/api.constants'
+import { localStorageConstant } from '../../utils/global.constants'
 
 const SingleFormProgress = (props) => {
   const {first, last, name, children, next, prev, done, edit} = props
@@ -16,11 +17,14 @@ const SingleFormProgress = (props) => {
   // Fetch and set initial values for form
   useEffect(() => {
     const fetchIdea = async () => {
-      const allIdeas = await axios.get(ideaEndpoint)
-        .then((res) => {
-          console.log("Fetch: ", res)
-          return res.data.data
-        })
+      const allIdeas = await axios.get(ideaEndpoint, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem(localStorageConstant.ACCESS_TOKEN)}`
+        }
+      }).then((res) => {
+        console.log("Fetch: ", res)
+        return res.data.data
+      })
       setFetchIdeas(allIdeas)
     }
     fetchIdea()

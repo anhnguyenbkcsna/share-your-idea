@@ -13,7 +13,7 @@ export const isAuthenticated = async () => {
     .then((res) => {
       return {
         authenticated: true,
-        data: res.data.data
+        data: res.data
       }
     })
     .catch((err) => {

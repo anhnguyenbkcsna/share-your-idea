@@ -1,41 +1,47 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button, Flex, Table } from 'antd'
 import { HrHeading } from '../Components/hrheading'
 import { OrangeBasicButton } from '../Components/button'
+import { contestSubmission, getContestById } from '../../../api/contest'
+import { getAllIdeas } from '../../../api/idea'
+import { getAllUsers, getUserById } from '../../../api/user'
 const columns = [
   {
     title: 'Tên bài dự thi',
     dataIndex: 'name',
   },
   {
-    title: 'Tác giả',
-    dataIndex: 'author',
-  },
-  {
-    title: 'Bình chọn',
-    dataIndex: 'vote',
-  },
-  {
     title: 'Điểm trung bình',
     dataIndex: 'averageMark',
-  }
+    sorter: (a, b) => a.averageMark - b.averageMark,
+  },
+  {
+    title: 'Action',
+    key: 'action',
+    render: (_, record) => (
+      <div size="middle">
+        <a 
+          // onClick={() => {console.log(record._id.$oid)}}
+          href={record && `ideas/${record._id.$oid}`}
+        >
+          Chấm điểm
+        </a>
+      </div>
+    ),
+  },
 ]
-const data = []
-for (let i = 0; i < 24; i++) {
-  data.push({
-    key: i,
-    name: `Bài dự thi số ${i}`,
-    author: `Tác giả ${i}`,
-    vote: 32,
-    averageMark: 4.5,
-  })
-}
+
 const SubmitIdeaPage = () => {
   const navigate = useNavigate()
+  const [contestId, setContestId] = useState(window.location.pathname.split('/')[2])
+  const [userId, setUserId] = useState([])
+  const [ideaList, setIdeaList] = useState([])
+  const [submissions, setSubmissions] = useState([])
   const [selectedRowKeys, setSelectedRowKeys] = useState([])
   const [loading, setLoading] = useState(false)
-  
+  const [data, setData] = useState([])
+
   const sendResultMail = () => {
     let emailList = []
     selectedRowKeys.forEach((key) => {
@@ -46,7 +52,6 @@ const SubmitIdeaPage = () => {
     })
     localStorage.setItem('email', emailList)
     navigate('/email')
-    
   }
 
   const onSelectChange = (newSelectedRowKeys) => {
@@ -58,6 +63,24 @@ const SubmitIdeaPage = () => {
     onChange: onSelectChange,
   }
   const hasSelected = selectedRowKeys.length > 0
+
+  useEffect(() => {
+    contestSubmission(contestId).then((res) => {
+      console.log(res)
+      setData(res)
+    })   
+  }, [])
+
+  const getIdeas = () => {
+    let listIdea = []
+    data.forEach((idea) => {
+      listIdea.push(idea.idea)
+      // Chưa làm nè
+    })
+    console.log(listIdea)
+    return listIdea
+  }
+
   return (
     <div style={{ maxWidth: '80%', margin: '0 auto' }}>
       <HrHeading title="Danh sách bài dự thi" />
@@ -66,7 +89,7 @@ const SubmitIdeaPage = () => {
           {hasSelected ? `Selected ${selectedRowKeys.length} items` : ''}
         </span>
       </div>
-      <Table rowSelection={rowSelection} columns={columns} dataSource={data} />
+      <Table rowSelection={rowSelection} columns={columns} dataSource={getIdeas()} />
       <OrangeBasicButton onClick={sendResultMail} disabled={!hasSelected} loading={loading} text='Gửi kết quả'/>
     </div>
   )

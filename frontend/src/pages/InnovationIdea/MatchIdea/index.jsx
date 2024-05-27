@@ -75,7 +75,26 @@ const MatchIdea = () => {
   console.log('>>>> fetchIdea', fetchIdeas)
 
   return (
-    <CusCard>
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: '#fff',
+      padding: '20px',
+      borderRadius: '10px',
+      boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+      maxWidth: '80%',
+      margin: '0 auto',
+    }}>
+      <h1 style={{
+        color: '#ffba66'
+      }}>
+        Danh sách ý tưởng phù hợp với yêu cầu
+      </h1>
+      <h3>
+        Yêu cầu của bạn: Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+      </h3>
       <OwlCarousel
         className='owl-theme'
         loop margin={15} lazyLoad dots smartSpeed={450} style={{zIndex: 0}}
@@ -88,7 +107,7 @@ const MatchIdea = () => {
           />
         ))}
       </OwlCarousel>
-    </CusCard>
+    </div>
   )
 }
 export default MatchIdea

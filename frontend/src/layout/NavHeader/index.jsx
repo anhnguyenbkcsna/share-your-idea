@@ -81,54 +81,56 @@ const companyMenu = [
 
 const NavHeader = (props) => {
   const navigate = useNavigate()
-  const { role } = props
+  const { role, colorBgContainer: colorByRoute } = props
+  console.log(colorByRoute)
   const {user, logout} = useAuth()
   const {
     token: { colorBgContainer },
   } = theme.useToken()
 
   return (
-    <Header
-      style={{
-        background: colorBgContainer,
-        position: 'sticky',
-        top: 0,
-        zIndex: 1,
-        padding: '0 75px',
-        height: 'auto',
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        lineHeight: '',
-        boxShadow: '5px 3px 10px gray'
-      }}>
-      <div className={styles['header-logo']}>
-        <div>
-          <img src={logosvg} alt="logo"/>
+    <div>
+      <Header
+        style={{
+          background: colorBgContainer,
+          top: 0,
+          zIndex: 1,
+          padding: '0 75px',
+          height: 'auto',
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          lineHeight: '',
+          // boxShadow: '5px 3px 10px gray'
+        }}>
+        <div className={styles['header-logo']}>
+          <div>
+            <img src={logosvg} alt="logo" style={{height: '70%', width: 'fit-content'}}/>
+          </div>
         </div>
-      </div>
-      {/* <Menu
-        style={{width: 'auto'}}
-        mode="horizontal"
-        disabledOverflow={true}
-        defaultSelectedKeys={['2']}
-        items={role === 'innovator' ? innovatorMenu : role === 'company' ? companyMenu : guestMenu}
-        className={'w-90'}
-      /> */}
-      {!user ?
-        <div>
-          <Link to={'login'}>
-            <Button type='text'>Đăng nhập</Button>
-          </Link>
-          <Link to={'profile'}>
-            <Button type='primary'>Đăng ký</Button>
-          </Link>
-        </div> :
-        <div>
-          <span>{`Xin chào ${user.name}!`}</span>
-          <Button onClick={() => logout()} type='primary'>Thoát</Button>
-        </div>}
-    </Header>
+        {!user ?
+          <div>
+            <Link to={'/login'}>
+              <Button type='text'>Đăng nhập</Button>
+            </Link>
+            <Link to={'/profile'}>
+              <Button type='primary'>Đăng ký</Button>
+            </Link>
+          </div> :
+          <div style={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'end',
+            minWidth: '300px'
+          }}>
+            <span>{user.name ?? 'Bạn chưa đăng nhập'}</span>
+            <Button onClick={() => logout()} type='primary' style={{
+              maxWidth: '100px',
+            }}>Thoát</Button>
+          </div>}
+      </Header>
+      <div style={{backgroundColor: colorByRoute? colorByRoute: '#f69d3c', height: '30px'}}></div>
+    </div>
   )
 }
 

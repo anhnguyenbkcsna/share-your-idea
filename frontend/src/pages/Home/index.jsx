@@ -60,7 +60,7 @@ const HomePage = () => {
           </div>
         </section>
       </div>
-      <Button onClick={() => sendEmail() } >Send Email</Button>
+      {/* <Button onClick={() => sendEmail() } >Send Email</Button> */}
     </>
   )
 }

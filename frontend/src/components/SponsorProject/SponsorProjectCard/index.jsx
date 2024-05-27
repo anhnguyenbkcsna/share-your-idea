@@ -20,7 +20,7 @@ const SponsorProjectCard = (props) => {
       <div className={styles.header}>
         <img
           className={styles.image}
-          src={props.image ? props.image : getRandomPlaceholder(props.index)}
+          src={props.img ? props.img : getRandomPlaceholder(props.index)}
           alt='Project Image'
         />
         <h2>{props.title}</h2>

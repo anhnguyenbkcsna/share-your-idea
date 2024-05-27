@@ -4,8 +4,8 @@
   font-size: 1.6rem;
   height: 540px;
   border-radius: 25px;
-  box-shadow: 4px 4px 10px 0 rgba($color: #fff, $alpha: 0.7);
-  background-color: #333;
+  box-shadow: 4px 4px 10px 0 rgba($color: #333, $alpha: 0.7);
+  background-color: #eee;
   padding: 20px;
   position: relative;
   overflow-y: hidden;
@@ -20,14 +20,25 @@
   padding: 18px 0;
   border-radius: 25px;
   background-color: $contest-primary-color;
-  box-shadow: 2px 2px 6px 0 rgba($color: #fff, $alpha: 0.7);
+  box-shadow: 2px 2px 6px 0 rgba($color: #333, $alpha: 0.7);
+}
+.closeContainer {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 100%;
+  height: 140;
+  padding: 18px 0;
+  border-radius: 25px;
+  // background-color: $contest-primary-color;
+  box-shadow: 2px 2px 6px 0 rgba($color: #333, $alpha: 0.7);
 }
 .headerTitle {
   font-family: $contest-heading-font-family;
   font-size: 3.2rem;
   font-weight: bold;
   text-transform: uppercase;
-  color: white;
+  color: black;
   // margin-bottom: 6px;
 }
 .headerDate {
@@ -46,11 +57,11 @@
   -webkit-line-clamp: 2;
   overflow: hidden;
   text-overflow: ellipsis;
+
 }
 
 .line {
   display: -webkit-box;
-  font-weight: bold;
   padding: 6px 0;
   line-clamp: 2;
   -webkit-line-clamp: 2;
@@ -65,4 +76,9 @@
   width: 100%;
   bottom: 20px;
   left: 0px;
+}
+.highlightText {
+  color: $contest-primary-color;
+  font-size: 2rem;
+  font-weight: bold;
 }

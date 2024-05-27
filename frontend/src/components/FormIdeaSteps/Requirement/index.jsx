@@ -10,7 +10,6 @@ const { TextArea } = Input
 
 const RequirementForm = (props) => {
   const [form] = useForm()
-  const [problem, setProblem] = useState('')
 
   return (
     <>
@@ -36,49 +35,44 @@ const RequirementForm = (props) => {
       </Form.Item>
 
       <Form.Item
-        name="description"
+        name="problem"
         label="Vần đề cụ thể mà doanh nghiệp quan tâm"
       >
         <TextArea
-          rows={3}
-          showCount maxLength={100}
+          autoSize={{ minRows: 3, maxRows: 5 }}
+          showCount maxLength={500}
           allowClear
           placeholder="Những tiêu chí đánh giá một đề tài là thành công..."
-          onChange={(e) => {setProblem(e.target.value)}}
         />
       </Form.Item>
 
-      {problem &&
       <Form.Item
-        name="success"
+        name="acceptance_criteria"
         required
         label="Những tiêu chí ăn điểm của ý tưởng"
       >
         <TextArea
-          rows={3}
-          showCount maxLength={100}
+          autoSize={{ minRows: 3, maxRows: 5 }}
+          showCount maxLength={500}
           allowClear
           placeholder="Giải pháp dựa trên AI, hệ thống Web/App,..."
           // onChange={()}
         />
       </Form.Item>
-      }
 
-      {problem &&
       <Form.Item
-        name="constraint"
+        name="constraints"
         required
-        label="Những ràng buộc (Not interested approach)"
+        label="Khoanh vùng giới hạn (Not interested approach)"
       >
         <TextArea
-          rows={3}
-          showCount maxLength={100}
+          autoSize={{ minRows: 3, maxRows: 5 }}
+          showCount maxLength={500}
           allowClear
           placeholder="Giải pháp không sử dụng cho ngôn ngữ Tiếng Anh..."
           // onChange={()}
         />
       </Form.Item>
-      }
 
     </>
   )

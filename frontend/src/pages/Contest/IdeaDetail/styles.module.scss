@@ -70,7 +70,7 @@
 		flex: 3;
 		display: grid;
 		gap: 20px;
-		grid-template-columns: 22% 8% 70%;
+		grid-template-columns: 30% 40% 20% 10%;
 	}
 
 	.evaluation {
@@ -85,6 +85,8 @@
 	}
 
 	.tblItem {
+		font-size: 2rem;
+		margin-bottom: 12px;
 	}
 
 	.point {
@@ -232,4 +234,9 @@
 		cursor: pointer;
 		padding: 10px 20px;
 	}
+}
+.mark {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 20px;
 }

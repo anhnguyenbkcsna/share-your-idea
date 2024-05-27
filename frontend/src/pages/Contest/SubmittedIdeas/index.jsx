@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from './styles.module.scss'
 import { useNavigate } from 'react-router-dom'
 import { OrangeBasicButton } from '../Components/button'
@@ -6,262 +6,17 @@ import ContestStatusLabel from '../Components/label'
 import ContestIdeaCard from './ContestIdeaCard'
 import { Carousel } from 'antd'
 import { PrevArrow, NextArrow } from './Arrow'
+import { getAllIdeas } from '../../../api/idea'
 // import contestBackground from '../../../assets/contest-bg.jpg'
 
-export default function SubmittedIdeasPage() {
+export default function SubmittedIdeasPage({ submissionList }) {
   const navigate = useNavigate()
   const NUM_OF_IDEAS_PER_CAROUSEL_ITEM = 8
-  const [status, setStatus] = React.useState('opening')
-  const [organizer, setOrganizer] = React.useState('GDSC HCMC')
-  const [ideas, setIdeas] = React.useState([
-    {
-      ideaImgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      title: 'babel-preset-react-app is part of the create-react-app project, which is not maintianed anymore',
-      field: 'babel-preset-react-app is part of the create-react-app project, of the create-react-app project, ',
-      innovatorAvtUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      innovatorName: 'Le Ngoc Minh Thu'
-    },
-    {
-      ideaImgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      title: 'abc',
-      field: 'abc',
-      innovatorAvtUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      innovatorName: 'Le Ngoc Minh Thu'
-    },
-    {
-      ideaImgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      title: 'abc',
-      field: 'abc',
-      innovatorAvtUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      innovatorName: 'Le Ngoc Minh Thu'
-    },
-    {
-      ideaImgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      title: 'abc',
-      field: 'abc',
-      innovatorAvtUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      innovatorName: 'Le Ngoc Minh Thu'
-    },
-    {
-      ideaImgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      title: 'abc',
-      field: 'abc',
-      innovatorAvtUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      innovatorName: 'Le Ngoc Minh Thu'
-    },
-    {
-      ideaImgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      title: 'abc',
-      field: 'abc',
-      innovatorAvtUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      innovatorName: 'Le Ngoc Minh Thu'
-    },
-    {
-      ideaImgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      title: 'abc',
-      field: 'abc',
-      innovatorAvtUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      innovatorName: 'Le Ngoc Minh Thu'
-    },
-    {
-      ideaImgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      title: 'abc',
-      field: 'abc',
-      innovatorAvtUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      innovatorName: 'Le Ngoc Minh Thuasdfasdf'
-    },
-    {
-      ideaImgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      title: 'abc',
-      field: 'abc',
-      innovatorAvtUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      innovatorName: 'Le Ngoc Minh Thu'
-    },
-    {
-      ideaImgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      title: 'abc',
-      field: 'abc',
-      innovatorAvtUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      innovatorName: 'Le Ngoc Minh Thu'
-    },
-    {
-      ideaImgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      title: 'abc',
-      field: 'abc',
-      innovatorAvtUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      innovatorName: 'Le Ngoc Minh Thu'
-    },
-    {
-      ideaImgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      title: 'abc',
-      field: 'abc',
-      innovatorAvtUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      innovatorName: 'Le Ngoc Minh Thu'
-    },
-    {
-      ideaImgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      title: 'abc',
-      field: 'abc',
-      innovatorAvtUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      innovatorName: 'Le Ngoc Minh Thu'
-    },
-    {
-      ideaImgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      title: 'abc',
-      field: 'abc',
-      innovatorAvtUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      innovatorName: 'Le Ngoc Minh Thu'
-    },
-    {
-      ideaImgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      title: 'abc',
-      field: 'abc',
-      innovatorAvtUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      innovatorName: 'Le Ngoc Minh Thu'
-    },
-    {
-      ideaImgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      title: 'abc',
-      field: 'abc',
-      innovatorAvtUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      innovatorName: 'Le Ngoc Minh Thu'
-    },
-    {
-      ideaImgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      title: 'abc',
-      field: 'abc',
-      innovatorAvtUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      innovatorName: 'Le Ngoc Minh Thu'
-    },
-    {
-      ideaImgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      title: 'abc',
-      field: 'abc',
-      innovatorAvtUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      innovatorName: 'Le Ngoc Minh Thu'
-    },
-    {
-      ideaImgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      title: 'abc',
-      field: 'abc',
-      innovatorAvtUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      innovatorName: 'Le Ngoc Minh Thu'
-    },
-    {
-      ideaImgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      title: 'abc',
-      field: 'abc',
-      innovatorAvtUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      innovatorName: 'Le Ngoc Minh Thu'
-    },
-    {
-      ideaImgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      title: 'abc',
-      field: 'abc',
-      innovatorAvtUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      innovatorName: 'Le Ngoc Minh Thu'
-    },
-    {
-      ideaImgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      title: 'abc',
-      field: 'abc',
-      innovatorAvtUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      innovatorName: 'Le Ngoc Minh Thu'
-    },
-    {
-      ideaImgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      title: 'abc',
-      field: 'abc',
-      innovatorAvtUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      innovatorName: 'Le Ngoc Minh Thu'
-    },
-    {
-      ideaImgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      title: 'abc',
-      field: 'abc',
-      innovatorAvtUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      innovatorName: 'Le Ngoc Minh Thu'
-    },
-    {
-      ideaImgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      title: 'abc',
-      field: 'abc',
-      innovatorAvtUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      innovatorName: 'Le Ngoc Minh Thu'
-    },
-    {
-      ideaImgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      title: 'abc',
-      field: 'abc',
-      innovatorAvtUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      innovatorName: 'Le Ngoc Minh Thu'
-    },
-    {
-      ideaImgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      title: 'abc',
-      field: 'abc',
-      innovatorAvtUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      innovatorName: 'Le Ngoc Minh Thu'
-    },
-    {
-      ideaImgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      title: 'abc',
-      field: 'abc',
-      innovatorAvtUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      innovatorName: 'Le Ngoc Minh Thu'
-    },
-    {
-      ideaImgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      title: 'abc',
-      field: 'abc',
-      innovatorAvtUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      innovatorName: 'Le Ngoc Minh Thu'
-    },
-    {
-      ideaImgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      title: 'abc',
-      field: 'abc',
-      innovatorAvtUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      innovatorName: 'Le Ngoc Minh Thu'
-    },
-    {
-      ideaImgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      title: 'abc',
-      field: 'abc',
-      innovatorAvtUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      innovatorName: 'Le Ngoc Minh Thu'
-    },
-    {
-      ideaImgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      title: 'abc',
-      field: 'abc',
-      innovatorAvtUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      innovatorName: 'Le Ngoc Minh Thu'
-    },
-    {
-      ideaImgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      title: 'abc',
-      field: 'abc',
-      innovatorAvtUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      innovatorName: 'Le Ngoc Minh Thu'
-    },
-    {
-      ideaImgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      title: 'abc',
-      field: 'abc',
-      innovatorAvtUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      innovatorName: 'Le Ngoc Minh Thu'
-    },
-    {
-      ideaImgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      title: 'abc',
-      field: 'abc',
-      innovatorAvtUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-      innovatorName: 'Le Ngoc Minh Thu'
-    },
-  ])
-  const [ideasToShow, setIdeasToShow] = React.useState([])
-
+  const [status, setStatus] = useState('opening')
+  const [organizer, setOrganizer] = useState('GDSC HCMC')
+  const [ideas, setIdeas] = useState([])
+  const [submitIdea, setSubmitIdea] = useState([])
+  const [ ideasToShow, setIdeasToShow] = useState([])
 
   const getCarouselItems = (ideaSubList, carouselItemIdx) => {
     if (ideaSubList.length < NUM_OF_IDEAS_PER_CAROUSEL_ITEM)
@@ -286,13 +41,20 @@ export default function SubmittedIdeasPage() {
   }
 
   useEffect(() => {
+    getAllIdeas().then(res => {
+      setIdeas(res)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }, [])
+
+  useEffect(() => {
     const tmp = []
     for (let i = 0; i < ideas.length; i++)
     {
-      if (i === 0)
-      {
+      if (i === 0) 
         continue
-      }
       else if (i % NUM_OF_IDEAS_PER_CAROUSEL_ITEM === 0)
       {
         tmp.push(getCarouselItems(ideas.slice(i - NUM_OF_IDEAS_PER_CAROUSEL_ITEM, i), i))
@@ -330,7 +92,7 @@ export default function SubmittedIdeasPage() {
         </div>
       </div> */}
 
-      <Carousel arrows prevArrow={<PrevArrow />} nextArrow={<NextArrow />}>
+      <Carousel arrows>
         {ideasToShow}
       </Carousel>
     </div>

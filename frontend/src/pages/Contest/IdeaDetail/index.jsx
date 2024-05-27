@@ -11,12 +11,16 @@ import { Button, Input } from 'antd'
 import { localStorageConstant } from '../../../utils/global.constants'
 import { DiffFilled, DislikeFilled, DislikeOutlined, LikeFilled, LikeOutlined } from '@ant-design/icons'
 import TextArea from 'antd/es/input/TextArea'
+import { contestSubmission, getContestSubmissionMark } from '../../../api/contest'
 
 export default function ContestIdeaDetailPage() {
   const navigate = useNavigate()
-  const [vote, setVote] = useState('none')
-  const [like, setLike] = useState(5331)
-  const [dislike, setDislike] = useState(212)
+  // const [vote, setVote] = useState('none')
+  // const [like, setLike] = useState(5331)
+  // const [dislike, setDislike] = useState(212)
+  const [contestId, setContestId] = useState(window.location.pathname.split('/')[2])
+  const [ideaId, setIdeaId] = useState(window.location.pathname.split('/')[4])
+  const [grades, setGrades] = useState([0,0,0,0,0])
   const organizer = 'GDSC HCMC'
   const innovatorName = 'Nguyễn'
   const innovatorAvtUrl = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s'
@@ -64,18 +68,18 @@ export default function ContestIdeaDetailPage() {
     }
   }
 
-  const handleVote = (e) => {
-    let user = localStorage.getItem(localStorageConstant.EMAIL)
-    if (e === 'like') {
-      setVote('like')
-    }
-    else if (e === 'dislike'){
-      setVote('dislike')
-    }
-  }
-
   useEffect(() => {
     window.scrollTo(0, 0)
+    getContestSubmissionMark().then(res => {
+      console.log(contestId, ideaId)
+      getContestSubmissionMark(contestId, ideaId).then(res => {
+        console.log("getContestSubmissionMark", res)
+        setGrades(res.data.data.grades)
+      }
+      ).catch(err => {
+        console.log(err)
+      })
+    })
   }, [])
 
   return (
@@ -150,26 +154,32 @@ export default function ContestIdeaDetailPage() {
         <hr
           style={{ color: '#FBFBFB', marginBottom: 20 }}
         />
+        <h1 style={{ color: '#FF7510' }}>
+          Đánh giá
+        </h1>
         <div className={styles.evaluation}>
           <div className={styles.evaluationTable}>
-            <div className={styles.tblItem}>Tính cấp thiết</div>
-            <div className={styles.tblItem}>8</div>
-            <div className={styles.tblItem}>Tính cấp thiếtTính cấp thiếtTính cấp thiếtTính cấp thiếtTính cấp thiếtTính cấp thiếtTính cấp thiết</div>
-            <div className={styles.tblItem}>Tính thuyết phục</div>
-            <div className={styles.tblItem}>8.4</div>
-            <div className={styles.tblItem}>Tính thuyết phục</div>
-            <div className={styles.tblItem}>Tính khả thi</div>
-            <div className={styles.tblItem}>8.2</div>
-            <div className={styles.tblItem}>Tính khả thi</div>
-            <div className={styles.tblItem}>Thuyết trình</div>
-            <div className={styles.tblItem}>8.9</div>
-            <div className={styles.tblItem}>Thuyết trình</div>
-            <div className={styles.tblItem}>Kiến thức nghiên cứu</div>
-            <div className={styles.tblItem}>7</div>
-            <div className={styles.tblItem}>Kiến thức nghiên cứu</div>
+            <div>
+              <RankingBox />
+            </div>
+            <div></div>
+            <div>
+              <div className={styles.tblItem}>Độ sáng tạo</div>
+              <div className={styles.tblItem}>Khả thi</div>
+              <div className={styles.tblItem}>Độ hiệu quả</div>
+              <div className={styles.tblItem}>Tính tiện ích</div>
+              <div className={styles.tblItem}>Tính ứng dụng</div>
+            </div>
+            <div>
+              <div className={styles.tblItem}>{grades[0]}</div>
+              <div className={styles.tblItem}>{grades[1]}</div>
+              <div className={styles.tblItem}>{grades[2]}</div>
+              <div className={styles.tblItem}>{grades[3]}</div>
+              <div className={styles.tblItem}>{grades[4]}</div>
+            </div>
           </div>
           <h2 className={styles.point}>
-            8.5
+            {grades.reduce((a, b) => a + b, 0) / 5}
           </h2>
         </div>
       </div>
@@ -188,11 +198,10 @@ export default function ContestIdeaDetailPage() {
             <ContestCommentInput />
           </div>
           <div className={styles.comments}>
-            <ContestCommentList />
+            {/* <ContestCommentList /> */}
           </div>
         </div>
-        <div className={styles.rankingWrapper}>
-          <RankingBox />
+        {/* <div className={styles.rankingWrapper}>
           <div className={styles.votingWrapper}>
             <div className={styles.votingTitle}>
               Đánh giá bài dự thi
@@ -220,7 +229,7 @@ export default function ContestIdeaDetailPage() {
               Gửi bình chọn
             </Button>
           </div>
-        </div>
+        </div> */}
       </div>
     </div >
   )

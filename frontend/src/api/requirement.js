@@ -12,9 +12,10 @@ export const createRequirement = async (obj) => {
   }
 
   return await axios
-    .post(`${deployedAPI}/company`, formData, {
+    .post(`${deployedAPI}/requirements/`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
+        'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
       },
     })
     .then((res) => {

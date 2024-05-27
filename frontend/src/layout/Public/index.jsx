@@ -1,7 +1,7 @@
 import { Content, Header } from 'antd/es/layout/layout'
 import React, { useState } from 'react'
 import Footer from '../Footer'
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, useLocation } from 'react-router-dom'
 import NavHeader from '../NavHeader'
 import {
   MenuFoldOutlined,
@@ -12,6 +12,7 @@ import {
   MailOutlined
 } from '@ant-design/icons'
 import { Button, Layout, Menu, theme } from 'antd'
+import { useEffect } from 'react'
 const { Sider } = Layout
 
 function getItem(label, key, icon, children) {
@@ -26,19 +27,62 @@ const items = [
   getItem('Ý tưởng sáng tạo', 'innovation', <BulbOutlined />, [
     getItem(<Link to='/innovator/idea'>Tạo mới ý tưởng</Link>, 'create'),
     getItem(<Link to='/innovator'>Ý tưởng của tôi</Link>, 'ideaList'),
-    getItem(<Link to='/match-idea'>Kết nối ý tưởng</Link>, 'ideaDetail'),
+    getItem(<Link to='/company'>Tạo yêu cầu</Link>, 'ideaDetail'),
+    getItem(<Link to='/company/requirement'>Yêu cầu của tôi</Link>, 'requirementList'),
+    getItem(<Link to='/match-idea'>Kết nối ý tưởng</Link>, 'ideaMatch'),
   ]),
   getItem('Triển khai cuộc thi', 'contest', <ProjectOutlined />, [
-    getItem(<Link to='/contest'>Các cuộc thi </Link>, 'contest'), 
+    getItem(<Link to='/contest'>Các cuộc thi</Link>, 'contest'), 
     getItem(<Link to='/contest/new'>Tạo cuộc thi</Link>, 'mySubmission'),
-    getItem(<Link to='/:contestId'>Danh sách dự thi</Link>, 'submissionList'),
+    getItem(<Link to='/contest/:contestId'>Thông tin cuộc thi</Link>, 'submissionList'),
+    getItem(<Link to='/contest/submit'>Bài dự thi</Link>, 'submission'),
+    getItem(<Link to='/contest/ideas/:id'>Chi tiết bài dự thi</Link>, 'submissionDescription'),
+    getItem(<Link to='/contest/ideas/:id/mark'>Chấm điểm</Link>, 'submissionMark'),
+    
   ]),
   getItem('Kêu gọi tài trợ', 'sponsor', <DollarOutlined />, [
-    getItem(<Link to='/sponsor/projects'>Tạo mới kêu gọi</Link>, 'createSponsor'),
-    getItem(<Link to='/sponsor/projects'>Dự án kêu gọi của tôi</Link>, 'sponsorDetail'),
+    getItem(<Link to='/sponsor'>Kêu gọi tài trợ</Link>, 'sponsor'),
+    getItem(<Link to='/sponsor/projects'>Các dự án kêu gọi</Link>, 'createSponsor'),
+    getItem(<Link to='/sponsor/projects/:id'>Chi tiết dự án</Link>, 'sponsorDescription'),
+    getItem(<Link to='/sponsor/projects/:id/edit'>Chỉnh sửa dự án tài trợ</Link>, 'sponsorDetail'),
   ]), 
   getItem(<Link to='/email'>Liên hệ</Link>, 'email', <MailOutlined />),
 ]
+
+const styleConfig = {
+  'match-idea': {
+    backgroundColor: '#ffde78',
+    textColor: 'darkgreen'
+  },
+  idea: {
+    backgroundColor: '#ffde78',
+    textColor: 'darkgreen'
+  },
+  contest: {
+    backgroundColor: '#f69d3c',
+    textColor: 'darkblue'
+  },
+  innovator: {
+    backgroundColor: '#ffde78',
+    textColor: 'darkgreen'
+  },
+  company: {
+    backgroundColor: '#ffe2a8',
+    textColor: 'darkgreen'
+  },
+  sponsor: {
+    backgroundColor: 'lightcoral',
+    textColor: 'darkred'
+  },
+  email: {
+    backgroundColor: '#ffa3d8',
+    textColor: 'darkred'
+  },
+  default: {
+    backgroundColor: 'white',
+    textColor: 'black'
+  }
+}
 
 const PublicLayout = (props) => {
   // const {user, logout} = useAuth()
@@ -46,6 +90,14 @@ const PublicLayout = (props) => {
   const {
     token: { colorBgContainer },
   } = theme.useToken()
+  const currentPath = location.pathname.split('/')[1] ? location.pathname.split('/')[1] : 'default'
+  const [colorStyle, setColorStyle] = useState(styleConfig[currentPath])
+  // const currentStyle = styleConfig[currentPath] || styleConfig.default
+
+  useEffect(() => {
+    const newStyle = styleConfig[currentPath] || styleConfig.default
+    setColorStyle(newStyle)
+  }, [currentPath])
 
   return (
     <Layout>
@@ -54,8 +106,9 @@ const PublicLayout = (props) => {
         collapsible
         collapsed={collapsed}
         style={{
-          background: colorBgContainer,
+          // background: colorStyle,
           zIndex: 100,
+          boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)'
         }}
       >
         <div
@@ -77,25 +130,26 @@ const PublicLayout = (props) => {
               fontSize: '16px',
               margin: 0,
               width: '100%',
-              background: colorBgContainer,
+              // background: colorStyle,
             }}
           />
           <Menu mode="inline" items={items} />
         </div>
       </Sider>
       <Layout>
-        <NavHeader />
+        <NavHeader colorBgContainer={colorStyle? colorStyle.backgroundColor: ''} />
         <Content
           style={{
             margin: '24px 16px',
             padding: 24,
             minHeight: 280,
-            background: colorBgContainer,
+            background: '',
+            color: 'black',
           }}
         >
           <Outlet />
         </Content>
-        <Footer />
+        <Footer colorBgContainer={colorStyle.backgroundColor}/>
       </Layout>
     </Layout>
   )

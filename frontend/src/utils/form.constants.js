@@ -6,81 +6,81 @@ export { deployedAPI }
 
 export const gender = [
   {
-    label: 'Male',
+    label: 'Nam',
     value: 'Male',
   },
   {
-    label: 'Female',
+    label: 'Nữ',
     value: 'Female',
   },
   {
-    label: 'Others',
+    label: 'Khác',
     value: 'Others',
   },
   {
-    label: 'Global',
+    label: 'Toàn cầu',
     value: 'Global',
   },
 ]
 
 export const residential = [
   {
-    label: 'Vietnam',
+    label: 'Việt Nam',
     value: 'Vietnam',
   },
   {
-    label: 'Asia',
+    label: 'Châu Á',
     value: 'Asia',
   },
   {
-    label: 'Europe',
+    label: 'Châu Âu',
     value: 'Europe',
   },
   {
-    label: 'Africa',
+    label: 'Châu Âu',
     value: 'Africa',
   },
   {
-    label: 'Australia',
+    label: 'Châu Úc',
     value: 'Australia',
   },
   {
-    label: 'Americas',
+    label: 'Châu Mỹ',
     value: 'Americas',
   },
   {
-    label: 'Metropolis', //big city
+    label: 'Đô thị', //big city
     value: 'Metropolis',
   },
   {
-    label: 'Downtown',
+    label: 'Ngoại ô',
     value: 'Downtown',
   },
   {
-    label: 'Countryside',
+    label: 'Nông thôn',
     value: 'Countryside',
   },
   {
-    label: 'Minority Area',
+    label: 'Khu vực hẻo lánh',
     value: 'Minority Area',
   },
 ]
 
 export const domains = [
   {
-    label: 'Science',
+    label: 'Khoa học',
     value: 'Science',
   },
   {
-    label: 'Healthcare',
+    label: 'Sức khoẻ',
     value: 'Healthcare',
   },
   {
-    label: 'Beauty',
+    label: 'Sắc đẹp',
     value: 'Beauty',
   },
   {
-    label: 'Business',
+    label: 'Kinh doanh',
     value: 'Business',
   },
   {
@@ -88,44 +88,32 @@ export const domains = [
     value: 'Marketing',
   },
   {
-    label: 'Eco-Bio',
+    label: 'Công nghệ',
     value: 'Eco-Bio',
   },
 ]
 
 export const userFormStepItem = [
   {
-    title: 'Idea Overview',
+    title: 'Khái quát ý tưởng',
     // icon: <UserOutlined />,
   },
   {
-    title: 'Customer Segments',
+    title: 'Đối tượng khách hàng',
     // icon: <SolutionOutlined />,
   },
   {
-    title: 'Value Propositions',
+    title: 'Giá trị đem lại',
     // icon: <LoadingOutlined />,
   },
   {
-    title: 'Done',
+    title: 'Hoàn tất',
     // icon: <SmileOutlined />,
   },
 ]
 export const userSponsorFormStepItem = [
   {
-    title: 'Idea Overview',
-    // icon: <UserOutlined />,
-  },
-  {
-    title: 'Customer Segments',
-    // icon: <SolutionOutlined />,
-  },
-  {
-    title: 'Value Propositions',
-    // icon: <LoadingOutlined />,
-  },
-  {
-    title: 'Sponsor Package',
+    title: 'Gói tài trợ',
     // icon: <SmileOutlined />,
   },
 ]

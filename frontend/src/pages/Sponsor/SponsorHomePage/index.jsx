@@ -1,13 +1,54 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import styles from "./styles.module.scss"
-import { Button } from "antd"
-import { Link } from "react-router-dom"
+import { Button, Modal } from "antd"
+import { Link, useNavigate } from "react-router-dom"
+import MyIdeaList from "../../Contest/Info/myIdeaList"
+import { getAllIdeas } from "../../../api/idea"
 
 const SponsorHomePage = () => {
-  const onSearch = (value, _e, info) => console.log(info?.source, value)
+  const navigate = useNavigate()
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [fetchIdeas, setFetchIdeas] = useState([])
+  const [yourSubmit, setYourSubmit] = useState()
+  
+  const handleCancel = () => {
+    setIsModalOpen(false)
+  }
+
+  const handleOk = () => {
+    setIsModalOpen(false)
+    navigate(`/sponsor/projects/${yourSubmit}/edit`)
+  }
+
+  useEffect(() => {
+    getAllIdeas().then((res) => {
+      setFetchIdeas(res)
+    })
+  }, [])
 
   return (
     <div className={styles.container}>
+      <Modal 
+        title="Nộp ý tưởng" 
+        open={isModalOpen} 
+        onOk={handleOk} 
+        onCancel={handleCancel}
+        footer={[
+          <Button key="submit" type="primary" onClick={handleOk}>
+            Chọn
+          </Button>,
+        ]}
+        width={800}
+      >
+        { fetchIdeas.length > 0 ? 
+          <MyIdeaList fetchIdeas={fetchIdeas} submissions={yourSubmit} setSubmissions={setYourSubmit} />
+          : <Button type="primary" onClick={() => navigate('/innovator/idea')}
+              style={{ width: 200 }}
+          >
+            Thêm ý tưởng
+          </Button>
+        }
+      </Modal>
       <div className={styles.headerBanner}>
         <h1 className={styles.slogan}>Chung tay góp sức, tạo dựng tương lai!</h1>
         <div className={styles.btnContainer}>
@@ -16,10 +57,8 @@ const SponsorHomePage = () => {
               Tài trợ dự án
             </Link>
           </Button>
-          <Button type="default" className={styles.btn}>
-            <Link to="projects/1/edit">
-              Kêu gọi tài trợ
-            </Link>
+          <Button type="default" className={styles.btn} onClick={() => setIsModalOpen(!isModalOpen)}>
+            Kêu gọi tài trợ
           </Button>
         </div>
         <i>Nền tảng kêu gọi tài trợ cho các dự án dành cho cá nhân và các tổ chức</i>

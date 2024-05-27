@@ -6,6 +6,9 @@ import contact from './contact.txt'
 import failedContest from './failedContest.txt'
 import passContest from './passContest.txt'
 import sponsor from './sponsor.txt'
+import axios from 'axios'
+import { deployedAPI } from '../../utils/form.constants'
+import { localStorageConstant } from '../../utils/global.constants'
 
 const { TextArea } = Input
 
@@ -56,12 +59,22 @@ const EmailPage = () => {
   const onChange = (e) => {
     setValue(e.target.value)
   }
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
     console.log(values)
+    const formData = new FormData()
+    formData.append('subject', JSON.stringify(values.Subject))
+    formData.append('message', JSON.stringify(values.Content))
+    formData.append('recipient_list', JSON.stringify([values.Receiver]))
+    
+    await axios.post(`${deployedAPI}/emails/`, formData, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem(localStorageConstant.ACCESS_TOKEN)}`
+      },
+    })
   }
 
   useEffect(() => {
-    setReceivers(localStorage.getItem('email').split(','))
+    localStorage.getItem('email') && setReceivers(localStorage.getItem('email').split(','))
     form.setFieldsValue({ Receiver: localStorage.getItem('email') })
   }, [])
 
@@ -95,7 +108,7 @@ const EmailPage = () => {
             <TextArea placeholder='To' autoSize={{ minRows: 1 }} />
           </Form.Item>
           <Form.Item name='CC' rules={[{ required: false }]}>
-            <Radio.Group onChange={onChange} value={value} defaultValue='cc'>
+            <Radio.Group onChange={onChange} value={value} >
               <Radio.Button value={'cc'} className={styles.radioBtn}>
                 CC
               </Radio.Button>

@@ -40,9 +40,9 @@ import SponsorList from './Sponsor/SponsorList'
 import SponsorProject from './Sponsor/SponsorProject'
 import SponsorEditor from './Sponsor/SponsorEditor'
 import EmailPage from './Email'
+import MeetPage from './Meet'
 
 export const getRouter = () => {
-  const { subDomain } = useDomain()
 
   const routes = (
     <Route path='/'>
@@ -90,10 +90,12 @@ export const getRouter = () => {
         <Route path=':ideaId/edit' Component={CreateIdeaFormPage} />
         
       </Route>
-      {/* <Route path='faq' Component={PrivateLayout} >
+      <Route path='faq' Component={PrivateLayout} >
         <Route index Component={Faq} />
-      </Route> */}
-
+      </Route>
+      <Route path='sponsor/create-meet' Component={PublicLayout} >
+        <Route index Component={MeetPage} />
+      </Route>
     </Route>
   )
 

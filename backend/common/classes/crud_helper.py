@@ -9,28 +9,28 @@ import copy
 
 
 class CrudHelper:
-    def mapIdField(idea):
-        id = idea["_id"].get("$oid")
-        idea.pop("_id")
-        idea["id"] = id
-        return idea
+    def mapIdField(obj):
+        id = obj["_id"].get("$oid")
+        obj.pop("_id")
+        obj["id"] = id
+        return obj
 
     @staticmethod
     def get_all(collection, ent_type=""):
-        ideas = parse_json(collection.find({}))
-        ideas = list(map(CrudHelper.mapIdField, ideas))
+        res = parse_json(collection.find({}))
+        res = list(map(CrudHelper.mapIdField, res))
         return Response(
-            {"message": f"Get all {ent_type}s successfully", "data": ideas}, status=200
+            {"message": f"Get all {ent_type}s successfully", "data": res}, status=200
         )
 
     @staticmethod
     def get_by_id(id, collection, ent_type=""):
-        idea = parse_json(collection.find_one({"_id": ObjectId(id)}))
+        res = parse_json(collection.find_one({"_id": ObjectId(id)}))
 
-        if idea:
-            idea = CrudHelper.mapIdField(idea)
+        if res:
+            res = CrudHelper.mapIdField(res)
             return Response(
-                {"message": f"Get {ent_type} successfully", "data": idea}, status=200
+                {"message": f"Get {ent_type} successfully", "data": res}, status=200
             )
         else:
             return Response({"message": f"Can't find {ent_type}"}, status=400)
@@ -40,10 +40,8 @@ class CrudHelper:
         if serializer.is_valid(raise_exception=True):
             data_insert = serializer.validated_data
             data_insert.update(kwargs)
-            
-            inserted_document_id = collection.insert_one(
-                data_insert
-            ).inserted_id
+
+            inserted_document_id = collection.insert_one(data_insert).inserted_id
             return CustomResponse(
                 message=f"Created {ent_type} successfully",
                 data=parse_json(inserted_document_id),
@@ -162,3 +160,16 @@ class CrudHelper:
             )
         else:
             return Response({"message": f"""Can't find {ent_type}"""}, status=400)
+
+    @staticmethod
+    def get_by_query(query, collection, ent_type=""):
+        results = parse_json(collection.find(query))
+        results = list(map(CrudHelper.mapIdField, results))
+        return Response(
+            {
+                "message": f"Get all {ent_type}s successfully",
+                "data": results,
+                "query": query,
+            },
+            status=200,
+        )

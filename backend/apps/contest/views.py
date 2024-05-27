@@ -8,6 +8,7 @@ from config.db_connection import db_connection
 from .serializers import ContestSerializer, SubmissionSerializer
 from common.classes.response import CustomResponse
 from config.authentication import CustomAuthentication
+from common.utils import parse_json
 
 
 class ContestViewSet(viewsets.ViewSet):
@@ -17,10 +18,12 @@ class ContestViewSet(viewsets.ViewSet):
     serializer_class = ContestSerializer
     ENT_TYPE = "contest"
 
-    @action(detail=False, 
-            methods=["GET", "POST"], 
-            permission_classes=[AllowAny],
-            url_path=r"contests")
+    @action(
+        detail=False,
+        methods=["GET", "POST"],
+        permission_classes=[AllowAny],
+        url_path=r"contests",
+    )
     def get_and_post_contests(self, request):
         if request.method == "POST":
             serializer = ContestSerializer(data=request.data)
@@ -53,7 +56,7 @@ class SubmissionViewSet(viewsets.ViewSet):
     @action(
         detail=False,
         methods=["GET", "POST"],
-        url_path=r"contests/(?P<id>[^/.]+)/submissions",
+        url_path=r"contests/(?P<id>[^/.]{24})/submissions",
     )
     def get_and_post_submissions(self, request, id):
         if request.method == "POST":
@@ -82,21 +85,31 @@ class SubmissionViewSet(viewsets.ViewSet):
                     status=404,
                 )
             submission_list = contest.get("submission_list", [])
+
+            def map_submission(submission):
+                idea = db_connection.get_collection("idea").find_one(
+                    {"_id": ObjectId(submission["idea_id"])}
+                )
+                submission.update({"idea": idea})
+                return submission
+
+            fin_submissions = list(map(map_submission, submission_list))
+
             return CustomResponse(
-                message="All submissions", data=submission_list, status=200
+                message="All submissions", data=fin_submissions, status=200
             )
 
     @action(
         detail=False,
         methods=["GET", "POST"],
-        url_path=r"contests/(?P<id>[^/.]+)/submissions/(?P<sub_id>[^/.]{24})/mark",
+        url_path=r"contests/(?P<id>[^/.]{24})/submissions/(?P<sub_id>[^/.]{24})/mark",
     )
-    def get_and_post_submissions(self, request, id, sub_id):
+    def mark_submissions(self, request, id, sub_id):
         if request.method == "POST":
-            grade = request.data.get("grade")
+            grade = request.data.get("grades")
             if grade is None:
                 return CustomResponse(
-                    message="Grade is required",
+                    message="Grades is required",
                     status=400,
                 )
             comment = request.data.get("comment")
@@ -106,12 +119,13 @@ class SubmissionViewSet(viewsets.ViewSet):
                     status=400,
                 )
 
+            print(id, sub_id)
             result = self.collection.update_one(
-                {"_id": ObjectId(id), "submission_list._id": ObjectId(sub_id)},
+                {"_id": ObjectId(id), "submission_list.idea_id": sub_id},
                 {
                     "$set": {
                         "submission_list.$.is_marked": True,
-                        "submission_list.$.grade": grade,
+                        "submission_list.$.grades": grade,
                         "submission_list.$.comment": comment,
                     }
                 },
@@ -119,14 +133,18 @@ class SubmissionViewSet(viewsets.ViewSet):
 
             return CustomResponse(
                 message="Submission marked successfully",
-                data=result,
+                data={"Modify Count": result.modified_count},
                 status=200,
             )
 
         else:
             submission = self.collection.find_one(
-                {"_id": ObjectId(id), "submission_list._id": ObjectId(sub_id)}
+                {"_id": ObjectId(id), "submission_list.idea_id": sub_id}
             )
+            submission = submission.get("submission_list")
+            submission = next(
+				filter(lambda x: x.get("idea_id") == sub_id, submission), None
+			)
             return CustomResponse(
                 message="Get a submission", data=submission, status=200
             )

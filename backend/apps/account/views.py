@@ -15,7 +15,7 @@ from .serializers import InnovatorSerializer, CompanySerializer
 
 class AccountViewSet(viewsets.ViewSet):
     collection = db_connection.get_collection("profile")
-    permission_classes = (IsAdminUser,)
+    permission_classes = (IsAuthenticated,)
     authentication_classes = [CustomAuthentication]
     queryset = Account.objects.all()
     ENT_TYPE = "account"

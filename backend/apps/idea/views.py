@@ -1,10 +1,8 @@
-from rest_framework.views import APIView
 from .serializers import IdeaSerializer, CommentSerializer
 from common.utils import parse_json, get_id_from_request
 from common.classes.crud_helper import CrudHelper
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework import viewsets
-from django.core.files.uploadedfile import InMemoryUploadedFile
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from config.db_connection import db_connection
@@ -15,6 +13,9 @@ from bson.objectid import ObjectId
 from common.classes.response import CustomResponse
 import requests
 from common.constants import AI_SERVER_URL
+import json
+import uuid
+from django.core.cache import cache
 
 
 class IdeaViewSet(viewsets.ViewSet):
@@ -25,77 +26,34 @@ class IdeaViewSet(viewsets.ViewSet):
     queryset = QuerySet(model=Idea, query=[])
     authentication_classes = [CustomAuthentication]
 
-    @action(detail=False, methods=["GET"], url_path=r"ideas")
+    @action(
+        detail=False, methods=["GET"], permission_classes=[AllowAny], url_path=r"ideas"
+    )
     def get_ideas(self, request):
         return CrudHelper.get_all(self.collection, self.ENT_TYPE)
 
-    @action(detail=False, methods=["GET"], url_path=r"ideas/recommend/list")
-    def get_recommend_ideas(self, request):
-        url = AI_SERVER_URL + "/topk/"
-        requirement = {
-            "domain": ["Phần mềm (Software)"],
-            "problem": '"Những hệ thống đăng tải ý tưởng ngày nay chưa đáp ứng đủ nhu cầu của nhà sáng tạo. Các ý tưởng đăng lên nhưng không quá chú trọng về nội dung mà chỉ quan tâm đến số lượng."',
-            "acceptance_criteria": "Một hệ thống mới giúp người dùng có thể đăng tải những ý tưởng sáng kiến của bản thân về một vấn đề gì đó trong cuộc sống.",
-            "constraints": "",
-            "_id": "398723wsjb29",
-        }
+    @action(detail=False, methods=["POST"], url_path=r"ideas/filter")
+    def filter_idea(self, request):
+        url = AI_SERVER_URL + "/spam_filtering"
+        idea = request.data
+        idea["_id"] = uuid.uuid4().hex
 
         try:
-            # Make a GET request to the API endpoint using requests.get()
-            response = requests.get(url, data=parse_json(requirement))
-
-            # Check if the request was successful (status code 200)
-            if response.status_code == 200:
-                posts = response.json()
-                return CustomResponse(
-                    message="Get recommend ideas", data=posts, status=200
-                )
-            else:
-                return CustomResponse(
-                    message="Error when getting recommend ideas",
-                    status=response.status_code,
-                )
-        except requests.exceptions.RequestException as e:
-            return CustomResponse(
-                message="Error when getting recommend ideas", status=400, error=str(e)
+            response = requests.get(
+                url, data=json.dumps(idea), headers={"Content-Type": "application/json"}
             )
 
-    def filter_idea(self, request):
-        url = AI_SERVER_URL + "/spam_filtering/"
-        idea = {
-            "_id": "65509e7e35a5fe8ab15550a0",
-            "domain": ["Phần mềm (Software)"],
-            "professional": ["Mọi người"],
-            "geographical": ["Vietnam"],
-            "ageRange": [0, 29],
-            "outstand": ["Ứng dụng cao"],
-            "name": '"Sàn kết nối ý tưởng với doanh nghiệp"',
-            "slogan": '"Ý tưởng không còn là ý tưởng"',
-            "problem": '"Những hệ thống đăng tải ý tưởng ngày nay chưa đáp ứng đủ nhu cầu của nhà sáng tạo. Các ý tưởng đăng lên nhưng không quá chú trọng về nội dung mà chỉ quan tâm đến số lượng."',
-            "solution": '"Hiện thực một hệ thống mới giúp người dùng có thể đăng tải những ý tưởng sáng kiến của bản thân về một vấn đề gì đó trong cuộc sống. Ở đây, các ý tưởng với độ hoàn thiện và được đánh giá cao sẽ có khả năng lớn trong việc kết hợp với doanh nghiệp trong ngành liên quan"',
-            "teamDescription": '"<5 thành viên"',
-            "teamExperience": '"Có kinh nghiệm trong việc xây dựng hệ thống. Có kiến thức về xử lý ngôn ngữ tự nhiên"',
-            "gender": '"Male"',
-            "behavior": '"Sàn ý tưởng giúp thu hẹp khoảng cách giữa ý tưởng và thực tế. Thông qua việc kết nối với doanh nghiệp, nhà sáng tạo có thể cơ hội, học hỏi thêm kinh nghiệm và những góp ý từ phía doanh nghiệp"',
-            "apps": '"ytuongsangtao.net, ytuongsangtaohcm Quá nhiều ý tưởng, tuy nhiên nội dung ý tưởng không chất lượng"',
-            "currentDev": '"[Hiện thực] Ý tưởng đang được hiện thực và thử nghiệm trong môi trường phát triển"',
-            "support": "undefined",
-            "files": ["65509e7e35a5fe8ab15550a0/Cave-bg.png"],
-        }
-
-        try:
-            # Make a GET request to the API endpoint using requests.get()
-            response = requests.get(url, data=idea)
-
-            # Check if the request was successful (status code 200)
             if response.status_code == 200:
                 posts = response.json()
+                retrnDat = {
+                    "isValid": posts["label"],
+                }
                 return CustomResponse(
-                    message="Get filtering result", data=posts, status=200
+                    message="Get filtering result", data=retrnDat, status=200
                 )
             else:
                 return CustomResponse(
-                    message="Error when filtering idea",
+                    message=response.json(),
                     status=response.status_code,
                 )
         except requests.exceptions.RequestException as e:
@@ -103,11 +61,65 @@ class IdeaViewSet(viewsets.ViewSet):
                 message="Error when filtering idea", status=400, error=str(e)
             )
 
-    @action(detail=False, methods=["GET"], url_path=r"ideas/(?P<id>[^/.]+)")
+    @action(detail=False, methods=["POST"], url_path=r"ideas/topk")
+    def match_idea(self, request):
+        url = AI_SERVER_URL + "/topk"
+        requirement = request.data
+        
+        if requirement.get("_id") is None:
+            requirement["_id"] = uuid.uuid4().hex
+
+        try:
+            cache_key = "idea_matching_" + requirement["_id"]
+            if cache.has_key(cache_key):
+                return CustomResponse(
+                    message="Get topk results", data=cache.get(cache_key), status=200
+                )
+
+            # If not found in cache
+            response = requests.get(
+                url,
+                data=json.dumps(requirement),
+                headers={"Content-Type": "application/json"},
+            )
+
+            if response.status_code == 200:
+                posts = response.json()
+                print("Idea Ranking: ", posts["rank"])
+
+                results = self.collection.find(
+                    {"_id": {"$in": [ObjectId(idea_id) for idea_id in posts["rank"]]}}
+                )
+
+                result_map = {
+                    str(result["_id"]): {**result, "_id": str(result["_id"])}
+                    for result in results
+                }
+
+                ordered_results = [result_map.get(id) for id in posts["rank"]]
+
+                cache.set(cache_key, ordered_results, timeout=60 * 5)
+
+                return CustomResponse(
+                    message="Get topk results", data=ordered_results, status=200
+                )
+            else:
+                return CustomResponse(
+                    message=response.json(),
+                    status=response.status_code,
+                )
+        except requests.exceptions.RequestException as e:
+            return CustomResponse(
+                message="Error when getting appropriate ideas", status=400, error=str(e)
+            )
+
+    @action(detail=False, methods=["GET"], permission_classes=[AllowAny], url_path=r"ideas/(?P<id>[^/.]{24})")
     def get_idea_by_idea_id(self, request, id=None):
         return CrudHelper.get_by_id(id, self.collection, self.ENT_TYPE)
 
-    @action(detail=False, methods=["GET"], url_path=r"innovators/(?P<id>[^/.]+)/ideas")
+    @action(
+        detail=False, methods=["GET"], url_path=r"innovators/(?P<id>[^/.]{24})/ideas"
+    )
     def get_ideas_by_innovator_id(self, request, id=None):
         inno_id = get_id_from_request(request)
         if not inno_id:
@@ -117,7 +129,7 @@ class IdeaViewSet(viewsets.ViewSet):
             {"message": f"Got all ideas of innovator", "data": idea}, status=200
         )
 
-    @action(detail=False, methods=["PATCH"], url_path=r"ideas/(?P<id>[^/.]+)")
+    @action(detail=False, methods=["PATCH"], url_path=r"ideas/(?P<id>[^/.]{24})")
     def patch(self, request, id=None):
         serializer = IdeaSerializer(data=request.data, partial=True)
         file_list = request.FILES.getlist("files")

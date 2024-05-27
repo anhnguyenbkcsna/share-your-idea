@@ -1,3 +1,5 @@
 button {
-	width: 100% !important;
+	width: initial;
+	padding: initial;
+	margin: initial;
 }

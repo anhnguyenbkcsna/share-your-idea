@@ -8,6 +8,7 @@ import { createContest } from '../../../api/contest'
 import { Button, Checkbox, Upload, Alert } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 import Round from './round'
+import { UploadOutlined } from '@ant-design/icons'
 // import contestBackground from '../../../assets/contest-bg.jpg'
 
 export default function CreateContestPage() {
@@ -19,17 +20,30 @@ export default function CreateContestPage() {
   const [prizes, setPrizes] = useState(1)
 
   const handleSubmitClick = () => {
-    console.log(data)
-    createContest(data)
+    console.log(">> Create contest data: ", data)
+    let formData = new FormData()
+    for (const key in data) {
+      if (data[key] !== undefined) {
+        formData.append(key, data[key])
+      }
+    }
+
+    createContest(formData)
       .then(res => {
         if (res?.status === 200)
         {
-          navigate('/contest')
+          // wait for 1s to make sure the contest is created
+
+          setTimeout(() => navigate('/contest'), 1000)
         }
       })
-      .catch()
+      .catch((err) => alert(err))
   }
 
+  const handleUploadFile = (e) => {
+    console.log(">> Upload file: ", e.target.files[0])
+    setData((prev) => ({ ...prev, banner: e.target.files[0] }))
+  }
   const increaseRounds = () => {
     if(rounds >= 5) return
     setRounds(1 + rounds)
@@ -70,7 +84,8 @@ export default function CreateContestPage() {
           <ContestInput label={'Chủ đề'} setFunc={setData} fieldName={'topic'} type='text'/>
           <ContestInput label={'Địa điểm tổ chức'} setFunc={setData} fieldName={'location'} type='text'/>
           <ContestInput label={'Thông tin thêm'} setFunc={setData} fieldName={'otherInfo'} type='text'/>
-          <ContestInput label={'Ảnh banner cuộc thi (1920x640)'} setFunc={setData} fieldName={'banner'} type='file'/>
+          {/* <ContestInput label={'Ảnh banner cuộc thi (1920x640)'} setFunc={setData} fieldName={'banner'} type='file'/> */}
+          <input type="file" id="myFile" name="filename" onChange={handleUploadFile}/>
           <div style={{
             display: 'flex',
             justifyContent: 'space-between',

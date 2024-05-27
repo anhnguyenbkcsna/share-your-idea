@@ -23,6 +23,7 @@ export function ContestInput({
       <br />
       <input
         type={type}
+        required
         onChange={handleOnChange}
         style={{
           outline: 'none',

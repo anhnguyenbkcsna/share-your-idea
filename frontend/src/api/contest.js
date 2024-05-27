@@ -50,7 +50,6 @@ export const createContest = async (data) => {
     return res
   } catch (err) {
     console.log('Error', err)
-    return null
   }
 }
 

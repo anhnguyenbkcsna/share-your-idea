@@ -126,6 +126,22 @@ export const getIdeaOfCurrentUser = async (userId) => {
     })
 }
 
+export const getIdeaById = async (ideaId) => {
+  return await axios
+    .get(`${ideaEndpoint}${ideaId}/`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem(localStorageConstant.ACCESS_TOKEN)}`,
+      }
+    })
+    .then((res) => {
+      return res.data.data
+    })
+    .catch((err) => {
+      console.log(err)
+      return []
+    })
+}
+
 export const sendIdeaToAIServer = async (ideaObj) => {
   return await axios
     .post(`${serverAIEndPoint}`, ideaObj, {

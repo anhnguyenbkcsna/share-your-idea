@@ -3,7 +3,7 @@ import genericStyles from '../styles.module.scss'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
-export default function ContestIdeaCard({ idea }) {
+export default function ContestIdeaCard({ bg, idea }) {
   // when idea is null, return a dummy card to fill the space
   const navigate = useNavigate()
 
@@ -19,7 +19,6 @@ export default function ContestIdeaCard({ idea }) {
   }
 
   const handleOnClick = () => {
-    idea.id = 1
     navigate(`ideas/${idea.id}`)
   }
 
@@ -32,7 +31,11 @@ export default function ContestIdeaCard({ idea }) {
     >
       <img
         alt='contest'
-        src={ideaImgUrl}
+        style={{ 
+          width: '100%',
+          height: 'auto',
+        }}
+        src={bg}
       />
       <div className={styles.cardInfo}>
         <div className={styles.cardHeading}>

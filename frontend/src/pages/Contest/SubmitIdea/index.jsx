@@ -23,9 +23,11 @@ const columns = [
       <div size="middle">
         <a 
           // onClick={() => {console.log(record._id.$oid)}}
-          href={record && `ideas/${record._id.$oid}`}
+          href={record && `ideas/${record.id}/mark`}
+          disabled = {record.averageMark !== 0}
         >
-          Chấm điểm
+          {record.averageMark === 0 ? 'Chấm điểm' : 'Đã chấm điểm'}
+          {/* Chấm điểm */}
         </a>
       </div>
     ),
@@ -66,20 +68,28 @@ const SubmitIdeaPage = () => {
 
   useEffect(() => {
     contestSubmission(contestId).then((res) => {
-      console.log(res)
+      // let averageMark
+      res = res.map((submission) => {
+        submission.name = submission.idea?.name
+        submission.id = submission.idea?._id.$oid
+        // Chưa chấm điểm
+        if (!submission.grades) {
+          submission.averageMark = 0
+          return submission
+        }
+        // Đã chấm điểm
+        let sum = 0
+        submission.grades?.map((grade) => {
+          sum += grade
+        })
+        submission.averageMark = sum / submission.grades?.length
+        return submission
+      })
+      console.log('>>> RES: ', res)
       setData(res)
-    })   
-  }, [])
-
-  const getIdeas = () => {
-    let listIdea = []
-    data.forEach((idea) => {
-      listIdea.push(idea.idea)
-      // Chưa làm nè
     })
-    console.log(listIdea)
-    return listIdea
-  }
+
+  }, [])
 
   return (
     <div style={{ maxWidth: '80%', margin: '0 auto' }}>
@@ -89,7 +99,7 @@ const SubmitIdeaPage = () => {
           {hasSelected ? `Selected ${selectedRowKeys.length} items` : ''}
         </span>
       </div>
-      <Table rowSelection={rowSelection} columns={columns} dataSource={getIdeas()} />
+      <Table rowSelection={rowSelection} columns={columns} dataSource={data} />
       <OrangeBasicButton onClick={sendResultMail} disabled={!hasSelected} loading={loading} text='Gửi kết quả'/>
     </div>
   )

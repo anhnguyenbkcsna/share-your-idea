@@ -18,6 +18,7 @@ import NotFoundPage from '../../Error/E404'
 import CommentList from '../../../components/IdeaListComponent'
 import { getAllIdeas } from '../../../api/idea'
 import { localStorageConstant } from '../../../utils/global.constants'
+import { getUserById } from '../../../api/user'
 
 // const iconKey = {
 //   name: <UserOutlined />,
@@ -53,32 +54,10 @@ const IdeaDescriptionPage = () => {
   const navigate = useNavigate()
   const { ideaId } = params
   
-  const [author, setAuthor] = useState({})
+  const [author, setAuthor] = useState()
+  const [email, setEmail] = useState()
   const [fetchIdeas, setFetchIdeas] = useState([])
   const [idea, setIdea] = useState({})
-
-  useEffect(() => {
-    // const fetchAuthor = async () => {
-    //   let response = await axios
-    //     .get(`${deployedAPI}/users/`)
-    //     .then((res) => res.data)
-    //   setAuthor(response.data)
-    // }
-    // fetchAuthor()
-    setAuthor(
-      {
-        key: 1,
-        label: 'Tên',
-        children: localStorage.getItem('name')
-      },
-      {
-        key: 2,
-        label: 'Email',
-        children: localStorage.getItem('email')
-      }
-    )
-    console.log('author', author)
-  }, [])
 
   useEffect(() => {
     const fetchIdea = async () => {
@@ -95,6 +74,14 @@ const IdeaDescriptionPage = () => {
     }
   }, [fetchIdeas])
 
+  useEffect(() => {
+    getUserById(idea.innovator_id).then((res) => {
+      setAuthor(res)
+    }).catch((err) => {
+      console.log(err)
+    })
+  }, [idea])
+
   const dataSourceGenerate = (ideaObj) => {
     let { author } = ideaObj
     author['current development stage'] = ideaObj.currentDev
@@ -108,8 +95,6 @@ const IdeaDescriptionPage = () => {
     console.log('res', res)
     return res
   }
-
-  const getUserFromLocal = () => {}
 
   return (
     <>
@@ -146,14 +131,14 @@ const IdeaDescriptionPage = () => {
                 contentStyle={{backgroundColor: '#eee'}}
                 label='Họ và tên'
               >
-                {localStorage.getItem('name')}
+                {author && author.name}
               </Descriptions.Item>
               <Descriptions.Item 
                 labelStyle={{backgroundColor: '#ddd'}}
                 contentStyle={{backgroundColor: '#eee'}}
                 label='Email'
               >
-                {localStorage.getItem('email')}
+                {author && author.email}
               </Descriptions.Item>
               <Descriptions.Item 
                 labelStyle={{backgroundColor: '#ddd'}}
@@ -265,10 +250,10 @@ const IdeaDescriptionPage = () => {
               {idea.files && (
                 <div className={styles.fileList}>
                   <h3 className={styles.subtitle}>Tài liệu đính kèm: </h3>
-                  {idea.files.map((item, idx) => {
+                  {idea.files.map((_, idx) => {
                     return (
                       <div className={styles.file} key={idx}>
-                        <Button type='primary' href={item.link}>
+                        <Button type='primary' href={idea.files[idx]} target="_blank">
                           Download
                         </Button>
                       </div>
@@ -290,7 +275,7 @@ const IdeaDescriptionPage = () => {
                 )}
               </div>
             </Row>
-            <CommentList comments={comments}/>
+            {/* <CommentList comments={comments}/> */}
           </CusCard>
         </div>
       ) : (

@@ -9,6 +9,9 @@ import { PrevArrow, NextArrow } from './Arrow'
 import { getAllIdeas } from '../../../api/idea'
 // import contestBackground from '../../../assets/contest-bg.jpg'
 
+const background = `https://blog.udemy.com/wp-content/uploads/2013/06/bigstock-Idea-Concept-42988369.jpg?fbclid=IwZXh0bgNhZW0CMTAAAR39L
+-0f-OTcqafqeFBMfuO9ZiJcKI07moo33Pwu9Pv7Eo7tY14R9E1vx_s_aem_AZ3TXmRtmL_bArFvRy8JwbZkDmQTLeIy65S6WvV7oTHrcnL9oAxdLkL7iNpaU8nEVKr4DuBo6k_KOkhCJ5AxUlnV`
+
 export default function SubmittedIdeasPage({ submissionList }) {
   const navigate = useNavigate()
   const NUM_OF_IDEAS_PER_CAROUSEL_ITEM = 8
@@ -29,10 +32,11 @@ export default function SubmittedIdeasPage({ submissionList }) {
 
     return (
       <div className={styles.carouselItemContainIdeasWrapper} key={carouselItemIdx}>
+        {console.log('>> ideaSubList', submissionList)}
         <div className={styles.ideasWrapper}>
           {
             ideaSubList.map((idea, index) => (
-              <ContestIdeaCard idea={idea} key={index} />
+              <ContestIdeaCard bg={background} idea={idea} key={index} />
             ))
           }
         </div>
@@ -53,7 +57,7 @@ export default function SubmittedIdeasPage({ submissionList }) {
     const tmp = []
     for (let i = 0; i < ideas.length; i++)
     {
-      if (i === 0) 
+      if (i === 0)
         continue
       else if (i % NUM_OF_IDEAS_PER_CAROUSEL_ITEM === 0)
       {

@@ -10,7 +10,10 @@ import { useNavigate } from 'react-router-dom'
 import SubmittedIdeasPage from '../SubmittedIdeas'
 import { HrHeading } from '../Components/hrheading'
 import MyIdeaList from './myIdeaList'
+import SubmissionList from './submissionList'
 import { getAllIdeas } from '../../../api/idea'
+const background = `https://blog.udemy.com/wp-content/uploads/2013/06/bigstock-Idea-Concept-42988369.jpg?fbclid=IwZXh0bgNhZW0CMTAAAR39L
+-0f-OTcqafqeFBMfuO9ZiJcKI07moo33Pwu9Pv7Eo7tY14R9E1vx_s_aem_AZ3TXmRtmL_bArFvRy8JwbZkDmQTLeIy65S6WvV7oTHrcnL9oAxdLkL7iNpaU8nEVKr4DuBo6k_KOkhCJ5AxUlnV`
 
 const ContestInfo = () => {
   const navigate = useNavigate()
@@ -113,7 +116,8 @@ const ContestInfo = () => {
       </Modal>
       <img
         className={styles.banner}
-        src="https://www.pvoil.com.vn/Data/Sites/1/media/tinpvoil/2021/20210924-p1.jpg"
+        src={contest?.files ? contest.files[0] : 
+          "https://www.binus.edu/wp-content/uploads/2017/03/Web-Banner-Innovation-Award-2017_2-01.jpg"}
         alt="Banner"
       />
       <div className={styles.container}>
@@ -213,7 +217,19 @@ const ContestInfo = () => {
             Xem tất cả
           </Button>
         </div>
-        <SubmittedIdeasPage submissionsList={contest.submissions_list}/>
+        {/* <SubmittedIdeasPage submissionsList={contest.submission_list}/> */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr'}}>
+          {contest.submission_list && contest.submission_list.map((submission) => {
+            return (
+              <SubmissionList bg={contest?.files ? contest.files[0] : 
+                "https://www.binus.edu/wp-content/uploads/2017/03/Web-Banner-Innovation-Award-2017_2-01.jpg"} 
+                submissionId={submission.idea_id} 
+              />
+            )
+          })}
+        </div>
+
+        {/* {console.log(typeof(contest.submission_list))} */}
       </div>
     </ConfigProvider>
   ) : (

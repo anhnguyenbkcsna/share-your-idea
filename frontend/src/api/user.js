@@ -30,7 +30,7 @@ export const getUserById = (userId) => {
   if (accessToken)
   {
     return axios
-      .get(`${accountEndpoint}/${userId}/`, {
+      .get(`${accountEndpoint}${userId}/`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         }

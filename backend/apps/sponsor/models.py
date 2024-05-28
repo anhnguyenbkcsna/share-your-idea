@@ -15,7 +15,7 @@ class SponsorEvent(models.Model):
 
 class SponsorPackage(models.Model):
     name = models.TextField()
-    description = models.TextField()
+    description = models.TextField(default="")
     value = models.TextField()
     benefits = models.JSONField(default=list)
     company_id = models.TextField(default=None) # sponsor company id

@@ -43,7 +43,6 @@ import EmailPage from './Email'
 import MeetPage from './Meet'
 
 export const getRouter = () => {
-//   const { subDomain } = useDomain()
 
   const routes = (
     <Route path='/'>
@@ -97,7 +96,6 @@ export const getRouter = () => {
       <Route path='sponsor/create-meet' Component={PublicLayout} >
         <Route index Component={MeetPage} />
       </Route>
-
     </Route>
   )
 

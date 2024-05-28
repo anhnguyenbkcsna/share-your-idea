@@ -63,7 +63,7 @@ class SponsorPackageViewSet(viewsets.ViewSet):
         return Response(
             {
                 "message": "Packages retrieved successfully",
-                "data": event.get("packages", []),
+                "data": {"packages": event.get("packages", []), "event": parse_json(event)},
             },
             status=200,
         )
@@ -84,7 +84,10 @@ class SponsorPackageViewSet(viewsets.ViewSet):
             if not package:
                 return CustomResponse("Package not found", status=400)
             return Response(
-                {"message": "Package retrieved successfully", "data": package},
+                {
+                    "message": "Package retrieved successfully",
+                    "data": {"package": package, "event": parse_json(event)},
+                },
                 status=200,
             )
         except IndexError:

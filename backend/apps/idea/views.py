@@ -134,10 +134,10 @@ class IdeaViewSet(viewsets.ViewSet):
         detail=False, methods=["GET"], url_path=r"innovators/(?P<id>[^/.]{24})/ideas"
     )
     def get_ideas_by_innovator_id(self, request, id=None):
-        inno_id = get_id_from_request(request)
+        inno_id = id
         if not inno_id:
             return Response({"message": f"Cannot find {self.ENT_TYPE}"}, status=400)
-        idea = parse_json(self.collection.find({"innovator_ids": {"$in": [inno_id]}}))
+        idea = parse_json(self.collection.find({"innovator_id": inno_id}))
         return Response(
             {"message": f"Got all ideas of innovator", "data": idea}, status=200
         )

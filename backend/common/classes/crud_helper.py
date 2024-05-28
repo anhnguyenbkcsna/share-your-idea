@@ -6,19 +6,25 @@ from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 from common.classes.response import CustomResponse
 import copy
+from services.file_service import FileService
 
 
 class CrudHelper:
-    def mapIdField(obj):
+    def map_object(obj):
+        # Map ID
         id = obj["_id"].get("$oid")
         obj.pop("_id")
         obj["id"] = id
+
+        # Map Files
+        if "files" in obj:
+            obj["files"] = FileService.get(obj["files"])
         return obj
 
     @staticmethod
     def get_all(collection, ent_type=""):
         res = parse_json(collection.find({}))
-        res = list(map(CrudHelper.mapIdField, res))
+        res = list(map(CrudHelper.map_object, res))
         return Response(
             {"message": f"Get all {ent_type}s successfully", "data": res}, status=200
         )
@@ -28,7 +34,7 @@ class CrudHelper:
         res = parse_json(collection.find_one({"_id": ObjectId(id)}))
 
         if res:
-            res = CrudHelper.mapIdField(res)
+            res = CrudHelper.map_object(res)
             return Response(
                 {"message": f"Get {ent_type} successfully", "data": res}, status=200
             )
@@ -164,7 +170,7 @@ class CrudHelper:
     @staticmethod
     def get_by_query(query, collection, ent_type=""):
         results = parse_json(collection.find(query))
-        results = list(map(CrudHelper.mapIdField, results))
+        results = list(map(CrudHelper.map_object, results))
         return Response(
             {
                 "message": f"Get all {ent_type}s successfully",

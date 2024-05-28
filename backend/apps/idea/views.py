@@ -16,6 +16,7 @@ from common.constants import AI_SERVER_URL
 import json
 import uuid
 from django.core.cache import cache
+from services.file_service import FileService
 
 
 class IdeaViewSet(viewsets.ViewSet):
@@ -65,7 +66,7 @@ class IdeaViewSet(viewsets.ViewSet):
     def match_idea(self, request):
         url = AI_SERVER_URL + "/topk"
         requirement = request.data
-        
+
         if requirement.get("_id") is None:
             requirement["_id"] = uuid.uuid4().hex
 
@@ -100,6 +101,12 @@ class IdeaViewSet(viewsets.ViewSet):
 
                 cache.set(cache_key, ordered_results, timeout=60 * 5)
 
+                def map_result(result):
+                    result["files"] = FileService.get(result["files"])
+                    return result
+
+                ordered_results = list(map(map_result, ordered_results))
+
                 return CustomResponse(
                     message="Get topk results", data=ordered_results, status=200
                 )
@@ -113,7 +120,12 @@ class IdeaViewSet(viewsets.ViewSet):
                 message="Error when getting appropriate ideas", status=400, error=str(e)
             )
 
-    @action(detail=False, methods=["GET"], permission_classes=[AllowAny], url_path=r"ideas/(?P<id>[^/.]{24})")
+    @action(
+        detail=False,
+        methods=["GET"],
+        permission_classes=[AllowAny],
+        url_path=r"ideas/(?P<id>[^/.]{24})",
+    )
     def get_idea_by_idea_id(self, request, id=None):
         return CrudHelper.get_by_id(id, self.collection, self.ENT_TYPE)
 

@@ -34,6 +34,7 @@ class ContestViewSet(viewsets.ViewSet):
                     error=serializer.error_messages,
                 )
             file_list = request.FILES.getlist("banner")
+            print(file_list)
             return CrudHelper.post_with_file(
                 self.collection, serializer, file_list, self.ENT_TYPE
             )
@@ -133,7 +134,7 @@ class SubmissionViewSet(viewsets.ViewSet):
 
             return CustomResponse(
                 message="Submission marked successfully",
-                data={"Modify Count": result.modified_count},
+                data={"modified_count": result.modified_count},
                 status=200,
             )
 

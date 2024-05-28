@@ -65,17 +65,17 @@ const SponsorHomePage = () => {
         {/* <img src="https://via.placeholder.com/150" alt="Banner" /> */}
         <div className={styles.statistics}>
           <div className={styles.elementCard}>
-            <h1>2131</h1>
+            <h1>24</h1>
             <h3>dự án được tài trợ</h3>
           </div>
           <div className={styles.elementCard}>
             <>
-              <h1>293,939 tỷ VNĐ </h1>
+              <h1>39 triệu VNĐ </h1>
               <h3>tổng tài trợ</h3>
             </>
           </div>
           <div className={styles.elementCard}>
-            <h1>123,123</h1>
+            <h1>76</h1>
             <h3>người tài trợ</h3>
           </div>
         </div>

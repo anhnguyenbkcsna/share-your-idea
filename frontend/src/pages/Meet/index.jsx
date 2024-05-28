@@ -16,7 +16,14 @@ import {
 } from "antd"
 import "./styles.css"
 import viVN from "antd/lib/locale/vi_VN"
-
+const layout = {
+  labelCol: {
+    span: 8,
+  },
+  wrapperCol: {
+    span: 8,
+  },
+}
 export default function MeetPage() {
   const [signedIn, setSignedIn] = useState(false)
 
@@ -64,67 +71,123 @@ export default function MeetPage() {
   }, [])
 
   return (
-    <div>
-      <h1>Meet Page</h1>
-      <div>{!signedIn && <button onClick={handleSignIn}>Sign In</button>}</div>
+    <div
+      style={{
+        width: "75%",
+        margin: "0 auto",
+      }}
+    >
+      <h1
+        style={{
+          textAlign: "center",
+          color: "#f08080",
+          fontSize: "4rem",
+          fontWeight: "bold",
+          marginBottom: "5rem",
+        }}
+      >
+        Tạo lịch Google Meet
+      </h1>
       <div>
-        <ConfigProvider locale={viVN}>
-          <Form onFinish={handleFinish}>
-            <Form.Item
-              name="summary"
-              label="Tên sự kiện"
-              required
-              rules={[
-                {
-                  type: "string",
-                  min: 10,
-                },
-              ]}
+        {!signedIn && (
+          <>
+            <h3
+              style={{
+                textAlign: "center",
+                fontSize: "2rem",
+                marginBottom: "5rem",
+              }}
             >
-              <Input placeholder="vd: gọi vốn cho ý tưởng" />
-            </Form.Item>
-            <Form.Item
-              name="description"
-              label="Mô tả"
-              rules={[
-                {
-                  type: "string",
-                  min: 10,
-                },
-              ]}
+              Đăng nhập lại để tiếp tục
+            </h3>
+            <Button
+              type="primary"
+              htmlType="submit"
+              style={{
+                marginLeft: "50%",
+                transform: "translateX(-50%)",
+                height: "50px",
+                width: "100px",
+                backgroundColor: "#f08080",
+                borderRadius: "10px",
+              }}
+              onClick={handleSignIn}
             >
-              <Input placeholder="vd: mô tả cho sự kiện gọi vốn" />
-            </Form.Item>
-            <Form.Item name="start" label="Ngày giờ bắt đầu" required>
-              <DatePicker
-                disabledDate={(current) => current < new Date()}
-                name="start"
-                showNow
-                format="YYYY-MM-DD HH:mm"
-                showTime={{
-                  format: "HH:mm",
+              Sign In
+            </Button>
+          </>
+        )}
+      </div>
+      {signedIn && (
+        <div>
+          <ConfigProvider locale={viVN}>
+            <Form onFinish={handleFinish} {...layout}>
+              <Form.Item
+                name="summary"
+                label="Tên sự kiện"
+                required
+                rules={[
+                  {
+                    type: "string",
+                    min: 10,
+                  },
+                ]}
+              >
+                <Input placeholder="Gọi vốn cho ý tưởng" />
+              </Form.Item>
+              <Form.Item
+                name="description"
+                label="Mô tả"
+                rules={[
+                  {
+                    type: "string",
+                    min: 10,
+                  },
+                ]}
+                autoSize={{ minRows: 3 }}
+              >
+                <Input placeholder="Mô tả cho sự kiện gọi vốn" />
+              </Form.Item>
+              <Form.Item name="start" label="Ngày giờ bắt đầu" required>
+                <DatePicker
+                  disabledDate={(current) => current < new Date()}
+                  name="start"
+                  showNow
+                  format="YYYY-MM-DD HH:mm"
+                  showTime={{
+                    format: "HH:mm",
+                  }}
+                />
+              </Form.Item>
+              <Form.Item name="end" label="Ngày giờ kết thúc" required>
+                <DatePicker
+                  disabledDate={(current) => current < new Date()}
+                  name="end"
+                  format="YYYY-MM-DD HH:mm"
+                  showTime={{
+                    format: "HH:mm",
+                  }}
+                  showNow
+                />
+              </Form.Item>
+              <Button
+                type="primary"
+                htmlType="submit"
+                style={{
+                  marginLeft: "50%",
+                  transform: "translateX(-50%)",
+                  height: "50px",
+                  width: "100px",
+                  backgroundColor: "#f08080",
+                  borderRadius: "10px",
                 }}
-              />
-            </Form.Item>
-            <Form.Item name="end" label="Ngày giờ kết thúc" required>
-              <DatePicker
-                disabledDate={(current) => current < new Date()}
-                name="end"
-                format="YYYY-MM-DD HH:mm"
-                showTime={{
-                  format: "HH:mm",
-                }}
-                showNow
-              />
-            </Form.Item>
-            <Form.Item>
-              <Button type="primary" htmlType="submit">
+              >
                 Submit
               </Button>
-            </Form.Item>
-          </Form>
-        </ConfigProvider>
-      </div>
+            </Form>
+          </ConfigProvider>
+        </div>
+      )}
     </div>
   )
 }

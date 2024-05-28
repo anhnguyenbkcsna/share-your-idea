@@ -5,12 +5,14 @@ import { useNavigate } from "react-router-dom"
 import { Pagination } from "antd"
 import { sponsorProjectEndpoint } from "../../../utils/api.constants"
 import axios from "axios"
+import { getAllPackage } from "../../../api/sponsor"
+import SponsorCard from "./sponsorCard"
 const { Search } = Input
 
 const SponsorList = () => {
   const navigate = useNavigate()
   const [projectList, setProjectList] = useState([])
-  const [projects, setProjects] = useState(13)
+  const [projects, setProjects] = useState(0)
   const [projectName, setProjectName] = useState("Tên dự án")
   const [projectDescription, setProjectDescription] = useState("Mô tả ngắn")
   const [projectCreator, setProjectCreator] = useState()
@@ -28,33 +30,24 @@ const SponsorList = () => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
   }
 
-  const getRandomPlaceholder = (index) => {
-    return `https://picsum.photos/300/150?random=${index}`
-  }
-
   const handleNavigateToProject = (projectId) => {
     console.log("Navigate to project", projectId)
     navigate(`${projectId}`)
   }
 
   useEffect(() => {
-    const getRandomName = async () => {
-      const response = await fetch("https://randomuser.me/api")
-      const data = await response.json()
-      setProjectCreator(data.results[0].name.first)
-    }
-    // const fetchSponsorProjects = async () => {
-    //   const res = await axios
-    //     .get(sponsorProjectEndpoint)
-    //     .then((res) => {
-    //       let data = res.data
-    //       console.log("Fetch All Sponsor Project: ", data)
-    //     })
-    //     .catch((err) => {
-    //       console.log("Error", err)
-    //       // return []
-    //     })
+    // const getRandomName = async () => {
+    //   const response = await fetch("https://randomuser.me/api")
+    //   const data = await response.json()
+    //   setProjectCreator(data.results[0].name.first)
     // }
+    getAllPackage().then((res) => {
+      console.log('All Package', res)
+      setProjectList(res.data.data)
+      setProjects(res.data.data.length)
+    }).catch((err) => {
+      console.log('Error', err)
+    })
   }, [])
   return (
     <div className={styles.container}>
@@ -69,41 +62,16 @@ const SponsorList = () => {
         />
       </div>
       <div className={styles.content}>
-        <h2>Có {numberWithComma(projects)} dự án đang kêu gọi</h2>
+        <h2>Có {projects} dự án đang kêu gọi</h2>
       </div>
       <div className={styles.projectList}>
-        {Array.from({ length: projects }).map((_, index) => (
-          <div
+        {projectList.map((project, index) => (
+          <SponsorCard
             key={index}
-            className={styles.projectCard}
-            onClick={() => handleNavigateToProject(index)}
-          >
-            <div className={styles.projectImage}>
-              <img src={getRandomPlaceholder(index)} alt="Project" />
-            </div>
-            <div className={styles.projectInfo}>
-              <h1>
-                {projectName} {index}
-              </h1>
-            </div>
-            <div className={styles.projectDescription}>
-              <p>
-                <i>{projectDescription}</i>
-              </p>
-            </div>
-            <div className={styles.projectFooter}>
-              <div className={styles.projectFooterLeft}>
-                <h3>{projectCreator}</h3>
-              </div>
-            </div>
-            <Button type="primary" style={{
-              width: '50%',
-              borderRadius: 5,
-              backgroundColor: '#f08080',
-            }}>
-              Xem chi tiết
-            </Button>
-          </div>
+            index={index}
+            projectId={project.id}
+            onClick={() => handleNavigateToProject(project.id)}
+          />
         ))}
       </div>
       <Pagination defaultCurrent={1} total={50} />;

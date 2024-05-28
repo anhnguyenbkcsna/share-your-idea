@@ -9,7 +9,8 @@ import {
   BulbOutlined,
   ProjectOutlined,
   DollarOutlined,
-  MailOutlined
+  MailOutlined,
+  GoogleOutlined
 } from '@ant-design/icons'
 import { Button, Layout, Menu, theme } from 'antd'
 import { useEffect } from 'react'
@@ -34,19 +35,14 @@ const items = [
   getItem('Triển khai cuộc thi', 'contest', <ProjectOutlined />, [
     getItem(<Link to='/contest'>Các cuộc thi</Link>, 'contest'), 
     getItem(<Link to='/contest/new'>Tạo cuộc thi</Link>, 'mySubmission'),
-    getItem(<Link to='/contest/:contestId'>Thông tin cuộc thi</Link>, 'submissionList'),
-    getItem(<Link to='/contest/submit'>Bài dự thi</Link>, 'submission'),
-    getItem(<Link to='/contest/ideas/:id'>Chi tiết bài dự thi</Link>, 'submissionDescription'),
-    getItem(<Link to='/contest/ideas/:id/mark'>Chấm điểm</Link>, 'submissionMark'),
     
   ]),
   getItem('Kêu gọi tài trợ', 'sponsor', <DollarOutlined />, [
     getItem(<Link to='/sponsor'>Kêu gọi tài trợ</Link>, 'sponsor'),
     getItem(<Link to='/sponsor/projects'>Các dự án kêu gọi</Link>, 'createSponsor'),
-    getItem(<Link to='/sponsor/projects/:id'>Chi tiết dự án</Link>, 'sponsorDescription'),
-    getItem(<Link to='/sponsor/projects/:id/edit'>Chỉnh sửa dự án tài trợ</Link>, 'sponsorDetail'),
   ]), 
   getItem(<Link to='/email'>Liên hệ</Link>, 'email', <MailOutlined />),
+  getItem(<Link to='/sponsor/create-meet'>Google Meet</Link>, '/sponsor/meet', <GoogleOutlined />),
 ]
 
 const styleConfig = {

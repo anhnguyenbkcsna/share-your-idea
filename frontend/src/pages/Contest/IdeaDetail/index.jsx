@@ -7,11 +7,13 @@ import ContestCommentCard from './CommentCard'
 import ContestCommentList from './CommentList'
 import RankingBox from './Ranking'
 import { OrangeBasicButton } from '../Components/button'
-import { Button, Input } from 'antd'
+import { Button, Input, Descriptions } from 'antd'
 import { localStorageConstant } from '../../../utils/global.constants'
 import { DiffFilled, DislikeFilled, DislikeOutlined, LikeFilled, LikeOutlined } from '@ant-design/icons'
 import TextArea from 'antd/es/input/TextArea'
-import { contestSubmission, getContestSubmissionMark } from '../../../api/contest'
+import { contestSubmission, getContestById, getContestSubmissionMark } from '../../../api/contest'
+import { getIdeaById } from '../../../api/idea'
+import { getUserById } from '../../../api/user'
 
 export default function ContestIdeaDetailPage() {
   const navigate = useNavigate()
@@ -20,9 +22,14 @@ export default function ContestIdeaDetailPage() {
   // const [dislike, setDislike] = useState(212)
   const [contestId, setContestId] = useState(window.location.pathname.split('/')[2])
   const [ideaId, setIdeaId] = useState(window.location.pathname.split('/')[4])
+  const [contest, setContest] = useState({})
+  const [idea, setIdea] = useState({})
+  const [comment, setComment] = useState('')
+
   const [grades, setGrades] = useState([0,0,0,0,0])
-  const organizer = 'GDSC HCMC'
-  const innovatorName = 'Nguyễn'
+
+  const [author, setAuthor] = useState('')
+  const [authorEmail, setAuthorEmail] = useState('')
   const innovatorAvtUrl = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s'
 
   const dataSource = [
@@ -70,22 +77,48 @@ export default function ContestIdeaDetailPage() {
 
   useEffect(() => {
     window.scrollTo(0, 0)
-    getContestSubmissionMark().then(res => {
+    getContestById(contestId).then(res => {
+      console.log(">> Get contest:", res)
+      setContest(res)
+    }).catch(err => {
+      console.log(err)
+    })
+
+    getIdeaById(ideaId).then(res => {
+      console.log(">> Get idea:", res)
+      setIdea(res)
+    }).catch(err => {
+      console.log(err)
+    })
+
+    getContestSubmissionMark().then((res) => {
       console.log(contestId, ideaId)
       getContestSubmissionMark(contestId, ideaId).then(res => {
         console.log("getContestSubmissionMark", res)
         setGrades(res.data.data.grades)
+        setComment(res.data.data.comment)
       }
       ).catch(err => {
         console.log(err)
       })
     })
+
   }, [])
+
+  useEffect(() => {
+    getUserById(idea.innovator_id).then(res => {
+      console.log(">> Get user:", res)
+      setAuthor(res.name)
+      setAuthorEmail(res.email)
+    }).catch(err => {
+      console.log(err)
+    })
+  }, [idea])
 
   return (
     <div className={styles.container}>
       <div className={styles.contestHeading}>
-        {organizer}
+        {contest.name}
         <button 
           style={{
             float: 'right',
@@ -104,9 +137,11 @@ export default function ContestIdeaDetailPage() {
           Chấm điểm
         </button>
       </div>
-      <div className={styles.mediaBox}>
-        Video
-      </div>
+      <img
+        src={contest.files ? contest.files[0] : "https://www.binus.edu/wp-content/uploads/2017/03/Web-Banner-Innovation-Award-2017_2-01.jpg"}
+        alt="idea"
+      >
+      </img>
       <div className={styles.mainContent}>
         <div className={styles.information}>
           <div className={styles.ideaHeading}>
@@ -123,30 +158,83 @@ export default function ContestIdeaDetailPage() {
               />
             </div>
             <div className={genericStyles.authorName}>
-              {innovatorName}
+              {author}
             </div>
           </div>
 
           <div className={styles.line}>
-            Số lượng: 5 thành viên
+            Số lượng: {idea.teamDescription}
           </div>
           <div className={styles.line}>
-            Lĩnh vực: Công nghệ Hóa học
+            Lĩnh vực: {idea.domain}
           </div>
           <div className={styles.line}>
             <div className={styles.ideaStatus}>
               Trạng thái dự án
             </div>
-            Đã có prototype thực thi tốt trong môi trường dev
+            {idea.currentDev}
           </div>
         </div>
 
         <div className={styles.detail}>
           <div className={styles.ideaHeading}>
-            Hệ thống phân loại tái chế
+            {idea.name}
+          </div>
+          <div className={styles.slogan}>
+            {idea.slogan}
           </div>
           <div className={styles.para}>
-            Tái chế và sử dụng các phế thải và sản phẩm phụ trong quá trình công nghiệp và nông nghiệp để chế tạo một
+            <h3 className={styles.subTitle}>
+              Vấn đề
+            </h3>
+              {idea.problem}
+          </div>
+          <div className={styles.para}>
+            <h3 className={styles.subTitle}>
+              Giải pháp
+            </h3>
+              {idea.solution}
+          </div>
+          <div className={styles.para}>
+            <h3 className={styles.subTitle}>
+              Đối tượng khách hàng
+            </h3>
+              <Descriptions bordered style={{ marginBottom: 20 }}>
+                <Descriptions.Item 
+                  labelStyle={{backgroundColor: '#ddd'}}
+                  contentStyle={{backgroundColor: '#eee'}}
+                  label='Khu vực'
+                >
+                  {idea.geographical}
+                </Descriptions.Item>
+                <Descriptions.Item 
+                  labelStyle={{backgroundColor: '#ddd'}}
+                  contentStyle={{backgroundColor: '#eee'}}
+                  label='Độ tuổi'
+                >
+                  {idea.ageRange}
+                </Descriptions.Item>
+                <Descriptions.Item 
+                  labelStyle={{backgroundColor: '#ddd'}}
+                  contentStyle={{backgroundColor: '#eee'}}
+                  label='Đối tượng'
+                >
+                  {idea.professional}
+                </Descriptions.Item>
+              </Descriptions>
+              {idea.behavior}
+          </div>
+          <div className={styles.para}>
+            <h3 className={styles.subTitle}>
+              Các ứng dụng tương tự
+            </h3>
+              {idea.apps}
+          </div>
+          <div className={styles.para}>
+            <h3 className={styles.subTitle}>
+              Điểm nổi bật của ý tưởng
+            </h3>
+              {idea.outstand}
           </div>
         </div>
       </div>
@@ -160,10 +248,6 @@ export default function ContestIdeaDetailPage() {
         <div className={styles.evaluation}>
           <div className={styles.evaluationTable}>
             <div>
-              <RankingBox />
-            </div>
-            <div></div>
-            <div>
               <div className={styles.tblItem}>Độ sáng tạo</div>
               <div className={styles.tblItem}>Khả thi</div>
               <div className={styles.tblItem}>Độ hiệu quả</div>
@@ -176,6 +260,12 @@ export default function ContestIdeaDetailPage() {
               <div className={styles.tblItem}>{grades[2]}</div>
               <div className={styles.tblItem}>{grades[3]}</div>
               <div className={styles.tblItem}>{grades[4]}</div>
+            </div>
+            <div>
+              <div className={styles.subTitle}>
+                Nhận xét từ giám khảo
+              </div>
+              {comment}
             </div>
           </div>
           <h2 className={styles.point}>
@@ -198,7 +288,7 @@ export default function ContestIdeaDetailPage() {
             <ContestCommentInput />
           </div>
           <div className={styles.comments}>
-            {/* <ContestCommentList /> */}
+            {/* <ContestCommentList data={idea.comment}/> */}
           </div>
         </div>
         {/* <div className={styles.rankingWrapper}>

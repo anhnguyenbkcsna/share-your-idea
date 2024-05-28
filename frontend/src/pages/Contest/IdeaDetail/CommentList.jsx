@@ -3,11 +3,7 @@ import { Avatar, List, Space, ConfigProvider, theme, Pagination } from 'antd'
 import ContestCommentCard from './CommentCard'
 import styles from './styles.module.scss'
 
-const data = Array.from({ length: 83 }).map((_, i) => ({
-}))
-
-
-export default function ContestCommentList() {
+export default function ContestCommentList({ data }) {
   return (
     <ConfigProvider
       theme={{

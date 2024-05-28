@@ -38,6 +38,7 @@ class IdeaViewSet(viewsets.ViewSet):
         url = AI_SERVER_URL + "/spam_filtering"
         idea = request.data
         idea["_id"] = uuid.uuid4().hex
+        idea["files"] = []
 
         try:
             response = requests.get(

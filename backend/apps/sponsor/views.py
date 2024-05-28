@@ -34,16 +34,17 @@ class SponsorPackageViewSet(viewsets.ViewSet):
             serializer = self.serializer_class(data=request.data)
             if not serializer.is_valid(raise_exception=True):
                 return Response(serializer.errors, status=400)
-            
-            res = self.collection.update_one({
-                "_id": ObjectId(id)
-            }, {
-                "$push": {
-                    "packages": serializer.validated_data
-                }
-            })
-            return CustomResponse("Package added successfully", {"modified_count": res.modified_count }, status=201)
-        # Handle GET 
+
+            res = self.collection.update_one(
+                {"_id": ObjectId(id)},
+                {"$push": {"packages": serializer.validated_data}},
+            )
+            return CustomResponse(
+                "Package added successfully",
+                {"modified_count": res.modified_count},
+                status=201,
+            )
+        # Handle GET
         if request.GET.get("idea_id"):
             return CrudHelper.get_by_query(
                 {"idea_id": request.GET.get("idea_id")},
@@ -59,7 +60,13 @@ class SponsorPackageViewSet(viewsets.ViewSet):
         event = self.collection.find_one({"_id": ObjectId(id)})
         if not event:
             return CustomResponse("Event not found", status=400)
-        return CustomResponse("Packages retrieved successfully", event.get("packages"))
+        return Response(
+            {
+                "message": "Packages retrieved successfully",
+                "data": event.get("packages", []),
+            },
+            status=200,
+        )
 
     @action(
         detail=False,
@@ -70,11 +77,16 @@ class SponsorPackageViewSet(viewsets.ViewSet):
         event = self.collection.find_one({"_id": ObjectId(id)})
         if not event:
             return CustomResponse("Event not found", status=400)
-        
+
         packages = event.get("packages", [])
         try:
             package = packages[int(package_id)]
-            return CustomResponse("Package retrieved successfully", package)
+            if not package:
+                return CustomResponse("Package not found", status=400)
+            return Response(
+                {"message": "Package retrieved successfully", "data": package},
+                status=200,
+            )
         except IndexError:
             return CustomResponse("Package not found", status=400)
 

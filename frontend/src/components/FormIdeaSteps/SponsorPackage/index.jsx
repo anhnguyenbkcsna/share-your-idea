@@ -4,7 +4,7 @@ import PackageCard from "./packageCard"
 import { Button } from "antd"
 import { PlusCircleOutlined } from "@ant-design/icons"
 
-const SponsorPackage = () => {
+const SponsorPackage = ({ submit }) => {
   const [numberOfPackage, setNumberOfPackage] = useState(1)
   return (
     <>
@@ -17,6 +17,7 @@ const SponsorPackage = () => {
             height: 50,
             marginBottom: 20,
             borderRadius: 10,
+            backgroundColor: '#f08080',
           }}
         >
           <PlusCircleOutlined />
@@ -25,7 +26,7 @@ const SponsorPackage = () => {
       </div>
       <div className={styles.packageContainer}>
         {[...Array(numberOfPackage)].map((_, index) => (
-          <PackageCard key={index} />
+          <PackageCard key={index} id={index} submit={submit}/>
         ))}
       </div>
     </>

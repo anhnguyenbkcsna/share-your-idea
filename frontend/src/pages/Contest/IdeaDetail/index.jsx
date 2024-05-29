@@ -26,7 +26,7 @@ export default function ContestIdeaDetailPage() {
   const [idea, setIdea] = useState({})
   const [comment, setComment] = useState('')
 
-  const [grades, setGrades] = useState([0,0,0,0,0])
+  const [grades, setGrades] = useState([0, 0, 0, 0, 0])
 
   const [author, setAuthor] = useState('')
   const [authorEmail, setAuthorEmail] = useState('')
@@ -95,8 +95,10 @@ export default function ContestIdeaDetailPage() {
       console.log(contestId, ideaId)
       getContestSubmissionMark(contestId, ideaId).then(res => {
         console.log("getContestSubmissionMark", res)
-        setGrades(res.data.data.grades)
-        setComment(res.data.data.comment)
+        if(res.data.data.grades !== undefined){
+          setGrades(res.data.data.grades)
+          setComment(res.data.data.comment)
+        }
       }
       ).catch(err => {
         console.log(err)
@@ -254,13 +256,13 @@ export default function ContestIdeaDetailPage() {
               <div className={styles.tblItem}>Tính tiện ích</div>
               <div className={styles.tblItem}>Tính ứng dụng</div>
             </div>
-            <div>
+            {grades && <div>
               <div className={styles.tblItem}>{grades[0]}</div>
               <div className={styles.tblItem}>{grades[1]}</div>
               <div className={styles.tblItem}>{grades[2]}</div>
               <div className={styles.tblItem}>{grades[3]}</div>
               <div className={styles.tblItem}>{grades[4]}</div>
-            </div>
+            </div>}
             <div>
               <div className={styles.subTitle}>
                 Nhận xét từ giám khảo
@@ -269,7 +271,7 @@ export default function ContestIdeaDetailPage() {
             </div>
           </div>
           <h2 className={styles.point}>
-            {grades.reduce((a, b) => a + b, 0) / 5}
+            {grades?.reduce((a, b) => a + b, 0) / 5}
           </h2>
         </div>
       </div>

@@ -13,6 +13,7 @@ import {
   Divider,
   ConfigProvider,
   Space,
+  Modal
 } from "antd"
 import "./styles.css"
 import viVN from "antd/lib/locale/vi_VN"
@@ -26,6 +27,7 @@ const layout = {
 }
 export default function MeetPage() {
   const [signedIn, setSignedIn] = useState(false)
+  const [done, setDone] = useState(false)
 
   const [event, setEvent] = useState({})
 
@@ -51,7 +53,12 @@ export default function MeetPage() {
       setSignedIn(isSignedIn())
     })
   }
-
+  const handleOk = () => {
+    setDone(false)
+  }
+  const handleCancel = () => {
+    setDone(false)
+  }
   const handleFinish = async (event) => {
     for (let key in event) {
       event[key] = event[key] ?? ""
@@ -61,6 +68,8 @@ export default function MeetPage() {
     try {
       const response = await createGoogleMeetEvent(event)
       console.log("Event created:", response)
+      setEvent(response.result)
+      setDone(true)
     } catch (error) {
       console.error("Error creating event:", error)
     }
@@ -89,7 +98,7 @@ export default function MeetPage() {
         Tạo lịch Google Meet
       </h1>
       <div>
-        {!signedIn && (
+        {!signedIn && !done && (
           <>
             <h3
               style={{
@@ -118,7 +127,7 @@ export default function MeetPage() {
           </>
         )}
       </div>
-      {signedIn && (
+      {signedIn && !done && (
         <div>
           <ConfigProvider locale={viVN}>
             <Form onFinish={handleFinish} {...layout}>
@@ -186,6 +195,41 @@ export default function MeetPage() {
               </Button>
             </Form>
           </ConfigProvider>
+        </div>
+      )}
+      {done && (
+        <div style={{
+          textAlign: "center",
+          marginTop: "5rem",
+          width: "50%",
+          margin: "0 auto",
+        }}>
+          <Divider />
+          <h2>Thông tin sự kiện</h2>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "3fr 3fr",
+              textAlign: "left",
+            }}
+          >
+            <h3>Tên sự kiện: </h3>
+            <h3>{event?.summary}</h3>
+            <h3>Mô tả: </h3>
+            <h3>{event?.description}</h3>
+            <h3>Đường dẫn cuộc họp: </h3>
+            <h3>
+              <a href={event?.hangoutLink} target="_blank">
+                {event?.hangoutLink}
+              </a>
+            </h3>
+            <h3>Ngày giờ bắt đầu: </h3>
+            <h3>{event?.start?.dateTime}</h3>
+            <h3>Ngày giờ kết thúc: </h3>
+            <h3>{event?.end?.dateTime}</h3>
+            <h3>Người tổ chức: </h3>
+            <h3>{event?.creator?.email}</h3>
+          </div>
         </div>
       )}
     </div>

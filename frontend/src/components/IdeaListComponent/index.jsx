@@ -29,7 +29,7 @@ const IdeaListComponent = (props) => {
           <List.Item.Meta
             avatar={<Avatar src={item.avatar} />}
             title={
-              <NavLink to = {`/idea/${item.id}`} >
+              <NavLink to = {`/idea/${item._id.$oid}`} >
                 {rmvQuote(item.name)}
               </NavLink>
             }

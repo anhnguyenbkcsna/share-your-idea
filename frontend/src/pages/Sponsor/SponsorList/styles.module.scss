@@ -8,12 +8,12 @@
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
 }
 .header{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  text-align: center;
+  color: #f08080;
 }
 .content{
   padding: 20px;
+  text-align: center;
 }
 .projectList{
   display: grid;

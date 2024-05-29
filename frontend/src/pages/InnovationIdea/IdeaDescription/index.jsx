@@ -71,6 +71,7 @@ const IdeaDescriptionPage = () => {
     if (fetchIdeas.length > 0) {
       let idea = fetchIdeas.find((item) => item.id === ideaId)
       setIdea(idea)
+      console.log('idea', idea)
     }
   }, [fetchIdeas])
 

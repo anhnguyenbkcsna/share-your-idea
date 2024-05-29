@@ -2,22 +2,31 @@ import React, { useEffect, useState } from "react"
 import styles from "./styles.module.scss"
 import { useNavigate } from "react-router-dom"
 import genericStyles from "../styles.module.scss"
-import { Button, Input, Table } from "antd"
-import { Form, InputNumber } from "antd"
+import { Button, Input, message, Table } from "antd"
+import { Form, Descriptions } from "antd"
 import MarkItem from "./markItem"
 import { postContestSubmissionMark } from "../../../api/contest"
+import { getIdeaById } from "../../../api/idea"
+import { getContestById, getContestSubmissionMark } from "../../../api/contest"
+
 const { TextArea } = Input
 
 export default function MarkPage() {
   const navigate = useNavigate()
   const [form] = Form.useForm()
   const [criterias, setCriterias] = useState(['creative', 'feasibility', 'effective', 'utility', 'applicability'])
-  const [averageMark, setAverageMark] = useState(0.0)
-  const [vote, setVote] = useState("none")
-  const [like, setLike] = useState(5331)
-  const [dislike, setDislike] = useState(212)
-  const organizer = "GDSC HCMC"
-  const innovatorName = "Nguyễn"
+  const [idea, setIdea] = useState({})
+  const [contestId, setContestId] = useState(window.location.pathname.split('/')[2])
+  const [ideaId, setIdeaId] = useState(window.location.pathname.split('/')[4])
+  
+  const [contest, setContest] = useState({})
+  const [comment, setComment] = useState('')
+
+  const [grades, setGrades] = useState([0,0,0,0,0])
+
+  const [author, setAuthor] = useState('')
+  const [authorEmail, setAuthorEmail] = useState('')
+
   const innovatorAvtUrl =
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s"
 
@@ -69,6 +78,12 @@ export default function MarkPage() {
     console.log(values)
     postContestSubmissionMark(obj, contestId).then((res) => {
       console.log(res)
+      message.success("Đã gửi điểm")
+      // wait 1 sec
+      setTimeout(() => {
+        navigate(`/contest/${contestId}/ideas/${ideaId}`)
+      }, 1000)
+
     }).catch((err) => {
       console.log(err)
     })
@@ -76,12 +91,49 @@ export default function MarkPage() {
 
   useEffect(() => {
     window.scrollTo(0, 0)
-  }, [])
+    getContestById(contestId).then(res => {
+      console.log(">> Get contest:", res)
+      setContest(res)
+    }).catch(err => {
+      console.log(err)
+    })
 
+    getIdeaById(ideaId).then(res => {
+      console.log(">> Get idea:", res)
+      setIdea(res)
+    }).catch(err => {
+      console.log(err)
+    })
+
+    getContestSubmissionMark().then((res) => {
+      console.log(contestId, ideaId)
+      getContestSubmissionMark(contestId, ideaId).then(res => {
+        console.log("getContestSubmissionMark", res)
+        if(res.data.data.grades === null) {
+        //   setGrades([0,0,0,0,0])
+        // }
+        // else {
+          setGrades(res.data.data.grades)
+          setComment(res.data.data.comment)
+        }
+      }
+      ).catch(err => {
+        console.log(err)
+      })
+    })
+
+  }, [])
+  
   return (
     <div className={styles.container}>
-      <div className={styles.contestHeading}>{organizer}</div>
-      <div className={styles.mediaBox}>Video</div>
+      <div className={styles.contestHeading}>
+          {contest?.name}
+      </div>
+      {/* <div className={styles.mediaBox}>Video</div> */}
+      <img
+        src={contest.files ? contest.files[0] : "https://www.binus.edu/wp-content/uploads/2017/03/Web-Banner-Innovation-Award-2017_2-01.jpg"}
+        alt="idea"
+      ></img>
       <div className={styles.mainContent}>
         <div className={styles.information}>
           <div className={styles.ideaHeading}>Thông tin</div>
@@ -92,22 +144,82 @@ export default function MarkPage() {
             <div className={genericStyles.authorAvtWrapper}>
               <img alt="contest" src={innovatorAvtUrl} />
             </div>
-            <div className={genericStyles.authorName}>{innovatorName}</div>
+            <div className={genericStyles.authorName}>{author}</div>
           </div>
 
-          <div className={styles.line}>Số lượng: 5 thành viên</div>
-          <div className={styles.line}>Lĩnh vực: Công nghệ Hóa học</div>
           <div className={styles.line}>
-            <div className={styles.ideaStatus}>Trạng thái dự án</div>
-            Đã có prototype thực thi tốt trong môi trường dev
+            Số lượng: {idea.teamDescription}
+          </div>
+          <div className={styles.line}>
+            Lĩnh vực: {idea.domain}
+          </div>
+          <div className={styles.line}>
+            <div className={styles.ideaStatus}>
+              Trạng thái dự án
+            </div>
+            {idea.currentDev}
           </div>
         </div>
 
         <div className={styles.detail}>
-          <div className={styles.ideaHeading}>Hệ thống phân loại tái chế</div>
+          <div className={styles.ideaHeading}>
+            {idea.name}
+          </div>
+          <div className={styles.slogan}>
+            {idea.slogan}
+          </div>
           <div className={styles.para}>
-            Tái chế và sử dụng các phế thải và sản phẩm phụ trong quá trình công
-            nghiệp và nông nghiệp để chế tạo một
+            <h3 className={styles.subTitle}>
+              Vấn đề
+            </h3>
+              {idea.problem}
+          </div>
+          <div className={styles.para}>
+            <h3 className={styles.subTitle}>
+              Giải pháp
+            </h3>
+              {idea.solution}
+          </div>
+          <div className={styles.para}>
+            <h3 className={styles.subTitle}>
+              Đối tượng khách hàng
+            </h3>
+              <Descriptions bordered style={{ marginBottom: 20 }}>
+                <Descriptions.Item 
+                  labelStyle={{backgroundColor: '#ddd'}}
+                  contentStyle={{backgroundColor: '#eee'}}
+                  label='Khu vực'
+                >
+                  {idea.geographical}
+                </Descriptions.Item>
+                <Descriptions.Item 
+                  labelStyle={{backgroundColor: '#ddd'}}
+                  contentStyle={{backgroundColor: '#eee'}}
+                  label='Độ tuổi'
+                >
+                  {idea.ageRange}
+                </Descriptions.Item>
+                <Descriptions.Item 
+                  labelStyle={{backgroundColor: '#ddd'}}
+                  contentStyle={{backgroundColor: '#eee'}}
+                  label='Đối tượng'
+                >
+                  {idea.professional}
+                </Descriptions.Item>
+              </Descriptions>
+              {idea.behavior}
+          </div>
+          <div className={styles.para}>
+            <h3 className={styles.subTitle}>
+              Các ứng dụng tương tự
+            </h3>
+              {idea.apps}
+          </div>
+          <div className={styles.para}>
+            <h3 className={styles.subTitle}>
+              Điểm nổi bật của ý tưởng
+            </h3>
+              {idea.outstand}
           </div>
         </div>
       </div>

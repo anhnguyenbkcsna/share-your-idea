@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { deployedAPI } from '../utils/form.constants'
-import { ideaEndpoint, serverAIEndPoint } from '../utils/api.constants'
+import { ideaEndpoint, serverAIEndPoint, innovatorIdeasEndpoint } from '../utils/api.constants'
 import { localStorageConstant } from '../utils/global.constants'
 
 export const createNewIdea = async (ideaObj) => {
@@ -112,7 +112,7 @@ export const editIdea = async (ideaObj) => {
 export const getIdeaOfCurrentUser = async (userId) => {
   const accessToken = localStorage.getItem(localStorageConstant.ACCESS_TOKEN)
   return axios
-    .get(`${ideaEndpoint}current/`, {
+    .get(`${innovatorIdeasEndpoint}${userId}/ideas/`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       }
@@ -143,8 +143,9 @@ export const getIdeaById = async (ideaId) => {
 }
 
 export const sendIdeaToAIServer = async (ideaObj) => {
+  ideaObj.outstand = [ideaObj.outstand]
   return await axios
-    .post(`${serverAIEndPoint}`, ideaObj, {
+    .post(`${serverAIEndPoint}`, JSON.stringify(ideaObj), {
       headers: {
         Authorization: `Bearer ${localStorage.getItem(localStorageConstant.ACCESS_TOKEN)}`,
         'Content-Type': 'application/json'

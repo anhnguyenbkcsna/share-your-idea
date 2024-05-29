@@ -22,6 +22,6 @@ export const contestEndpoint = deployedAPI + '/contests/'
 
 export const sponsorEventEndpoint = deployedAPI + '/sponsors/events/'
 
-export const sponsorPackageEndpoint = deployedAPI + '/sponsors/packages/'
-
 export const serverAIEndPoint = deployedAPI + '/ideas/filter/'
+
+export const innovatorIdeasEndpoint = deployedAPI + '/innovators/'

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Form } from 'antd'
+import { Button, Form } from 'antd'
 
 import { userSponsorFormStepItem } from '../../../utils/form.constants'
 import { editIdea } from '../../../api/idea'
@@ -11,30 +11,33 @@ import SponsorPackage from '../../../components/FormIdeaSteps/SponsorPackage'
 import axios from 'axios'
 import { ideaEndpoint, sponsorEventEndpoint, sponsorProjectEndpoint } from '../../../utils/api.constants'
 import { localStorageConstant } from '../../../utils/global.constants'
-import { createNewPackage } from '../../../api/sponsor'
+import { createNewSponsorEvent } from '../../../api/sponsor'
 
 const SponsorEditor = () => {
   const navigate = useNavigate()
   const [ideaId, setIdeaId] = useState(window.location.href.split('/')[5])
+  const [submit, setSubmit] = useState(false)
+  const [idea, setIdea] = useState({})
 
-  const onFormFinish = (formObj) => {
-    const formData = new FormData()
-    for (let key in formObj)
-    {
-      formData.append(key, formObj[key])
-    }
-    for (var pair of formData.entries()) {
-      console.log(pair[0]+ ', ' + pair[1])
-    }
+  // const onFormFinish = (formObj) => {
+  //   const formData = new FormData()
+  //   for (let key in formObj)
+  //   {
+  //     formData.append(key, formObj[key])
+  //   }
+  //   formData.append('idea_id', ideaId)
+  //   for (var pair of formData.entries()) {
+  //     console.log(pair[0]+ ', ' + pair[1])
+  //   }
     
-    createNewPackage(formData).then(res => {
-      console.log('Create New Package: ', res)
-      window.scrollTo({top: 0, left: 0, behavior: 'smooth'})
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-  }
+  //   createNewSponsorEvent(formData).then(res => {
+  //     console.log('Create New Sponsor Event: ', res)
+  //     window.scrollTo({top: 0, left: 0, behavior: 'smooth'})
+  //   })
+  //   .catch((err) => {
+  //     console.log(err)
+  //   })
+  // }
 
   // Fetch project data from API with project ID
   useEffect(() => {
@@ -46,8 +49,9 @@ const SponsorEditor = () => {
         },
       })
         .then((res) => {
+          res = res.data.data
           console.log('Fetch Sponsor Project By ID: ', res)
-          return res
+          setIdea(res)
         })
         .catch((err) => {
           console.log(err)
@@ -58,14 +62,19 @@ const SponsorEditor = () => {
 
   return (
     <CusCard>
-      <FormProgress
-        onFormFinish={onFormFinish}
-        slogans={['Gói tài trợ cho dự án']}
-        // formSource={[FormOverview, FormCustomerSegment, FormValuePropositions, SponsorPackage]}
-        formSource={[SponsorPackage]}
-        dataSteps={userSponsorFormStepItem}
-        edit={false}
-      />
+      <h1 style={{ color: '#f08080'}}>{idea?.name}</h1>
+      
+      <SponsorPackage submit={submit} />
+      <Button
+        style={{
+          backgroundColor: '#f08080',
+        }}
+        htmlType='submit'
+        type={submit ? 'primary' : 'default'}
+        onClick={() => setSubmit(!submit)}
+      >
+        Gửi
+      </Button>
     </CusCard>
   )
 }

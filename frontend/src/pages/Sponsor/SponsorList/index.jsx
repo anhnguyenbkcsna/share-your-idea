@@ -13,11 +13,7 @@ const SponsorList = () => {
   const navigate = useNavigate()
   const [projectList, setProjectList] = useState([])
   const [projects, setProjects] = useState(0)
-  const [projectName, setProjectName] = useState("Tên dự án")
-  const [projectDescription, setProjectDescription] = useState("Mô tả ngắn")
-  const [projectCreator, setProjectCreator] = useState()
-  const [projectTimeLeft, setProjectTimeLeft] = useState(13)
-  const [projectPercentage, setProjectPercentage] = useState(66)
+
 
   // SEARCHING ????
   const onSearch = (value, _e, info) => {
@@ -53,24 +49,23 @@ const SponsorList = () => {
     <div className={styles.container}>
       <div className={styles.header}>
         <h1>Kêu gọi tài trợ cho ý tưởng sáng tạo</h1>
-        <Search
+        {/* <Search
           placeholder="Tìm kiếm dự án"
           onSearch={onSearch}
           style={{
             width: 400,
           }}
-        />
+        /> */}
       </div>
       <div className={styles.content}>
-        <h2>Có {projects} dự án đang kêu gọi</h2>
+        <h2>Có <span style={{ fontWeight: 'bold', color: '#f08080', fontSize: '3rem'}}>{projects}</span> dự án đang kêu gọi</h2>
       </div>
       <div className={styles.projectList}>
         {projectList.map((project, index) => (
           <SponsorCard
             key={index}
             index={index}
-            projectId={project.id}
-            onClick={() => handleNavigateToProject(project.id)}
+            sponsorId={project.id}
           />
         ))}
       </div>

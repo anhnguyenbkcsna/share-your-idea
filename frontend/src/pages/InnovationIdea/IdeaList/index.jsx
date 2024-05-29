@@ -5,7 +5,8 @@ import styles from './styles.module.scss'
 import { deployedAPI } from '../../../utils/form.constants'
 import IdeaListComponent from '../../../components/IdeaListComponent'
 import { useNavigate } from 'react-router-dom'
-import { getAllIdeas } from '../../../api/idea'
+import { getAllIdeas, getIdeaOfCurrentUser } from '../../../api/idea'
+import { localStorageConstant } from '../../../utils/global.constants'
 
 const InnovatorIdea = () => {
   const navigate = useNavigate()
@@ -13,11 +14,34 @@ const InnovatorIdea = () => {
 
   useEffect(() => {
     const fetchIdea = async () => {
-      let ideas = await getAllIdeas()
-      console.log('>> ideas', ideas)
-      setFetchIdeas(ideas)
+      // let ideas = await getAllIdeas()
+      // console.log('>> ideas', ideas)
+      // setFetchIdeas(ideas)
+      await axios.get(`${deployedAPI}/accounts/`, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem(localStorageConstant.ACCESS_TOKEN)}`,
+        },
+      }).then((res) => {
+        console.log('>> users', res.data.data)
+        res.data.data.map((user) => {
+          if (user.email === localStorage.getItem(localStorageConstant.EMAIL)) {
+            console.log('>> user', user.id)
+            getIdeaOfCurrentUser(user.id).then((res) => {
+              console.log('>> ideas', res)
+              setFetchIdeas(res)
+            })
+          }
+        })
+      })
     }
     fetchIdea()
+    // const fetchIdea = async () => {
+    //   let ideas = await getIdeaOfCurrentUser()
+    //   console.log('>> ideas', ideas)
+    //   setFetchIdeas(ideas)
+    // }
+    // fetchIdea()
   }, [])
 
   return (
@@ -29,6 +53,8 @@ const InnovatorIdea = () => {
           height: 50,
           borderRadius: 10,
           fontSize: '1.7rem',
+          backgroundColor: '#ffde78',
+          color: 'black',
         }}>
           Tạo ý tưởng
         </Button>

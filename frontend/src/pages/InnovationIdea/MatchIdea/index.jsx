@@ -93,7 +93,7 @@ const MatchIdea = () => {
         Danh sách ý tưởng phù hợp với yêu cầu
       </h1>
       <h3>
-        Yêu cầu của bạn: Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+        {/* Yêu cầu của bạn: Lorem Ipsum is simply dummy text of the printing and typesetting industry.  */}
       </h3>
       <OwlCarousel
         className='owl-theme'

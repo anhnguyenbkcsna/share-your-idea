@@ -3,7 +3,11 @@ import styles from "./styles.module.scss"
 import { Button, Modal } from "antd"
 import { Link, useNavigate } from "react-router-dom"
 import MyIdeaList from "../../Contest/Info/myIdeaList"
-import { getAllIdeas } from "../../../api/idea"
+import { getIdeaOfCurrentUser } from "../../../api/idea"
+import { createNewSponsorEvent } from "../../../api/sponsor"
+import { deployedAPI } from "../../../utils/form.constants"
+import { localStorageConstant } from "../../../utils/global.constants"
+import axios from "axios"
 
 const SponsorHomePage = () => {
   const navigate = useNavigate()
@@ -20,10 +24,30 @@ const SponsorHomePage = () => {
     navigate(`/sponsor/projects/${yourSubmit}/edit`)
   }
 
-  useEffect(() => {
-    getAllIdeas().then((res) => {
-      setFetchIdeas(res)
+  const getMyIdea = async () => {
+    await axios.get(`${deployedAPI}/accounts/`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem(localStorageConstant.ACCESS_TOKEN)}`,
+      },
+    }).then((res) => {
+      console.log('>> users', res.data.data)
+      res.data.data.map((user) => {
+        if (user.email === localStorage.getItem(localStorageConstant.EMAIL)) {
+          console.log('>> user', user.id)
+          getIdeaOfCurrentUser(user.id).then((res) => {
+            console.log('>> ideas', res)
+            setFetchIdeas(res)
+          })
+        }
+      })
     })
+  }
+  useEffect(() => {
+    // getAllIdeas().then((res) => {
+    //   setFetchIdeas(res)
+    // })
+    getMyIdea()
   }, [])
 
   return (
@@ -76,7 +100,7 @@ const SponsorHomePage = () => {
           </div>
           <div className={styles.elementCard}>
             <h1>76</h1>
-            <h3>người tài trợ</h3>
+            <h3>nhà tài trợ</h3>
           </div>
         </div>
       </div>

@@ -131,6 +131,9 @@ const EmailPage = () => {
             margin: '20 auto',
             width: '20%',
             display: 'block',
+            backgroundColor: '#ffa3d8',
+            color: '#121481',
+            fontWeight: 'bold',
           }}
         >
           Send

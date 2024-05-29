@@ -99,7 +99,6 @@ const CreateIdeaFormPage = () => {
     console.log("curStep", parseInt(curStep))
     setCurrentStep(parseInt(curStep))
   }, [])
-
   const onFormFinish = (formObj) => {
     messageApi.open({
       type: "loading",
@@ -107,15 +106,18 @@ const CreateIdeaFormPage = () => {
     })
     
     console.log("Send idea to AI server: ", formObj)
-
+    window.scrollTo({top: 0, left: 0, behavior: 'smooth'})
+    
     sendIdeaToAIServer(formObj).then((res) => {
       console.log(">> AI respond: ", res)
       switch (res) {
         case "VALID":
           message.success("Gửi ý tưởng thành công", 2.5)
+          createNewIdea(formObj).then(res => {
+            window.scrollTo({top: 0, left: 0, behavior: 'smooth'})
+          })
           delay(3000)
           // Send idea to backend server
-          finishForm()
           navigate("/innovator")
           break
         case "WARNING":

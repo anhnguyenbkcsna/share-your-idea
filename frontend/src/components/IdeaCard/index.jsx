@@ -31,7 +31,7 @@ const IdeaCard = (props) => {
 		  setImageSrc(idea.src)
 	  }
 	  else {
-		  setImageSrc(null)
+		  setImageSrc(defaultImage)
 	  }
   }, [])
 

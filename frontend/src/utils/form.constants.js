@@ -1,9 +1,15 @@
-import { labelValueGenerate } from './utils'
 import { deployedAPI } from './api.constants'
 
 export { deployedAPI }
 // export const deployedAPI = 'https://share-your-idea.onrender.com'
-
+export const  labelValueGenerate = (strList) => {
+  return strList.map((item) => {
+    return {
+      label: item,
+      value: item,
+    }
+  })
+}
 export const gender = [
   {
     label: 'Nam',
@@ -317,3 +323,28 @@ export const currentDevStage = [
   '[Beta] Ý tưởng đã hoàn thiện và cần một số chỉnh sửa nhỏ',
   '[Hoàn thiện] Ý tưởng đã có thể đưa ra thị trường và hoạt động tốt',
 ]
+
+export const sponsorBenefits = [
+  'Logo và tên công ty được hiển thị trên các tài liệu quảng cáo, trang web và các ấn phẩm của dự án.',
+  'Được giới thiệu tại các sự kiện của dự án.',
+  'Cơ hội tiếp cận với các nhà đầu tư và khách hàng tiềm năng.',
+  'Tăng nhận thức về thương hiệu và uy tín của công ty.',
+  'Được hưởng lợi từ các ưu đãi về thuế.Tài trợ bằng sản phẩm hoặc dịch vụ',
+  'Sản phẩm hoặc dịch vụ của nhà tài trợ được sử dụng trong dự án.',
+  'Logo và tên công ty được hiển thị trên sản phẩm hoặc dịch vụ của dự án.',
+  'Cơ hội quảng bá sản phẩm hoặc dịch vụ của nhà tài trợ cho đối tượng mục tiêu.',
+  'Tăng nhận thức về thương hiệu và uy tín của công ty.',
+  'Xây dựng mối quan hệ với các khách hàng tiềm năng.Tài trợ bằng chuyên môn',
+  'Nhà tài trợ cung cấp chuyên môn của mình cho dự án.',
+  'Được ghi nhận vì sự đóng góp của mình cho dự án.',
+  'Tăng nhận thức về thương hiệu và uy tín của công ty.',
+  'Xây dựng mối quan hệ với các nhà lãnh đạo trong ngành.',
+  'Thu hút nhân tài mới.Tài trợ truyền thông.',
+  'Logo và tên công ty được hiển thị trong các tài liệu quảng cáo của dự án.',
+  'Được giới thiệu trong các bài báo, bài đăng trên blog và các phương tiện truyền thông xã hội về dự án.',
+  'Cơ hội tiếp cận với đối tượng mục tiêu của nhà tài trợ.',
+  'Tăng nhận thức về thương hiệu và uy tín của công ty.',
+  'Xây dựng mối quan hệ với các nhà báo và những người có ảnh hưởng.'
+]
+
+export const sponsorBenefitsOptions = labelValueGenerate(sponsorBenefits)

@@ -1,20 +1,24 @@
-import React, { useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import styles from "./styles.module.scss"
 import { useNavigate } from "react-router-dom"
-import { getPackageById } from "../../../api/sponsor"
+import { getSponsorEventById } from "../../../api/sponsor"
 import { Button } from "antd"
 
-const SponsorCard = ({ index, projectId }) => {
+const SponsorCard = ({ index, sponsorId }) => {
   const navigate = useNavigate()
+  const [sponsorProject, setSponsorProject] = useState()
 
   const getRandomPlaceholder = (index) => {
     return `https://picsum.photos/300/150?random=${index}`
   }
 
+  const handleNavigateToProject = (sponsorId) => {
+    navigate(`/sponsor/projects/${sponsorId}`)
+  }
+
   useEffect(() => {
-    console.log("Sponsor ID", projectId)
-    getPackageById(projectId).then((res) => {
-      console.log(">> getPackageById:", res)
+    getSponsorEventById(sponsorId).then((res) => {
+      setSponsorProject(res.data.data)
     }).catch((err) => {
       console.log("Error", err)
     })
@@ -30,12 +34,12 @@ const SponsorCard = ({ index, projectId }) => {
       </div>
       <div className={styles.projectInfo}>
         <h1>
-          {/* {projectName} {index} */}
+          {sponsorProject?.name}
         </h1>
       </div>
       <div className={styles.projectDescription}>
         <p>
-          {/* <i>{projectDescription}</i> */}
+          <i>{sponsorProject?.description}</i>
         </p>
       </div>
       <div className={styles.projectFooter}>
@@ -50,6 +54,7 @@ const SponsorCard = ({ index, projectId }) => {
           borderRadius: 5,
           backgroundColor: "#f08080",
         }}
+        onClick={() => handleNavigateToProject(sponsorId)}
       >
         Xem chi tiết
       </Button>

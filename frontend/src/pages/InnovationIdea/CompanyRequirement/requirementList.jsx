@@ -42,9 +42,12 @@ const CompanyRequirementList = () => {
   return (
     <div style={{
       padding: '0 78px',
+      margin: '0 auto',
+      width: '60%',
+      alignItems: 'center',
     }}>
-      <h1>Yêu cầu của tôi</h1>
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <h1 style={{ textAlign: 'center' }}>Yêu cầu của tôi</h1>
+      <div style={{ display: "flex", justifyContent: "center", marginBottom: '5rem' }}>
         {/* <Button onClick={handleSort} style={{
           minWidth: 150
         }}>

@@ -30,12 +30,12 @@ const SponsorCard = ({ index, sponsorId }) => {
       className={styles.projectCard}
     >
       <div className={styles.projectImage}>
-        <img src={getRandomPlaceholder(index)} alt="Project" />
+        <img src={getRandomPlaceholder(index)} alt="Project" className={styles.cover}/>
       </div>
       <div className={styles.projectInfo}>
-        <h1>
+        <h2>
           {sponsorProject?.name}
-        </h1>
+        </h2>
       </div>
       <div className={styles.projectDescription}>
         <p>

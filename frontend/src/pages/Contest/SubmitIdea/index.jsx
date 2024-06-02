@@ -6,6 +6,7 @@ import { OrangeBasicButton } from '../Components/button'
 import { contestSubmission, getContestById } from '../../../api/contest'
 import { getAllIdeas } from '../../../api/idea'
 import { getAllUsers, getUserById } from '../../../api/user'
+import { localStorageConstant } from '../../../utils/global.constants'
 const columns = [
   {
     title: 'Tên bài dự thi',
@@ -47,10 +48,11 @@ const SubmitIdeaPage = () => {
   const sendResultMail = () => {
     let emailList = []
     selectedRowKeys.forEach((key) => {
-      console.log(data[key].author)
+      console.log(data[key])
       // Get author's email through API
       // emailList.push(authorEmail)
-      emailList.push(data[key].author)
+      emailList.push(localStorage.getItem(localStorageConstant.EMAIL))
+      // emailList.push(data[key])
     })
     localStorage.setItem('email', emailList)
     navigate('/email')
@@ -59,6 +61,7 @@ const SubmitIdeaPage = () => {
   const onSelectChange = (newSelectedRowKeys) => {
     console.log('selectedRowKeys changed: ', newSelectedRowKeys)
     setSelectedRowKeys(newSelectedRowKeys)
+    console.log('selectedRowKeys: ', selectedRowKeys)
   }
   const rowSelection = {
     selectedRowKeys,
@@ -71,7 +74,7 @@ const SubmitIdeaPage = () => {
       // let averageMark
       res = res.map((submission) => {
         submission.name = submission.idea?.name
-        submission.id = submission.idea?._id.$oid
+        submission.key = submission.idea?._id.$oid
         // Chưa chấm điểm
         if (!submission.grades) {
           submission.averageMark = 0

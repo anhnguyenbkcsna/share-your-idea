@@ -25,7 +25,10 @@ export default function HomePage() {
   }
 
   useEffect(() => {
-    getContestList().then(res => setContestList(res))
+    getContestList().then(res => {
+      setContestList(res)
+      console.log(res)
+    })
   }, [])
 
   return (

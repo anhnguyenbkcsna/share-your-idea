@@ -29,6 +29,7 @@ const SponsorProject = () => {
     getSponsorEventById(sponsorId).then((res) => {
       res = res.data.data
       console.log(">> getSponsorEventById :", res)
+      setSponsorPackage([res])
 
       getIdeaById(res.idea_id).then((res) => {
         console.log(">> getIdeaById :", res)
@@ -38,32 +39,32 @@ const SponsorProject = () => {
       console.log("Error", err)
     })
 
-    // Get sponsor package by sponsorId
-    getSponsorPackageBySponsorId(sponsorId).then((res) => {
-      console.log(">> getSponsorPackageBySponsorId :", res.data.data.packages)
-      setSponsorPackage(res.data.data.packages)
+    // // Get sponsor package by sponsorId
+    // getSponsorPackageBySponsorId(sponsorId).then((res) => {
+    //   console.log(">> getSponsorPackageBySponsorId :", res.data.data.packages)
+    //   setSponsorPackage(res.data.data.packages)
 
-    })
-    .catch((err) => {
-      console.log("Error", err)
-    })
+    // })
+    // .catch((err) => {
+    //   console.log("Error", err)
+    // })
   }, [])
 
   return (
     <div className={styles.container}>
       <div className={styles.content}>
         <div style={{
-          display: "flex",
-          flexDirection: "row",
+          display: 'grid',
+          gridTemplateColumns: '6fr 1fr',
         }}>
           <h1
             style={{
-              color: "#ff8c00",
+              color: "#f08080",
             }}
           >
             {idea?.name}
           </h1>
-          <Button type="primary" style={{ marginTop: 20, height: 50 }} onClick={() => navigate('edit')}>
+          <Button type="primary" style={{ marginTop: 20, height: 50, backgroundColor: '#f08080' }} onClick={() => navigate('edit')}>
             Thêm gói tài trợ
           </Button>
         </div>
@@ -97,14 +98,20 @@ const SponsorProject = () => {
           </div>
         </p>
       </div>
-      {sponsorPackage.map((item, index) => {
+      {sponsorPackage?.map((item, index) => {
+        item = item.packages
         return (
-          <SponsorProjectCard
-            img="https://1office.vn/wp-content/uploads/2023/04/FNvBU9QVUAAlFnK-1024x683.jpg"
-            title={item.name}
-            price={item.price}
-            benefits={item.benefits}
-          />
+          <>
+            {console.log(">> SponsorPackage: ", item)}
+            <SponsorProjectCard
+              img="https://1office.vn/wp-content/uploads/2023/04/FNvBU9QVUAAlFnK-1024x683.jpg"
+              title={item[0].name}
+              description={item[0].description}
+              price={item[0].value}
+              benefits={item[0].benefits}
+            />
+          </>
+
         )
       })}
       {/* <SponsorProjectCard

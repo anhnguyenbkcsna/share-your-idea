@@ -12,6 +12,9 @@ import { HrHeading } from '../Components/hrheading'
 import MyIdeaList from './myIdeaList'
 import SubmissionList from './submissionList'
 import { getAllIdeas } from '../../../api/idea'
+import axios from 'axios'
+import { deployedAPI } from '../../../utils/api.constants'
+import { localStorageConstant } from '../../../utils/global.constants'
 const background = `https://blog.udemy.com/wp-content/uploads/2013/06/bigstock-Idea-Concept-42988369.jpg?fbclid=IwZXh0bgNhZW0CMTAAAR39L
 -0f-OTcqafqeFBMfuO9ZiJcKI07moo33Pwu9Pv7Eo7tY14R9E1vx_s_aem_AZ3TXmRtmL_bArFvRy8JwbZkDmQTLeIy65S6WvV7oTHrcnL9oAxdLkL7iNpaU8nEVKr4DuBo6k_KOkhCJ5AxUlnV`
 
@@ -30,6 +33,7 @@ const ContestInfo = () => {
   const { contestId } = useParams()
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     getContestById(contestId)
       .then(res => {
         console.log(res)
@@ -62,9 +66,13 @@ const ContestInfo = () => {
     return res
   }
 
-  const handleSubmitIdea = () => {
-    // navigate('/innovator')
+  const handleSubmitIdea = (ideaId) => {
     // window.scrollTo(0, 0)
+    // axios.post(`${deployedAPI}/contests/${contestId}/submit`, JSON.stringify(ideaId), {
+    //   headers: {
+    //     Authorization: `Bearer ${localStorage.getItem(localStorageConstant.ACCESS_TOKEN)}`
+    //   }
+    // })
     setIsModalOpen(true)
   }
 
@@ -116,8 +124,8 @@ const ContestInfo = () => {
       </Modal>
       <img
         className={styles.banner}
-        src={contest?.files ? contest.files[0] : 
-          "https://www.binus.edu/wp-content/uploads/2017/03/Web-Banner-Innovation-Award-2017_2-01.jpg"}
+        src={contest.files.length ? contest.files[0] : 
+          "https://www.uit.edu.vn/sites/vi/files/uploads/images/thumbs/202312/khoi_nghiep_0.jpg"}
         alt="Banner"
       />
       <div className={styles.container}>

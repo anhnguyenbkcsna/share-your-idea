@@ -97,7 +97,12 @@ export default function MarkPage() {
     }).catch(err => {
       console.log(err)
     })
-
+    getContestById(contestId).then(res => {
+      console.log(">> Get contest:", res)
+      setContest(res)
+    }).catch(err => {
+      console.log(err)
+    })
     getIdeaById(ideaId).then(res => {
       console.log(">> Get idea:", res)
       setIdea(res)
@@ -130,10 +135,12 @@ export default function MarkPage() {
           {contest?.name}
       </div>
       {/* <div className={styles.mediaBox}>Video</div> */}
+      {console.log(contest)}
       <img
-        src={contest.files ? contest.files[0] : "https://www.binus.edu/wp-content/uploads/2017/03/Web-Banner-Innovation-Award-2017_2-01.jpg"}
+        className={styles.banner}
+        src={"https://www.uit.edu.vn/sites/vi/files/uploads/images/thumbs/202312/khoi_nghiep_0.jpg"}
         alt="idea"
-      ></img>
+      />
       <div className={styles.mainContent}>
         <div className={styles.information}>
           <div className={styles.ideaHeading}>Thông tin</div>

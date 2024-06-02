@@ -18,8 +18,15 @@ const PackageCard = ({ id, submit }) => {
       // Log form data
       let formData = form.getFieldsValue()
       formData.idea_id = ideaId
+      formData.packages = [{
+        name: form.getFieldsValue().name,
+        description: form.getFieldsValue().description,
+        value: form.getFieldsValue().value,
+        benefits: form.getFieldsValue().benefits,
+      }]
 
       console.log("<< Form data:", formData)
+      
       createNewSponsorEvent(formData).then((res) => {
         message.success("Tạo gói tài trợ thành công")
         setTimeout(() => {

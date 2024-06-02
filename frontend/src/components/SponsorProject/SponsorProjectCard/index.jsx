@@ -1,9 +1,11 @@
 import React from 'react'
 import styles from './styles.module.scss'
 import { Button, List } from 'antd'
+import { useNavigate } from 'react-router-dom'
 import { RightOutlined } from '@ant-design/icons'
 
 const SponsorProjectCard = (props) => {
+  const navigate = useNavigate()
   const getRandomPlaceholder = (index) => {
     return `https://picsum.photos/300/150?random=${index}`
   }
@@ -36,7 +38,7 @@ const SponsorProjectCard = (props) => {
           {/* <Button type='default' className={styles.btn}>
             Chi tiết
           </Button> */}
-          <Button type='primary' className={styles.primaryBtn}>
+          <Button type='primary' className={styles.primaryBtn} onClick={() => navigate('/email')}>
             Tài trợ
           </Button>
         </div>

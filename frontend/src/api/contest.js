@@ -39,7 +39,9 @@ export const createContest = async (data) => {
   let formData = new FormData()
   for (let key in data) {
     if (typeof data[key] === "object") {
+      console.log(">> JSONdata[key]", data[key])
       formData.append(key, JSON.stringify(data[key]))
+      // formData.append(key, data[key])
     } else formData.append(key, data[key])
     // {
     //   console.log('>> data[key]', data[key])

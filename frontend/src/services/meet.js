@@ -28,9 +28,12 @@ const updateSigninStatus = (isSignedIn) => {
 }
 
 export const createGoogleMeetEvent = (event) => {
+  event.attendees = event.attendees.split(",").map((email) => { return { email } })
+  console.log(event)
   return gapi.client.calendar.events.insert({
     calendarId: "primary",
     resource: {
+      attendees: event.attendees,
       summary: event.summary,
       description: event.description,
       start: {

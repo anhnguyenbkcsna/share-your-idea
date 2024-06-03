@@ -132,6 +132,19 @@ export default function MeetPage() {
           <ConfigProvider locale={viVN}>
             <Form onFinish={handleFinish} {...layout}>
               <Form.Item
+                name="attendees"
+                label="Người tham dự"
+                required
+                rules={[
+                  {
+                    type: "string",
+                    min: 10,
+                  },
+                ]}
+              >
+                <Input placeholder="foo@gmail.com" />
+              </Form.Item>
+              <Form.Item
                 name="summary"
                 label="Tên sự kiện"
                 required
@@ -229,6 +242,8 @@ export default function MeetPage() {
             <h3>{event?.end?.dateTime}</h3>
             <h3>Người tổ chức: </h3>
             <h3>{event?.creator?.email}</h3>
+            <h3>Người tham dự: </h3>
+            <h3>{event?.attendees?.map((attendee) => attendee.email).join(", ")}</h3>
           </div>
         </div>
       )}

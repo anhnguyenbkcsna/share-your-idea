@@ -8,6 +8,7 @@ import axios from 'axios'
 
 import { deployedAPI } from '../../../utils/api.constants'
 import { getAllIdeas } from '../../../api/idea'
+import { localStorageConstant } from '../../../utils/global.constants'
 
 const ideas = [
   {
@@ -64,15 +65,41 @@ const ideas = [
 
 const MatchIdea = () => {
   const [fetchIdeas, setFetchIdeas] = useState([])
+  const [fetchReq, setFetchReq] = useState()
+  const [reqIndex, setReqIndex] = useState(window.location.href.split('/').pop())
 
   useEffect(() => {
-    const fetchIdea = async () => {
-      const allIdeas = await getAllIdeas()
-      setFetchIdeas(allIdeas)
+    // const fetchIdea = async () => {
+    //   const allIdeas = await getAllIdeas()
+    //   setFetchIdeas(allIdeas)
+    // }
+    // fetchIdea()
+    const fetchRequirement = async () => {
+      let requirement = await axios.get(`${deployedAPI}/requirements/`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem(localStorageConstant.ACCESS_TOKEN)}`,
+        }
+      }).then((res) => res = res.data.data)
+      setFetchReq(requirement[reqIndex])
+      console.log('>> requirement', requirement[reqIndex])
     }
-    fetchIdea()
+
+    fetchRequirement()
   }, [])
-  console.log('>>>> fetchIdea', fetchIdeas)
+  useEffect(() => {
+    const getTopK = async () => {
+      await axios.post(`${deployedAPI}/ideas/topk/`, fetchReq, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem(localStorageConstant.ACCESS_TOKEN)}`,
+        }
+    }).then((res) => {
+      console.log('>> topk', res.data.data)
+      setFetchIdeas(res.data.data)
+    }).catch((err) => {
+      console.log('>> err', err)
+    })}
+    getTopK()
+  }, [fetchReq])
 
   return (
     <div style={{

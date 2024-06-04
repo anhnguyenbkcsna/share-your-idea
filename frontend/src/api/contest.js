@@ -89,6 +89,28 @@ export const contestSubmission = async (contestId) => {
   }
 }
 
+export const postContestSubmission = async (data, contestId) => {
+  try {
+    const res = await axios.post(
+      `${contestEndpoint}${contestId}/submissions/`,
+      data,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem(
+            localStorageConstant.ACCESS_TOKEN
+          )}`,
+        },
+      }
+    )
+    return res
+  } catch (err) {
+    console.log("Error", err)
+    return null
+  }
+
+}
+
 export const postContestSubmissionMark = async (data, contestId) => {
   try {
     console.log(

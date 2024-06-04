@@ -84,6 +84,7 @@ export const getRouter = () => {
       </Route>
       <Route path='match-idea' Component={PublicLayout}>
         <Route index Component={MatchIdea} />
+        <Route path=':ideaId' Component={MatchIdea} />
       </Route>
       <Route path='idea' Component={PublicLayout}>
         <Route path=':ideaId' Component={IdeaDescriptionPage} />

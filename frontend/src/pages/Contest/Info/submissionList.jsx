@@ -39,7 +39,6 @@ const SubmissionList = ({ bg, submissionId }) => {
           borderTopRightRadius: 10,
       }}/>
       <div style={{ padding: 10 }}>
-        {console.log(submission)}
         {submission && <h3 style={{ color: '#ff7510', fontWeight: 'bold'}}>{submission.name}</h3>}
       </div>
     </div>

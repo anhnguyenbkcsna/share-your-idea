@@ -25,6 +25,7 @@ const layout = {
     span: 8,
   },
 }
+const TextArea = Input.TextArea
 export default function MeetPage() {
   const [signedIn, setSignedIn] = useState(false)
   const [done, setDone] = useState(false)
@@ -142,7 +143,9 @@ export default function MeetPage() {
                   },
                 ]}
               >
-                <Input placeholder="foo@gmail.com" />
+                <TextArea placeholder="foo@gmail.com" 
+                  autoSize={{ minRows: 3 }}
+                />
               </Form.Item>
               <Form.Item
                 name="summary"

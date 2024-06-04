@@ -11,10 +11,11 @@ import SubmittedIdeasPage from '../SubmittedIdeas'
 import { HrHeading } from '../Components/hrheading'
 import MyIdeaList from './myIdeaList'
 import SubmissionList from './submissionList'
-import { getAllIdeas } from '../../../api/idea'
+import { getAllIdeas, getIdeaById } from '../../../api/idea'
 import axios from 'axios'
 import { deployedAPI } from '../../../utils/api.constants'
 import { localStorageConstant } from '../../../utils/global.constants'
+import { postContestSubmission } from '../../../api/contest'
 const background = `https://blog.udemy.com/wp-content/uploads/2013/06/bigstock-Idea-Concept-42988369.jpg?fbclid=IwZXh0bgNhZW0CMTAAAR39L
 -0f-OTcqafqeFBMfuO9ZiJcKI07moo33Pwu9Pv7Eo7tY14R9E1vx_s_aem_AZ3TXmRtmL_bArFvRy8JwbZkDmQTLeIy65S6WvV7oTHrcnL9oAxdLkL7iNpaU8nEVKr4DuBo6k_KOkhCJ5AxUlnV`
 
@@ -78,6 +79,11 @@ const ContestInfo = () => {
 
   const handleOk = () => {
     console.log('>>> Submit idea', yourSubmit)
+    postContestSubmission({ _id: yourSubmit }, contestId).then((res) => {
+      console.log('>> res', res)
+    }).catch((err) => {
+      console.log('>> err', err)
+    })
     setIsModalOpen(false)
   }
   const handleCancel = () => {
@@ -124,8 +130,7 @@ const ContestInfo = () => {
       </Modal>
       <img
         className={styles.banner}
-        src={contest.files.length ? contest.files[0] : 
-          "https://www.uit.edu.vn/sites/vi/files/uploads/images/thumbs/202312/khoi_nghiep_0.jpg"}
+        src={"https://www.uit.edu.vn/sites/vi/files/uploads/images/thumbs/202312/khoi_nghiep_0.jpg"}
         alt="Banner"
       />
       <div className={styles.container}>

@@ -70,7 +70,7 @@ const CompanyRequirementList = () => {
           <List.Item>
             <hr />
             <List.Item.Meta
-              title={<Link to='/match-idea'>{item.problem}</Link>}
+              title={<Link to={`/match-idea/${index}`}>{item.problem}</Link>}
               description={item.domain.map((domain) => domain).join(", ")}
             />
           </List.Item>

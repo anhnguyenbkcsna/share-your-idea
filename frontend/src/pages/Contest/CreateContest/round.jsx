@@ -10,7 +10,7 @@ const roundTypes = [
   },
   {
     value: 'online',
-    label: 'Thi trực tuyến'
+    label: 'Phản biện trực tuyến'
   },
   {
     value: 'offline',

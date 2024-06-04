@@ -35,7 +35,7 @@ const MyIdeaList = (props) => {
           <List.Item className={styles.item} key={item.title}
             extra={
               <Space> 
-                <Radio value={item._id.$oid} onClick={() => handleSetSubmission(item._id.$oid)}/>
+                <Radio value={item.id} onClick={() => handleSetSubmission(item.id)}/>
               </Space>
             }
           >
